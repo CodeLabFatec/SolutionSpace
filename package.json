@@ -8,6 +8,7 @@
     "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
+    "test:coverage": "jest --runInBand --coverage",
     "prepare": "husky install"
   },
   "repository": {
