@@ -1,0 +1,18 @@
+{
+  "name": "solutionspace",
+  "version": "0.0.0",
+  "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeLabFatec/SolutionSpace.git"
+  },
+  "author": "CodeLabFatec",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeLabFatec/SolutionSpace/issues"
+  },
+  "homepage": "https://github.com/CodeLabFatec/SolutionSpace#readme"
+}
