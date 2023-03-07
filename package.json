@@ -4,6 +4,8 @@
   "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install"
   },
   "repository": {
