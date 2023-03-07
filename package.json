@@ -14,5 +14,8 @@
   "bugs": {
     "url": "https://github.com/CodeLabFatec/SolutionSpace/issues"
   },
-  "homepage": "https://github.com/CodeLabFatec/SolutionSpace#readme"
+  "homepage": "https://github.com/CodeLabFatec/SolutionSpace#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.8.3"
+  }
 }
