@@ -1,0 +1,9 @@
+# Dependencies
+node_modules
+
+# Coverage
+coverage
+
+# Transpiled files
+build/
+dist/
