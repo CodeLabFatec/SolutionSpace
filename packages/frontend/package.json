@@ -14,9 +14,23 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:coverage": "jest --runInBand --coverage"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeLabFatec/SolutionSpace.git"
+  },
+  "author": "CodeLabFatec",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeLabFatec/SolutionSpace/issues"
+  },
+  "homepage": "https://github.com/CodeLabFatec/SolutionSpace#readme",
   "eslintConfig": {
     "extends": [
       "react-app",
