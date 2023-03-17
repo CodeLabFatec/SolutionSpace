@@ -1,0 +1,10 @@
+{
+  "*/backend/**/*.ts": [
+    "npm run lint:fix -w backend",
+    "npm run test:staged -w backend"
+  ],
+  "*/frontend/**/*.{ts,tsx}": [
+    "npm run lint:fix -w frontend",
+    "npm run test -w frontend"
+  ]
+}
