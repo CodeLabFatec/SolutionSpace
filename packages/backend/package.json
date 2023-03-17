@@ -1,5 +1,5 @@
 {
-  "name": "solutionspace-backend",
+  "name": "backend",
   "version": "0.0.0",
   "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
   "scripts": {
