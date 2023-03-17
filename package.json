@@ -1,0 +1,30 @@
+{
+  "name": "solutionspace",
+  "version": "1.0.0",
+  "description": "<br id=\"topo\">",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend"
+  ],
+  "scripts": {
+    "start": "echo \"Error: no script defined\" && exit 1",
+    "prestart:dev": "npm run build -w backend",
+    "start:dev": "npm run build -w backend -- -w & npm run start:dev -w frontend",
+    "test": "jest",
+    "test:core": "npm run test -w packages/*",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeLabFatec/SolutionSpace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.8.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2"
+  }
+}
