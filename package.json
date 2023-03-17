@@ -2,8 +2,10 @@
   "name": "solutionspace",
   "version": "1.0.0",
   "description": "<br id=\"topo\">",
+  "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/backend",
+    "packages/frontend"
   ],
   "scripts": {
     "start": "echo \"Error: no script defined\" && exit 1",
