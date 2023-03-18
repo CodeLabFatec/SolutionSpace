@@ -1,7 +1,4 @@
 module.exports = {
-    projects: [
-        '<rootDir>/packages/backend',
-        '<rootDir>/packages/frontend',
-    ],
-    coverageDirectory: '<rootDir>/coverage',
+  projects: ['<rootDir>/packages/backend', '<rootDir>/packages/frontend'],
+  coverageDirectory: '<rootDir>/coverage'
 }
