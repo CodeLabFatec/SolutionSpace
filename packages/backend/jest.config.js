@@ -14,7 +14,7 @@ module.exports = {
   roots: ['<rootDir>/src', '<rootDir>/test'],
   testPathIgnorePatterns: ['/node_modules/'],
   moduleNameMapper: {
-    '@/tests/(.*)': '<rootDir>/test/$1',
+    '@/test/(.*)': '<rootDir>/test/$1',
     '@/(.*)': '<rootDir>/src/$1'
   }
 }
