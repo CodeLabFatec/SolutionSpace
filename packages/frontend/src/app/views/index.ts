@@ -1,1 +1,1 @@
-export * from './formularioChamados/formularioChamados';
+export * from './formularioChamados/formularioChamados'

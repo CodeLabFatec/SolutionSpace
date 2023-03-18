@@ -1,10 +1,9 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Routes } from 'react-router-dom'
 
 export const Caminhos = () => {
-    return(
-        <BrowserRouter>
-            <Routes>
-            </Routes>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <Routes></Routes>
+    </BrowserRouter>
+  )
 }
