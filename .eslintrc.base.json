@@ -1,5 +1,8 @@
 {
   "extends": "standard-with-typescript",
+  "env": {
+    "jest": true
+  },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
