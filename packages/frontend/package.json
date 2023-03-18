@@ -16,7 +16,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0"
+    "@testing-library/user-event": "^13.5.0",
+    "eslint-plugin-react": "^7.32.2"
   },
   "scripts": {
     "lint": "eslint .",
