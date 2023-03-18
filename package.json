@@ -9,10 +9,7 @@
   ],
   "scripts": {
     "start": "echo \"Error: no script defined\" && exit 1",
-    "prestart:dev": "npm run build -w backend",
-    "start:dev": "npm run build -w backend -- -w & npm run start:dev -w frontend",
     "test": "jest",
-    "test:core": "npm run test -w packages/*",
     "prepare": "husky install"
   },
   "repository": {
