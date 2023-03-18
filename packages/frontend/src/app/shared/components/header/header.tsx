@@ -1,7 +1,9 @@
+import React from 'react'
+
 import { Logo } from '../Logo'
 import './header.css'
 
-export const Header = (): JSX.Element => {
+export const Header = (): React.ReactElement => {
   return (
     <>
       <div className='nav'>
