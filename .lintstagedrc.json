@@ -1,4 +1,8 @@
 {
   "*/backend/**/*.ts": ["npm run format -w backend", "npm run lint:fix -w backend", "npm run test:staged -w backend"],
-  "*/frontend/**/*.{ts,tsx}": ["npm run format -w frontend", "npm run lint:fix -w frontend"]
+  "*/frontend/**/*.{ts,tsx}": [
+    "npm run format -w frontend",
+    "npm run lint:fix -w frontend",
+    "npm run test:staged -w frontend"
+  ]
 }
