@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "start": "echo \"Error: no script defined\" && exit 1",
+    "format": "prettier --write 'packages/**/*.{js,ts,tsx,css,md,json}' --config ./.prettierrc",
     "test": "jest",
     "prepare": "husky install"
   },

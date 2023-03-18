@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
   "scripts": {
-    "lint": "eslint .",
+    "format": "prettier --write 'src/**/*.{js,ts,json}' --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache",
-    "test:watch": "npm test -- --watch",
+    "lint": "eslint .",
+    "test:coverage": "jest --runInBand --coverage",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:coverage": "jest --runInBand --coverage"
+    "test:watch": "npm test -- --watch",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache"
   },
   "repository": {
     "type": "git",
