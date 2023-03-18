@@ -19,8 +19,12 @@
   },
   "scripts": {
     "format": "prettier --write 'src/**/*.{js,ts,tsx,css,json}' --config ../../.prettierrc",
+    "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "test:coverage": "jest --runInBand --coverage",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:watch": "npm test -- --watch",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache"
   },
   "browserslist": {
     "production": [
