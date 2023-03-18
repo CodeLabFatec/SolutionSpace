@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-undef */
 import { Logo } from '../Logo'
 import './header.css'
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   return (
     <>
       <div className='nav'>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export function Logo(props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) {
+export function Logo(props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       width={232}
