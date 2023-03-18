@@ -21,6 +21,8 @@
     "@testing-library/user-event": "^13.5.0"
   },
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
