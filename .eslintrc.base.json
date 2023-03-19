@@ -1,11 +1,13 @@
 {
-  "extends": [
-    "standard-with-typescript",
-    "prettier"
-  ],
+  "extends": ["standard-with-typescript", "prettier"],
   "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "env": {
-    "jest": true
+    "jest": true,
+    "node": true,
+    "es6": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
