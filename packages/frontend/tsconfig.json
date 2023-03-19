@@ -9,8 +9,8 @@
     "strict": true,
     "moduleResolution": "node",
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
+    "outDir": "./dist",
     "paths": {
       "@/*": ["*"],
       "@/test/*": ["../test/*"]
