@@ -34,6 +34,8 @@
     "format": "prettier --write 'src/**/*.{js,ts,tsx,css,json}' --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
+    "dev:base": "webpack-dev-server --config webpack.dev.js",
+    "dev": "npm run dev:base -- --open",
     "test:coverage": "jest --runInBand --coverage",
     "test:staged": "npm test -- --findRelatedTests",
     "test:watch": "npm test -- --watch",
