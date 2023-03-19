@@ -1,6 +1,10 @@
 import Router from '@/main/routes/router'
 import '@/presentation/styles/global.scss'
 
-import ReactDOM from 'react-dom'
+import ReactDOMClient from 'react-dom/client'
 
-ReactDOM.render(<Router />, document.getElementById('main'))
+const rootElement = document.getElementById('main') as Element
+
+const root = ReactDOMClient.createRoot(rootElement)
+
+root.render(<Router />)
