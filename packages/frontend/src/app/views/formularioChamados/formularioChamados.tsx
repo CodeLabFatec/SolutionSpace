@@ -1,22 +1,18 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useNavigate } from 'react-router-dom';
-import './formularioChamados.css';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import './formularioChamados.css'
 
+export const formularioChamados = (): React.ReactElement => {
+  const history = useNavigate()
 
-export const formularioChamados = () => {
-    const history = useNavigate();
+  const handleLogout = (): void => {
+    history('./')
+  }
 
-    const handleLogout = () => {
-        history('./');
-    }
+  const handleGoBack = (): void => {
+    history('./')
+  }
 
-    const handleGoBack = () => {
-        history('./');
-    }
-
-    return (
-        <>
-        
-        </>
-    )
+  return <></>
 }

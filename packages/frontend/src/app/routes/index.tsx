@@ -1,10 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import React from 'react'
+import { BrowserRouter, Routes } from 'react-router-dom'
 
-export const Caminhos = () => {
-    return(
-        <BrowserRouter>
-            <Routes>
-            </Routes>
-        </BrowserRouter>
-    )
+export const Caminhos = (): React.ReactElement => {
+  return (
+    <BrowserRouter>
+      <Routes></Routes>
+    </BrowserRouter>
+  )
 }
