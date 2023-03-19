@@ -20,6 +20,7 @@
     "favicons-webpack-plugin": "^6.0.0",
     "html-webpack-plugin": "^5.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "ts-loader": "^9.4.2",
     "webpack": "^5.76.2",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.1",
