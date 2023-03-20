@@ -5,20 +5,20 @@
   .headerContent {
     background-color: #333333;
     width: 100%;
-    height: 64px;
+    height: 115px;
 
     display: flex;
   }
 
   .formButton {
-    padding-top: 12px;
     font-weight: bold;
     color: #4fb4bc;
     background-color: rgba(196, 196, 204, 0.2);
 
-    width: 64px;
-    max-height: 64px;
+    width: 75px;
+    max-height: 115px;
 
+    padding: 60px 8px 30.5px 8px;
     border-bottom: 4px solid #4fb4bc;
     margin: 0 0 0 30px;
     text-align: center;
@@ -33,20 +33,16 @@
 
   .userConnected {
     color: #ffffff;
-    margin: 26px 33px 0 0;
+    margin: 45px 33px 0 0;
     font-size: 24px;
 
     hr {
       border: 2px solid #4fb4bc;
     }
-
-    p {
-      margin-bottom: 6px;
-    }
   }
 
   .logo {
-    margin: -1px 9px 25px 9px;
+    margin: 25px 9px 25px 9px;
   }
 
   .logout {
@@ -57,19 +53,15 @@
     position: absolute;
     right: 24px;
     width: 75px;
-    max-height: 64px;
+    max-height: 115px;
 
-    padding: 12px 8px 25px 8px;
+    padding: 65px 8px 25px 8px;
     border-bottom: 4px solid #4fb4bc;
     margin: 0 0 0 30px;
     text-align: center;
 
     cursor: pointer;
     user-select: none;
-
-    p {
-      margin-top: 8px;
-    }
   }
 
   .tickets {
@@ -80,19 +72,14 @@
     position: absolute;
     right: 131px;
     width: 191px;
-    max-height: 64px;
+    max-height: 115px;
 
-    padding: 12px 8px 25px 8px;
+    padding: 65px 8px 25px 8px;
     border-bottom: 4px solid #4fb4bc;
     margin: 0 0 0 30px;
     text-align: center;
-    justify-content: center;
 
     cursor: pointer;
     user-select: none;
-
-    p {
-      margin-top: 8px;
-    }
   }
 }
