@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
   "scripts": {
-    "format": "prettier --write 'src/**/*.{js,ts,json}' --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "test:coverage": "jest --runInBand --coverage",
