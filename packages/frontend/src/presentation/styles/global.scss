@@ -20,17 +20,17 @@ body {
   color: $white;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   background-color: #333333;
   border-radius: 4px;
   width: 10px;
 }
 
-body::-webkit-scrollbar-button{
+body::-webkit-scrollbar-button {
   display: none;
 }
 
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
   background-color: $scrollbar;
   border-radius: 20px;
 }

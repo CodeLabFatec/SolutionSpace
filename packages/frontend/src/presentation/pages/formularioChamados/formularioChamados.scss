@@ -1,112 +1,110 @@
-body{
-    text-align: center;
-  }
+body {
+  text-align: center;
+}
 
 textarea {
-    resize: none;
+  resize: none;
 }
 
-textarea::-webkit-scrollbar{
-    background-color: #333333;
-    border-radius: 4px;
-    width: 10px;
+textarea::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 4px;
+  width: 10px;
 }
 
-textarea::-webkit-scrollbar-button{
-    display: none;
+textarea::-webkit-scrollbar-button {
+  display: none;
 }
 
-textarea::-webkit-scrollbar-thumb{
-    background-color: #535252;
-    border-radius: 20px;
+textarea::-webkit-scrollbar-thumb {
+  background-color: #535252;
+  border-radius: 20px;
 }
 
-.H1formularioChamados{
-    color: #FFFFFF;
-    margin-top: 47px;
+.H1formularioChamados {
+  color: #ffffff;
+  margin-top: 47px;
 }
 
-.H1formularioChamados hr{
-    border: 1px dashed #FFFFFF;
-    width: 566px;
-    margin: 0 auto;
+.H1formularioChamados hr {
+  border: 1px dashed #ffffff;
+  width: 566px;
+  margin: 0 auto;
 }
 
-.form{
-    display: flex;
-    width: 1295px;
+.form {
+  display: flex;
+  width: 1295px;
 
-    margin: 67px auto;
+  margin: 67px auto;
 }
 
-.tituloDetalhe{
-    max-width: 600px;
+.tituloDetalhe {
+  max-width: 600px;
 
-    flex-wrap: wrap;
-    text-align: start;
+  flex-wrap: wrap;
+  text-align: start;
 }
 
-.inputTitulo{
-    width: 600px;
-    padding: 10px 0px 10px 20px;
-    margin: 7px 0 17px 0;
+.inputTitulo {
+  width: 600px;
+  padding: 10px 0px 10px 20px;
+  margin: 7px 0 17px 0;
 
-    background-color: #333333;
-    color: #FFFFFF;
+  background-color: #333333;
+  color: #ffffff;
 
-    outline: none;
-    border: none;
-    border-radius: 4px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
 }
 
-.inputDetalhe{
-    width: 600px;
-    height: 400px;
-    padding: 10px 20px;
-    margin-top: 7px;
+.inputDetalhe {
+  width: 600px;
+  height: 400px;
+  padding: 10px 20px;
+  margin-top: 7px;
 
-    background-color: #333333;
-    color: #FFFFFF;
+  background-color: #333333;
+  color: #ffffff;
 
-    outline: none;
-    border: none;
-    border-radius: 4px;
-    text-align: justify;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  text-align: justify;
 }
 
-.selecionarArquivo{
-    position: absolute;
-    padding: 112px 270px;
-    border: 2px dashed #FFFFFF;
+.selecionarArquivo {
+  position: absolute;
+  padding: 112px 270px;
+  border: 2px dashed #ffffff;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    right: 40px;
+  right: 40px;
 }
 
-.arquivoSelecionado{
-    position: absolute;
-    width: 597px ;
-    height: 287px;
+.arquivoSelecionado {
+  position: absolute;
+  width: 597px;
+  height: 287px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    right: 40px;
+  right: 40px;
 }
 
-.selecionarArquivo i{
-    font-size: 55px;
+.selecionarArquivo i {
+  font-size: 55px;
 }
 
 input[type='file'] {
-    display: none
+  display: none;
 }
 
-.picture__img{
-    width: fit-content;
-    height: 287px;
+.picture__img {
+  width: fit-content;
+  height: 287px;
 
-    cursor: pointer;
-
+  cursor: pointer;
 }
-
