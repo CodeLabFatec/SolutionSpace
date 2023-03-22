@@ -1,85 +1,79 @@
-.headerWrap {
+.nav{
+  background-color: #333333;
+  width: 100%;
+  max-height: 95px;
+
   display: flex;
-  justify-content: center;
+}
 
-  .headerContent {
-    background-color: #333333;
-    width: 100%;
-    height: 115px;
+.formButton{
+  font-weight: bold;
+  color: #4FB4BC;
+  background-color: rgba(196, 196, 204, 0.2);
+  
+  width: 75px;
+  max-height: 115px;
 
-    display: flex;
-  }
+  padding: 37px 8px 30.5px 8px;
+  border-bottom: 4px solid #4FB4BC;
+  margin: 0 0 0 30px;
+  text-align: center;
 
-  .formButton {
-    font-weight: bold;
-    color: #4fb4bc;
-    background-color: rgba(196, 196, 204, 0.2);
+  cursor: pointer;
+  user-select:none
+}
 
-    width: 75px;
-    max-height: 115px;
+#iconHome{
+  font-size: 33px;
+  
+}
 
-    padding: 60px 8px 30.5px 8px;
-    border-bottom: 4px solid #4fb4bc;
-    margin: 0 0 0 30px;
-    text-align: center;
+.logo{
+  margin: 17px 9px 13px 9px ;
+}
 
-    cursor: pointer;
-    user-select: none;
-  }
+.userConnected{
+  color: #FFFFFF;
+  margin: 40.5px 33px 0 0;
+  font-size: 20px;
+}
 
-  #iconHome {
-    font-size: 33px;
-  }
+.userConnected hr {
+  border: 1px solid #4FB4BC;
+}
 
-  .userConnected {
-    color: #ffffff;
-    margin: 45px 33px 0 0;
-    font-size: 24px;
+.logout{
+  font-size: 20px;
+  color: #4FB4BC;
+  background-color: rgba(196, 196, 204, 0.2);
+  
+  position: absolute;
+  right: 24px;
+  width: 75px;
 
-    hr {
-      border: 2px solid #4fb4bc;
-    }
-  }
+  padding: 46px 8px 20.5px 8px;
+  border-bottom: 4px solid #4FB4BC;
+  margin: 0 0 0 30px;
+  text-align: center;
 
-  .logo {
-    margin: 25px 9px 25px 9px;
-  }
+  cursor: pointer;
+  user-select:none
+}
 
-  .logout {
-    font-size: 20px;
-    color: #4fb4bc;
-    background-color: rgba(196, 196, 204, 0.2);
+.chamados{
+  font-size: 20px;
+  color: #4FB4BC;
+  background-color: rgba(196, 196, 204, 0.2);
+  
+  position: absolute;
+  right: 131px;
+  width: 191px;
 
-    position: absolute;
-    right: 24px;
-    width: 75px;
-    max-height: 115px;
+  padding: 46px 8px 20.5px 8px;
+  border-bottom: 4px solid #4FB4BC;
+  margin: 0 0 0 30px;
+  text-align: center;
 
-    padding: 65px 8px 25px 8px;
-    border-bottom: 4px solid #4fb4bc;
-    margin: 0 0 0 30px;
-    text-align: center;
-
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .tickets {
-    font-size: 20px;
-    color: #4fb4bc;
-    background-color: rgba(196, 196, 204, 0.2);
-
-    position: absolute;
-    right: 131px;
-    width: 191px;
-    max-height: 115px;
-
-    padding: 65px 8px 25px 8px;
-    border-bottom: 4px solid #4fb4bc;
-    margin: 0 0 0 30px;
-    text-align: center;
-
-    cursor: pointer;
-    user-select: none;
-  }
+  cursor: pointer;
+  user-select:none
 }
