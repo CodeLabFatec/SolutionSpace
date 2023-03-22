@@ -1,1 +1,1 @@
-export { default as TicketForm } from './ticket-form/ticket-form'
+export { FormularioChamados } from './formularioChamados/formularioChamados'
