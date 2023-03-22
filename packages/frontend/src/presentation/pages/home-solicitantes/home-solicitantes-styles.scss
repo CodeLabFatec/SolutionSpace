@@ -1,0 +1,21 @@
+.botoesHomeSolicitantes {
+  display: flex;
+  margin: 0 120px 73px 126px;
+  justify-content: space-between;
+  padding: 41px 0;
+}
+
+.abrirChamadoLabel {
+  text-align: center;
+  background-image: url(./images/backgroundedited.jpg);
+  background-size: cover;
+  background-position: center;
+
+  h1 {
+    background-color: rgba($color: #1d1e20, $alpha: 0.6);
+    padding: 220px 0 20px 0;
+    font-size: 36px;
+    font-weight: 200;
+    color: #9af0e8;
+  }
+}
