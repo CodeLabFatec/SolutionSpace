@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "description": "A simple TypeScript application to manage internal feature and hotfix demands.",
   "scripts": {
-    "dev": "npx nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node ./src/server.ts",
+    "typeorm": "npx ts-node ../../node_modules/typeorm/cli.js",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
@@ -20,11 +23,21 @@
   "author": "CodeLabFatec",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.15.3",
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.7"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.15.5",
     "nodemon": "^2.0.21",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"

@@ -1,9 +1,22 @@
-import express from "express"
-import routes from "./routes"
+import 'reflect-metadata'
+import 'dotenv/config'
+import express from 'express'
+import { AppDataSource } from './data-source'
+import routes from './routes'
+import cors from 'cors'
 
-const app = express()
+AppDataSource.initialize()
+  .then(() => {
+    console.log(`Data Source has been initialized on PORT ${process.env.DB_PORT}`)
 
-app.use(express.json())
-app.use(routes)
+    const app = express()
 
-app.listen(3000, () => console.log("Server started at http://localhost:3000"))
+    app.use(express.json())
+    app.use(routes)
+    app.use(cors())
+
+    app.listen(process.env.PORT, () => console.log(`Server started at http://localhost:${process.env.PORT}`))
+  })
+  .catch((err) => {
+    console.error('Data Source initialization erro', err)
+  })
