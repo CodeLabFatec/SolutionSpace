@@ -31,7 +31,6 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "format": "prettier --write 'src/**/*.{js,ts,tsx,css,json}' --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "dev:base": "webpack-dev-server --config webpack.dev.js",
