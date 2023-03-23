@@ -5,7 +5,7 @@
     <a href="#objetivo">Objetivo</a> |
     <a href="#requisitos">Requisitos</a> |
     <a href="#relatório">Relatório</a> |
-    <a href="#projeto">Resultado</a> |
+    <a href="#backlog">Backlog</a> |
     <a href="#tecnologias">Tecnologias</a> |
     <a href="#equipe">Equipe</a> |
 </p>
@@ -53,15 +53,11 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <span id="Documentação">
 <h2> :clipboard: Documentação</h2>
 
-<span id="projeto">
+<span id="backlog">
 
 <br>
 
-## 📌 Backlog Priorizado
-
-<p align="center"> <img src = "imagens/backlog.png"></p>
-
-## 📆 Sprints
+## 📌 Backlog
 
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
 
