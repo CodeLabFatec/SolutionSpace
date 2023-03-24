@@ -44,16 +44,19 @@ export const MultiSelect = () => {
       backgroundColor: '#333333',
       border: 'none',
       borderRadius: '4px',
-      color: '#FFF'
+      color: '#FFF',
+      boxShadow: 'none'
     }),
     multiValueLabel: (style: any) => ({
       ...style,
       backgroundColor: '#535252',
-      color: '#FFF'
+      color: '#FFF',
+      borderRadius: '0'
     }),
     multiValueRemove: (style: any) => ({
       ...style,
-      backgroundColor: '#535252'
+      backgroundColor: '#535252',
+      borderRadius: '0'
     })
   }
   return (

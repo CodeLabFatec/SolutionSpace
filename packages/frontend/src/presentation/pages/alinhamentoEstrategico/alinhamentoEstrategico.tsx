@@ -21,14 +21,33 @@ const AlinhamentoEstrategico: React.FC = () => {
           <input type='text' className={Styles.inputTitulo} id='titulo' required autoFocus maxLength={60} />
           <label htmlFor='detalhes'>Detalhes</label>
           <textarea className={Styles.inputDetalhe} name='' id='detalhes' cols={30} rows={10} required></textarea>
+
+          <div className={Styles.formWrapper}>
+            <form action='' method=''>
+              <h3 className={Styles.formTitle}>Nível de prioridade</h3>
+              <hr />
+              <div className={Styles.debtAmountSlider}>
+                <input type='radio' name='debt-amount' id='0' value='0' required />
+                <label htmlFor='0' data-debt-amount='0'></label>
+                <input type='radio' name='debt-amount' id='1' value='1' required />
+                <label htmlFor='1' data-debt-amount='1'></label>
+                <input type='radio' name='debt-amount' id='2' value='2' required />
+                <label htmlFor='2' data-debt-amount='2'></label>
+                <input type='radio' name='debt-amount' id='3' value='3' required />
+                <label htmlFor='3' data-debt-amount='3'></label>
+                <div className={Styles.debtAmountPos}></div>
+              </div>
+            </form>
+          </div>
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
             <DropZone />
           </div>
-          <label htmlFor='equipe'>Grupo</label>
+          <label htmlFor='grupo' className={Styles.grupo}>
+            Grupos
+          </label>
           <MultiSelect />
-
           <input type='button' value='Enviar' className={Styles.buttonEnviar} />
         </div>
       </div>
