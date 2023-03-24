@@ -23,10 +23,39 @@ const options = [
 export const MultiSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
 
-  //   const handleSelect = () => {
-  //     console.log(selectedOptions);
-  //   };
-
+  const colourStyles = {
+    menuList: (styles: any) => ({
+      ...styles,
+      background: '#333333',
+      color: '#FFF'
+    }),
+    option: (styles: any, { isFocused, isSelected }: any) => ({
+      ...styles,
+      background: isFocused ? '#535252' : isSelected ? '#535252' : undefined,
+      zIndex: 1
+    }),
+    menu: (base: any) => ({
+      ...base,
+      zIndex: 100
+    }),
+    control: (styles: any, state: { isFocused: any }) => ({
+      ...styles,
+      borderColor: state.isFocused ? '#535252' : 'none',
+      backgroundColor: '#333333',
+      border: 'none',
+      borderRadius: '4px',
+      color: '#FFF'
+    }),
+    multiValueLabel: (style: any) => ({
+      ...style,
+      backgroundColor: '#535252',
+      color: '#FFF'
+    }),
+    multiValueRemove: (style: any) => ({
+      ...style,
+      backgroundColor: '#535252'
+    })
+  }
   return (
     <>
       <Select
@@ -42,6 +71,8 @@ export const MultiSelect = () => {
         isLoading={false}
         isRtl={false}
         closeMenuOnSelect={false}
+        styles={colourStyles}
+        placeholder='Selecione...'
       />
       {/* 
       <button onClick={handleSelect}>Imprimir itens</button> */}

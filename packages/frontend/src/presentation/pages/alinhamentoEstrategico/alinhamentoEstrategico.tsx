@@ -26,12 +26,8 @@ const AlinhamentoEstrategico: React.FC = () => {
           <div className={Styles.dropzoneContainer}>
             <DropZone />
           </div>
-          <label htmlFor='equipe'>Equipe</label>
-          {/* <input type='text' className={Styles.equipe} id='equipe' required maxLength={60} /> */}
+          <label htmlFor='equipe'>Grupo</label>
           <MultiSelect />
-
-          <label htmlFor='grupo'>Grupo</label>
-          <input type='text' className={Styles.grupo} id='grupo' required maxLength={60} />
 
           <input type='button' value='Enviar' className={Styles.buttonEnviar} />
         </div>
