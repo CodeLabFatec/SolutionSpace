@@ -10,7 +10,6 @@
   "scripts": {
     "start": "echo \"Error: no script defined\" && exit 1",
     "start:front": "npm run dev -w frontend",
-    "format": "prettier --write 'packages/**/*.{js,ts,tsx,css,md,json}' --config ./.prettierrc",
     "test": "jest",
     "prepare": "husky install"
   },
