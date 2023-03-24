@@ -7,7 +7,7 @@ const Router: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/formularioChamados' element={<FormularioChamados />} />
-        <Route path='home' element={<HomeSolicitantes />} />
+        <Route path='/home' element={<HomeSolicitantes />} />
       </Routes>
     </BrowserRouter>
   )

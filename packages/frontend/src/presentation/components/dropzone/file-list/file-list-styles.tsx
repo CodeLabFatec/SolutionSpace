@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Container = styled.ul`
   margin-top: 20px;
+  background-color: #535252;
+  border-radius: 4px;
 
   li {
     display: flex;
@@ -22,11 +24,14 @@ export const FileInfo = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    color: #fff;
 
     span {
       font-size: 12px;
       color: #999;
       margin-top: 5px;
+      color: #ddd;
+      text-align: start;
 
       button {
         border: 0;

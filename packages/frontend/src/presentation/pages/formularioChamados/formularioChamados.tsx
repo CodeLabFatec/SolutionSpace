@@ -3,8 +3,10 @@ import { Header } from '@/presentation/components'
 import Styles from './formularioChamados.scss'
 
 import React from 'react'
+import DropZone from '@/presentation/components/dropzone/dropzone'
+import Footer from '@/presentation/components/footer/footer'
 
-export const FormularioChamados: React.FC = () => {
+const FormularioChamados: React.FC = () => {
   return (
     <>
       <Header />
@@ -20,23 +22,15 @@ export const FormularioChamados: React.FC = () => {
           <textarea className={Styles.inputDetalhe} name='' id='detalhes' cols={30} rows={10} required></textarea>
         </div>
         <div className={Styles.arquivoBotao}>
-          {/*   <label htmlFor="selecaoArquivo" className={Styles.selecionarArquivo}>
-            <i className="materialicons">image</i>
-            <span className={Styles.picture__image}></span>
-          </label>
-          <input
-            type="file"
-            name="files"
-            accept=".png"
-            multiple
-            id="selecaoArquivo"
-            capture="environment"
-          /> */}
-
-          <input type='button' value='Cancelar' />
-          <input type='button' value='Enviar para o comitê de aprovação' />
+          <div className={Styles.dropzoneContainer}>
+            <DropZone />
+          </div>
+          <input type='button' value='Cancelar' className={Styles.buttonCancelar} />
+          <input type='button' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
         </div>
       </div>
+      <Footer />
     </>
   )
 }
+export default FormularioChamados

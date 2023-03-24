@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback } from 'react'
-import Dropzone, { useDropzone, Accept } from 'react-dropzone'
+import React from 'react'
+import Dropzone from 'react-dropzone'
 import UploadMessage2, { DropContainer, UploadMessage } from './upload-styles'
 
 const Upload: React.FC<{ onUpload: any }> = (props) => {
@@ -17,7 +17,7 @@ const Upload: React.FC<{ onUpload: any }> = (props) => {
 
   return (
     <Dropzone
-      accept={{ 'image/jpeg': ['.jpeg', '.png'], 'video/mp4': ['.mp4', '.MP4'], 'video/mkv': ['.mkv'] }}
+      accept={{ 'image/*': ['.jpeg', '.png'], 'video/*': ['.mp4', '.MP4', '.mkv'], 'audio/*': ['.mp3'] }}
       onDropAccepted={props.onUpload}
     >
       {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
