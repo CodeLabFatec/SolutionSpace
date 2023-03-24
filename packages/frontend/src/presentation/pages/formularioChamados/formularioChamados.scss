@@ -1,0 +1,163 @@
+body {
+  text-align: center;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 4px;
+  width: 10px;
+}
+
+textarea::-webkit-scrollbar-button {
+  display: none;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #535252;
+  border-radius: 20px;
+}
+
+.H1formularioChamados {
+  color: #ffffff;
+  margin-top: 47px;
+}
+
+.H1formularioChamados hr {
+  border: 1px dashed #ffffff;
+  width: 566px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  width: 1295px;
+
+  margin: 67px auto;
+}
+
+.tituloDetalhe {
+  max-width: 600px;
+
+  flex-wrap: wrap;
+  text-align: start;
+}
+
+.inputTitulo {
+  width: 600px;
+  padding: 10px 0px 10px 20px;
+  margin: 7px 0 17px 0;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+
+.inputDetalhe {
+  width: 600px;
+  height: 400px;
+  padding: 10px 20px;
+  margin-top: 7px;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  text-align: justify;
+}
+
+.selecionarArquivo {
+  position: absolute;
+  padding: 112px 270px;
+  border: 2px dashed #ffffff;
+
+  cursor: pointer;
+
+  right: 40px;
+}
+
+.arquivoSelecionado {
+  position: absolute;
+  width: 597px;
+  height: 287px;
+
+  cursor: pointer;
+
+  right: 40px;
+}
+
+.selecionarArquivo i {
+  font-size: 55px;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.picture__img {
+  width: fit-content;
+  height: 287px;
+
+  cursor: pointer;
+}
+
+.dropzoneContainer {
+  width: 700px;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 0;
+  margin: 23px 0 100px 25px;
+  border-radius: 6px;
+
+  &::-webkit-scrollbar {
+    background-color: #3f3f41;
+    border-radius: 0 4px 4px 0;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d6d5d5;
+    border-radius: 20px;
+  }
+}
+
+.buttonCancelar {
+  background-color: #a2a2a2;
+  color: #fff;
+  padding: 12px 54px;
+  font-size: 16px;
+  border: none;
+  margin: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #bfbebe;
+  }
+}
+
+.buttonEnviar {
+  background-color: #4fb4bc;
+  color: #fff;
+  padding: 12px 54px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #5dcfd7;
+  }
+}
