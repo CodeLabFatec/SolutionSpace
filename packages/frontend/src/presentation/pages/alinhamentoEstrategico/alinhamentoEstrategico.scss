@@ -95,7 +95,7 @@ input[type='file'] {
   height: 300px;
   overflow-y: scroll;
   padding: 0;
-  margin: 23px 0 100px 25px;
+  margin: 23px 0 20px 25px;
   border-radius: 6px;
 
   &::-webkit-scrollbar {
@@ -114,21 +114,6 @@ input[type='file'] {
   }
 }
 
-.buttonCancelar {
-  background-color: #a2a2a2;
-  color: #fff;
-  padding: 12px 54px;
-  font-size: 16px;
-  border: none;
-  margin: 0 16px;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #bfbebe;
-  }
-}
-
 .buttonEnviar {
   background-color: #4fb4bc;
   color: #fff;
@@ -137,8 +122,41 @@ input[type='file'] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 685px;
+  margin: 7px 0 17px 25px;
 
   &:hover {
     background-color: #5dcfd7;
   }
+}
+
+.arquivoBotao {
+  text-align: start;
+  background-color: aquamarine;
+}
+
+.equipe {
+  width: 685px;
+  padding: 10px 0px 10px 20px;
+  margin: 7px 0 17px 25px;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+
+.grupo {
+  width: 685px;
+  padding: 10px 0px 10px 20px;
+  margin: 7px 0 30px 25px;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
 }
