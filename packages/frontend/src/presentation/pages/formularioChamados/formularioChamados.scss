@@ -2,25 +2,6 @@ body {
   text-align: center;
 }
 
-textarea {
-  resize: none;
-}
-
-textarea::-webkit-scrollbar {
-  background-color: #333333;
-  border-radius: 4px;
-  width: 10px;
-}
-
-textarea::-webkit-scrollbar-button {
-  display: none;
-}
-
-textarea::-webkit-scrollbar-thumb {
-  background-color: #535252;
-  border-radius: 20px;
-}
-
 .H1formularioChamados {
   color: #ffffff;
   margin-top: 47px;
