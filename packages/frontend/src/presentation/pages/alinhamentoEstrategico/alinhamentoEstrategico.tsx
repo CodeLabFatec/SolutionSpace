@@ -5,7 +5,7 @@ import Styles from './alinhamentoEstrategico.scss'
 import React from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
-import { MultiSelect } from '@/presentation/components/multipleSelect/multipleSelect'
+import { SelectType } from '@/presentation/components/SelectType/SelectType'
 
 const AlinhamentoEstrategico: React.FC = () => {
   return (
@@ -47,7 +47,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos
           </label>
-          <MultiSelect />
+          <SelectType />
           <input type='button' value='Enviar' className={Styles.buttonEnviar} />
         </div>
       </div>
