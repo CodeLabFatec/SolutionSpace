@@ -1,8 +1,8 @@
-import { userRepository } from '../repositories/userRepository'
 import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
+import { userRepository } from '../../infra/repos/postgres/repositories/userRepository'
 
 export class AuthController {
   async authenticate(req: Request, res: Response) {

@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import 'dotenv/config'
 import express from 'express'
-import { AppDataSource } from './data-source'
-import routes from './routes'
+import { AppDataSource } from './infra/database/data-source'
 import cors from 'cors'
+import routes from './routes'
 
 AppDataSource.initialize()
   .then(() => {

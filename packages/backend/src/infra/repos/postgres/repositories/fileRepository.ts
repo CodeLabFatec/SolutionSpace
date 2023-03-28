@@ -1,4 +1,4 @@
 import { File } from '../entitites/Files'
-import { AppDataSource } from '../data-source'
+import { AppDataSource } from '../../../database/data-source'
 
 export const fileRepository = AppDataSource.getRepository(File)

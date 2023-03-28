@@ -1,4 +1,4 @@
-import { userRepository } from '../repositories/userRepository'
+import { userRepository } from '../../infra/repos/postgres/repositories/userRepository'
 import { Request, Response } from 'express'
 
 export class UserController {

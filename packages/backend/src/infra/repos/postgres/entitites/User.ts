@@ -10,7 +10,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import bcrypt from 'bcryptjs'
-import { Group } from './Group'
+import { Team } from './Team'
 import moment from 'moment-timezone'
 
 @Entity('users')
@@ -33,9 +33,9 @@ export class User {
     this.password = bcrypt.hashSync(this.password, 8)
   }
 
-  @ManyToOne(() => Group, (group) => group.users)
-  @JoinColumn({ name: 'group_id' })
-  group: Group
+  @ManyToOne(() => Team, (team) => team.users)
+  @JoinColumn({ name: 'team_id' })
+  team: Team
 
   @CreateDateColumn()
   created_at: Date
