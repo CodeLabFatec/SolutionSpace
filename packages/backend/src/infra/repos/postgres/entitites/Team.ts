@@ -4,7 +4,7 @@ import { User } from './User'
 @Entity('teams')
 export class Team {
   @PrimaryGeneratedColumn('uuid')
-  team_id: number
+  team_id: string
 
   @Column({ type: 'text', nullable: false })
   team_name: string

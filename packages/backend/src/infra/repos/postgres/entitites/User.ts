@@ -16,7 +16,7 @@ import moment from 'moment-timezone'
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  user_id: number
+  user_id: string
 
   @Column({ type: 'text', nullable: false })
   name: string

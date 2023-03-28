@@ -1,16 +1,22 @@
+import { teamRepository } from '../../infra/repos/postgres/repositories/teamRepository'
 import { userRepository } from '../../infra/repos/postgres/repositories/userRepository'
 import { Request, Response } from 'express'
 
 export class UserController {
   async create(req: Request, res: Response) {
     const { name, email, password } = req.body
+    const { team_id } = req.params
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'All properties as required to create an User' })
     }
 
     try {
-      const newUser = userRepository.create({ name, email, password })
+      const team = await teamRepository.findOneBy({ team_id })
+
+      if (!team) return res.status(404).json('Team not found')
+
+      const newUser = userRepository.create({ name, email, password, team })
 
       await userRepository.save(newUser)
 
@@ -25,7 +31,11 @@ export class UserController {
 
   async listUser(req: Request, res: Response) {
     try {
-      const users = await userRepository.find()
+      const users = await userRepository.find({
+        relations: {
+          team: true
+        }
+      })
 
       return res.status(200).json(users)
     } catch (error) {

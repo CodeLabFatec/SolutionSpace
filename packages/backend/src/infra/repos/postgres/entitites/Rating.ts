@@ -21,7 +21,7 @@ export enum RequestStep {
 @Entity('ratings')
 export class Rating {
   @PrimaryGeneratedColumn('uuid')
-  rating_id: number
+  rating_id: string
 
   @Column({ type: 'text', nullable: false })
   rating: string
