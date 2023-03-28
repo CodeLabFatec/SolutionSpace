@@ -22,9 +22,23 @@ export class TeamController {
 
   async listTeams(req: Request, res: Response) {
     try {
-      const users = await teamRepository.find()
+      const teams = await teamRepository.find()
 
-      return res.status(200).json(users)
+      return res.status(200).json(teams)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
+
+  async getTeamById(req: Request, res: Response) {
+    const { id } = req.params
+
+    try {
+      const team = await teamRepository.findOneBy({ team_id: id })
+
+      if (!team) return res.status(404).json('Team not found')
+
+      return res.status(200).json(team)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }

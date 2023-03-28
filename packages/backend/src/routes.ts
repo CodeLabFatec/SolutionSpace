@@ -16,10 +16,11 @@ router.post('/auth', new AuthController().authenticate)
 // User
 router.post('/login', authMiddleware, new UserController().login)
 router.get('/listUsers', new UserController().listUser)
-router.post('/createUser', new UserController().create)
+router.post('/createUser/:team_id', new UserController().create)
 
-// Group
+// Team
 router.get('/listTeams', authMiddleware, new TeamController().listTeams)
+router.get('/team/:id', authMiddleware, new TeamController().getTeamById)
 router.post('/createTeam', authMiddleware, new TeamController().create)
 
 export default router

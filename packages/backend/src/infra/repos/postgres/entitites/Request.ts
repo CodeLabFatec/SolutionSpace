@@ -20,7 +20,7 @@ export enum RequestType {
 @Entity('requests')
 export class Request {
   @PrimaryGeneratedColumn('uuid')
-  request_id: number
+  request_id: string
 
   @Column({ type: 'text', nullable: false })
   title: string
