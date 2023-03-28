@@ -21,7 +21,11 @@ export default async function authMiddleware(req: Request, res: Response, next: 
       return res.status(401).json('User not found')
     }
 
-    res.locals = { user_id: id }
+    res.locals = {
+      user_id: id,
+      user_name: user.name,
+      team_id: user.team
+    }
 
     next()
   } catch {

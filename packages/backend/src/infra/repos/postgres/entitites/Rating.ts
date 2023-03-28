@@ -46,6 +46,9 @@ export class Rating {
   })
   requestStep: RequestStep
 
+  @Column({ type: 'text', nullable: true })
+  targetGroup: string
+
   @CreateDateColumn()
   created_at: Date
 
