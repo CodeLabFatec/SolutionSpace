@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export class default1680006436439 implements MigrationInterface {
-  name = 'default1680006436439'
+export class default1680030083992 implements MigrationInterface {
+  name = 'default1680030083992'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -11,10 +11,10 @@ export class default1680006436439 implements MigrationInterface {
       `CREATE TABLE "users" ("user_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" text NOT NULL, "email" text NOT NULL, "password" text NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "team_id" uuid, CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), CONSTRAINT "PK_96aac72f1574b88752e9fb00089" PRIMARY KEY ("user_id"))`
     )
     await queryRunner.query(
-      `CREATE TABLE "requests" ("request_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "title" text NOT NULL, "description" text, "RequestType" "public"."requests_requesttype_enum" NOT NULL, "requestStep" text NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "user_id" uuid, CONSTRAINT "PK_4e7b87d34546d9f21a648aed04d" PRIMARY KEY ("request_id"))`
+      `CREATE TABLE "requests" ("request_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "title" text NOT NULL, "description" text, "requestType" "public"."requests_requesttype_enum", "requestStep" text NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "user_id" uuid, CONSTRAINT "PK_4e7b87d34546d9f21a648aed04d" PRIMARY KEY ("request_id"))`
     )
     await queryRunner.query(
-      `CREATE TABLE "ratings" ("rating_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "rating" text NOT NULL, "title" text NOT NULL, "description" text, "requestStep" "public"."ratings_requeststep_enum" NOT NULL, "targetGroup" text, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "user_id" uuid, "request_id" uuid, CONSTRAINT "PK_dc4f636dd0dd5a75e84115a606f" PRIMARY KEY ("rating_id"))`
+      `CREATE TABLE "ratings" ("rating_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "rating" text NOT NULL, "title" text NOT NULL, "description" text, "requestStep" "public"."ratings_requeststep_enum", "targetGroup" text, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "user_id" uuid, "request_id" uuid, CONSTRAINT "PK_dc4f636dd0dd5a75e84115a606f" PRIMARY KEY ("rating_id"))`
     )
     await queryRunner.query(
       `CREATE TABLE "files" ("file_id" uuid NOT NULL DEFAULT uuid_generate_v4(), "file_name" text NOT NULL, "base64" text NOT NULL, "ext" text NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "request_id" uuid, "rating_id" uuid, CONSTRAINT "PK_a753eb40fcc8cd925fe9c9aded4" PRIMARY KEY ("file_id"))`

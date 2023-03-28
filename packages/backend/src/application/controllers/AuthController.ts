@@ -13,7 +13,7 @@ export class AuthController {
     }
 
     try {
-      const user = await userRepository.findOne({ where: { email } })
+      const user = await userRepository.findOne({ where: { email }, relations: { team: true } })
 
       if (!user) return res.status(401).json('Unauthorized - Email not found')
 
@@ -21,12 +21,12 @@ export class AuthController {
 
       if (!isValidPassword) return res.status(401).json('Unauthorized - Incorrect password')
 
-      const token = jwt.sign({ id: user.user_id }, process.env.JWT_PASS as string, { expiresIn: 120000 })
+      const token = jwt.sign({ id: user.user_id }, process.env.JWT_PASS as string, { expiresIn: '7d' })
 
       return res.json({
         user,
         token,
-        expiresIn: 120000
+        expiresIn: '7d'
       })
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })

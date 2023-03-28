@@ -13,8 +13,8 @@ import {
 import { User } from './User'
 
 export enum RequestType {
-  FEATURE = 'feature',
-  HOTFIX = 'hotfix'
+  FEATURE = 'Feature',
+  HOTFIX = 'Hotfix'
 }
 
 @Entity('requests')
@@ -30,15 +30,16 @@ export class Request {
 
   @Column({
     type: 'enum',
-    enum: RequestType
+    enum: RequestType,
+    nullable: true
   })
-  RequestType: RequestType
+  requestType: RequestType
 
   @ManyToOne(() => User, (user) => user.user_id)
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   requestStep: string
 
   @CreateDateColumn()
