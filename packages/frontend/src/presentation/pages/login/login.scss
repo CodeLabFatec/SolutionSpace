@@ -56,7 +56,6 @@ body {
 }
 
 .input {
-
   font-size: 15px;
   margin-top: 15px;
   color: #fff;
@@ -97,7 +96,7 @@ body {
   font-size: 15px;
   color: #999;
   line-height: 1.2;
-  
+
   content: attr(data-placeholder);
 
   display: block;
@@ -107,8 +106,6 @@ body {
   left: 0px;
 
   padding-left: 5px;
-
-  
 }
 
 .input:focus {
