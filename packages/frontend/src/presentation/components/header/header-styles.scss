@@ -1,4 +1,8 @@
-.headerWrap {
+.nav {
+  background-color: #333333;
+  width: 100%;
+  max-height: 95px;
+
   display: flex;
   justify-content: center;
 
@@ -82,4 +86,75 @@
     cursor: pointer;
     user-select: none;
   }
+}
+
+.formButton {
+  font-weight: bold;
+  color: #4fb4bc;
+  background-color: rgba(196, 196, 204, 0.2);
+
+  width: 75px;
+  max-height: 115px;
+
+  padding: 37px 8px 30.5px 8px;
+  border-bottom: 4px solid #4fb4bc;
+  margin: 0 0 0 30px;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+#iconHome {
+  font-size: 33px;
+}
+
+.logo {
+  margin: 17px 9px 13px 9px;
+}
+
+.userConnected {
+  color: #ffffff;
+  margin: 40.5px 33px 0 0;
+  font-size: 20px;
+}
+
+.userConnected hr {
+  border: 1px solid #4fb4bc;
+}
+
+.logout {
+  font-size: 20px;
+  color: #4fb4bc;
+  background-color: rgba(196, 196, 204, 0.2);
+
+  position: absolute;
+  right: 24px;
+  width: 75px;
+
+  padding: 46px 8px 20.5px 8px;
+  border-bottom: 4px solid #4fb4bc;
+  margin: 0 0 0 30px;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.chamados {
+  font-size: 20px;
+  color: #4fb4bc;
+  background-color: rgba(196, 196, 204, 0.2);
+
+  position: absolute;
+  right: 131px;
+  width: 191px;
+
+  padding: 46px 8px 20.5px 8px;
+  border-bottom: 4px solid #4fb4bc;
+  margin: 0 0 0 30px;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
 }

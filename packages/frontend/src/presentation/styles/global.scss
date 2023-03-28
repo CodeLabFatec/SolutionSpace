@@ -18,6 +18,41 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #ffffff;
   background-color: $background;
+  color: $white;
+}
+
+body::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 4px;
+  width: 10px;
+}
+
+body::-webkit-scrollbar-button {
+  display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: $scrollbar;
+  border-radius: 20px;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 4px;
+  width: 10px;
+}
+
+textarea::-webkit-scrollbar-button {
+  display: none;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #535252;
+  border-radius: 20px;
 }
 
 :root {

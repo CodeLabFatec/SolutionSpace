@@ -7,3 +7,6 @@ coverage
 # Transpiled files
 build/
 dist/
+
+# enviroments variable
+.env
