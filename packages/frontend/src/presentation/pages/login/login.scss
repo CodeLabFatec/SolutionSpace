@@ -1,16 +1,12 @@
-body {
+.imagem {
   background-image: url(./imagem/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.container {
-  background-color: rgba(6, 6, 6, 0.8);
-  height: 900px;
-  margin: 0 auto;
-}
-
 .container_login {
+  background-color: rgba(6, 6, 6, 0.8);
+  height: 695px;
   width: 100%;
   min-height: 100vh;
 
@@ -27,7 +23,7 @@ body {
   background-color: #000;
   border-radius: 10px;
   overflow: hidden;
-  padding: 50px 55px 33px 55px;
+  padding: 50px 55px 33px 5px;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
@@ -41,7 +37,7 @@ body {
   font-size: 30px;
   color: azure;
   font-weight: bold;
-
+  margin-left: 35px;
   line-height: 1.9;
   text-align: center;
   align-items: center;
