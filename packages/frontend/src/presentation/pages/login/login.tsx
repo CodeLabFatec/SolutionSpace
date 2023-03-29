@@ -23,7 +23,6 @@ const Login: React.FC = () => {
           <form className={Styles.login_form} onSubmit={handleSubmit}>
             <LogoMenor className={Styles.logomenor} />
             <span className={Styles.login_form_title}>Ionic Health™</span>
-            <span className={Styles.login_form_title}></span>
             <div className={Styles.wrap_input}>
               <input
                 className={Styles.input}
