@@ -1,5 +1,4 @@
-
-import { MakeLogin, MakeTicketForm } from '@/main/factories/pages'
+import { MakeLogin } from '@/main/factories/pages'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react'
@@ -11,8 +10,8 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/ticket-form' element={<MakeTicketForm />} />
-        <Route path='/login' element={<MakeLogin />} />
+        {/* <Route path='/ticket-form' element={<MakeTicketForm />} /> */}
+        <Route path='/' element={<MakeLogin />} />
         <Route path='/formularioChamados' element={<FormularioChamados />} />
         <Route path='/home' element={<HomeSolicitantes />} />
         <Route path='/alinhamentoEstrategico' element={<AlinhamentoEstrategico />} />
