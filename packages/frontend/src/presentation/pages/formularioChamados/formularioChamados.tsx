@@ -5,13 +5,16 @@ import Styles from './formularioChamados.scss'
 import React from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
+import { TipoChamado } from '@/main/enums/tipo-chamado'
 
-const FormularioChamados: React.FC = () => {
+const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
+  const title = props.tipoChamado === TipoChamado.FEATURE ? 'Nova feature' : 'Hotfix'
+
   return (
     <>
-      <Header />
+      <Header exibirHome={true} />
       <div className={Styles.H1formularioChamados}>
-        <h1>Nova feature</h1>
+        <h1>{title}</h1>
         <hr />
       </div>
       <div className={Styles.form}>

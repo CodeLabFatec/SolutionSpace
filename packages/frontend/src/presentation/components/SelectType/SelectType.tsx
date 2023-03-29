@@ -13,7 +13,7 @@ const options = [
   { value: 'produto 08', label: 'Produto 08' }
 ]
 
-export const SelectType = () => {
+const SelectType = () => {
   const colourStyles = {
     menuList: (styles: any) => ({
       ...styles,
@@ -52,3 +52,5 @@ export const SelectType = () => {
     </>
   )
 }
+
+export default SelectType

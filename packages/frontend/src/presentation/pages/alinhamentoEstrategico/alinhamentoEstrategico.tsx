@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header } from '@/presentation/components'
+import { Header, SelectType } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
 import React from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
-import { SelectType } from '@/presentation/components/SelectType/SelectType'
 
 const AlinhamentoEstrategico: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header exibirHome={true} />
       <div className={Styles.H1formularioChamados}>
         <h1>Alinhamento estratégico</h1>
         <hr />
