@@ -1,16 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Styles from './login.scss'
 import LogoMenor from '@/presentation/components/logomenor/logomenor'
+import { AuthContext } from '@/main/contexts/authcontext'
 
 const Login: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { authenticated, login } = useContext(AuthContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    login(email, password)
+  }
+
   return (
-    <div className={Styles.container}>
+    <div className={Styles.imagem}>
       <div className={Styles.container_login}>
         <div className={Styles.wrap_login}>
-          <form className={Styles.login_form}>
+          <form className={Styles.login_form} onSubmit={handleSubmit}>
             <LogoMenor className={Styles.logomenor} />
             <span className={Styles.login_form_title}>Ionic Health™</span>
             <span className={Styles.login_form_title}></span>
@@ -38,7 +48,9 @@ const Login: React.FC = () => {
             </div>
 
             <div className={Styles.container_login_form_btn}>
-              <button className={Styles.login_form_btn}>Entrar</button>
+              <button type='submit' className={Styles.login_form_btn}>
+                Entrar
+              </button>
             </div>
           </form>
         </div>
