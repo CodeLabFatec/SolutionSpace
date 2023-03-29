@@ -6,10 +6,10 @@ import { RequestStep } from '../../infra/repos/postgres/entitites/Rating'
 
 export class RequestController {
   async create(req: Request, res: Response) {
-    const { title, description, requestType, requestStep } = req.body
+    const { title, description, requestType } = req.body
     const { userId } = req.params
 
-    if (!title || !requestType || !requestStep || !userId) {
+    if (!title || !requestType || !userId) {
       return res.status(400).json({ message: 'Missing required informations to create a request' })
     }
 
@@ -22,8 +22,7 @@ export class RequestController {
         title,
         description,
         requestType: requestType === 'FEATURE' ? RequestType.FEATURE : RequestType.HOTFIX,
-        requestStep:
-          requestStep === 'ALINHAMENTO_ESTRATEGICO' ? RequestStep.ALINHAMENTO_ESTRATEGICO : RequestStep.ANALISE_RISCO,
+        requestStep: requestType === 'FEATURE' ? RequestStep.ANALISE_RISCO : RequestStep.ALINHAMENTO_ESTRATEGICO,
         user
       })
 
@@ -37,7 +36,22 @@ export class RequestController {
 
   async listRequests(req: Request, res: Response) {
     try {
-      const requests = await requestRepository.find({ relations: { user: { team: true } } })
+      const requests = await requestRepository.find({ relations: { user: { team: true }, files: true } })
+
+      return res.status(200).json(requests)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
+
+  async listRequestsByUser(req: Request, res: Response) {
+    const { user_id } = req.params
+
+    try {
+      const requests = await requestRepository.find({
+        where: { user: { user_id } },
+        relations: { user: { team: true }, files: true }
+      })
 
       return res.status(200).json(requests)
     } catch (error) {
@@ -51,7 +65,7 @@ export class RequestController {
     try {
       const request = await requestRepository.findOne({
         where: { request_id: id },
-        relations: { user: { team: true } }
+        relations: { user: { team: true }, files: true }
       })
 
       if (!request) return res.status(404).json('Request not found')

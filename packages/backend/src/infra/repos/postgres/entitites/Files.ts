@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -27,9 +29,19 @@ export class File {
   @Column({ type: 'text', nullable: false })
   ext: string
 
-  @ManyToOne(() => Request, (request) => request.request_id)
-  @JoinColumn({ name: 'request_id' })
-  request: Request
+  @ManyToMany(() => Request, (request) => request.files)
+  @JoinTable({
+    name: 'request_file',
+    joinColumn: {
+      name: 'request',
+      referencedColumnName: 'file_id'
+    },
+    inverseJoinColumn: {
+      name: 'file',
+      referencedColumnName: 'request_id'
+    }
+  })
+  requests: Request[]
 
   @ManyToOne(() => Rating, (rating) => rating.rating_id)
   @JoinColumn({ name: 'rating_id' })

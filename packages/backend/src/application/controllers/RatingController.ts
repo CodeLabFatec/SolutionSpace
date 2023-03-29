@@ -13,9 +13,20 @@ export class RatingController {
       return res.status(400).json({ message: 'Missing required informations to create a rating' })
     }
 
-    const user = await userRepository.findOneBy({ user_id })
+    const user = await userRepository.findOne({ where: { user_id }, relations: { team: true } })
 
     if (!user) return res.status(404).json('User not found')
+
+    const alreadyRated = await ratingRepository.find({
+      where: {
+        request: { request_id: requestId },
+        user: { team: { team_id: user.team.team_id } }
+      }
+    })
+
+    if (alreadyRated.length) {
+      return res.status(400).json('There is already a rating for this request from the same team')
+    }
 
     const request = await requestRepository.findOneBy({ request_id: requestId })
 
@@ -28,12 +39,9 @@ export class RatingController {
         request,
         title,
         description,
-        requestStep:
-          requestStep === 'ALINHAMENTO_ESTRATEGICO' ? RequestStep.ALINHAMENTO_ESTRATEGICO : RequestStep.ANALISE_RISCO,
+        requestStep: request.requestStep as RequestStep,
         targetGroup
       })
-
-      console.log(newRating)
 
       await ratingRepository.save(newRating)
 
