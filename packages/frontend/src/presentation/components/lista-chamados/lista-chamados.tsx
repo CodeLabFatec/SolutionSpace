@@ -45,6 +45,30 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       type: TipoChamado.HOTFIX,
       date: '25/03/23'
     })
+    teste.push({
+      id: '114',
+      title: 'FIX/01: Título página',
+      description: 'Corrigir o título da aplicação',
+      status: 0,
+      type: TipoChamado.HOTFIX,
+      date: '25/03/23'
+    })
+    teste.push({
+      id: '115',
+      title: 'FIX/01: Título página',
+      description: 'Corrigir o título da aplicação',
+      status: 0,
+      type: TipoChamado.HOTFIX,
+      date: '25/03/23'
+    })
+    teste.push({
+      id: '116',
+      title: 'FIX/01: Título página',
+      description: 'Corrigir o título da aplicação',
+      status: 0,
+      type: TipoChamado.HOTFIX,
+      date: '25/03/23'
+    })
 
     setChamados(teste)
     setChamadosFiltrados(teste)
@@ -83,6 +107,7 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
         {chamadosFiltrados.map((item) => (
           // eslint-disable-next-line react/jsx-key
           <div
+            key={item.id}
             onClick={() => {
               props.chamadoState(item)
             }}

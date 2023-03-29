@@ -13,6 +13,14 @@ const Login: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
+    if (email == null || email === '' || email === ' ') {
+      return
+    }
+
+    if (password == null || password === '' || password === ' ') {
+      return
+    }
+
     login(email, password)
   }
 

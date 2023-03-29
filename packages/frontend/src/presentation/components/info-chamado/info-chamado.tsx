@@ -1,34 +1,37 @@
 import React from 'react'
 import Styles from './info-chamado-styles.scss'
 import { type ChamadoType } from '../lista-chamados/lista-chamados'
+import Footer from '../footer/footer'
 
 const InfoChamado: React.FC<{ chamado: ChamadoType | undefined }> = (props) => {
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
       return (
-        <div className={Styles.tituloDetalhe}>
-          <label htmlFor='titulo'>Título</label>
-          <input
-            readOnly={true}
-            value={props.chamado.title}
-            type='text'
-            className={Styles.inputTitulo}
-            id='titulo'
-            required
-            autoFocus
-            maxLength={60}
-          />
-          <label htmlFor='detalhes'>Detalhes</label>
-          <textarea
-            readOnly={true}
-            value={props.chamado.description}
-            className={Styles.inputDetalhe}
-            id='detalhes'
-            cols={30}
-            rows={10}
-            required
-          ></textarea>
-        </div>
+        <>
+          <div className={Styles.tituloDetalhe}>
+            <label htmlFor='titulo'>Título</label>
+            <input
+              readOnly={true}
+              value={props.chamado.title}
+              type='text'
+              className={Styles.inputTitulo}
+              id='titulo'
+              required
+              autoFocus
+              maxLength={60}
+            />
+            <label htmlFor='detalhes'>Detalhes</label>
+            <textarea
+              readOnly={true}
+              value={props.chamado.description}
+              className={Styles.inputDetalhe}
+              id='detalhes'
+              cols={30}
+              rows={10}
+              required
+            ></textarea>
+          </div>
+        </>
       )
     }
     return (

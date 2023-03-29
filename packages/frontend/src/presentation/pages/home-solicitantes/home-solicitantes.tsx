@@ -8,7 +8,7 @@ import { TipoChamado } from '@/main/enums/tipo-chamado'
 const HomeSolicitantes: React.FC = () => {
   return (
     <div>
-      <Header />
+      <Header exibirHome={false} />
       <div className={Styles.abrirChamadoLabel}>
         <h1>Abrir chamado</h1>
       </div>

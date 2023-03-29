@@ -1,6 +1,10 @@
 import React, { useEffect, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createSession, api } from '../api/api'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export const AuthContext = createContext({} as any)
 
@@ -40,6 +44,22 @@ export const AuthProvider = ({ children }: any) => {
       // verificar pelo equipe (team) do usuário para qual página redirecioná-lo
     } catch (e: any) {
       console.log(e.response.data)
+      const responseMessage = e.response.data
+      let errorMessage
+
+      if (responseMessage.includes('Email not found')) {
+        errorMessage = 'Email ou senha incorreta.'
+      } else if (responseMessage.includes('Incorrect password')) {
+        errorMessage = 'Email ou senha incorreta.'
+      } else {
+        errorMessage = responseMessage
+      }
+
+      MySwal.fire({
+        title: 'Erro',
+        icon: 'error',
+        html: errorMessage
+      })
     }
   }
 
@@ -50,6 +70,8 @@ export const AuthProvider = ({ children }: any) => {
     api.defaults.headers.Authorization = null
 
     setUser(null)
+
+    navigate('/login')
   }
 
   return (

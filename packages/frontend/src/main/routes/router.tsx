@@ -1,11 +1,11 @@
-import { MakeLogin, MakeTicketForm } from '@/main/factories/pages'
+import { MakeChamados, MakeLogin } from '@/main/factories/pages'
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import React, { useContext } from 'react'
-import { FormularioChamados, HomeSolicitantes } from '@/presentation/pages'
-import AlinhamentoEstrategico from '@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico'
-import AnaliseRisco from '@/presentation/pages/analiseRisco/analiseRisco'
+import { HomeSolicitantes } from '@/presentation/pages'
 import { AuthProvider, AuthContext } from '../contexts/authcontext'
+import { MakeFormularioChamados } from '../factories/pages/formularioChamados-factory'
+import { TipoChamado } from '../enums/tipo-chamado'
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -20,6 +20,16 @@ const Router: React.FC = () => {
     }
 
     return children
+  }
+
+  const Login = () => {
+    const { authenticated } = useContext(AuthContext)
+
+    if (!authenticated) {
+      return <MakeLogin />
+    }
+
+    return <Navigate to='/home' />
   }
 
   const Origin = ({ children }: any) => {
@@ -48,17 +58,16 @@ const Router: React.FC = () => {
                 <Navigate to='/home' />
               </Origin>
             }
-          ></Route>
-          <Route path='/ticket-form' element={<MakeTicketForm />} />
-          <Route path='/login' element={<MakeLogin />} />
+          />
           <Route
-            path='/formularioChamados'
+            path='*'
             element={
-              <Private>
-                <FormularioChamados />
-              </Private>
+              <Origin>
+                <Navigate to='/home' />
+              </Origin>
             }
           />
+          <Route path='/login' element={<Login />} />
           <Route
             path='/home'
             element={
@@ -68,18 +77,26 @@ const Router: React.FC = () => {
             }
           />
           <Route
-            path='/alinhamentoEstrategico'
+            path='/newFeature'
             element={
               <Private>
-                <AlinhamentoEstrategico />
+                <MakeFormularioChamados tipoChamado={TipoChamado.FEATURE} />
               </Private>
             }
           />
           <Route
-            path='/analiserisco'
+            path='/newHotfix'
             element={
               <Private>
-                <AnaliseRisco />
+                <MakeFormularioChamados tipoChamado={TipoChamado.HOTFIX} />
+              </Private>
+            }
+          />
+          <Route
+            path='/requests'
+            element={
+              <Private>
+                <MakeChamados />
               </Private>
             }
           />

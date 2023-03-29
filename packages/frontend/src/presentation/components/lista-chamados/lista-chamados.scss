@@ -1,6 +1,8 @@
 .listaChamadosWrapper {
-    width: 363px;
+    width: 375px;
     background-color: rgba($color: #333333, $alpha: 0.4);
+    user-select: none;
+
 
     .listaChamadosHeader {
         background-color: #333333;
@@ -8,6 +10,7 @@
 
         .listaChamadosHeaderSwitch {
             padding: 5px 0 0 311px;
+
             i {
                 font-size: 35px;
                 color: #FFFFFF;
@@ -18,8 +21,24 @@
     .listaChamadosPack {
         justify-content: space-between;
         padding: 20px 19px 0 19px;
-        height: 530px;
-        //overflow-y: scroll;
+        height: 598px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            background-color: rgba($color: #333333, $alpha: 0.1);
+            border-radius: 4px;
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #535252;
+            border-radius: 20px;
+        }
+
 
         .listaChamadosFiltro {
             width: 325px;
@@ -27,7 +46,9 @@
             display: flex;
 
             .listaChamadosFiltroIcon {
+                cursor: pointer;
                 font-size: 30px;
+                margin-top: -2px;
                 padding-left: 10px;
             }
 
@@ -40,7 +61,7 @@
                 font-weight: 500;
             }
 
-            input:focus{
+            input:focus {
                 outline: none;
             }
         }
