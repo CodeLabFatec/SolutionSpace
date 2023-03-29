@@ -5,12 +5,11 @@ import Styles from './analiseRisco.scss'
 import React from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
-import { SelectType } from '@/presentation/components/SelectType/SelectType'
 
 const AnaliseRisco: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header exibirHome={true} />
       <div className={Styles.H1formularioChamados}>
         <h1>Documento de análise de risco</h1>
         <hr />
