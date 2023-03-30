@@ -6,6 +6,7 @@ import { HomeSolicitantes } from '@/presentation/pages'
 import { AuthProvider, AuthContext } from '../contexts/authcontext'
 import { MakeFormularioChamados } from '../factories/pages/formularioChamados-factory'
 import { TipoChamado } from '../enums/tipo-chamado'
+import { VisualizarChamado } from '../enums/visualizar-chamado'
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -93,10 +94,18 @@ const Router: React.FC = () => {
             }
           />
           <Route
+            path='/myRequests'
+            element={
+              <Private>
+                <MakeChamados visualizacaoChamados={VisualizarChamado.MEUS_CHAMADOS} />
+              </Private>
+            }
+          />
+          <Route
             path='/requests'
             element={
               <Private>
-                <MakeChamados />
+                <MakeChamados visualizacaoChamados={VisualizarChamado.TODOS_CHAMADOS} />
               </Private>
             }
           />

@@ -76,3 +76,21 @@
   cursor: pointer;
   user-select: none;
 }
+
+.allChamados {
+  font-size: 20px;
+  color: #4fb4bc;
+  background-color: rgba(196, 196, 204, 0.2);
+
+  position: absolute;
+  right: 355px;
+  width: 191px;
+
+  padding: 46px 8px 20.5px 8px;
+  border-bottom: 4px solid #4fb4bc;
+  margin: 0 0 0 30px;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+}

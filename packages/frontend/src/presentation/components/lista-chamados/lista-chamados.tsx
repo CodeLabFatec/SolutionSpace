@@ -5,6 +5,7 @@ import Styles from './lista-chamados.scss'
 import React, { useEffect, useState } from 'react'
 import Chamado from '@/presentation/components/chamado/chamado'
 import { TipoChamado } from '@/main/enums/tipo-chamado'
+import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 
 export type ChamadoType = {
   id: string
@@ -13,9 +14,10 @@ export type ChamadoType = {
   status: number
   type: TipoChamado
   date: string
+  step: string
 }
 
-const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
+const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: VisualizarChamado }> = (props) => {
   const [chamados, setChamados] = useState<ChamadoType[]>([])
   const [chamadosFiltrados, setChamadosFiltrados] = useState<ChamadoType[]>([])
 
@@ -27,7 +29,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Desenvolver a homepage da aplicação',
       status: 0,
       type: TipoChamado.FEATURE,
-      date: '27/03/23'
+      date: '27/03/23',
+      step: 'Aguardando análise'
     })
     teste.push({
       id: '112',
@@ -35,7 +38,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Desenvolver a página de login da aplicação',
       status: 0,
       type: TipoChamado.FEATURE,
-      date: '26/03/23'
+      date: '26/03/23',
+      step: 'Análise de Risco'
     })
     teste.push({
       id: '113',
@@ -43,7 +47,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Corrigir o título da aplicação',
       status: 0,
       type: TipoChamado.HOTFIX,
-      date: '25/03/23'
+      date: '25/03/23',
+      step: 'Alinhamento Estratégico'
     })
     teste.push({
       id: '114',
@@ -51,7 +56,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Corrigir o título da aplicação',
       status: 0,
       type: TipoChamado.HOTFIX,
-      date: '25/03/23'
+      date: '25/03/23',
+      step: 'Alinhamento Estratégico'
     })
     teste.push({
       id: '115',
@@ -59,7 +65,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Corrigir o título da aplicação',
       status: 0,
       type: TipoChamado.HOTFIX,
-      date: '25/03/23'
+      date: '25/03/23',
+      step: 'Descartado'
     })
     teste.push({
       id: '116',
@@ -67,7 +74,8 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
       description: 'Corrigir o título da aplicação',
       status: 0,
       type: TipoChamado.HOTFIX,
-      date: '25/03/23'
+      date: '25/03/23',
+      step: 'Descartado'
     })
 
     setChamados(teste)

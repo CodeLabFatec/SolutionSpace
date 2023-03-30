@@ -19,6 +19,11 @@ const Chamado: React.FC<{ chamado: ChamadoType }> = (props) => {
         <p>{props.chamado.title}</p>
         <p>{props.chamado.date}</p>
       </div>
+      <div className={Styles.chamadoStatusTagWrapper}>
+        <div className={Styles.chamadoStatusTagInfo}>
+          <p>{props.chamado.step}</p>
+        </div>
+      </div>
     </div>
   )
 }

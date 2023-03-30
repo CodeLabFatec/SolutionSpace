@@ -16,7 +16,7 @@ const Header: React.FC<{ exibirHome: boolean }> = (props) => {
   const handleRequests = (e: any) => {
     e.preventDefault()
 
-    navigate('/requests')
+    navigate('/myRequests')
   }
 
   const handleHome = (e: any) => {
@@ -72,6 +72,14 @@ const Header: React.FC<{ exibirHome: boolean }> = (props) => {
       </div>
       <div onClick={handleRequests} className={Styles.chamados}>
         <p>Meus chamados</p>
+      </div>
+      <div
+        onClick={() => {
+          navigate('/requests')
+        }}
+        className={Styles.allChamados}
+      >
+        <p>Todos chamados</p>
       </div>
     </div>
   )
