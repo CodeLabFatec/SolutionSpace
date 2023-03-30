@@ -3,6 +3,8 @@ import { Request, Response } from 'express'
 import { userRepository } from '../../infra/repos/postgres/repositories/userRepository'
 import { RequestType } from '../../infra/repos/postgres/entitites/Request'
 import { RequestStep } from '../../infra/repos/postgres/entitites/Rating'
+import { ratingRepository } from '../../infra/repos/postgres/repositories/ratingRepository'
+import { In } from 'typeorm'
 
 export class RequestController {
   async create(req: Request, res: Response) {
@@ -54,6 +56,63 @@ export class RequestController {
       })
 
       return res.status(200).json(requests)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
+
+  async listRequestsByTeam(req: Request, res: Response) {
+    const { user_id } = req.params
+
+    const user = await userRepository.findOne({ where: { user_id }, relations: { team: true } })
+
+    if (!user) return res.status(404).json('User not found')
+
+    try {
+      if (user.team.team_name === 'Solicitante') {
+        const requests = await requestRepository.find({
+          where: { user: { user_id } },
+          relations: { user: { team: true }, files: true }
+        })
+
+        return res.status(200).json(requests)
+      }
+
+      let teamRatedIds: string[] = []
+
+      const teamRated = await ratingRepository.find({
+        where: { user: { team: { team_name: user.team.team_name } } },
+        relations: { request: true }
+      })
+
+      if (teamRated) {
+        teamRatedIds = teamRated.map((rating) => rating.request.request_id)
+      }
+
+      if (teamRatedIds.length > 0) {
+        const teamRequests = await requestRepository.find({
+          where: [{ user: { team: { team_name: user.team.team_name } } }],
+          relations: { user: { team: true }, files: true }
+        })
+
+        const teamRatedRequests = await requestRepository.find({
+          where: { request_id: In(teamRatedIds) },
+          relations: { user: { team: true }, files: true }
+        })
+
+        const filteredRequests = teamRequests.filter(
+          (req) => !teamRatedRequests.filter((req2) => req.request_id === req2.request_id).length
+        )
+
+        return res.status(200).json(filteredRequests)
+      }
+
+      const teamRequests = await requestRepository.find({
+        where: [{ user: { team: { team_name: user.team.team_name } } }],
+        relations: { user: { team: true }, files: true }
+      })
+
+      return res.status(200).json(teamRequests)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }

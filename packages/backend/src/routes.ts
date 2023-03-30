@@ -28,6 +28,7 @@ router.post('/createTeam', new TeamController().create)
 // Request
 router.get('/listRequests', authMiddleware, new RequestController().listRequests)
 router.get('/listRequestsByUser/:user_id', authMiddleware, new RequestController().listRequestsByUser)
+router.get('/listRequestsBySquad/:user_id', authMiddleware, new RequestController().listRequestsByTeam)
 router.get('/request/:id', authMiddleware, new RequestController().getRequestById)
 router.post('/createRequest/:userId', authMiddleware, new RequestController().create)
 
