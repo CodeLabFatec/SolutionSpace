@@ -6,7 +6,7 @@ export class Team {
   @PrimaryGeneratedColumn('uuid')
   team_id: string
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'text', unique: true, nullable: false })
   team_name: string
 
   @OneToMany(() => User, (user) => user.team)

@@ -6,15 +6,17 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
 import { User } from './User'
+import { File } from './Files'
 
 export enum RequestType {
-  FEATURE = 'feature',
-  HOTFIX = 'hotfix'
+  FEATURE = 'Feature',
+  HOTFIX = 'Hotfix'
 }
 
 @Entity('requests')
@@ -30,16 +32,20 @@ export class Request {
 
   @Column({
     type: 'enum',
-    enum: RequestType
+    enum: RequestType,
+    nullable: true
   })
-  RequestType: RequestType
+  requestType: RequestType
 
   @ManyToOne(() => User, (user) => user.user_id)
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   requestStep: string
+
+  @ManyToMany(() => File, (file) => file.requests)
+  files: File[]
 
   @CreateDateColumn()
   created_at: Date

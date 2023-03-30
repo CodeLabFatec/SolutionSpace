@@ -17,9 +17,7 @@ export default async function authMiddleware(req: Request, res: Response, next: 
 
     const user = await userRepository.findOne({
       where: { user_id: id.toString() },
-      relations: {
-        team: true
-      }
+      relations: { team: true }
     })
 
     if (!user) {
