@@ -60,7 +60,8 @@ const AlinhamentoEstrategico: React.FC = () => {
           >
             <div>a</div>
           </Modal>
-
+        </div>
+        <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
             <DropZone />
           </div>
