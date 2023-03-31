@@ -3,15 +3,20 @@ import { Request, Response } from 'express'
 import { userRepository } from '../../infra/repos/postgres/repositories/userRepository'
 import { ratingRepository } from '../../infra/repos/postgres/repositories/ratingRepository'
 import { RequestStep } from '../../infra/repos/postgres/entitites/Rating'
+import { File } from '../../infra/repos/postgres/entitites/File'
+import { fileRepository } from '../../infra/repos/postgres/repositories/fileRepository'
 
 export class RatingController {
   async create(req: Request, res: Response) {
-    const { rating, user_id, title, description, requestStep, targetGroup } = req.body
+    const { rating, user_id, title, description, requestStep, targetGroup, files } = req.body
     const { requestId } = req.params
 
     if (!rating || !user_id || !title || !requestStep || !requestId) {
       return res.status(400).json({ message: 'Missing required informations to create a rating' })
     }
+
+    const ratingFiles: File[] = files
+    const createdFiles: File[] = []
 
     const user = await userRepository.findOne({ where: { user_id }, relations: { team: true } })
 
@@ -33,6 +38,22 @@ export class RatingController {
     if (!request) return res.status(404).json('Request not found')
 
     try {
+      if (ratingFiles.length > 0) {
+        ratingFiles.forEach(async (file) => {
+          const newFile = fileRepository.create({
+            file_name: file.file_name,
+            base64: file.base64,
+            ext: file.ext
+          })
+
+          await fileRepository.save(newFile)
+
+          if (newFile) {
+            createdFiles.push(newFile)
+          }
+        })
+      }
+
       const newRating = ratingRepository.create({
         rating,
         user,
@@ -43,7 +64,18 @@ export class RatingController {
         targetGroup
       })
 
-      await ratingRepository.save(newRating)
+      const createdRating = await ratingRepository.save(newRating)
+
+      if (createdFiles.length > 0) {
+        const requestInsertFiles = {
+          ...createdRating,
+          files: createdFiles
+        }
+
+        const createdRatingWithFiles = await ratingRepository.save(requestInsertFiles)
+
+        return res.status(201).json(createdRatingWithFiles)
+      }
 
       return res.status(201).json(newRating)
     } catch (error) {
@@ -54,7 +86,7 @@ export class RatingController {
   async listRatings(req: Request, res: Response) {
     try {
       const ratings = await ratingRepository.find({
-        relations: { user: { team: true }, request: { user: true } }
+        relations: { user: { team: true }, request: { user: true }, files: true }
       })
 
       return res.status(200).json(ratings)
@@ -69,7 +101,7 @@ export class RatingController {
     try {
       const rating = await ratingRepository.findOne({
         where: { rating_id: id },
-        relations: { user: { team: true }, request: { user: true } }
+        relations: { user: { team: true }, request: { user: true }, files: true }
       })
 
       if (!rating) return res.status(404).json('Rating not found')
@@ -86,7 +118,7 @@ export class RatingController {
     try {
       const ratings = await ratingRepository.find({
         where: { request: { request_id } },
-        relations: { user: { team: true }, request: { user: true } }
+        relations: { user: { team: true }, request: { user: true }, files: true }
       })
 
       if (!ratings) return res.status(404).json('Ratings not found for this request id')

@@ -6,13 +6,13 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
 import { User } from './User'
-import { File } from './Files'
+import { File } from './File'
 
 export enum RequestType {
   FEATURE = 'feature',
@@ -44,7 +44,7 @@ export class Request {
   @Column({ type: 'text', nullable: false })
   requestStep: string
 
-  @ManyToMany(() => File, (file) => file.requests)
+  @OneToMany(() => File, (file) => file.request)
   files: File[]
 
   @CreateDateColumn()

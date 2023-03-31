@@ -5,21 +5,42 @@ import { RequestType } from '../../infra/repos/postgres/entitites/Request'
 import { RequestStep } from '../../infra/repos/postgres/entitites/Rating'
 import { ratingRepository } from '../../infra/repos/postgres/repositories/ratingRepository'
 import { In } from 'typeorm'
+import { fileRepository } from '../../infra/repos/postgres/repositories/fileRepository'
+import { File } from '../../infra/repos/postgres/entitites/File'
 
 export class RequestController {
   async create(req: Request, res: Response) {
-    const { title, description, requestType } = req.body
+    const { title, description, requestType, files } = req.body
     const { userId } = req.params
 
     if (!title || !requestType || !userId) {
       return res.status(400).json({ message: 'Missing required informations to create a request' })
     }
 
+    const requestFiles: File[] = files
+    const createdFiles: File[] = []
+
     const user = await userRepository.findOneBy({ user_id: userId })
 
     if (!user) return res.status(404).json('User not found')
 
     try {
+      if (requestFiles.length > 0) {
+        requestFiles.forEach(async (file) => {
+          const newFile = fileRepository.create({
+            file_name: file.file_name,
+            base64: file.base64,
+            ext: file.ext
+          })
+
+          await fileRepository.save(newFile)
+
+          if (newFile) {
+            createdFiles.push(newFile)
+          }
+        })
+      }
+
       const newRequest = requestRepository.create({
         title,
         description,
@@ -28,9 +49,20 @@ export class RequestController {
         user
       })
 
-      await requestRepository.save(newRequest)
+      const createdRequest = await requestRepository.save(newRequest)
 
-      return res.status(201).json(newRequest)
+      if (createdFiles.length > 0) {
+        const requestInsertFiles = {
+          ...createdRequest,
+          files: createdFiles
+        }
+
+        const createdRequestWithFiles = await requestRepository.save(requestInsertFiles)
+
+        return res.status(201).json(createdRequestWithFiles)
+      }
+
+      return res.status(201).json(createdRequest)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
