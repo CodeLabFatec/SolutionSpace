@@ -12,8 +12,13 @@ AppDataSource.initialize()
     const app = express()
 
     app.use(express.json())
+    app.use(
+      cors({
+        origin: 'http://localhost:8080',
+        credentials: true
+      })
+    )
     app.use(routes)
-    app.use(cors())
 
     app.listen(process.env.PORT, () => console.log(`Server started at http://localhost:${process.env.PORT}`))
   })

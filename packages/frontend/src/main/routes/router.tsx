@@ -1,22 +1,107 @@
-import { MakeLogin } from '@/main/factories/pages'
+import { MakeChamados, MakeLogin } from '@/main/factories/pages'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import React from 'react'
-import { FormularioChamados, HomeSolicitantes } from '@/presentation/pages'
-import AlinhamentoEstrategico from '@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico'
-import AnaliseRisco from '@/presentation/pages/analiseRisco/analiseRisco'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { HomeSolicitantes } from '@/presentation/pages'
+import { AuthProvider, AuthContext } from '../contexts/authcontext'
+import { MakeFormularioChamados } from '../factories/pages/formularioChamados-factory'
+import { TipoChamado } from '../enums/tipo-chamado'
 
 const Router: React.FC = () => {
+  const Private = ({ children }: any) => {
+    const { authenticated, loading } = useContext(AuthContext)
+
+    if (loading) {
+      return <div className='loading'>Carregando...</div>
+    }
+
+    if (!authenticated) {
+      return <Navigate to='/login' />
+    }
+
+    return children
+  }
+
+  const Login = () => {
+    const { authenticated } = useContext(AuthContext)
+
+    if (!authenticated) {
+      return <MakeLogin />
+    }
+
+    return <Navigate to='/home' />
+  }
+
+  const Origin = ({ children }: any) => {
+    const { authenticated, loading } = useContext(AuthContext)
+
+    if (loading) {
+      return <div className='loading'>Carregando...</div>
+    }
+
+    if (!authenticated) {
+      return <Navigate to='/login' />
+    }
+
+    // Verificar o team do user para redirecioná-lo à página correta.
+    return children
+  }
+
   return (
     <BrowserRouter>
-      <Routes>
-        {/* <Route path='/ticket-form' element={<MakeTicketForm />} /> */}
-        <Route path='/' element={<MakeLogin />} />
-        <Route path='/formularioChamados' element={<FormularioChamados />} />
-        <Route path='/home' element={<HomeSolicitantes />} />
-        <Route path='/alinhamentoEstrategico' element={<AlinhamentoEstrategico />} />
-        <Route path='/analiserisco' element={<AnaliseRisco />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route
+            index
+            element={
+              <Origin>
+                <Navigate to='/home' />
+              </Origin>
+            }
+          />
+          <Route
+            path='*'
+            element={
+              <Origin>
+                <Navigate to='/home' />
+              </Origin>
+            }
+          />
+          <Route path='/login' element={<Login />} />
+          <Route
+            path='/home'
+            element={
+              <Private>
+                <HomeSolicitantes />
+              </Private>
+            }
+          />
+          <Route
+            path='/newFeature'
+            element={
+              <Private>
+                <MakeFormularioChamados tipoChamado={TipoChamado.FEATURE} />
+              </Private>
+            }
+          />
+          <Route
+            path='/newHotfix'
+            element={
+              <Private>
+                <MakeFormularioChamados tipoChamado={TipoChamado.HOTFIX} />
+              </Private>
+            }
+          />
+          <Route
+            path='/requests'
+            element={
+              <Private>
+                <MakeChamados />
+              </Private>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

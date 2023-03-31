@@ -7,13 +7,14 @@ import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
 import Modal from '@/presentation/components/modal/modal'
 
+
 const AnaliseRisco: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTitle] = useState('Título')
 
   return (
     <>
-      <Header />
+      <Header exibirHome={true} />
       <div className={Styles.H1formularioChamados}>
         <h1>Documento de análise de risco</h1>
         <hr />
