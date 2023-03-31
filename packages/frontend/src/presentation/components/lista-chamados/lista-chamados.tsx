@@ -9,6 +9,13 @@ import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 import { getAllRequests, getAllRequestsByUser } from '@/main/api/api'
 import { AuthContext } from '@/main/contexts/authcontext'
 
+type FileChamado = {
+  base64: string
+  ext: string
+  file_name: string
+  file_id: string
+}
+
 export type ChamadoType = {
   request_id: string
   title: string
@@ -16,6 +23,7 @@ export type ChamadoType = {
   requestType: TipoChamado
   created_at: string
   requestStep: string
+  files: FileChamado[]
 }
 
 const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: VisualizarChamado }> = (props) => {

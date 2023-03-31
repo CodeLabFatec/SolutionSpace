@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Container, Content } from './dropzone-styles'
 import { uniqueId } from 'lodash'
 import Upload from './upload/upload'
 import FileList from './file-list/file-list'
 import GlobalStyle from './dropzone-global-styles'
 import { filesize } from 'filesize'
-const DropZone: React.FC = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
+const DropZone: React.FC<{ uploadedFiles: any[]; setUploadedFiles: any }> = (props) => {
+  useEffect(() => {}, [props])
 
   const handleDelete = async (id: any) => {
-    setUploadedFiles(uploadedFiles.filter((file: any) => file.id !== id))
+    props.setUploadedFiles(props.uploadedFiles.filter((file: any) => file.id !== id))
   }
 
   const handleUpload = async (files: any[]) => {
@@ -24,13 +24,15 @@ const DropZone: React.FC = () => {
       progress: 0,
       uploaded: false,
       error: false,
+      type: null,
+      base64: null,
       url: null
     }))
 
-    const newArray = [...uploadedFiles]
+    const newArray = [...props.uploadedFiles]
     await processUpload(filesUpload)
     filesUpload.forEach((item) => newArray.push(item))
-    setUploadedFiles(newArray)
+    props.setUploadedFiles(newArray)
   }
 
   const processUpload = async (files: any[]) => {
@@ -41,6 +43,8 @@ const DropZone: React.FC = () => {
       file.preview = base64File
       file.uploaded = true
       file.progress = 100
+      file.base64 = base64File?.split(';')[1].replace('base64,', '')
+      file.type = base64File?.split(';')[0].split(':')[1]
     }
   }
 
@@ -62,7 +66,7 @@ const DropZone: React.FC = () => {
     <Container>
       <Content>
         <Upload onUpload={handleUpload} />
-        {!!uploadedFiles.length && <FileList files={uploadedFiles} onDelete={handleDelete} />}
+        {!!props.uploadedFiles.length && <FileList files={props.uploadedFiles} onDelete={handleDelete} />}
       </Content>
       <GlobalStyle />
     </Container>

@@ -11,14 +11,26 @@ export const createSession = async (email: string, password: string) => {
   return api.post('/auth', { email, password })
 }
 
-export const createRequest = async (userid: string, title: string, description: string, requestType: string) => {
-  return api.post('/createRequest/' + userid, { title, description, requestType })
+export const createRequest = async (
+  userid: string,
+  title: string,
+  description: string,
+  requestType: string,
+  files: any[]
+) => {
+  return api.post('/createRequest/' + userid, { title, description, requestType, files })
 }
 
-export const createRiskAnalysisRating = async (user_id: string, rating: string, title: string, description: string) => {
+export const createRiskAnalysisRating = async (
+  user_id: string,
+  rating: string,
+  title: string,
+  description: string,
+  files: any[]
+) => {
   const requestStep = 'Analise de risco'
   const targetGroup = null
-  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup })
+  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup, files })
 }
 
 export const createStrategicAlignmentRating = async (
@@ -26,10 +38,11 @@ export const createStrategicAlignmentRating = async (
   rating: string,
   title: string,
   description: string,
-  targetGroup: string
+  targetGroup: string,
+  files: any[]
 ) => {
   const requestStep = 'Alinhamento estratégico'
-  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup })
+  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup, files })
 }
 
 export const getAllRequests = async () => {

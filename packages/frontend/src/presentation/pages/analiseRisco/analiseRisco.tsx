@@ -22,10 +22,22 @@ const AnaliseRisco: React.FC = () => {
   const [titulo, setTitulo] = useState<string>('')
   const [detalhes, setDetalhes] = useState<string>('')
   const [rating, setRating] = useState<string>('')
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
 
   const handleRequest = async () => {
     try {
-      const response = await createRiskAnalysisRating(user.user_id, rating, titulo, detalhes)
+      const files: any[] = []
+      if (uploadedFiles.length > 0) {
+        uploadedFiles.forEach((file) => {
+          files.push({
+            file_name: file.name,
+            base64: file.base64,
+            ext: file.type
+          })
+        })
+      }
+
+      const response = await createRiskAnalysisRating(user.user_id, rating, titulo, detalhes, files)
 
       MySwal.fire({
         title: 'Sucesso',
@@ -134,7 +146,7 @@ const AnaliseRisco: React.FC = () => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone />
+            <DropZone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
           </div>
           <div className={Styles.formWrapper}>
             <form className={Styles.formAvaliacao} action='' method=''>

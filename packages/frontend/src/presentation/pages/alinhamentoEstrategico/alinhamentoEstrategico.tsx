@@ -23,10 +23,22 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [detalhes, setDetalhes] = useState<string>('')
   const [rating, setRating] = useState<string>('')
   const [targetGroup, setTargetGroup] = useState<string>('')
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
 
   const handleRequest = async () => {
     try {
-      const response = await createStrategicAlignmentRating(user.user_id, rating, titulo, detalhes, targetGroup)
+      const files: any[] = []
+      if (uploadedFiles.length > 0) {
+        uploadedFiles.forEach((file) => {
+          files.push({
+            file_name: file.name,
+            base64: file.base64,
+            ext: file.type
+          })
+        })
+      }
+
+      const response = await createStrategicAlignmentRating(user.user_id, rating, titulo, detalhes, targetGroup, files)
 
       MySwal.fire({
         title: 'Sucesso',
@@ -210,7 +222,7 @@ const AlinhamentoEstrategico: React.FC = () => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone />
+            <DropZone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
           </div>
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos

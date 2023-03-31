@@ -19,16 +19,29 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
 
   const [titulo, setTitulo] = useState<string>('')
   const [detalhes, setDetalhes] = useState<string>('')
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleRequest = async () => {
     try {
+      const files: any[] = []
+      if (uploadedFiles.length > 0) {
+        uploadedFiles.forEach((file) => {
+          files.push({
+            file_name: file.name,
+            base64: file.base64,
+            ext: file.type
+          })
+        })
+      }
+
       const response = await createRequest(
         user.user_id,
         titulo,
         detalhes,
-        props.tipoChamado === TipoChamado.FEATURE ? 'FEATURE' : 'hotfix'
+        props.tipoChamado === TipoChamado.FEATURE ? 'FEATURE' : 'hotfix',
+        files
       )
 
       MySwal.fire({
@@ -132,7 +145,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone />
+            <DropZone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
           </div>
           <input type='button' value='Cancelar' className={Styles.buttonCancelar} />
           <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />

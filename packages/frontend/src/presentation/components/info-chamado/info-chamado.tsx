@@ -9,6 +9,27 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
 
   useEffect(() => {}, [props])
 
+  const handleDownload = (e: any) => {
+    e.preventDefault()
+    if (props.chamado == null) return
+
+    if (props.chamado.files.length <= 0) return
+
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    props.chamado.files.forEach(async (file) => {
+      await downloadBase64File(file.ext, file.base64, file.file_name)
+    })
+  }
+
+  const downloadBase64File = async (contentType: string, base64Data: string, fileName: string) => {
+    const linkSource = `data:${contentType};base64,${base64Data}`
+    const downloadLink = document.createElement('a')
+    downloadLink.href = linkSource
+    downloadLink.download = fileName
+    downloadLink.click()
+    downloadLink.remove()
+  }
+
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
       return (
@@ -37,27 +58,37 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
             ></textarea>
           </div>
 
-          {props.chamado.requestStep === 'Analise de risco' ? (
-            <button
-              className={Styles.botaoAvaliar}
-              onClick={() => {
-                navigate('/riskAnalysis', { replace: true, state: props.chamado })
-              }}
-            >
-              Avaliar
-            </button>
-          ) : props.chamado.requestStep === 'Alinhamento estratégico' ? (
-            <button
-              className={Styles.botaoAvaliar}
-              onClick={() => {
-                navigate('/strategicAlignment', { replace: true, state: props.chamado })
-              }}
-            >
-              Avaliar
-            </button>
-          ) : (
-            <p>Esse chamado já foi avaliado!</p>
-          )}
+          <div className={Styles.botoesInfochamado}>
+            {props.chamado.files.length > 0 ? (
+              <button className={Styles.botaoDownloadArquivo} onClick={handleDownload}>
+                Download Arquivos
+              </button>
+            ) : (
+              <></>
+            )}
+
+            {props.chamado.requestStep === 'Analise de risco' ? (
+              <button
+                className={Styles.botaoAvaliar}
+                onClick={() => {
+                  navigate('/riskAnalysis', { replace: true, state: props.chamado })
+                }}
+              >
+                Avaliar
+              </button>
+            ) : props.chamado.requestStep === 'Alinhamento estratégico' ? (
+              <button
+                className={Styles.botaoAvaliar}
+                onClick={() => {
+                  navigate('/strategicAlignment', { replace: true, state: props.chamado })
+                }}
+              >
+                Avaliar
+              </button>
+            ) : (
+              <p>Esse chamado já foi avaliado!</p>
+            )}
+          </div>
         </>
       )
     }
