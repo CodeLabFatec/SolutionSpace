@@ -1,9 +1,12 @@
 .footer {
   text-align: end;
+  position: relative;
+  width: 100%;
+  right: 0 ;
+  bottom: 0;
   hr {
     width: 90%;
     margin: 0 auto;
-    border: #ffffff 1px solid;
   }
 
   p {

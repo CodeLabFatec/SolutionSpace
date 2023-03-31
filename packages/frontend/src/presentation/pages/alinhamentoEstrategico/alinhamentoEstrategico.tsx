@@ -2,11 +2,17 @@
 import { Header, SelectType } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
-import React from 'react'
+import React, { useState } from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
+import { SelectType } from '@/presentation/components/SelectType/SelectType'
+import Modal from '@/presentation/components/modal/modal'
+
 
 const AlinhamentoEstrategico: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false)
+  const [title, setTitle] = useState('Título')
+
   return (
     <>
       <Header exibirHome={true} />
@@ -22,7 +28,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           <textarea className={Styles.inputDetalhe} name='' id='detalhes' cols={30} rows={10} required></textarea>
 
           <div className={Styles.formWrapper}>
-            <form action='' method=''>
+            <form className={Styles.formAnalise} action='' method=''>
               <h3 className={Styles.formTitle}>Nível de prioridade</h3>
               <hr />
               <div className={Styles.debtAmountSlider}>
@@ -38,6 +44,23 @@ const AlinhamentoEstrategico: React.FC = () => {
               </div>
             </form>
           </div>
+          <div
+            className={Styles.openModal}
+            onClick={() => {
+              setOpenModal(true)
+            }}
+          >
+            <i className='large material-icons'>assignment_turned_in</i>
+          </div>
+          <Modal
+            isOpen={openModal}
+            titulo={title}
+            setModalClose={() => {
+              setOpenModal(!openModal)
+            }}
+          >
+            <div>a</div>
+          </Modal>
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
