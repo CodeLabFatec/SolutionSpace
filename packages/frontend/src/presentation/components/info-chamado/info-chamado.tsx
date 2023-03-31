@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Styles from './info-chamado-styles.scss'
 import { type ChamadoType } from '../lista-chamados/lista-chamados'
-import Footer from '../footer/footer'
+import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
+import { useNavigate } from 'react-router-dom'
 
-const InfoChamado: React.FC<{ chamado: ChamadoType | undefined }> = (props) => {
+const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoChamado: VisualizarChamado }> = (props) => {
+  const navigate = useNavigate()
+
+  useEffect(() => {}, [props])
+
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
       return (
@@ -31,6 +36,28 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined }> = (props) => {
               required
             ></textarea>
           </div>
+
+          {props.chamado.requestStep === 'Analise de risco' ? (
+            <button
+              className={Styles.botaoAvaliar}
+              onClick={() => {
+                navigate('/riskAnalysis', { replace: true, state: props.chamado })
+              }}
+            >
+              Avaliar
+            </button>
+          ) : props.chamado.requestStep === 'Alinhamento estratégico' ? (
+            <button
+              className={Styles.botaoAvaliar}
+              onClick={() => {
+                navigate('/strategicAlignment', { replace: true, state: props.chamado })
+              }}
+            >
+              Avaliar
+            </button>
+          ) : (
+            <p>Esse chamado já foi avaliado!</p>
+          )}
         </>
       )
     }

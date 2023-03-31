@@ -1,4 +1,4 @@
 export enum TipoChamado {
-  FEATURE = 'Feature',
-  HOTFIX = 'Hotfix'
+  FEATURE = 'feature',
+  HOTFIX = 'hotfix'
 }

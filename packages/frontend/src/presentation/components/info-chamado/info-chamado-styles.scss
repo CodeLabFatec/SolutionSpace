@@ -1,7 +1,6 @@
 .infoChamadoWrapper {
     width: 100vw;
     max-height: 80vh;
-
     .tituloChamado {
         margin: 10vh 8vh 0 8vh;
 
@@ -53,5 +52,16 @@
         border: none;
         border-radius: 4px;
         text-align: justify;
+      }
+
+      .botaoAvaliar {
+        margin: 140px 8vh 0 0;
+        position: relative;
+        float: right;
+        background-color: #4FB4BC;
+        color: #ffffff;
+        padding: 10px 24px;
+        border-radius: 4px;
+        border: none;
       }
 }

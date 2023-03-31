@@ -8,14 +8,16 @@ import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 const Chamados: React.FC<{ visualizacaoChamado: VisualizarChamado }> = (props) => {
   const [chamado, setChamado] = useState<ChamadoType>()
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    setChamado(undefined)
+  }, [props])
 
   return (
     <>
       <Header exibirHome={true} />
       <div className={Styles.chamadosWrapper}>
         <ListaChamados chamadoState={setChamado} visualizacaoChamado={props.visualizacaoChamado} />
-        <InfoChamado chamado={chamado} />
+        <InfoChamado chamado={chamado} visualizacaoChamado={props.visualizacaoChamado} />
       </div>
     </>
   )

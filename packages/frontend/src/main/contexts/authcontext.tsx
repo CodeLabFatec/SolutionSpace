@@ -15,9 +15,13 @@ export const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     const recoveredUser = localStorage.getItem('user')
+    const recoveredToken = localStorage.getItem('token')
 
-    if (recoveredUser) {
+    if (recoveredUser && recoveredToken) {
       setUser(JSON.parse(recoveredUser))
+      api.defaults.headers.Authorization = `Bearer ${recoveredToken}`
+      api.defaults.headers.common = { Authorization: `Bearer ${recoveredToken}` }
+      api.defaults.withCredentials = true
     }
 
     setLoading(false)
@@ -26,16 +30,15 @@ export const AuthProvider = ({ children }: any) => {
   const login = async (email: string, password: string) => {
     try {
       const response = await createSession(email, password)
-      console.log(response.data)
       const loggedUser = response.data.user
       const token = response.data.token
-
-      console.log(loggedUser)
 
       localStorage.setItem('user', JSON.stringify(loggedUser))
       localStorage.setItem('token', token)
 
       api.defaults.headers.Authorization = `Bearer ${token}`
+      api.defaults.headers.common = { Authorization: `Bearer ${token}` }
+      api.defaults.withCredentials = true
 
       setUser(loggedUser)
 
@@ -68,6 +71,8 @@ export const AuthProvider = ({ children }: any) => {
     localStorage.removeItem('token')
 
     api.defaults.headers.Authorization = null
+    api.defaults.headers.common = { Authorization: `` }
+    api.defaults.withCredentials = false
 
     setUser(null)
 
