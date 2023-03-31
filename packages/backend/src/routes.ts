@@ -35,6 +35,7 @@ router.post('/createRequest/:userId', authMiddleware, new RequestController().cr
 // Rating
 router.get('/listRatings', authMiddleware, new RatingController().listRatings)
 router.get('/rating/:id', authMiddleware, new RatingController().getRatingById)
+router.get('/listRatingsByRequestId/:request_id', authMiddleware, new RatingController().listRatingsByRequestId)
 router.post('/createRating/:requestId', authMiddleware, new RatingController().create)
 
 export default router

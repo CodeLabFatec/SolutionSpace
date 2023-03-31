@@ -79,4 +79,21 @@ export class RatingController {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
   }
+
+  async listRatingsByRequestId(req: Request, res: Response) {
+    const { request_id } = req.params
+
+    try {
+      const ratings = await ratingRepository.find({
+        where: { request: { request_id } },
+        relations: { user: { team: true }, request: { user: true } }
+      })
+
+      if (!ratings) return res.status(404).json('Ratings not found for this request id')
+
+      return res.status(200).json(ratings)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
 }
