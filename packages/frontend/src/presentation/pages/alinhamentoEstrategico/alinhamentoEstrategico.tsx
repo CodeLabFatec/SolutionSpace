@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header } from '@/presentation/components'
+import { Header, SelectType } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
 import React, { useState } from 'react'
@@ -8,13 +8,14 @@ import Footer from '@/presentation/components/footer/footer'
 import { SelectType } from '@/presentation/components/SelectType/SelectType'
 import Modal from '@/presentation/components/modal/modal'
 
+
 const AlinhamentoEstrategico: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [title, setTitle] = useState('Título')
 
   return (
     <>
-      <Header />
+      <Header exibirHome={true} />
       <div className={Styles.H1formularioChamados}>
         <h1>Alinhamento estratégico</h1>
         <hr />

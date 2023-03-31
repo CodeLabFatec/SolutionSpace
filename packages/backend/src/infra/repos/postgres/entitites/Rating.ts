@@ -42,7 +42,8 @@ export class Rating {
 
   @Column({
     type: 'enum',
-    enum: RequestStep
+    enum: RequestStep,
+    nullable: true
   })
   requestStep: RequestStep
 

@@ -3,27 +3,22 @@ import Styles from './home-solicitantes-styles.scss'
 
 import React from 'react'
 import Footer from '@/presentation/components/footer/footer'
+import { TipoChamado } from '@/main/enums/tipo-chamado'
 
 const HomeSolicitantes: React.FC = () => {
   return (
     <div>
-      <Header />
+      <Header exibirHome={false} />
       <div className={Styles.abrirChamadoLabel}>
         <h1>Abrir chamado</h1>
       </div>
       <div className={Styles.retanguloHomeSolicitantes}>
         <div className={Styles.botoesHomeSolicitantes}>
-          <BotaoSolicitar
-            isFeature={true}
-            description='Clique aqui para abrir uma solicitação para o desenvolvimento de uma nova Feature para o sistema.'
-          />
-          <BotaoSolicitar
-            isFeature={false}
-            description='Clique aqui para abrir uma solicitação para o desenvolvimento de uma Hotfix para o sistema.'
-          />
+          <BotaoSolicitar tipoChamado={TipoChamado.FEATURE} />
+          <BotaoSolicitar tipoChamado={TipoChamado.HOTFIX} />
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   )
 }

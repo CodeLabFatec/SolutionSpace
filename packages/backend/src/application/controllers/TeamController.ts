@@ -10,11 +10,11 @@ export class TeamController {
     }
 
     try {
-      const newGroup = teamRepository.create({ team_name: teamName })
+      const newTeam = teamRepository.create({ team_name: teamName })
 
-      await teamRepository.save(newGroup)
+      await teamRepository.save(newTeam)
 
-      return res.status(201).json(newGroup)
+      return res.status(201).json(newTeam)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
@@ -22,7 +22,7 @@ export class TeamController {
 
   async listTeams(req: Request, res: Response) {
     try {
-      const teams = await teamRepository.find()
+      const teams = await teamRepository.find({ relations: { users: true } })
 
       return res.status(200).json(teams)
     } catch (error) {
@@ -34,7 +34,7 @@ export class TeamController {
     const { id } = req.params
 
     try {
-      const team = await teamRepository.findOneBy({ team_id: id })
+      const team = await teamRepository.findOne({ where: { team_id: id }, relations: { users: true } })
 
       if (!team) return res.status(404).json('Team not found')
 
