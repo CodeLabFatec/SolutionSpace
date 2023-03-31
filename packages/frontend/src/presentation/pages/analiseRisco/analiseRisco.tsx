@@ -2,12 +2,15 @@
 import { Header } from '@/presentation/components'
 import Styles from './analiseRisco.scss'
 
-import React from 'react'
+import React, { useState } from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
-import { SelectType } from '@/presentation/components/SelectType/SelectType'
+import Modal from '@/presentation/components/modal/modal'
 
 const AnaliseRisco: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false)
+  const [title, setTitle] = useState('Título')
+
   return (
     <>
       <Header />
@@ -44,6 +47,21 @@ const AnaliseRisco: React.FC = () => {
             </form>
           </div>
           <input type='button' value='Confirmar avaliação' className={Styles.buttonEnviar} />
+          <div
+            className={Styles.openModal}
+            onClick={() => {
+              setOpenModal(true)
+            }}
+          >
+            <i className='large material-icons'>assignment_turned_in</i>
+          </div>
+          <Modal
+            isOpen={openModal}
+            titulo={title}
+            setModalClose={() => {
+              setOpenModal(!openModal)
+            }}
+          ></Modal>
         </div>
       </div>
       <Footer />
