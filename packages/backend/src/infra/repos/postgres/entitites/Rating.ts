@@ -8,10 +8,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  OneToMany
 } from 'typeorm'
 import { User } from './User'
 import { Request } from './Request'
+import { File } from './File'
 
 export enum RequestStep {
   ANALISE_RISCO = 'Analise de risco',
@@ -49,6 +51,9 @@ export class Rating {
 
   @Column({ type: 'text', nullable: true })
   targetGroup: string
+
+  @OneToMany(() => File, (file) => file.rating)
+  files: File[]
 
   @CreateDateColumn()
   created_at: Date

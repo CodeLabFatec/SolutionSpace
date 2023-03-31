@@ -5,15 +5,13 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
 import { Request } from './Request'
-import { Rating } from './Rating'
 import moment from 'moment'
+import { Rating } from './Rating'
 
 @Entity('files')
 export class File {
@@ -29,21 +27,11 @@ export class File {
   @Column({ type: 'text', nullable: false })
   ext: string
 
-  @ManyToMany(() => Request, (request) => request.files)
-  @JoinTable({
-    name: 'request_file',
-    joinColumn: {
-      name: 'request',
-      referencedColumnName: 'file_id'
-    },
-    inverseJoinColumn: {
-      name: 'file',
-      referencedColumnName: 'request_id'
-    }
-  })
-  requests: Request[]
+  @ManyToOne(() => Request, (request) => request.files)
+  @JoinColumn({ name: 'request_id' })
+  request: Request
 
-  @ManyToOne(() => Rating, (rating) => rating.rating_id)
+  @ManyToOne(() => Rating, (rating) => rating.files)
   @JoinColumn({ name: 'rating_id' })
   rating: Rating
 
