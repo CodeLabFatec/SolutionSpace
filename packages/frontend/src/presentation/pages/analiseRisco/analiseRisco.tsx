@@ -61,7 +61,9 @@ const AnaliseRisco: React.FC = () => {
             setModalClose={() => {
               setOpenModal(!openModal)
             }}
-          ></Modal>
+          >
+            <div>a</div>
+          </Modal>
         </div>
       </div>
       <Footer />

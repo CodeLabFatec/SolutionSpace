@@ -57,9 +57,10 @@ const AlinhamentoEstrategico: React.FC = () => {
             setModalClose={() => {
               setOpenModal(!openModal)
             }}
-          ></Modal>
-        </div>
-        <div className={Styles.arquivoBotao}>
+          >
+            <div>a</div>
+          </Modal>
+
           <div className={Styles.dropzoneContainer}>
             <DropZone />
           </div>
