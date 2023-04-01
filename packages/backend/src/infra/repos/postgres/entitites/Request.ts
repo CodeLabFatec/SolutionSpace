@@ -27,6 +27,9 @@ export class Request {
   @Column({ type: 'text', nullable: false })
   title: string
 
+  @Column({ type: 'text', nullable: false, default: 'Aberto' })
+  status: string
+
   @Column({ type: 'text', nullable: true })
   description: string
 
