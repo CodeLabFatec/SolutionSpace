@@ -5,6 +5,7 @@ import authMiddleware from './application/middlewares/authMiddlaware'
 import { TeamController } from './application/controllers/TeamController'
 import { RatingController } from './application/controllers/RatingController'
 import { RequestController } from './application/controllers/RequestController'
+import { StatusConfigurationController } from './application/controllers/statusConfigurationController'
 
 const router = Router()
 
@@ -37,5 +38,10 @@ router.get('/listRatings', authMiddleware, new RatingController().listRatings)
 router.get('/rating/:id', authMiddleware, new RatingController().getRatingById)
 router.get('/listRatingsByRequestId/:request_id', authMiddleware, new RatingController().listRatingsByRequestId)
 router.post('/createRating/:requestId', authMiddleware, new RatingController().create)
+
+// Status
+router.get('/listStatus', authMiddleware, new StatusConfigurationController().listStatus)
+router.get('/status/:status_id', authMiddleware, new StatusConfigurationController().getStatusById)
+router.post('/createStatus', authMiddleware, new StatusConfigurationController().create)
 
 export default router
