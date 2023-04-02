@@ -13,28 +13,32 @@
 <span id="objetivo">
 <h2> :dart: Objetivo</h2>
 
-<p align="justify"> Texto</p>
+<p align="justify">Desenvolver uma plataforma capaz de receber e gerenciar chamados internos dentro de uma sprint de projeto, podendo configurar uma árvore de decisão para redirecionar demandas de acordo com a classificação.</p>
 
 <span id="requisitos">
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
-- [] Item;
+- [x] Cadastro de chamados;
+- [x] Fluxo de chamados;
+- [ ] Cadastros de grupo de usuários;
+- [ ] Permissão por grupo e por usuário;
+- [ ] Usuários devem ter distinção por times;
+- [ ] Fila de chamados por time;
+- [ ] Configuração e personalização de formulário de chamados;
+- [ ] Árvore de decisão para escalonamento de chamado;
+- [ ] Cadastro de soluções para problemas conhecidos;
+- [ ] Formulário de abertura de chamado com indicação de interessados.
 
 <h3> Requisitos Não Funcionais </h3>
 
-- [] Item;
+- [ ] React;
+- [ ] NodeJS.
 
 → [Voltar ao topo](#topo)
 
 ## Entregas
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img width="100%" src = ""></p>
-<h4> Entrega da Sprint 2 </h4>
-<p align="center"> <img width="100%" src = ""></p>
-<h4> Entrega da Sprint 3 </h4>
-<p align="center"> <img width="100%" src = ""></p>
-<h4> Entrega da Sprint 4 </h4>
 <p align="center"> <img width="100%" src = ""></p>
 
 <span id="relatório">
@@ -45,13 +49,10 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 
 | Sprint |  Entrega   |       Status       |              Relatório               |
 | :----: | :--------: | :----------------: | :----------------------------------: |
-|   01   | 02/04/2023 | :hourglass:	 | [ver relatório](https://github.com/) |
-|   02   | 23/04/2023 | :hourglass:	 | [ver relatório](https://github.com/) |
-|   03   | 14/05/2023 | :hourglass:	 | [ver relatório](https://github.com/) |
-|   04   | 04/06/2023 | :hourglass:	 | [ver relatório](https://github.com/) |
-
-<span id="Documentação">
-<h2> :clipboard: Documentação</h2>
+|   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/) |
+|   02   | 23/04/2023 | :hourglass:	 | ... |
+|   03   | 14/05/2023 | :hourglass:	 | ... |
+|   04   | 04/06/2023 | :hourglass:	 | ... |
 
 <span id="backlog">
 
@@ -62,18 +63,28 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
 
 | Sprint | Atividade |       Status       |
-| :----: | :-------: | :----------------: |
-|   01   |   Criação do banco de dados.   | :heavy_check_mark: |
-|   01   |   Criação de tabelas de chamados, usuários, arquivos e avaliações.   | :heavy_check_mark: |
-|   01   |   Métodos para salvar, visualizar e listar chamados.   | :heavy_check_mark: |
-|   01   |   Métodos para login e logout.   | :heavy_check_mark: |
-|   01   |   Página de acesso ao sistema.   | :heavy_check_mark: |
-|   01   |   Página home para usuários solicitantes.   | :heavy_check_mark: |
-|   01   |   Página de cadastro de chamados.   | :heavy_check_mark: |
-|   01   |   Página de listagem de chamados cadastrados.   | :heavy_check_mark: |
-|   01   |   Página para realizar a avaliação de análise de risco para um chamado.   | :heavy_check_mark: |
-|   01   |   Página para realizar a avaliação de alinhamento estratégico para um chamado.   | :heavy_check_mark: |
-|   01   |   Componente de modal para a visualização de uma avaliação de um chamado.   | :heavy_check_mark: |
+| :----: | :-------- | :----------------: |
+|   01   |   Criação da página home para solicitantes   | :heavy_check_mark: |
+|   01   |   Criação da página para cadastro de chamados (Feature/Hotfix)   | :heavy_check_mark: |
+|   01   |   Criação da página de listagem de chamados individual   | :heavy_check_mark: |
+|   01   |   Criação da página de listagem de chamados   | :heavy_check_mark: |
+|   01   |   Criação da página de realização da etapa 'análise de risco'   | :heavy_check_mark: |
+|   01   |   Criação da página de realização da etapa 'alinhamento estratégico'   | :heavy_check_mark: |
+|   01   |   Criação da página de login   | :heavy_check_mark: |
+|    |
+|   02   |   Criação de páginas para cadastro, listagem e edição de usuários   | :hourglass: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :hourglass: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :hourglass: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :hourglass: |
+|   02   |   Adição de permissões de equipes ao fluxo de chamados   | :hourglass: |
+|   02   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: |
+|    |
+|   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: |
+|   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: |
+|   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: |
+|    |
+|   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: |
+|   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: |
 
 <br>
 <span id="equipe">
