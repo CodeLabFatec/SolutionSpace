@@ -9,6 +9,15 @@ const Chamado: React.FC<{ chamado: ChamadoType }> = (props) => {
   const backgroundTipoChamado: any =
     props.chamado.requestType === TipoChamado.FEATURE ? { backgroundColor: '#308497' } : { backgroundColor: '#973030' }
 
+  const backgroundStatusChamado: any =
+    props.chamado.status === 'Aberto'
+      ? { backgroundColor: '#007bff' }
+      : props.chamado.status === 'Aguardando análise'
+      ? { backgroundColor: '#ffb300' }
+      : props.chamado.status === 'Aprovado'
+      ? { backgroundColor: '#28a745' }
+      : { backgroundColor: '#6c757d' }
+
   const date = new Date(props.chamado.created_at)
 
   function adicionaZero(numero: number): any {
@@ -31,8 +40,8 @@ const Chamado: React.FC<{ chamado: ChamadoType }> = (props) => {
         <p>{formatedDate}</p>
       </div>
       <div className={Styles.chamadoStatusTagWrapper}>
-        <div className={Styles.chamadoStatusTagInfo}>
-          <p>{props.chamado.requestStep}</p>
+        <div className={Styles.chamadoStatusTagInfo} style={backgroundStatusChamado}>
+          <p>{props.chamado.status}</p>
         </div>
       </div>
     </div>

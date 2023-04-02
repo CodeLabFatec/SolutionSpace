@@ -2,7 +2,7 @@
 import { Header, SelectType } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import DropZone from '@/presentation/components/dropzone/dropzone'
 import Footer from '@/presentation/components/footer/footer'
 import Modal from '@/presentation/components/modal/modal'
@@ -10,7 +10,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/main/contexts/authcontext'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { createStrategicAlignmentRating } from '@/main/api/api'
+import { createStrategicAlignmentRating, getRatingsByRequest } from '@/main/api/api'
+import { TipoChamado } from '@/main/enums/tipo-chamado'
 
 const MySwal = withReactContent(Swal)
 
@@ -24,6 +25,29 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [rating, setRating] = useState<string>('')
   const [targetGroup, setTargetGroup] = useState<string>('')
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
+  const [ratingAnalise, setRatingAnalise] = useState<any>('')
+
+  useEffect(() => {
+    setRatingAnalise(null)
+    loadRatings()
+  }, [])
+
+  const loadRatings = async () => {
+    if (location.state != null) {
+      if (location.state.status === 'Aberto' && location.state.requestType === TipoChamado.HOTFIX) return
+      if (location.state.requestStep === 'Analise de risco' && location.state.requestType === TipoChamado.FEATURE)
+        return
+
+      try {
+        const response = await getRatingsByRequest(location.state.request_id)
+
+        if (response.data.length > 0) {
+          const data = response.data
+          setRatingAnalise(data[data.length - 1])
+        }
+      } catch (e) {}
+    }
+  }
 
   const handleRequest = async () => {
     try {
@@ -38,7 +62,15 @@ const AlinhamentoEstrategico: React.FC = () => {
         })
       }
 
-      const response = await createStrategicAlignmentRating(user.user_id, rating, titulo, detalhes, targetGroup, files)
+      const response = await createStrategicAlignmentRating(
+        location.state.request_id,
+        user.user_id,
+        rating,
+        titulo,
+        detalhes,
+        targetGroup,
+        files
+      )
 
       MySwal.fire({
         title: 'Sucesso',
@@ -202,23 +234,29 @@ const AlinhamentoEstrategico: React.FC = () => {
               </div>
             </form>
           </div>
-          <div
-            className={Styles.openModal}
-            onClick={() => {
-              setOpenModal(true)
-            }}
-          >
-            <i className='large material-icons'>assignment_turned_in</i>
-          </div>
-          <Modal
-            isOpen={openModal}
-            titulo={'teste'}
-            setModalClose={() => {
-              setOpenModal(!openModal)
-            }}
-          >
-            <div>a</div>
-          </Modal>
+          {ratingAnalise != null ? (
+            <>
+              <div
+                className={Styles.openModal}
+                onClick={() => {
+                  setOpenModal(true)
+                }}
+              >
+                <i className='large material-icons'>assignment_turned_in</i>
+              </div>
+              <Modal
+                isOpen={openModal}
+                titulo={ratingAnalise != null ? ratingAnalise.title : 'Avaliação'}
+                setModalClose={() => {
+                  setOpenModal(!openModal)
+                }}
+              >
+                {rating != null ? <p>{ratingAnalise.description}</p> : <p>Ocorreu um erro ao carregar a avaliação.</p>}
+              </Modal>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>

@@ -23,6 +23,7 @@ export type ChamadoType = {
   requestType: TipoChamado
   created_at: string
   requestStep: string
+  status: string
   files: FileChamado[]
 }
 
@@ -54,7 +55,7 @@ const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiz
   }, [props])
 
   const changeFilter: any = (event: any) => {
-    const filter = event.target.value
+    const filter = event.target.value.toLowerCase()
     if (filter !== undefined && filter !== null) {
       if (filter.toLowerCase() === 'feature' || filter.toLowerCase() === 'nova feature') {
         const filteredList = chamados.filter((x) => x.requestType === TipoChamado.FEATURE)
@@ -63,7 +64,9 @@ const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiz
         const filteredList = chamados.filter((x) => x.requestType === TipoChamado.HOTFIX)
         setChamadosFiltrados(filteredList)
       } else {
-        const filteredList = chamados.filter((x) => x.title.includes(filter) || filter.includes(x.title))
+        const filteredList = chamados.filter(
+          (x) => x.title.toLowerCase().includes(filter) || filter.includes(x.title.toLowerCase())
+        )
         setChamadosFiltrados(filteredList)
       }
     }

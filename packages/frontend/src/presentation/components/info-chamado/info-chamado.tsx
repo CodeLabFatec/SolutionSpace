@@ -1,13 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Styles from './info-chamado-styles.scss'
 import { type ChamadoType } from '../lista-chamados/lista-chamados'
 import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 import { useNavigate } from 'react-router-dom'
+import Modal from '../modal/modal'
+import { getRatingsByRequest } from '@/main/api/api'
+import { TipoChamado } from '@/main/enums/tipo-chamado'
 
 const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoChamado: VisualizarChamado }> = (props) => {
   const navigate = useNavigate()
+  const [openModal, setOpenModal] = useState(false)
+  const [rating, setRating] = useState<any>(null)
 
-  useEffect(() => {}, [props])
+  const applyMarginToButton =
+    props.chamado?.status === 'Aprovado' || props.chamado?.status === 'Arquivado' ? { marginRight: '8vh' } : {}
+
+  const loadRatings = async () => {
+    if (props.chamado != null) {
+      if (props.chamado.status === 'Aberto' && props.chamado.requestType === TipoChamado.HOTFIX) return
+      if (props.chamado.requestStep === 'Analise de risco' && props.chamado.requestType === TipoChamado.FEATURE) return
+
+      try {
+        const response = await getRatingsByRequest(props.chamado.request_id)
+
+        if (response.data.length > 0) {
+          const data = response.data
+          setRating(data[data.length - 1])
+        }
+      } catch (e) {}
+    }
+  }
+
+  useEffect(() => {
+    setRating(null)
+    loadRatings()
+  }, [props])
 
   const handleDownload = (e: any) => {
     e.preventDefault()
@@ -56,18 +83,21 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
               rows={10}
               required
             ></textarea>
-          </div>
-
-          <div className={Styles.botoesInfochamado}>
             {props.chamado.files.length > 0 ? (
               <button className={Styles.botaoDownloadArquivo} onClick={handleDownload}>
-                Download Arquivos
+                <i className='material-icons'>file_download</i>
               </button>
             ) : (
               <></>
             )}
+          </div>
 
-            {props.chamado.requestStep === 'Analise de risco' ? (
+          <div className={Styles.botoesInfochamado}>
+            {props.chamado.status === 'Arquivado' ? (
+              <></>
+            ) : props.chamado.status === 'Aprovado' ? (
+              <></>
+            ) : props.chamado.requestStep === 'Analise de risco' ? (
               <button
                 className={Styles.botaoAvaliar}
                 onClick={() => {
@@ -76,7 +106,7 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
               >
                 Avaliar
               </button>
-            ) : props.chamado.requestStep === 'Alinhamento estratégico' ? (
+            ) : (
               <button
                 className={Styles.botaoAvaliar}
                 onClick={() => {
@@ -85,8 +115,32 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
               >
                 Avaliar
               </button>
+            )}
+
+            {rating != null ? (
+              <>
+                <button
+                  style={applyMarginToButton}
+                  className={Styles.botaoVisualizarAnalise}
+                  onClick={() => {
+                    setOpenModal(true)
+                  }}
+                >
+                  Visualizar avaliação
+                </button>
+                <Modal
+                  isOpen={openModal}
+                  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                  titulo={rating != null ? rating.title + ' (por ' + rating.user.name + ')' : 'Avaliação'}
+                  setModalClose={() => {
+                    setOpenModal(!openModal)
+                  }}
+                >
+                  {rating != null ? <p>{rating.description}</p> : <p>Ocorreu um erro ao carregar a avaliação.</p>}
+                </Modal>
+              </>
             ) : (
-              <p>Esse chamado já foi avaliado!</p>
+              <></>
             )}
           </div>
         </>

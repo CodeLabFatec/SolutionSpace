@@ -37,7 +37,14 @@ const AnaliseRisco: React.FC = () => {
         })
       }
 
-      const response = await createRiskAnalysisRating(user.user_id, rating, titulo, detalhes, files)
+      const response = await createRiskAnalysisRating(
+        location.state.request_id,
+        user.user_id,
+        rating,
+        titulo,
+        detalhes,
+        files
+      )
 
       MySwal.fire({
         title: 'Sucesso',

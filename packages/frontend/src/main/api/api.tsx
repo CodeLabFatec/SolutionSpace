@@ -22,6 +22,7 @@ export const createRequest = async (
 }
 
 export const createRiskAnalysisRating = async (
+  request_id: string,
   user_id: string,
   rating: string,
   title: string,
@@ -30,10 +31,19 @@ export const createRiskAnalysisRating = async (
 ) => {
   const requestStep = 'Analise de risco'
   const targetGroup = null
-  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup, files })
+  return api.post('/createRating/' + request_id, {
+    user_id,
+    requestStep,
+    rating,
+    title,
+    description,
+    targetGroup,
+    files
+  })
 }
 
 export const createStrategicAlignmentRating = async (
+  request_id: string,
   user_id: string,
   rating: string,
   title: string,
@@ -42,7 +52,15 @@ export const createStrategicAlignmentRating = async (
   files: any[]
 ) => {
   const requestStep = 'Alinhamento estratégico'
-  return api.post('/', { user_id, requestStep, rating, title, description, targetGroup, files })
+  return api.post('/createRating/' + request_id, {
+    user_id,
+    requestStep,
+    rating,
+    title,
+    description,
+    targetGroup,
+    files
+  })
 }
 
 export const getAllRequests = async () => {
