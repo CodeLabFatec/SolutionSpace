@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Header, SelectType } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
@@ -25,7 +27,7 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [rating, setRating] = useState<string>('')
   const [targetGroup, setTargetGroup] = useState<string>('')
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
-  const [ratingAnalise, setRatingAnalise] = useState<any>('')
+  const [ratingAnalise, setRatingAnalise] = useState<any>(null)
 
   useEffect(() => {
     setRatingAnalise(null)
@@ -34,9 +36,14 @@ const AlinhamentoEstrategico: React.FC = () => {
 
   const loadRatings = async () => {
     if (location.state != null) {
-      if (location.state.status === 'Aberto' && location.state.requestType === TipoChamado.HOTFIX) return
-      if (location.state.requestStep === 'Analise de risco' && location.state.requestType === TipoChamado.FEATURE)
+      if (location.state.status === 'Aberto' && location.state.requestType === TipoChamado.HOTFIX) {
+        setRatingAnalise(null)
         return
+      }
+      if (location.state.requestStep === 'Analise de risco' && location.state.requestType === TipoChamado.FEATURE) {
+        setRatingAnalise(null)
+        return
+      }
 
       try {
         const response = await getRatingsByRequest(location.state.request_id)
@@ -183,7 +190,7 @@ const AlinhamentoEstrategico: React.FC = () => {
 
           <div className={Styles.formWrapper}>
             <form className={Styles.formAnalise} action='' method=''>
-              <h3 className={Styles.formTitle}>Nível de prioridade</h3>
+              <h3 className={Styles.formTitle}>Nível de impacto</h3>
               <hr />
               <div className={Styles.debtAmountSlider}>
                 <input
@@ -246,12 +253,25 @@ const AlinhamentoEstrategico: React.FC = () => {
               </div>
               <Modal
                 isOpen={openModal}
-                titulo={ratingAnalise != null ? ratingAnalise.title : 'Avaliação'}
+                titulo={
+                  ratingAnalise != null
+                    ? ratingAnalise.title +
+                      ' - ' +
+                      ratingAnalise.user.name +
+                      ' (Avaliação: ' +
+                      ratingAnalise.rating +
+                      ')'
+                    : 'Avaliação'
+                }
                 setModalClose={() => {
                   setOpenModal(!openModal)
                 }}
               >
-                {rating != null ? <p>{ratingAnalise.description}</p> : <p>Ocorreu um erro ao carregar a avaliação.</p>}
+                {ratingAnalise != null ? (
+                  <p>{ratingAnalise.description}</p>
+                ) : (
+                  <p>Ocorreu um erro ao carregar a avaliação.</p>
+                )}
               </Modal>
             </>
           ) : (
