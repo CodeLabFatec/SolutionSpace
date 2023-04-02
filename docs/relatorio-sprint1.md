@@ -1,7 +1,7 @@
 
 <br id="topo">
  
-# SPRINT 1
+<h1 align="center">SolutionSpace - Primeira entrega</h1>
 
 <p align="center">
     <a href="#mvp">MVP</a> | 
@@ -23,7 +23,7 @@
 
 <span id="burndown">
 
-## :pushpin: Burndown
+## 📉  Burndown
 ![image](https://user-images.githubusercontent.com/26208169/229379520-2e436ce7-b236-4a99-9325-55b4f8e5e523.png)
 
 <br>  
