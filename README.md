@@ -1,58 +1,20 @@
 <br id="topo">
 
-<h1> SolutionSpace - EQUIPE CODELAB - PROJETO INTEGRADOR 4º SEMESTRE ADS - 2022 </h1>
+<h1> SolutionSpace - PROJETO INTEGRADOR 4º SEMESTRE ADS - 2023 </h1>
 <p align="center">
     <a href="#objetivo">Objetivo</a> |
-    <a href="#requisitos">Requisitos</a> |
-    <a href="#relatório">Relatório</a> |
     <a href="#backlog">Backlog</a> |
+    <a href="#relatório">Relatório</a> |
     <a href="#tecnologias">Tecnologias</a> |
     <a href="#equipe">Equipe</a> |
 </p>
 
 <span id="objetivo">
-<h2> :dart: Objetivo</h2>
+<h2> 🚀 Objetivo</h2>
+  > **Status do projeto: Em desenvolvimento**
 
 <p align="justify">Desenvolver uma plataforma capaz de receber e gerenciar chamados internos dentro de uma sprint de projeto, podendo configurar uma árvore de decisão para redirecionar demandas de acordo com a classificação.</p>
 
-<span id="requisitos">
-<h2> :bookmark_tabs: Requisitos Funcionais </h2>
-
-- [x] Cadastro de chamados;
-- [x] Fluxo de chamados;
-- [ ] Cadastros de grupo de usuários;
-- [ ] Permissão por grupo e por usuário;
-- [ ] Usuários devem ter distinção por times;
-- [ ] Fila de chamados por time;
-- [ ] Configuração e personalização de formulário de chamados;
-- [ ] Árvore de decisão para escalonamento de chamado;
-- [ ] Cadastro de soluções para problemas conhecidos;
-- [ ] Formulário de abertura de chamado com indicação de interessados.
-
-<h3> Requisitos Não Funcionais </h3>
-
-- [ ] React;
-- [ ] NodeJS.
-
-→ [Voltar ao topo](#topo)
-
-## Entregas
-
-<h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img width="100%" src = ""></p>
-
-<span id="relatório">
-
-## :clipboard: Relatórios
-
-Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando em "Ver relatório".
-
-| Sprint |  Entrega   |       Status       |              Relatório               |
-| :----: | :--------: | :----------------: | :----------------------------------: |
-|   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/) |
-|   02   | 23/04/2023 | :hourglass:	 | ... |
-|   03   | 14/05/2023 | :hourglass:	 | ... |
-|   04   | 04/06/2023 | :hourglass:	 | ... |
 
 <span id="backlog">
 
@@ -87,6 +49,43 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: |
 
 <br>
+
+<span id="relatório">
+
+## :clipboard: Relatórios
+
+Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando em "Ver relatório".
+
+| Sprint |  Entrega   |       Status       |              Relatório               |
+| :----: | :--------: | :----------------: | :----------------------------------: |
+|   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint1.md) |
+|   02   | 23/04/2023 | :hourglass:	 | ... |
+|   03   | 14/05/2023 | :hourglass:	 | ... |
+|   04   | 04/06/2023 | :hourglass:	 | ... |
+
+<br />
+
+## Entregas
+
+<h4> Entrega da Sprint 1 </h4>
+<p align="center"> <img width="100%" src = ""></p>
+
+<br />
+
+<span id="tecnologias">
+
+## 🛠️ Tecnologias
+
+Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execução do projeto:
+
+- [Node](https://nodejs.org/): Runtime
+- [React](https://pt-br.reactjs.org/): Framework
+- [Typescript](https://www.typescriptlang.org/): Linguagem de programação
+- [Git](https://git-scm.com): Versionamento
+- [GitHub](https://github.com/): Armazenamento de código
+
+<br />
+
 <span id="equipe">
 
 ## 👩‍💻 Equipe
@@ -100,18 +99,6 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | Developer | Gabriel Ferreira Fabian | <a href="https://github.com/gabriel-fabian" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> | <a href="https://www.linkedin.com/in/fabian-gabriel/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> |
 
 <br>
-
-<span id="tecnologias">
-
-## 🛠️ Tecnologias
-
-Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execução do projeto:
-
-- [Node](https://nodejs.org/): Runtime
-- [React](https://pt-br.reactjs.org/): Framework
-- [Typescript](https://www.typescriptlang.org/): Linguagem de programação
-- [Git](https://git-scm.com): Versionamento
-- [GitHub](https://github.com/): Armazenamento de código
 
 → [Voltar ao topo](#topo)
 
