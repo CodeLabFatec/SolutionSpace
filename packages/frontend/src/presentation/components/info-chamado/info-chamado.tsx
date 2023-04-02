@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import React, { useEffect, useState } from 'react'
 import Styles from './info-chamado-styles.scss'
 import { type ChamadoType } from '../lista-chamados/lista-chamados'
@@ -130,8 +131,11 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
                 </button>
                 <Modal
                   isOpen={openModal}
-                  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                  titulo={rating != null ? rating.title + ' (por ' + rating.user.name + ')' : 'Avaliação'}
+                  titulo={
+                    rating != null
+                      ? rating.title + ' - ' + rating.user.name + ' (Avaliação: ' + rating.rating + ')'
+                      : 'Avaliação'
+                  }
                   setModalClose={() => {
                     setOpenModal(!openModal)
                   }}
