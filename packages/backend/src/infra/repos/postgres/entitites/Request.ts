@@ -15,8 +15,8 @@ import { User } from './User'
 import { File } from './File'
 
 export enum RequestType {
-  FEATURE = 'Feature',
-  HOTFIX = 'Hotfix'
+  FEATURE = 'feature',
+  HOTFIX = 'hotfix'
 }
 
 @Entity('requests')

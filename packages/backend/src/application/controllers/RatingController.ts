@@ -25,6 +25,7 @@ export class RatingController {
 
     const alreadyRated = await ratingRepository.find({
       where: {
+        requestStep: requestStep as RequestStep,
         request: { request_id: requestId },
         user: { team: { team_id: user.team.team_id } }
       }
@@ -130,6 +131,7 @@ export class RatingController {
       if (createdRating.requestStep === RequestStep.ANALISE_RISCO) {
         await requestRepository.save({
           ...request,
+          status: statusConfig.status,
           requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
         })
       }

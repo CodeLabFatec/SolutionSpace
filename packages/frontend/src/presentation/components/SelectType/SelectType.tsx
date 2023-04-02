@@ -1,19 +1,15 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-redeclare */
 import Select from 'react-select'
 
 const options = [
-  { value: 'produto 01', label: 'Produto 01' },
-  { value: 'produto 02', label: 'Produto 02' },
-  { value: 'produto 03', label: 'Produto 03' },
-  { value: 'produto 04', label: 'Produto 04' },
-  { value: 'produto 05', label: 'Produto 05' },
-  { value: 'produto 06', label: 'Produto 06' },
-  { value: 'produto 07', label: 'Produto 07' },
-  { value: 'produto 08', label: 'Produto 08' }
+  { value: 'Desenvolvimento', label: 'Desenvolvimento' },
+  { value: 'PO', label: 'PO' },
+  { value: 'Q&A', label: 'Q&A' }
 ]
 
-const SelectType = () => {
+const SelectType: React.FC<{ onChange: any }> = (props) => {
   const colourStyles = {
     menuList: (styles: any) => ({
       ...styles,
@@ -48,7 +44,15 @@ const SelectType = () => {
 
   return (
     <>
-      <Select options={options} styles={colourStyles} placeholder={'Selecione...'} />
+      <Select
+        isSearchable={true}
+        onChange={(e: any) => {
+          props.onChange(e.value)
+        }}
+        options={options}
+        styles={colourStyles}
+        placeholder={'Selecione...'}
+      />
     </>
   )
 }

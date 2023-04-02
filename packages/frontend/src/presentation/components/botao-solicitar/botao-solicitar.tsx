@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom'
 const BotaoSolicitar: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
   const navigate = useNavigate()
 
-  const urlCriar: string = props.tipoChamado === TipoChamado.FEATURE ? '/criarFeature' : '/criarHotfix'
   const description: string =
     props.tipoChamado === TipoChamado.FEATURE
       ? 'Clique aqui para abrir uma solicitação para o desenvolvimento de uma nova Feature para o sistema.'
       : 'Clique aqui para abrir uma solicitação para o desenvolvimento de uma Hotfix para o sistema.'
-  const title: string = props.tipoChamado.toString()
+  const title: string = props.tipoChamado === TipoChamado.FEATURE ? 'Nova feature' : 'Hotfix'
 
   const handleClick = () => {
     if (props.tipoChamado === TipoChamado.FEATURE) {

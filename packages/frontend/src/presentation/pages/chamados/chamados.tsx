@@ -1,26 +1,23 @@
 import { Header, InfoChamado, ListaChamados } from '@/presentation/components'
 import Styles from './chamados-styles.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '@/main/contexts/authcontext'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import React, { useEffect, useState } from 'react'
 import { ChamadoType } from '@/presentation/components/lista-chamados/lista-chamados'
+import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 
-const MySwal = withReactContent(Swal)
-
-const Chamados: React.FC = () => {
-  const { user } = useContext(AuthContext)
+const Chamados: React.FC<{ visualizacaoChamado: VisualizarChamado }> = (props) => {
   const [chamado, setChamado] = useState<ChamadoType>()
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    setChamado(undefined)
+  }, [props])
 
   return (
     <>
       <Header exibirHome={true} />
       <div className={Styles.chamadosWrapper}>
-        <ListaChamados chamadoState={setChamado} />
-        <InfoChamado chamado={chamado} />
+        <ListaChamados chamadoState={setChamado} visualizacaoChamado={props.visualizacaoChamado} />
+        <InfoChamado chamado={chamado} visualizacaoChamado={props.visualizacaoChamado} />
       </div>
     </>
   )

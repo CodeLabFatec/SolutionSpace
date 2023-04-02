@@ -2,89 +2,71 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Styles from './lista-chamados.scss'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Chamado from '@/presentation/components/chamado/chamado'
 import { TipoChamado } from '@/main/enums/tipo-chamado'
+import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
+import { getAllRequests, getAllRequestsByUser } from '@/main/api/api'
+import { AuthContext } from '@/main/contexts/authcontext'
 
-export type ChamadoType = {
-  id: string
-  title: string
-  description: string
-  status: number
-  type: TipoChamado
-  date: string
+type FileChamado = {
+  base64: string
+  ext: string
+  file_name: string
+  file_id: string
 }
 
-const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
+export type ChamadoType = {
+  request_id: string
+  title: string
+  description: string
+  requestType: TipoChamado
+  created_at: string
+  requestStep: string
+  status: string
+  files: FileChamado[]
+}
+
+const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: VisualizarChamado }> = (props) => {
   const [chamados, setChamados] = useState<ChamadoType[]>([])
   const [chamadosFiltrados, setChamadosFiltrados] = useState<ChamadoType[]>([])
+  const { user } = useContext(AuthContext)
+
+  const loadChamados = async () => {
+    try {
+      if (props.visualizacaoChamado === VisualizarChamado.MEUS_CHAMADOS) {
+        const response = await getAllRequestsByUser(user.user_id)
+
+        setChamados(response.data)
+        setChamadosFiltrados(response.data)
+      } else if (props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS) {
+        const response = await getAllRequests()
+
+        setChamados(response.data)
+        setChamadosFiltrados(response.data)
+      }
+    } catch (e: any) {
+      console.log(e.response.data.message)
+    }
+  }
 
   useEffect(() => {
-    const teste: ChamadoType[] = []
-    teste.push({
-      id: '111',
-      title: 'CLB/01: Homepage',
-      description: 'Desenvolver a homepage da aplicação',
-      status: 0,
-      type: TipoChamado.FEATURE,
-      date: '27/03/23'
-    })
-    teste.push({
-      id: '112',
-      title: 'CLB/02: Página de login',
-      description: 'Desenvolver a página de login da aplicação',
-      status: 0,
-      type: TipoChamado.FEATURE,
-      date: '26/03/23'
-    })
-    teste.push({
-      id: '113',
-      title: 'FIX/01: Título página',
-      description: 'Corrigir o título da aplicação',
-      status: 0,
-      type: TipoChamado.HOTFIX,
-      date: '25/03/23'
-    })
-    teste.push({
-      id: '114',
-      title: 'FIX/01: Título página',
-      description: 'Corrigir o título da aplicação',
-      status: 0,
-      type: TipoChamado.HOTFIX,
-      date: '25/03/23'
-    })
-    teste.push({
-      id: '115',
-      title: 'FIX/01: Título página',
-      description: 'Corrigir o título da aplicação',
-      status: 0,
-      type: TipoChamado.HOTFIX,
-      date: '25/03/23'
-    })
-    teste.push({
-      id: '116',
-      title: 'FIX/01: Título página',
-      description: 'Corrigir o título da aplicação',
-      status: 0,
-      type: TipoChamado.HOTFIX,
-      date: '25/03/23'
-    })
-
-    setChamados(teste)
-    setChamadosFiltrados(teste)
+    loadChamados()
   }, [props])
 
   const changeFilter: any = (event: any) => {
-    const filter = event.target.value
+    const filter = event.target.value.toLowerCase()
     if (filter !== undefined && filter !== null) {
       if (filter.toLowerCase() === 'feature' || filter.toLowerCase() === 'nova feature') {
-        const filteredList = chamados.filter((x) => x.type === TipoChamado.FEATURE)
+        const filteredList = chamados.filter((x) => x.requestType === TipoChamado.FEATURE)
         setChamadosFiltrados(filteredList)
       } else if (filter.toLowerCase() === 'hotfix') {
-        const filteredList = chamados.filter((x) => x.type === TipoChamado.HOTFIX)
+        const filteredList = chamados.filter((x) => x.requestType === TipoChamado.HOTFIX)
         setChamadosFiltrados(filteredList)
       } else {
-        const filteredList = chamados.filter((x) => x.title.includes(filter) || filter.includes(x.title))
+        const filteredList = chamados.filter(
+          (x) => x.title.toLowerCase().includes(filter) || filter.includes(x.title.toLowerCase())
+        )
         setChamadosFiltrados(filteredList)
       }
     }
@@ -107,7 +89,7 @@ const ListaChamados: React.FC<{ chamadoState: any }> = (props) => {
         {chamadosFiltrados.map((item) => (
           // eslint-disable-next-line react/jsx-key
           <div
-            key={item.id}
+            key={item.request_id}
             onClick={() => {
               props.chamadoState(item)
             }}
