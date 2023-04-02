@@ -17,7 +17,7 @@
 <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img width="100%" src = "./docs/images/sprint1.gif"></p>
+<p align="center"> <img src = "./images/sprint1.gif"></p>
 <br>
 
 
