@@ -72,7 +72,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 ## Entregas
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img src = "./docs/images/sprint1.gif"></p>
+<p align="center"> <img src = "./docs/images/sprint1.mp4"></p>
 
 <br />
 
