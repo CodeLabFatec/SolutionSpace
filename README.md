@@ -1,6 +1,8 @@
 <br id="topo">
 
-<h1> SolutionSpace - PROJETO INTEGRADOR 4º SEMESTRE ADS - 2023 </h1>
+# SolutionSpace
+  > **Projeto Integrador 4º Semestre ADS - 2023**
+
 <p align="center">
     <a href="#objetivo">Objetivo</a> |
     <a href="#backlog">Backlog</a> |
@@ -10,7 +12,8 @@
 </p>
 
 <span id="objetivo">
-<h2> 🚀 Objetivo</h2>
+
+## 🚀 Objetivo
   > **Status do projeto: Em desenvolvimento**
 
 <p align="justify">Desenvolver uma plataforma capaz de receber e gerenciar chamados internos dentro de uma sprint de projeto, podendo configurar uma árvore de decisão para redirecionar demandas de acordo com a classificação.</p>
