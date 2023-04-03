@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "target": "ES6",
+    "baseUrl": "src",
+    "rootDirs": ["src", "test"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": ["*"],
+      "@/test/*": ["../test/*"]
+    }
+  },
+  "include": ["src", "test"]
+}

@@ -1,0 +1,46 @@
+.chamadoWrapper {
+    margin-top: 22px;
+    width: 325px;
+    height: 150px;
+    background-color: rgba($color: #C4C4CC, $alpha: 0.2);
+    border-radius: 10px;
+
+    .chamadoInfo {
+        padding-top: 30px;
+        text-align: center;
+        p {
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+        p:last-child {
+            padding-top: 14px;
+        }
+    }
+
+    .chamadoTagWrapper {
+        padding: 7px 7px 0 255px;
+        text-align: center;
+        
+        .chamadoTagInfo {
+            width: 63px;
+            height: 12px;
+            font-size: 11px;
+            border-radius: 5px;
+            color: #FFFFFF;
+        }
+    }
+
+    .chamadoStatusTagWrapper {
+        padding: 32px 7px 0 185px;
+        text-align: center;
+        
+        .chamadoStatusTagInfo {
+            width: 130px;
+            height: 12px;
+            font-size: 11px;
+            border-radius: 5px;
+            color: #FFFFFF;
+            background-color: rgba(aquamarine, 0.3);
+        }
+    }
+}

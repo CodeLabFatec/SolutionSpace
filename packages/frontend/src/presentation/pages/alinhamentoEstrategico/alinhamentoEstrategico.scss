@@ -1,0 +1,355 @@
+body {
+  text-align: center;
+}
+
+.H1formularioChamados {
+  color: #ffffff;
+  margin-top: 47px;
+}
+
+.H1formularioChamados hr {
+  border: 1px dashed #ffffff;
+  width: 566px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  width: 1295px;
+
+  margin: 67px auto;
+}
+
+.tituloDetalhe {
+  max-width: 600px;
+
+  flex-wrap: wrap;
+  text-align: start;
+}
+
+.inputTitulo {
+  width: 600px;
+  padding: 10px 0px 10px 20px;
+  margin: 7px 0 17px 0;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+
+.inputDetalhe {
+  width: 600px;
+  height: 400px;
+  padding: 10px 20px;
+  margin-top: 7px;
+
+  background-color: #333333;
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  text-align: justify;
+}
+
+.selecionarArquivo {
+  position: absolute;
+  padding: 112px 270px;
+  border: 2px dashed #ffffff;
+
+  cursor: pointer;
+
+  right: 40px;
+}
+
+.arquivoSelecionado {
+  position: absolute;
+  width: 597px;
+  height: 287px;
+
+  cursor: pointer;
+
+  right: 40px;
+}
+
+.dropzoneContainer {
+  width: 700px;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 0;
+  margin: 23px 0 110px 25px;
+  border-radius: 6px;
+
+  &::-webkit-scrollbar {
+    background-color: #3f3f41;
+    border-radius: 0 4px 4px 0;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d6d5d5;
+    border-radius: 20px;
+  }
+}
+
+.buttonEnviar {
+  background-color: #4fb4bc;
+  color: #fff;
+  padding: 12px 54px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 685px;
+  margin: 0 0 0 25px;
+
+  &:hover {
+    background-color: #5dcfd7;
+  }
+}
+
+.arquivoBotao {
+  text-align: start;
+}
+
+.grupo {
+  width: 685px;
+  margin-left: 25px;
+
+  color: #ffffff;
+}
+
+.openModal {
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 0 0 5px;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  float: right;
+  right: 10px;
+  top: -67px;
+
+
+  i{
+    font-size: 20px;  
+  }
+
+}
+
+$number-of-options: 4;
+
+#for .formWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formAnalise {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: 0;
+  
+  h3 + hr {
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  hr {
+    border: 1px dashed #fff;
+    margin-bottom: 20px;
+  }
+  
+  .formTitle {
+    font-weight: 400;
+    text-align: center;
+  }
+  .debtAmountSlider {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    user-select: none;
+    &::before {
+      content: ' ';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      width: calc(100% * (#{$number-of-options - 1} / #{$number-of-options}));
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #333333;
+    }
+    input,
+    label {
+      box-sizing: border-box;
+      flex: 1;
+      user-select: none;
+      cursor: pointer;
+    }
+    label {
+      display: inline-block;
+      position: relative;
+      width: 20%;
+      height: 100%;
+      user-select: none;
+      &::before {
+        content: attr(data-debt-amount);
+        position: absolute;
+        left: 50%;
+        padding-top: 10px;
+        transform: translate(-50%, 45px);
+        font-size: 14px;
+        letter-spacing: 0.9px;
+        font-weight: 400;
+        white-space: nowrap;
+        opacity: 0.85;
+        transition: all 0.15s ease-in-out;
+      }
+      &::after {
+        content: ' ';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background: #333333;
+        border-radius: 50%;
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+      }
+      &:hover::after {
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+    input {
+      display: none;
+      &:checked {
+        + label::before {
+          font-weight: 800;
+          opacity: 1;
+        }
+        + label::after {
+          border-width: 4px;
+          transform: translate(-50%, -50%) scale(0.75);
+        }
+        ~ .debtAmountPos {
+          opacity: 1;
+        }
+        @for $i from 1 through $number-of-options {
+          &:nth-child(#{$i * 2 - 1}) ~ .debtAmountPos {
+            left: #{($i * 25%) - 12.5%};
+          }
+        }
+      }
+    }
+    .debtAmountPos {
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: #4fb4bc;
+      border-radius: 50%;
+      transition: all 0.15s ease-in-out;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      z-index: 2;
+    }
+  }
+  &:valid {
+    .debtAmountSlider {
+      input {
+        + label::before {
+          transform: translate(-50%, 45px) scale(0.9);
+          transition: all 0.15s linear;
+        }
+        &:checked + label::before {
+          transform: translate(-50%, 45px) scale(1.1);
+          transition: all 0.15s linear;
+        }
+      }
+    }
+  }
+  & + button {
+    display: block;
+    position: relative;
+    margin: 56px auto 0;
+    padding: 10px 20px;
+    appearance: none;
+    transition: all 0.15s ease-in-out;
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 600;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 8px;
+    outline: 0;
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+      // transform: scale(1.1);
+      background: #000;
+      color: #fff;
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+    &:focus {
+      background: #4caf50;
+      border-color: #4caf50;
+      color: #fff;
+      pointer-events: none;
+      &::before {
+        animation: spin 1s linear infinite;
+      }
+    }
+    &::before {
+      display: inline-block;
+      width: 0;
+      opacity: 0;
+      content: '\f3f4';
+      font-family: 'Font Awesome 5 Pro';
+      font-weight: 900;
+      margin-right: 0;
+      transform: rotate(0deg);
+    }
+  }
+  &:invalid + button {
+    pointer-events: none;
+    opacity: 0.25;
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+  to {
+    transform: rotate(360deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+}
