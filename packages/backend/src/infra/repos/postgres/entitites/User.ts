@@ -12,6 +12,7 @@ import {
 import bcrypt from 'bcryptjs'
 import { Team } from './Team'
 import moment from 'moment-timezone'
+import { Group } from './Group'
 
 @Entity('users')
 export class User {
@@ -36,6 +37,10 @@ export class User {
   @ManyToOne(() => Team, (team) => team.users)
   @JoinColumn({ name: 'team_id' })
   team: Team
+
+  @ManyToOne(() => Group, (group) => group.users)
+  @JoinColumn({ name: 'group_id' })
+  group: Group
 
   @CreateDateColumn()
   created_at: Date

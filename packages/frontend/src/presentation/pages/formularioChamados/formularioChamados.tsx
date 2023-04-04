@@ -77,7 +77,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
       MySwal.fire({
         title: 'Erro',
         icon: 'error',
-        html: 'O campo de título é obrigatório!'
+        html: 'Título é obrigatório.'
       })
       return
     }
@@ -86,7 +86,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
       MySwal.fire({
         title: 'Erro',
         icon: 'error',
-        html: 'O campo de detalhes é obrigatório!'
+        html: 'Detalhes é obrigatório.'
       })
       return
     }
@@ -125,8 +125,6 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
             }}
             className={Styles.inputTitulo}
             id='titulo'
-            required
-            autoFocus
             maxLength={60}
           />
           <label htmlFor='detalhes'>Detalhes</label>
@@ -140,7 +138,6 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
             id='detalhes'
             cols={30}
             rows={10}
-            required
           ></textarea>
         </div>
         <div className={Styles.arquivoBotao}>

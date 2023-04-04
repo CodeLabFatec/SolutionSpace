@@ -128,7 +128,7 @@ const AlinhamentoEstrategico: React.FC = () => {
     }
 
     if (rating == null || rating === '' || rating === ' ') {
-      MySwal.fire('Erro', 'Defina um nível de prioridade.', 'error')
+      MySwal.fire('Erro', 'Defina um nível de impacto.', 'error')
       return
     }
 
@@ -171,8 +171,6 @@ const AlinhamentoEstrategico: React.FC = () => {
             }}
             className={Styles.inputTitulo}
             id='titulo'
-            required
-            autoFocus
             maxLength={60}
           />
           <label htmlFor='detalhes'>Detalhes</label>
@@ -185,7 +183,6 @@ const AlinhamentoEstrategico: React.FC = () => {
             id='detalhes'
             cols={30}
             rows={10}
-            required
           ></textarea>
 
           <div className={Styles.formWrapper}>
