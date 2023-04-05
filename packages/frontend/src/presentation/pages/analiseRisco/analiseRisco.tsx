@@ -133,8 +133,6 @@ const AnaliseRisco: React.FC = () => {
             type='text'
             className={Styles.inputTitulo}
             id='titulo'
-            required
-            autoFocus
             maxLength={60}
           />
           <label htmlFor='detalhes'>Detalhes</label>
@@ -148,7 +146,6 @@ const AnaliseRisco: React.FC = () => {
             id='detalhes'
             cols={30}
             rows={10}
-            required
           ></textarea>
         </div>
         <div className={Styles.arquivoBotao}>
