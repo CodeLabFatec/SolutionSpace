@@ -1,30 +1,22 @@
 {
-  "extends": [
-    "standard-with-typescript",
-    "prettier"
-  ],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "plugins": [
-    "prettier"
+    "@typescript-eslint"
   ],
-  "parserOptions": {
-    "ecmaVersion": 6
-  },
-  "env": {
-    "jest": true,
-    "node": true,
-    "es6": true
-  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
+    "@typescript-eslint/indent": [ "error", 4, { "SwitchCase": 1 } ],
     "max-len": [ "warn", { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true } ],
+    "object-curly-spacing": ["warn", "always"],
     "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/consistent-type-imports": "off",
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-namespace": "off",
-    "@typescript-eslint/no-unused-vars": [ "warn", { "vars": "all", "args": "none" } ],
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "eol-last": 2
+    "@typescript-eslint/no-unused-vars": [ "warn", { "vars": "all", "args": "none" } ]
   }
 }

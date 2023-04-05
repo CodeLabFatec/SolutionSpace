@@ -5,18 +5,14 @@
     "noUnusedParameters": false,
     "target": "ES6",
     "baseUrl": "src",
-    "rootDirs": ["src", "test"],
+    "rootDirs": ["src"],
     "lib": ["dom", "dom.iterable", "esnext"],
-    "skipLibCheck": true,
-    "strict": true,
-    "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
     "paths": {
-      "@/*": ["*"],
-      "@/test/*": ["../test/*"]
+      "@/*": ["*"]
     }
   },
-  "include": ["src", "test"]
+  "include": ["src"]
 }

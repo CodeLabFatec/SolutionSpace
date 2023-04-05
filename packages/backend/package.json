@@ -8,12 +8,9 @@
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/data-source.ts migration:generate ./src/infra/database/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/infra/database/data-source.ts migration:run",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "test:coverage": "jest --runInBand --coverage",
-    "test:staged": "npm test -- --findRelatedTests",
-    "test:watch": "npm test -- --watch",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache"
   },
   "repository": {

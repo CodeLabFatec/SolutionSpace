@@ -32,7 +32,6 @@
     "eslint-plugin-react": "^7.32.2",
     "favicons-webpack-plugin": "^6.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "jest-environment-jsdom": "^29.5.0",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.1",
     "style-loader": "^3.3.2",
@@ -43,15 +42,10 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "format": "prettier --write \"src/**/*.{scss,tsx,ts}\" --config ../../.prettierrc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "dev:base": "webpack-dev-server --config webpack.dev.js",
-    "dev": "npm run dev:base -- --open",
-    "test:coverage": "jest --runInBand --coverage",
-    "test:staged": "npm test -- --findRelatedTests",
-    "test:watch": "npm test -- --watch",
-    "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache"
+    "dev": "npm run dev:base -- --open"
   },
   "browserslist": {
     "production": [
