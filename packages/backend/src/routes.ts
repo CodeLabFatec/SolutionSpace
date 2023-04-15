@@ -6,6 +6,7 @@ import { TeamController } from './application/controllers/TeamController'
 import { RatingController } from './application/controllers/RatingController'
 import { RequestController } from './application/controllers/RequestController'
 import { StatusConfigurationController } from './application/controllers/statusConfigurationController'
+import { GroupController } from './application/controllers/GroupController'
 
 const router = Router()
 
@@ -43,5 +44,13 @@ router.post('/createRating/:requestId', authMiddleware, new RatingController().c
 router.get('/listStatus', authMiddleware, new StatusConfigurationController().listStatus)
 router.get('/status/:status_id', authMiddleware, new StatusConfigurationController().getStatusById)
 router.post('/createStatus', authMiddleware, new StatusConfigurationController().create)
+
+// Group
+router.get('/listGroups', authMiddleware, new GroupController().listGroups)
+router.get('/group/:id', authMiddleware, new GroupController().getGroupById)
+router.post('/createGroup', authMiddleware, new GroupController().create)
+router.put('/updateGroup', authMiddleware, new GroupController().edit)
+router.delete('/deleteGroup/:id', authMiddleware, new GroupController().delete)
+
 
 export default router
