@@ -11,6 +11,8 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { AuthContext } from '@/main/contexts/authcontext'
 import { useNavigate } from 'react-router-dom'
+import SideMenu from '@/presentation/components/menu/menu'
+import { ProSidebarProvider } from 'react-pro-sidebar'
 
 const MySwal = withReactContent(Swal)
 
@@ -108,8 +110,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
   }
 
   return (
-    <>
-      <Header exibirHome={true} />
+    <div className='teste'>
       <div className={Styles.H1formularioChamados}>
         <h1>{title}</h1>
         <hr />
@@ -149,7 +150,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         </div>
       </form>
       <Footer />
-    </>
+    </div>
   )
 }
 export default FormularioChamados

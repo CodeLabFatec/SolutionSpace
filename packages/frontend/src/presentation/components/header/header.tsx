@@ -47,11 +47,7 @@ const Header: React.FC<{ exibirHome: boolean }> = (props) => {
   const exibirHomeButton = () => {
     if (props.exibirHome) {
       return (
-        <div onClick={handleHome} className={Styles.formButton}>
-          <i className='material-icons' id={Styles.iconHome}>
-            home
-          </i>
-        </div>
+        <div style={{ width: '105px' }}></div>
       )
     }
     return <div style={{ width: '105px' }}></div>
@@ -64,23 +60,23 @@ const Header: React.FC<{ exibirHome: boolean }> = (props) => {
         <Logo></Logo>
       </div>
       <div className={Styles.userConnected}>
-        <p>Bem vindo, {user.name}</p>
+        <p>Bem vindo, </p>
         <hr />
       </div>
       <div onClick={handleLogout} className={Styles.logout}>
-        <p>Sair</p>
+        <i id={Styles.logout} className="material-icons">exit_to_app</i>
       </div>
-      <div onClick={handleRequests} className={Styles.chamados}>
+      {/* <div onClick={handleRequests} className={Styles.chamados}>
         <p>Meus chamados</p>
-      </div>
-      <div
+      </div> */}
+      {/* <div
         onClick={() => {
           navigate('/requests')
         }}
         className={Styles.allChamados}
       >
         <p>Todos chamados</p>
-      </div>
+      </div> */}
     </div>
   )
 }

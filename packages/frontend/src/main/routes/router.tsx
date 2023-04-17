@@ -9,6 +9,9 @@ import { TipoChamado } from '../enums/tipo-chamado'
 import { VisualizarChamado } from '../enums/visualizar-chamado'
 import AlinhamentoEstrategico from '@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico'
 import AnaliseRisco from '@/presentation/pages/analiseRisco/analiseRisco'
+import SideMenu from '@/presentation/components/menu/menu'
+import { ProSidebarProvider } from 'react-pro-sidebar'
+import { Header } from '@/presentation/components'
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -82,9 +85,16 @@ const Router: React.FC = () => {
           <Route
             path='/newFeature'
             element={
-              <Private>
-                <MakeFormularioChamados tipoChamado={TipoChamado.FEATURE} />
-              </Private>
+              <>
+              
+              <Header exibirHome={true}></Header>
+              <ProSidebarProvider>
+                <SideMenu></SideMenu>
+              </ProSidebarProvider>
+              </>
+              // <Private>
+              // <MakeFormularioChamados tipoChamado={TipoChamado.FEATURE} />
+              // </Private>
             }
           />
           <Route
