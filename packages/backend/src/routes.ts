@@ -21,13 +21,15 @@ router.post('/auth', new AuthController().authenticate);
 router.get('/listUsers', new UserController().listUser);
 router.get('/user/:id', new UserController().getUserById);
 router.post('/createUser/:team_id', new UserController().create);
-router.put('/updateUser/:user_id',authMiddleware, new UserController().editUser);
-router.delete('/deleteUser/:user_id',authMiddleware, new UserController().deleteUser);
+router.put('/updateUser/:user_id', authMiddleware, new UserController().editUser);
+router.delete('/deleteUser/:user_id', authMiddleware, new UserController().deleteUser);
 
 // Team
 router.get('/listTeams', authMiddleware, new TeamController().listTeams);
 router.get('/team/:id', authMiddleware, new TeamController().getTeamById);
 router.post('/createTeam', new TeamController().create);
+router.put('/updateTeam/:team_id', authMiddleware, new TeamController().editTeam);
+router.delete('/deleteTeam/:team_id', authMiddleware, new TeamController().deleteTeam);
 
 // Request
 router.get('/listRequests', authMiddleware, new RequestController().listRequests);

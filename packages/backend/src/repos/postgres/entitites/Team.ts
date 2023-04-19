@@ -9,6 +9,9 @@ export class Team {
     @Column({ type: 'text', unique: true, nullable: false })
     team_name: string;
 
+    @Column({ type: 'text', nullable: true })
+    description: string;
+
     @OneToMany(() => User, (user) => user.team)
     users: User[];
 }

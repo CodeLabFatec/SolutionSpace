@@ -125,8 +125,7 @@ export class UserController {
                 message: "User succesfully deleted.",
                 user
             });
-        }
-        catch (error) {
+        } catch (error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
     }
