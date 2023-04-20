@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/dotenv": "^8.2.0",
     "@types/dropzone": "^5.7.4",
     "@types/estree": "^1.0.0",
@@ -33,6 +34,7 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "dropzone": "^6.0.0-beta.2",
     "express": "^4.18.2",

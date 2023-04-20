@@ -1,12 +1,7 @@
-# Dependencies
-node_modules
-
-# Coverage
-coverage
-
-# Transpiled files
-build/
-dist/
-
-# enviroments variable
 .env
+dist/
+.build/
+.vscode/
+node_modules/
+coverage/
+yarn.lock
