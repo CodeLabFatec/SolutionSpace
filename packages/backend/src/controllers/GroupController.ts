@@ -4,8 +4,8 @@ import { Request, Response } from 'express'
 
 export class GroupController {
   async create(req: Request, res: Response) {
-    const { group_name, canRequestFeatures, canRequestHotfix, canRatingAnalise, mustRateAnalise,
-      canRatingAnalinhamento, mustRateAnalinhamento, team_id } = req.body
+    const { group_name, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
+      canRateAnalinhamento, mustRateAnalinhamento, team_id } = req.body
 
     if (!group_name || !team_id) {
       return res.status(400).json({ message: 'Group name and team id are required to create a group' })
@@ -26,11 +26,11 @@ export class GroupController {
       if (canRequestHotfix) {
         group.canRequestHotfix = canRequestHotfix
       }
-      if (canRatingAnalinhamento) {
-        group.canRatingAnalinhamento = canRatingAnalinhamento
+      if (canRateAnalinhamento) {
+        group.canRateAnalinhamento = canRateAnalinhamento
       }
-      if (canRatingAnalise) {
-        group.canRatingAnalise = canRatingAnalise
+      if (canRateAnalise) {
+        group.canRateAnalise = canRateAnalise
       }
       if (mustRateAnalinhamento) {
         group.mustRateAnalinhamento = mustRateAnalinhamento
@@ -50,8 +50,8 @@ export class GroupController {
   }
 
   async edit(req: Request, res: Response) {
-    const { group_id, group_name, canRequestFeatures, canRequestHotfix, canRatingAnalise, mustRateAnalise,
-      canRatingAnalinhamento, mustRateAnalinhamento, team_id } = req.body
+    const { group_id, group_name, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
+      canRateAnalinhamento, mustRateAnalinhamento, team_id } = req.body
 
     if (!group_id || !group_name) {
       return res.status(400).json({ message: 'All properties are required to edit an Group' })
@@ -70,8 +70,8 @@ export class GroupController {
       group.team = team
       group.canRequestFeatures = canRequestFeatures
       group.canRequestHotfix = canRequestHotfix
-      group.canRatingAnalinhamento = canRatingAnalinhamento
-      group.canRatingAnalise = canRatingAnalise
+      group.canRateAnalinhamento = canRateAnalinhamento
+      group.canRateAnalise = canRateAnalise
       group.mustRateAnalinhamento = mustRateAnalinhamento
       group.mustRateAnalise = mustRateAnalise
 

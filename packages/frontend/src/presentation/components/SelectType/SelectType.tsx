@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-redeclare */
-import { useEffect } from 'react'
 import Select from 'react-select'
 
-const SelectType: React.FC<{ target: any, onChange: any, options: any }> = (props) => {
+const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
   const colourStyles = {
     menuList: (styles: any) => ({
       ...styles,
@@ -37,9 +36,6 @@ const SelectType: React.FC<{ target: any, onChange: any, options: any }> = (prop
     })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  useEffect(()=> { }, [props.options])
-
   return (
     <>
       <Select
@@ -48,7 +44,6 @@ const SelectType: React.FC<{ target: any, onChange: any, options: any }> = (prop
           props.onChange(e.value)
         }}
         options={props.options}
-        value={props.target}
         styles={colourStyles}
         placeholder={'Selecione...'}
       />

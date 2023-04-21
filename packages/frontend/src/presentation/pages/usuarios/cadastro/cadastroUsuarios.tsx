@@ -58,7 +58,7 @@ const CadastroUsuarios: React.FC = () => {
         nome,
         email,
         senha,
-        genero,
+        (genero === 'Masculino' ? 'male' : genero === 'Feminino' ? 'female' : 'others'),
         equipe,
         grupo
       )
@@ -71,6 +71,7 @@ const CadastroUsuarios: React.FC = () => {
         navigate('/home')
       })
     } catch (e: any) {
+      console.log(e)
       let errorMessage = e.response.data
 
       if (errorMessage === 'Missing required informations to create a request') {
@@ -185,8 +186,6 @@ const CadastroUsuarios: React.FC = () => {
       const response = await getGroupsByTeam(value)
 
       if(response && response.data){
-        console.log(value)
-        console.log(response.data)
         response.data.map((item: any) => {
           grupos.push({ label: item.group_name, value: item.group_id })
         })
@@ -221,7 +220,7 @@ const CadastroUsuarios: React.FC = () => {
           </div>
           <div style={ { width: '50% !important' } }>
             <label htmlFor='nome'>Gênero</label>
-            <SelectType onChange={setGenero} target={genero} options={generos} />
+            <SelectType onChange={setGenero} options={generos} />
           </div>
         </div>
         <div className={Styles.inputGroup}>
@@ -266,11 +265,11 @@ const CadastroUsuarios: React.FC = () => {
         <div className={Styles.inputGroup}>
           <div style={ { width: '50% !important' } }>
             <label htmlFor='nome'>Equipe</label>
-            <SelectType onChange={handleEquipeChange} target={equipe} options={equipes} />
+            <SelectType onChange={handleEquipeChange} options={equipes} />
           </div>
-          <div style={ equipe === '' ? { width: '50% !important', display: 'none' } : { width: '50%' } }>
+          <div style={ equipe === '' || equipe == null ? { width: '50% !important', display: 'none' } : { width: '50%' } }>
             <label htmlFor='nome'>Grupo</label>
-            <SelectType onChange={setGrupo} target={grupo} options={grupos} />
+            <SelectType onChange={setGrupo} options={grupos} />
           </div>
         </div>
         <div className={Styles.buttonWrapper}>

@@ -20,7 +20,7 @@ router.post('/auth', new AuthController().authenticate);
 // User
 router.get('/listUsers', new UserController().listUser);
 router.get('/user/:id', new UserController().getUserById);
-router.post('/createUser/:team_id', new UserController().create);
+router.post('/createUser', new UserController().create);
 router.put('/updateUser/:user_id', authMiddleware, new UserController().editUser);
 router.delete('/deleteUser/:user_id', authMiddleware, new UserController().deleteUser);
 

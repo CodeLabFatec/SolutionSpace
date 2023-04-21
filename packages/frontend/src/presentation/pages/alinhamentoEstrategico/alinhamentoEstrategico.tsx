@@ -288,7 +288,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos
           </label>
-          <SelectType onChange={setTargetGroup} target={targetGroup} options={options} />
+          <SelectType onChange={setTargetGroup} options={options} />
           <input type='button' onClick={handleSubmit} className={Styles.buttonEnviar} value='Enviar' />
         </div>
       </div>

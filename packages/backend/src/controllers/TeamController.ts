@@ -3,14 +3,25 @@ import { Request, Response } from 'express';
 
 export class TeamController {
     async create(req: Request, res: Response) {
-        const { teamName } = req.body;
+        const { team_name, description, permissionCreateUsers, permissionCreateTeams, 
+            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
 
-        if (!teamName) {
-            return res.status(400).json({ message: 'Team name is required to create a team' });
+        if (!team_name || !description || !permissionCreateGroups || !permissionCreateUsers || !permissionCreateTeams ||
+            !permissionEditRequests || !permissionUnarchiveRequests) {
+            return res.status(400).json({ message: 'All properties are required to create a team' });
         }
 
         try {
-            const newTeam = teamRepository.create({ team_name: teamName });
+            const newTeam = teamRepository.create(
+                { 
+                    team_name, 
+                    description,
+                    permissionCreateGroups,
+                    permissionCreateTeams, 
+                    permissionCreateUsers,
+                    permissionEditRequests, 
+                    permissionUnarchiveRequests 
+                });
 
             await teamRepository.save(newTeam);
 
@@ -45,25 +56,28 @@ export class TeamController {
     }
 
     async editTeam(req: Request, res: Response) {
-        const { name, description } = req.body;
+        const { team_name, description, permissionCreateUsers, permissionCreateTeams, 
+            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
         const { team_id } = req.params;
 
-        if (!name) {
-            return res.status(400).json({ message: 'All properties as required to edit an Team' });
+        if (!team_name || !description || !permissionCreateGroups || !permissionCreateUsers || !permissionCreateTeams ||
+            !permissionEditRequests || !permissionUnarchiveRequests) {
+            return res.status(400).json({ message: 'All properties are required to edit an Team' });
         }
 
         try {
             const team = await teamRepository.findOne({
-                where: { team_id },
-                relations: { users: true }
-            });
+                where: { team_id } });
 
             if (!team) return res.status(404).json('Team not found');
 
-            team.team_name = name;
-
-            if (description)
-                team.description = description;
+            team.team_name = team_name;
+            team.description = description;
+            team.permissionCreateGroups = permissionCreateGroups;
+            team.permissionCreateTeams = permissionCreateTeams;
+            team.permissionCreateUsers = permissionCreateUsers;
+            team.permissionEditRequests = permissionEditRequests;
+            team.permissionUnarchiveRequests = permissionUnarchiveRequests;
 
             await teamRepository.save(team);
 
