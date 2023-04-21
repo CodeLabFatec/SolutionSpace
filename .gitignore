@@ -10,3 +10,5 @@ dist/
 
 # enviroments variable
 .env
+
+packages/backend/src/infra/*

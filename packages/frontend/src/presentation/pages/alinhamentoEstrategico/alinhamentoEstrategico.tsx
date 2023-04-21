@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -80,9 +81,12 @@ const AlinhamentoEstrategico: React.FC = () => {
       )
 
       MySwal.fire({
-        title: 'Sucesso',
-        html: 'Avaliação feita com sucesso!',
-        icon: 'success'
+        html: "Avaliação feita com sucesso!",
+        icon: "success",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
       }).then((r) => {
         navigate('/home')
       })
@@ -90,22 +94,26 @@ const AlinhamentoEstrategico: React.FC = () => {
       let errorMessage = e.response.data
 
       if (errorMessage === 'Missing required informations to create a rating') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois faltam informações.'
+        errorMessage = "Preencha todas as informações.";
       } else if (errorMessage === 'User not found') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois o usuário não encontrado.'
+        errorMessage = "Usuário inválido.";
       } else if (errorMessage === 'There is already a rating for this request from the same team') {
-        errorMessage = 'Esse chamado já passou por essa avaliação.'
+        errorMessage = 'Chamado já avaliado.'
       } else if (errorMessage === 'Request not found') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois o chamado não foi encontrado.'
+        errorMessage = 'Chamado não encontrado.'
       } else if (errorMessage === 'Authorization not found') {
-        errorMessage = 'Você precisa estar autenticado para realizar essa operação!'
+        errorMessage = 'Você precisa estar autenticado para realizar essa operação.'
       }
 
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: errorMessage
-      })
+        icon: "error",
+        html: errorMessage,
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
+      
     }
   }
 
@@ -113,39 +121,77 @@ const AlinhamentoEstrategico: React.FC = () => {
     e.preventDefault()
 
     if (location.state === null) {
-      MySwal.fire('Erro', 'O chamado não foi encontrado.', 'error')
+      MySwal.fire({
+        icon: "error",
+        html: "Chamado não encontrado.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (titulo == null || titulo === '' || titulo === ' ') {
-      MySwal.fire('Erro', 'Título é obrigatório.', 'error')
+      MySwal.fire({
+        title: "Opss...",
+        html: "Título é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (detalhes == null || detalhes === '' || detalhes === ' ') {
-      MySwal.fire('Erro', 'Detalhes é obrigatório.', 'error')
+      MySwal.fire('Erro', '', 'error')
+      MySwal.fire({
+        title: "Opss...",
+        html: "Detalhes é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (rating == null || rating === '' || rating === ' ') {
-      MySwal.fire('Erro', 'Defina um nível de impacto.', 'error')
+      MySwal.fire({
+        title: "Opss...",
+        html: "Defina um nível de impacto.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (targetGroup == null || targetGroup === '' || targetGroup === ' ') {
-      MySwal.fire('Erro', 'É necessário selecionar um grupo.', 'error')
+      MySwal.fire({
+        title: "Opss...",
+        html: "Selecione um grupo.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     MySwal.fire({
-      title: 'Aviso',
-      html: 'Deseja salvar essa avaliação?',
-      icon: 'question',
+      html: 'Deseja salvar avaliação?',
       showCancelButton: true,
       confirmButtonText: 'Sim',
-      confirmButtonColor: '#76ba1b',
+      confirmButtonColor: '#4FB4BC',
       cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#ff0000'
+      cancelButtonColor: '#A9A9A9',
+      width: '350px',
+      background:'#FAF0E6',
+      color: '#000',
+      reverseButtons: true
     }).then((r) => {
       if (r.isConfirmed) {
         handleRequest()
@@ -154,8 +200,7 @@ const AlinhamentoEstrategico: React.FC = () => {
   }
 
   return (
-    <>
-      <Header exibirHome={true} />
+    <div className={Styles.container}>
       <div className={Styles.H1formularioChamados}>
         <h1>Alinhamento estratégico</h1>
         <hr />
@@ -286,8 +331,8 @@ const AlinhamentoEstrategico: React.FC = () => {
           <input type='button' onClick={handleSubmit} className={Styles.buttonEnviar} value='Enviar' />
         </div>
       </div>
-      <Footer />
-    </>
+      {/* <Footer /> */}
+    </div>
   )
 }
 export default AlinhamentoEstrategico

@@ -2,9 +2,16 @@ body {
   text-align: center;
 }
 
+.container{
+  position: absolute;
+  top: 69px;
+  left: 100px;
+  height: 100vh;
+}
+
 .H1formularioChamados {
   color: #ffffff;
-  margin-top: 47px;
+  margin-top: 20px;
 }
 
 .H1formularioChamados hr {
@@ -187,13 +194,13 @@ $number-of-options: 4;
     &::before {
       content: ' ';
       position: absolute;
-      height: 2px;
+      height: 1px;
       width: 100%;
       width: calc(100% * (#{$number-of-options - 1} / #{$number-of-options}));
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #333333;
+      background: #FAF0E6;
     }
     input,
     label {
@@ -229,7 +236,7 @@ $number-of-options: 4;
         transform: translate(-50%, -50%);
         width: 20px;
         height: 20px;
-        background: #333333;
+        background: #FAF0E6;
         border-radius: 50%;
         pointer-events: none;
         user-select: none;
