@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useState } from 'react'
+import { useEffect, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createSession, api } from '../api/api'
 import Swal from 'sweetalert2'

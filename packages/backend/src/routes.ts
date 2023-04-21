@@ -20,7 +20,7 @@ router.post('/auth', new AuthController().authenticate);
 // User
 router.get('/listUsers', new UserController().listUser);
 router.get('/user/:id', new UserController().getUserById);
-router.post('/createUser/:team_id', new UserController().create);
+router.post('/createUser', new UserController().create);
 router.put('/updateUser/:user_id', authMiddleware, new UserController().editUser);
 router.delete('/deleteUser/:user_id', authMiddleware, new UserController().deleteUser);
 
@@ -52,6 +52,7 @@ router.post('/createStatus', authMiddleware, new StatusConfigurationController()
 // Group
 router.get('/listGroups', authMiddleware, new GroupController().listGroups)
 router.get('/group/:id', authMiddleware, new GroupController().getGroupById)
+router.get('/getGroupsByTeam/:team_id', authMiddleware, new GroupController().getGroupsByTeam)
 router.post('/createGroup', authMiddleware, new GroupController().create)
 router.put('/updateGroup', authMiddleware, new GroupController().edit)
 router.delete('/deleteGroup/:id', authMiddleware, new GroupController().delete)

@@ -17,21 +17,21 @@ export class Group {
     canRequestHotfix: boolean
 
     @Column({ type: 'boolean', nullable: false, default: false })
-    canRatingAnalise: boolean
+    canRateAnalise: boolean
 
     @Column({ type: 'boolean', nullable: false, default: false })
     mustRateAnalise: boolean
 
     @Column({ type: 'boolean', nullable: false, default: false })
-    canRatingAnalinhamento: boolean
+    canRateAnalinhamento: boolean
 
     @Column({ type: 'boolean', nullable: false, default: false })
     mustRateAnalinhamento: boolean
 
-    @ManyToOne(() => Team, (team) => team.users)
+    @ManyToOne(() => Team, (team) => team.groups)
     @JoinColumn({ name: 'team_id' })
     team: Team
 
-    @OneToMany(() => User, (user) => user.team)
+    @OneToMany(() => User, (user) => user.group)
     users: User[]
 }

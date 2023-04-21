@@ -14,6 +14,13 @@ import moment from 'moment-timezone';
 import { Group } from './Group';
 import { dataEncrypt } from '../../../utils/encryptor';
 
+export enum Genders {
+    MALE = 'male',
+    FEMALE = 'female',
+    OTHERS = 'others'
+}
+
+
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn('uuid')
@@ -21,6 +28,13 @@ export class User {
 
     @Column({ type: 'text', nullable: false })
     name: string;
+
+    @Column({
+        type: 'enum',
+        enum: Genders,
+        nullable: true
+    })
+    gender: Genders;
 
     @Column({ type: 'text', unique: true, nullable: false })
     email: string;

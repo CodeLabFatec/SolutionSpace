@@ -3,14 +3,14 @@ import { teamRepository } from '../repos/postgres/repositories/teamRepository';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { Request, Response } from 'express';
 import { dataDecript } from '../utils/encryptor';
+import { groupRepository } from '../repos/postgres/repositories/groupRepository';
 
 export class UserController {
     async create(req: Request, res: Response) {
-        const { name, email, password } = req.body;
-        const { team_id } = req.params;
+        const { name, email, password, gender, team_id, group_id } = req.body;
 
-        if (!name || !email || !password) {
-            return res.status(400).json({ message: 'All properties as required to create an User' });
+        if (!name || !email || !password || !gender || !team_id || !group_id) {
+            return res.status(400).json({ message: 'All properties are required to create an User' });
         }
 
         try {
@@ -18,15 +18,16 @@ export class UserController {
 
             if (!team) return res.status(404).json('Team not found');
 
-            const newUser = userRepository.create({ name, email, password, team });
+            const group = await groupRepository.findOneBy({ group_id });
+
+            if (!group) return res.status(404).json('Group not found');
+
+            const newUser = userRepository.create({ name, email, password, gender, group, team });
 
             await userRepository.save(newUser);
 
             return res.status(201).json(newUser);
         } catch (error) {
-            if (error.detail.includes('already exists')) {
-                return res.status(409).json({ message: `Internal Server Error - Email already exists` });
-            }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
     }
@@ -34,7 +35,7 @@ export class UserController {
     async listUser(req: Request, res: Response) {
         try {
             const users = await userRepository.find({
-                relations: { team: true }
+                relations: { team: true, group: true }
             });
 
             return res.status(200).json({ users });
@@ -49,7 +50,7 @@ export class UserController {
         try {
             const user = await userRepository.findOne({
                 where: { user_id: id },
-                relations: { team: true }
+                relations: { team: true, group: true }
             });
 
             if (!user) return res.status(404).json('User not found');
@@ -65,17 +66,17 @@ export class UserController {
     }
 
     async editUser(req: Request, res: Response) {
-        const { name, email, password, team_id } = req.body;
+        const { name, email, password, gender, team_id, group_id } = req.body;
         const { user_id } = req.params;
 
-        if (!name || !email || !password) {
-            return res.status(400).json({ message: 'All properties as required to edit an User' });
+        if (!name || !email || !password || !gender || !team_id || !group_id) {
+            return res.status(400).json({ message: 'All properties are required to edit an User' });
         }
 
         try {
             const user = await userRepository.findOne({
                 where: { user_id },
-                relations: { team: true }
+                relations: { team: true, group: true }
             });
 
             if (!user) return res.status(404).json('User not found');
@@ -94,10 +95,16 @@ export class UserController {
 
             if (!team) return res.status(404).json('Team not found');
 
+            const group = await groupRepository.findOneBy({ group_id });
+
+            if (!group) return res.status(404).json('Group not found');
+
             user.name = name;
             user.email = email;
             user.password = email;
             user.team = team;
+            user.group = group;
+            user.gender = gender;
 
             await userRepository.save(user);
 
@@ -113,9 +120,7 @@ export class UserController {
 
         try {
             const user = await userRepository.findOne({
-                where: { user_id },
-                relations: { team: true }
-            });
+                where: { user_id } });
 
             if (!user) return res.status(404).json('User not found');
 
