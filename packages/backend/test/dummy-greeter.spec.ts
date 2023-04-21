@@ -1,10 +1,10 @@
-import { greeter } from '@/dummy-greeter'
+import { greeter } from '../src/dummy-greeter';
 
 describe('Dummy greeter test', () => {
-  it('should return a greeting to a specified name', () => {
-    const name = 'Jane Doe'
-    const res = greeter(name)
+    it('should return a greeting to a specified name', () => {
+        const name = 'Jane Doe';
+        const res = greeter(name);
 
-    expect(res).toStrictEqual(`Hello ${name}`)
-  })
-})
+        expect(res).toStrictEqual(`Hello ${name}`);
+    });
+});
