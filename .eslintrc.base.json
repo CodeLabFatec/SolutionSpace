@@ -10,7 +10,6 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "@typescript-eslint/indent": [ "error", 4, { "SwitchCase": 1 } ],
     "max-len": [ "warn", { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true } ],
     "object-curly-spacing": ["warn", "always"],
     "@typescript-eslint/ban-ts-comment": "off",

@@ -38,17 +38,19 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   01   |   Criação da página de realização da etapa 'alinhamento estratégico'   | :heavy_check_mark: |
 |   01   |   Criação da página de login   | :heavy_check_mark: |
 |    |
-|   02   |   Criação de páginas para cadastro, listagem e edição de usuários   | :hourglass: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :hourglass: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :hourglass: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :hourglass: |
-|   02   |   Adição de permissões de equipes ao fluxo de chamados   | :hourglass: |
-|   02   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de usuários   | :heavy_check_mark: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :heavy_check_mark: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :heavy_check_mark: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :heavy_check_mark: |
+|   02   |   Adição de permissões de equipes ao fluxo de chamados   | :heavy_check_mark: |
+|   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: |
 |    |
 |   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: |
+|   03   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: |
 |   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: |
 |   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: |
 |    |
+|   04   |   Realizar ajustes nos layouts das páginas  | :hourglass: |
 |   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: |
 |   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: |
 
@@ -63,7 +65,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 | Sprint |  Entrega   |       Status       |              Relatório               |
 | :----: | :--------: | :----------------: | :----------------------------------: |
 |   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint1.md) |
-|   02   | 23/04/2023 | :hourglass:	 | ... |
+|   02   | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint2.md) |
 |   03   | 14/05/2023 | :hourglass:	 | ... |
 |   04   | 04/06/2023 | :hourglass:	 | ... |
 
@@ -72,7 +74,10 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 ## Entregas
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img width="1500" src = "./docs/images/sprint1.gif"></p>
+<p align="center"> <img width="1500" src = "./docs/images/sprint1.gif" /></p>
+
+<h4> Entrega da Sprint 2 </h4>
+<p align="center"> <img width="1500" src="" /> </p>
 
 <br />
 

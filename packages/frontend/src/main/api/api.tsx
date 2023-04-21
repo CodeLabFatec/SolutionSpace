@@ -63,6 +63,17 @@ export const createStrategicAlignmentRating = async (
   })
 }
 
+export const createUser = async (
+  name: string,
+  email: string,
+  password: string,
+  gender: string,
+  team_id: string,
+  group_id: string
+) => {
+  return api.post('/createUser', { name, email, password, gender, team_id, group_id })
+}
+
 export const getAllRequests = async () => {
   return api.get('/listRequests')
 }
@@ -73,4 +84,12 @@ export const getAllRequestsByUser = async (userid: string) => {
 
 export const getRatingsByRequest = async (requestid: string) => {
   return api.get('/listRatingsByRequestId/' + requestid)
+}
+
+export const getAllTeams = async () => {
+  return api.get('/listTeams')
+}
+
+export const getGroupsByTeam = async (teamId: string) => {
+  return api.get('/getGroupsByTeam/' + teamId)
 }

@@ -3,13 +3,7 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 import Select from 'react-select'
 
-const options = [
-  { value: 'Desenvolvimento', label: 'Desenvolvimento' },
-  { value: 'PO', label: 'PO' },
-  { value: 'Q&A', label: 'Q&A' }
-]
-
-const SelectType: React.FC<{ onChange: any }> = (props) => {
+const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
   const colourStyles = {
     menuList: (styles: any) => ({
       ...styles,
@@ -24,12 +18,12 @@ const SelectType: React.FC<{ onChange: any }> = (props) => {
     menu: (base: any) => ({
       ...base,
       marginLeft: '25px',
-      width: '685px',
+      width: '550px',
       zIndex: 100
     }),
     control: (styles: any) => ({
       ...styles,
-      width: '685px',
+      width: '550px',
       backgroundColor: '#333333',
       border: 'none',
       borderRadius: '4px',
@@ -49,7 +43,7 @@ const SelectType: React.FC<{ onChange: any }> = (props) => {
         onChange={(e: any) => {
           props.onChange(e.value)
         }}
-        options={options}
+        options={props.options}
         styles={colourStyles}
         placeholder={'Selecione...'}
       />

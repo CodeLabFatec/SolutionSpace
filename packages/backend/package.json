@@ -5,14 +5,34 @@
   "scripts": {
     "dev": "nodemon --exec ts-node ./src/server.ts",
     "typeorm": "npx ts-node ../../node_modules/typeorm/cli.js",
-    "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/data-source.ts migration:generate ./src/infra/database/migrations/default",
-    "migration:run": "typeorm-ts-node-commonjs -d ./src/infra/database/data-source.ts migration:run",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run",
     "build": "tsc",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint .",
     "test:coverage": "jest --runInBand --coverage",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "node"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|js)x?$",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "!src/**/*.d.ts"
+    ]
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeLabFatec/SolutionSpace.git"
