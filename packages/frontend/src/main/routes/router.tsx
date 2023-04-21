@@ -9,6 +9,7 @@ import { TipoChamado } from '../enums/tipo-chamado'
 import { VisualizarChamado } from '../enums/visualizar-chamado'
 import AlinhamentoEstrategico from '@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico'
 import AnaliseRisco from '@/presentation/pages/analiseRisco/analiseRisco'
+import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -124,6 +125,14 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <AnaliseRisco />
+              </Private>
+            }
+          />
+          <Route
+            path='/newUser'
+            element={
+              <Private>
+                <MakeCadastroUsuarios />
               </Private>
             }
           />

@@ -123,4 +123,18 @@ export class GroupController {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
   }
+
+  async getGroupsByTeam(req: Request, res: Response) {
+    const { team_id } = req.params
+
+    try {
+      const groups = await groupRepository.find({ where: { team: { team_id } } })
+
+      if(!groups) return res.status(404).json('Team not found')
+      
+      return res.status(200).json(groups)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
 }

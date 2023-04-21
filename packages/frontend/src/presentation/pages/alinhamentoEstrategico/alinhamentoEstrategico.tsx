@@ -29,6 +29,12 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
   const [ratingAnalise, setRatingAnalise] = useState<any>(null)
 
+  const options = [
+    { value: 'Desenvolvimento', label: 'Desenvolvimento' },
+    { value: 'PO', label: 'PO' },
+    { value: 'Q&A', label: 'Q&A' }
+  ]
+
   useEffect(() => {
     setRatingAnalise(null)
     loadRatings()
@@ -52,7 +58,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           const data = response.data
           setRatingAnalise(data[data.length - 1])
         }
-      } catch (e) {}
+      } catch (e) { /* empty */ }
     }
   }
 
@@ -282,7 +288,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos
           </label>
-          <SelectType onChange={setTargetGroup} />
+          <SelectType onChange={setTargetGroup} target={targetGroup} options={options} />
           <input type='button' onClick={handleSubmit} className={Styles.buttonEnviar} value='Enviar' />
         </div>
       </div>

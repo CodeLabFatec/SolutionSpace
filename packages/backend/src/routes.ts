@@ -48,6 +48,7 @@ router.post('/createStatus', authMiddleware, new StatusConfigurationController()
 // Group
 router.get('/listGroups', authMiddleware, new GroupController().listGroups)
 router.get('/group/:id', authMiddleware, new GroupController().getGroupById)
+router.get('/getGroupsByTeam/:team_id', authMiddleware, new GroupController().getGroupsByTeam)
 router.post('/createGroup', authMiddleware, new GroupController().create)
 router.put('/updateGroup', authMiddleware, new GroupController().edit)
 router.delete('/deleteGroup/:id', authMiddleware, new GroupController().delete)
