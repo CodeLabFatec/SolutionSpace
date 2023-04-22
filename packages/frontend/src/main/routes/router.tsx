@@ -17,6 +17,7 @@ import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
 import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
+import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -204,6 +205,30 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <EdicaoEquipe />
+              </Private>
+            }
+          />
+           <Route 
+            path='/newGroup'
+            element={
+              <Private>
+                {/* <CadastroEquipe /> */}
+              </Private>
+            }
+          />
+          <Route 
+            path='/groups'
+            element={
+              <Private>
+                <ListagemGrupos />
+              </Private>
+            }
+          />
+          <Route 
+            path='/editGroup'
+            element={
+              <Private>
+                {/* <EdicaoEquipe /> */}
               </Private>
             }
           />

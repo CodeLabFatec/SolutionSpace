@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import Styles from "./listagem-usuarios-styles.scss";
-import { deleteUser, getAllUsers } from "@/main/api/api";
+import Styles from "./listagemGrupos.scss";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
+import { deleteGroup, getAllGroups } from "@/main/api/api";
 
 const MySwal = withReactContent(Swal);
 
-const ListagemUsuarios: React.FC = () => {
+const ListagemGrupos: React.FC = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
-  const loadUsers = async () => {
+  const loadGroups = async () => {
     try {
-      const response = await getAllUsers();
-      setData(response.data.users);
+      const response = await getAllGroups();
+      setData(response.data);
     } catch (e) {
       console.log("test " + e);
        MySwal.fire({
         title: "Erro",
-        html: "Ocorreu um erro ao carregar os usuários",
+        html: "Ocorreu um erro ao carregar os grupos",
         width: "350px",
         background: "#FAF0E6",
         color: "#000",
@@ -29,20 +29,20 @@ const ListagemUsuarios: React.FC = () => {
   };
 
   useEffect(() => {
-    loadUsers();
+    loadGroups();
   }, []);
 
   const handleEdit = (e: any, item: any) => {
     e.preventDefault();
 
-    navigate("/editUser", { replace: true, state: item });
+    navigate("/editGroups", { replace: true, state: item });
   };
 
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
     MySwal.fire({
-      html: `Deseja excluir ${item.name}?`,
+      html: `Deseja excluir ${item.group_name}?`,
       showCancelButton: true,
       confirmButtonText: "Confirmar",
       confirmButtonColor: "#4FB4BC",
@@ -55,22 +55,22 @@ const ListagemUsuarios: React.FC = () => {
     }).then(async (r) => {
       if (r.isConfirmed) {
         try {
-          await deleteUser(item.user_id);
+          await deleteGroup(item.group_id);
 
            MySwal.fire({
-            html: `Usuário ${item.name} excluído com sucesso!`,
+            html: `Grupo ${item.group_name} excluído com sucesso!`,
             icon: "success",
             width: "350px",
             background: "#FAF0E6",
             color: "#000",
             confirmButtonColor: "#4FB4BC",
           })
-          loadUsers();
+          loadGroups();
         } catch (e) {
           let errorMessage = e.response.data.message;
           if (errorMessage.includes("QueryFailedError: update or delete")) {
             errorMessage =
-              "Existem chamados vinculadas este usuário.";
+              "Existem usuários ou equipes vinculados a este grupo.";
           }
           MySwal.fire({
             title: "Erro",
@@ -89,17 +89,15 @@ const ListagemUsuarios: React.FC = () => {
     <div className={Styles.container}>
       <div className={Styles.tableContainer}>
         <div className={Styles.title}>
-          <h1>Usuários</h1>
+          <h1>Grupos</h1>
           <hr />
         </div>
-        <div className={Styles.tableUsers}>
+        <div className={Styles.tableGroups}>
           <table className={Styles.table}>
             <thead>
               <tr className={Styles.headRow}>
                 <td>Nome</td>
-                <td>Email</td>
-                <td>Grupo</td>
-                <td>Equipe</td>
+                <td>Descrição</td>
                 <td></td>
               </tr>
             </thead>
@@ -107,18 +105,16 @@ const ListagemUsuarios: React.FC = () => {
               {data.length === 0 ? (
                 <>
                   <tr>
-                    <td colSpan={5}>Nenhum usuário encontrado</td>
+                    <td colSpan={3}>Nenhum grupo encontrado</td>
                   </tr>
                 </>
               ) : (
                 <></>
               )}
               {data.map((item: any) => (
-                <tr key={item.user_id}>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.group?.group_name}</td>
-                  <td>{item.team?.team_name}</td>
+                <tr key={item.group_id}>
+                  <td>{item.group_name}</td>
+                  <td>{item.description}</td>
                   <td>
                     <div className={Styles.icons}>
                       <i
@@ -149,4 +145,4 @@ const ListagemUsuarios: React.FC = () => {
   );
 };
 
-export default ListagemUsuarios;
+export default ListagemGrupos;
