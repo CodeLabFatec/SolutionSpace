@@ -116,7 +116,11 @@ export const getAllTeams = async () => {
 }
 
 export const getAllUsers = async () => {
-  return api.get('listUsers')
+  return api.get('/listUsers')
+}
+
+export const getAllGroups = async () => {
+  return api.get('/listGroups')
 }
 
 export const getGroupsByTeam = async (teamId: string) => {
@@ -125,6 +129,14 @@ export const getGroupsByTeam = async (teamId: string) => {
 
 export const deleteUser = async (user_id: string) => {
   return api.delete('/deleteUser/' + user_id)
+}
+
+export const deleteTeam = async (team_id: string) => {
+  return api.delete('/deleteTeam/' + team_id)
+}
+
+export const deleteGroup = async (group_id: string) => {
+  return api.delete('/deleteGroup/' + group_id)
 }
 
 export const updateUser = async (
@@ -136,4 +148,16 @@ export const updateUser = async (
   team_id: string,
   group_id: string) => {
   return api.put('/updateUser/' + user_id, { name, email, password, gender, team_id, group_id })
+}
+
+export const updateTeam = async (
+  team_id: string,
+  team_name: string,
+  description: string,
+  permissionCreateUsers: boolean,
+  permissionCreateTeams: boolean,
+  permissionCreateGroups: boolean,
+  permissionEditRequests: boolean,
+  permissionUnarchiveRequests: boolean) => {
+  return api.put('/updateTeam/' + team_id, { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
 }

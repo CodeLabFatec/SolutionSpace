@@ -47,6 +47,7 @@ const EdicaoUsuario: React.FC = () => {
 
     if(!user){
       Swal.fire('Erro', 'Ocorreu um erro ao carregar as informações do usuário a ser editado.', 'error')
+      navigate('/users')
       return
     }
 

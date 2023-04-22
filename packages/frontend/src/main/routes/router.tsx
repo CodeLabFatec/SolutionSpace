@@ -2,7 +2,7 @@ import { MakeChamados, MakeLogin } from "@/main/factories/pages";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { CadastroUsuarios, HomeSolicitantes } from "@/presentation/pages";
+import { EdicaoEquipe, HomeSolicitantes } from "@/presentation/pages";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { MakeFormularioChamados } from "../factories/pages/formularioChamados-factory";
 import { TipoChamado } from "../enums/tipo-chamado";
@@ -17,6 +17,10 @@ import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
 import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
 import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
+import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
+import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
+import HomeFeature from "@/presentation/pages/home-solicitantes/Feature/homeFeature";
+import HomeHotfix from "@/presentation/pages/home-solicitantes/Hotfx/homeHotfix";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -102,6 +106,22 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <HomeSolicitantes />
+              </Private>
+            }
+          />
+          <Route
+            path="/homeFeature"
+            element={
+              <Private>
+                <HomeFeature />
+              </Private>
+            }
+          />
+          <Route
+            path="/homeHotfix"
+            element={
+              <Private>
+                <HomeHotfix />
               </Private>
             }
           />
@@ -196,6 +216,46 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <CadastroEquipe />
+              </Private>
+            }
+          />
+          <Route 
+            path='/teams'
+            element={
+              <Private>
+                <ListagemEquipe />
+              </Private>
+            }
+          />
+          <Route 
+            path='/editTeam'
+            element={
+              <Private>
+                <EdicaoEquipe />
+              </Private>
+            }
+          />
+           <Route 
+            path='/newGroup'
+            element={
+              <Private>
+                {/* <CadastroEquipe /> */}
+              </Private>
+            }
+          />
+          <Route 
+            path='/groups'
+            element={
+              <Private>
+                <ListagemGrupos />
+              </Private>
+            }
+          />
+          <Route 
+            path='/editGroup'
+            element={
+              <Private>
+                {/* <EdicaoEquipe /> */}
               </Private>
             }
           />

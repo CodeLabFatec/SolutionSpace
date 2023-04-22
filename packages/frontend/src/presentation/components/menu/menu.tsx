@@ -8,6 +8,8 @@ import {
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import Styles from "./menuStyle.scss"
 import { Link } from "react-router-dom";
@@ -59,19 +61,42 @@ const SideMenu = () => {
             </MenuItem>
           </SubMenu>
           <SubMenu
+            id={Styles.menuList}
             icon={<PersonAddAltRoundedIcon />}
-            label="Cadastros"
+            label="Usuários"
+            style={{ color: "#4FB4BC", padding:"10px" }}
+          >
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newUser" />}>
+              Cadastrar
+            </MenuItem>
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/users" />}>
+              Usuários cadastrados
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            id={Styles.menuList}
+            icon={<GroupAddIcon />}
+            label="Equipes"
+            style={{ color: "#4FB4BC", padding:"10px" }}
+          >
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newTeam" />}>
+              Cadastrar
+            </MenuItem>
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/teams" />}>
+              Equipes cadastradas
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            icon={<GroupsIcon />}
+            label="Grupos"
             style={{ color: "#4FB4BC", padding:"10px" }}
             id={Styles.menuList}
           >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newTeam" />}>
-              Equipe
-            </MenuItem>
             <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newGroup" />}>
-              Grupo
+              Cadastrar
             </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newUser" />}>
-              Usuário
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/groups" />}>
+              Grupos cadastrados
             </MenuItem>
           </SubMenu>
         </Menu>

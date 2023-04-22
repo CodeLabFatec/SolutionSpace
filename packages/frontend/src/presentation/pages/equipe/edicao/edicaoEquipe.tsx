@@ -1,71 +1,77 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import Styles from "./cadastroEquipe.scss";
-import React, { useState } from "react";
+import Styles from "./edicaoEquipe.scss";
+import React, { useState, useEffect } from "react";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
-import { createTeam } from "@/main/api/api";
+import { updateTeam } from "@/main/api/api";
 
 
-const MySwal = withReactContent(Swal);
+const MySwal = withReactContent(Swal)
 
-const CadastroEquipe: React.FC = () => {
-  const [nomeEquipe, setNomeEquipe] = useState("");
-  const [descricaoEquipe, setDescricaoEquipe] = useState("");
-  const [cadastrarUsuario, setCadastrarUsuario] = useState(false);
-  const [cadastrarEquipe, setCadastrarEquipe] = useState(false);
-  const [cadastrarGrupo, setCadastrarGrupo] = useState(false);
-  const [editarChamado, setEditarChamado] = useState(false);
-  const [desarquivarChamado, setDesarquivarChamado] = useState(false);
+const EdicaoEquipe: React.FC = () => {
 
-  const navigate = useNavigate();
+  const [id, setId] = useState<string>('')
+  const [nomeEquipe, setNomeEquipe] = useState("")
+  const [descricaoEquipe, setDescricaoEquipe] = useState("")
+  const [cadastrarUsuario, setCadastrarUsuario] = useState(false)
+  const [cadastrarEquipe, setCadastrarEquipe] = useState(false)
+  const [cadastrarGrupo, setCadastrarGrupo] = useState(false)
+  const [editarChamado, setEditarChamado] = useState(false)
+  const [desarquivarChamado, setDesarquivarChamado] = useState(false)
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const loadTeam = async () => {
+    const team = location.state
+
+    if(!team){
+      Swal.fire('Erro', 'Ocorreu um erro ao carregar as informações da equipe a ser editada.', 'error')
+      navigate('/teams')
+      return
+    }
+
+    setId(team.team_id)
+    setNomeEquipe(team.team_name)
+    setDescricaoEquipe(team.description)
+    setCadastrarEquipe(team.permissionCreateTeams)
+    setCadastrarGrupo(team.permissionCreateGroups)
+    setCadastrarUsuario(team.permissionCreateUsers)
+    setEditarChamado(team.permissionEditRequests)
+    setDesarquivarChamado(team.permissionUnarchiveRequests)
+  }
+
+  useEffect(()=> {
+    loadTeam()
+  }, [])
 
   const handleCadatrarUsuario = () => {
-    if (!cadastrarUsuario){
-        setCadastrarUsuario(true)
-    }else{
-        setCadastrarUsuario(false)
-    }
+    setCadastrarUsuario(!cadastrarUsuario)
   }
 
   const handleCadatrarEquipe = () => {
-    if (!cadastrarEquipe){
-        setCadastrarEquipe(true)
-    }else{
-        setCadastrarEquipe(false)
-    }
+    setCadastrarEquipe(!cadastrarEquipe)
   }
 
   const handleCadatrarGrupo = () => {
-    if (!cadastrarGrupo){
-        setCadastrarGrupo(true)
-    }else{
-        setCadastrarGrupo(false)
-    }
+    setCadastrarGrupo(!cadastrarGrupo)
   }
 
   const handleDesarquivarChamado = () => {
-    if (!desarquivarChamado){
-        setDesarquivarChamado(true)
-    }else{
-        setDesarquivarChamado(false)
-    }
+    setDesarquivarChamado(!desarquivarChamado)
   }
 
   const handleEditarChamado = () => {
-    if (!editarChamado){
-        setEditarChamado(true)
-    }else{
-        setEditarChamado(false)
-    }
+    setEditarChamado(!editarChamado)
   }
 
   const handleRequest = async () => {
     try {
 
-      await createTeam(
+      await updateTeam(
+        id,
         nomeEquipe,
         descricaoEquipe,
         cadastrarUsuario, 
@@ -75,7 +81,7 @@ const CadastroEquipe: React.FC = () => {
         desarquivarChamado)
 
       MySwal.fire({
-        html: "Equipe cadastrada com sucesso.",
+        html: "Equipe alterada com sucesso.",
         icon: "success",
         width: "350px",
         background: "#FAF0E6",
@@ -86,10 +92,8 @@ const CadastroEquipe: React.FC = () => {
       });
     } catch (e: any) {
       let errorMessage = e.response.data.message;
-
-      console.log(e)
       if (
-        errorMessage === "All properties are required to create a team"
+        errorMessage === "All properties are required to edit a team"
       ) {
         errorMessage = "Preencha todas as informações.";
       } else if (errorMessage === "User not found") {
@@ -190,35 +194,35 @@ const CadastroEquipe: React.FC = () => {
         <div className={Styles.permissionsContainer}>
           <FormGroup id={Styles.teste}>
             <FormControlLabel
-              control={<Switch  value={cadastrarUsuario}/>}
+              control={<Switch value={cadastrarUsuario} checked={cadastrarUsuario} />}
               onChange={handleCadatrarUsuario}
               label="Poderá cadastrar usuários?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
-              control={<Switch value={cadastrarEquipe}/>}
+              control={<Switch value={cadastrarEquipe} checked={cadastrarEquipe}/>}
               onChange={handleCadatrarEquipe}
               label="Poderá cadastrar equipes?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
-              control={<Switch value={cadastrarGrupo} />}
+              control={<Switch value={cadastrarGrupo} checked={cadastrarGrupo} />}
               onChange={handleCadatrarGrupo}
               label="Poderá cadastrar grupos?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
-              control={<Switch value={editarChamado}/>}
+              control={<Switch value={editarChamado} checked={editarChamado}/>}
               onChange={handleEditarChamado}
               label="Poderá editar chamados?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
-              control={<Switch  value={desarquivarChamado}/>}
+              control={<Switch  value={desarquivarChamado} checked={desarquivarChamado}/>}
               onChange={handleDesarquivarChamado}
               label="Poderá desarquivar chamados?"
               labelPlacement="start"
@@ -238,4 +242,4 @@ const CadastroEquipe: React.FC = () => {
     </div>
   );
 };
-export default CadastroEquipe;
+export default EdicaoEquipe;
