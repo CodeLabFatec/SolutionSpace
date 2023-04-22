@@ -38,6 +38,10 @@ export class UserController {
                 relations: { team: true, group: true }
             });
 
+            users.forEach(user => {
+                user.password = dataDecript(user.password)
+            })
+
             return res.status(200).json({ users });
         } catch (error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
@@ -101,7 +105,7 @@ export class UserController {
 
             user.name = name;
             user.email = email;
-            user.password = email;
+            user.password = password;
             user.team = team;
             user.group = group;
             user.gender = gender;
