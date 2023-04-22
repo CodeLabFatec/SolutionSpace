@@ -5,9 +5,9 @@ export class TeamController {
     async create(req: Request, res: Response) {
         const { team_name, description, permissionCreateUsers, permissionCreateTeams, 
             permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
+            console.log(req.body)
 
-        if (!team_name || !description || !permissionCreateGroups || !permissionCreateUsers || !permissionCreateTeams ||
-            !permissionEditRequests || !permissionUnarchiveRequests) {
+        if (!team_name || !description) {
             return res.status(400).json({ message: 'All properties are required to create a team' });
         }
 
@@ -60,8 +60,7 @@ export class TeamController {
             permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
         const { team_id } = req.params;
 
-        if (!team_name || !description || !permissionCreateGroups || !permissionCreateUsers || !permissionCreateTeams ||
-            !permissionEditRequests || !permissionUnarchiveRequests) {
+        if (!team_name || !description) {
             return res.status(400).json({ message: 'All properties are required to edit an Team' });
         }
 

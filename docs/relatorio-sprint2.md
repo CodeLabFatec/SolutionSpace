@@ -24,7 +24,7 @@
 |   Criação de páginas para cadastro, listagem e edição de usuários   |   COMO um usuário EU QUERO acessar as páginas de cadastro, listagem e edição de usuários PARA QUE seja possível realizar as operações de crud de usuários |
 |   Criação de páginas para cadastro, listagem e edição de equipes   |   COMO um usuário EU QUERO acessar as páginas de cadastro, listagem e edição de equipes PARA QUE seja possível realizar as operações de crud de equipes |
 |   Criação de páginas para cadastro, listagem e edição de grupos   |   COMO um usuário EU QUERO acessar as páginas de cadastro, listagem e edição de grupos PARA QUE seja possível realizar as operações de crud de grupos |
-|   Criação de páginas para cadastro, listagem e edição de status de chamados   |   COMO um usuário EU QUERO acessar as páginas de cadastro, listagem e edição de status de chamados PARA QUE seja possível realizar as operações de crud de status de chamados |
+|   Reformulação do header e do menu de navegação   |   COMO um usuário EU QUERO que ao acessar o sistema eu possa visualizar o header e o menu de navegação de forma agradável PARA QUE seja possível navegar com facilidade entre as telas do sistema |
 |   Adição de permissões de equipes ao fluxo de chamados   |   COMO um usuário EU QUERO que o fluxo de criação e avaliação de chamados respeite as permissões que eu possua PARA QUE seja possível controlar e gerenciar as ações dos usuários |
 |   Adição de permissões de nível de sistema aos usuário   |   COMO um usuário EU QUERO que as ações de cadastros do sistema respeite as permissões que eu possua PARA QUE seja possível controlar e gerenciar as ações dos usuários |
 
