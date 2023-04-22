@@ -10,6 +10,8 @@ import { VisualizarChamado } from '../enums/visualizar-chamado'
 import AlinhamentoEstrategico from '@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico'
 import AnaliseRisco from '@/presentation/pages/analiseRisco/analiseRisco'
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
+import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
+import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -133,6 +135,22 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <MakeCadastroUsuarios />
+              </Private>
+            }
+          />
+          <Route
+            path='/users'
+            element={
+              <Private>
+                <MakeListagemUsuarios />
+              </Private>
+            }
+          />
+          <Route
+            path='/editUser'
+            element={
+              <Private>
+                <MakeEdicaoUsuario />
               </Private>
             }
           />

@@ -90,6 +90,25 @@ export const getAllTeams = async () => {
   return api.get('/listTeams')
 }
 
+export const getAllUsers = async () => {
+  return api.get('listUsers')
+}
+
 export const getGroupsByTeam = async (teamId: string) => {
   return api.get('/getGroupsByTeam/' + teamId)
+}
+
+export const deleteUser = async (user_id: string) => {
+  return api.delete('/deleteUser/' + user_id)
+}
+
+export const updateUser = async (
+  user_id: string,
+  name: string,
+  email: string,
+  password: string,
+  gender: string,
+  team_id: string,
+  group_id: string) => {
+  return api.put('/updateUser/' + user_id, { name, email, password, gender, team_id, group_id })
 }

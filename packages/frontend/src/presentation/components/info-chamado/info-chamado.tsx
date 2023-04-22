@@ -28,7 +28,7 @@ const InfoChamado: React.FC<{ chamado: ChamadoType | undefined; visualizacaoCham
           const data = response.data
           setRating(data[data.length - 1])
         }
-      } catch (e) {}
+      } catch (e) { /*teste*/ }
     }
   }
 

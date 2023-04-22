@@ -17,7 +17,7 @@ const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
     }),
     menu: (base: any) => ({
       ...base,
-      marginLeft: '25px',
+      marginLeft: '0',
       width: '550px',
       zIndex: 100
     }),
@@ -28,7 +28,7 @@ const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
       border: 'none',
       borderRadius: '4px',
       boxShadow: 'none',
-      margin: '10px 0 55px 25px'
+      margin: '7px 0 17px 0'
     }),
     singleValue: (styles: any) => ({
       ...styles,

@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+}
+
+.title {
+    color: #ffffff;
+    margin-top: 47px;
+}
+
+.title hr {
+    border: 1px dashed #ffffff;
+    width: 566px;
+    margin: 0 auto;
+}
+
+.tableUsers {
+    margin: 80px 110px 0 110px;
+    width: 1300px;
+
+    table, td, tr {
+        border: 1px solid;
+    }
+
+    table {
+
+        thead {
+            td {
+                width: 260px;
+            }
+        }
+
+        tbody {
+            td {
+                text-align: center;
+                width: 260px;
+            }
+        }
+    }
+}
