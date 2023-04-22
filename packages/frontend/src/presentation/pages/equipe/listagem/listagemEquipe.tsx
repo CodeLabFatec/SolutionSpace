@@ -18,7 +18,7 @@ const ListagemEquipe: React.FC = () => {
     } catch (e) {
       console.log("test " + e);
       MySwal.fire({
-        title: "Opss...",
+        title: "Erro",
         html: "Ocorreu um erro ao carregar as equipes",
         width: "350px",
         background: "#FAF0E6",
@@ -57,7 +57,7 @@ const ListagemEquipe: React.FC = () => {
         try {
           // await deleteTeam(item.user_id);
           MySwal.fire({
-            html: `PUsuário ${item.name} excluído com sucesso!`,
+            html: `Usuário ${item.name} excluído com sucesso!`,
             icon: "success",
             width: "350px",
             background: "#FAF0E6",

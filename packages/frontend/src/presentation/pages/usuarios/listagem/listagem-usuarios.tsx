@@ -17,7 +17,14 @@ const ListagemUsuarios: React.FC = () => {
       setData(response.data.users);
     } catch (e) {
       console.log("test " + e);
-      Swal.fire("Erro", "Ocorreu um erro ao carregar os usuários", "error");
+       MySwal.fire({
+        title: "Erro",
+        html: "Ocorreu um erro ao carregar os usuários",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
     }
   };
 
@@ -35,36 +42,44 @@ const ListagemUsuarios: React.FC = () => {
     e.preventDefault();
 
     MySwal.fire({
-      title: "Aviso",
-      html: `Deseja mesmo excluir o usuário ${item.name}?`,
-      icon: "question",
+      html: `Deseja excluir ${item.name}?`,
       showCancelButton: true,
-      confirmButtonText: "Sim, excluir",
-      confirmButtonColor: "#76ba1b",
-      cancelButtonText: "Não, cancelar",
-      cancelButtonColor: "#ff0000",
+      confirmButtonText: "Confirmar",
+      confirmButtonColor: "#4FB4BC",
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "#A9A9A9",
+      width: '350px',
+      background:'#FAF0E6',
+      color: '#000',
+      reverseButtons: true
     }).then(async (r) => {
       if (r.isConfirmed) {
         try {
           await deleteUser(item.user_id);
 
-          Swal.fire(
-            "Sucesso",
-            `Usuário ${item.name} excluído com sucesso!`,
-            "success"
-          );
+           MySwal.fire({
+            html: `Usuário ${item.name} excluído com sucesso!`,
+            icon: "success",
+            width: "350px",
+            background: "#FAF0E6",
+            color: "#000",
+            confirmButtonColor: "#4FB4BC",
+          })
           loadUsers();
         } catch (e) {
           let errorMessage = e.response.data.message;
           if (errorMessage.includes("QueryFailedError: update or delete")) {
             errorMessage =
-              "Existem informações de chamados vinculadas a esse usuário, por isso não foi possível excluí-lo.";
+              "Existem chamados vinculadas este usuário.";
           }
-          Swal.fire(
-            "Erro",
-            `Ocorreu um erro ao excluir o usuário. ${errorMessage}`,
-            "error"
-          );
+          MySwal.fire({
+            title: "Erro",
+            html: errorMessage,
+            width: "350px",
+            background: "#FAF0E6",
+            color: "#000",
+            confirmButtonColor: "#4FB4BC",
+          })
         }
       }
     });
