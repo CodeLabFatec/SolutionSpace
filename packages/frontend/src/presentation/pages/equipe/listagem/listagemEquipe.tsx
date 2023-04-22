@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Styles from "./listagem-usuarios-styles.scss";
-import {  getAllTeams, getAllUsers } from "@/main/api/api";
+import Styles from "./listagemEquipeStyles.scss";
+import {  deleteTeam, getAllTeams } from "@/main/api/api";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,8 @@ const ListagemEquipe: React.FC = () => {
   const loadTeams = async () => {
     try {
       const response = await getAllTeams();
-      setData(response.data.teams);
+      setData(response.data);
     } catch (e) {
-      console.log("test " + e);
       MySwal.fire({
         title: "Erro",
         html: "Ocorreu um erro ao carregar as equipes",
@@ -35,14 +34,14 @@ const ListagemEquipe: React.FC = () => {
   const handleEdit = (e: any, item: any) => {
     e.preventDefault();
 
-    navigate("/editTeams", { replace: true, state: item });
+    navigate("/editTeam", { replace: true, state: item });
   };
 
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
     MySwal.fire({
-      html: `Deseja excluir ${item.name}?`,
+      html: `Deseja excluir ${item.team_name}?`,
       showCancelButton: true,
       confirmButtonText: "Confirmar",
       confirmButtonColor: "#4FB4BC",
@@ -55,9 +54,10 @@ const ListagemEquipe: React.FC = () => {
     }).then(async (r) => {
       if (r.isConfirmed) {
         try {
-          // await deleteTeam(item.user_id);
+          await deleteTeam(item.team_id);
+
           MySwal.fire({
-            html: `Usuário ${item.name} excluído com sucesso!`,
+            html: `Equipe ${item.team_name} excluída com sucesso!`,
             icon: "success",
             width: "350px",
             background: "#FAF0E6",
@@ -69,7 +69,7 @@ const ListagemEquipe: React.FC = () => {
           let errorMessage = e.response.data.message;
           if (errorMessage.includes("QueryFailedError: update or delete")) {
             errorMessage =
-              "Existem chamados vinculados a este usuário.";
+              "Existem usuários ou grupos vinculados a esta equipe.";
           }
           MySwal.fire({
             title: "Erro",
@@ -88,7 +88,7 @@ const ListagemEquipe: React.FC = () => {
     <div className={Styles.container}>
       <div className={Styles.tableContainer}>
         <div className={Styles.title}>
-          <h1>Usuários</h1>
+          <h1>Equipes</h1>
           <hr />
         </div>
         <div className={Styles.tableTeams}>
@@ -96,9 +96,7 @@ const ListagemEquipe: React.FC = () => {
             <thead>
               <tr className={Styles.headRow}>
                 <td>Nome</td>
-                <td>Email</td>
-                <td>Grupo</td>
-                <td>Equipe</td>
+                <td>Descrição</td>
                 <td></td>
               </tr>
             </thead>
@@ -106,18 +104,16 @@ const ListagemEquipe: React.FC = () => {
               {data.length === 0 ? (
                 <>
                   <tr>
-                    <td colSpan={5}>Nenhum usuário encontrado</td>
+                    <td colSpan={3}>Nenhuma equipe encontrada</td>
                   </tr>
                 </>
               ) : (
                 <></>
               )}
               {data.map((item: any) => (
-                <tr key={item.user_id}>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.group?.group_name}</td>
-                  <td>{item.team?.team_name}</td>
+                <tr key={item.team_id}>
+                  <td>{item.team_name}</td>
+                  <td>{item.description}</td>
                   <td>
                     <div className={Styles.icons}>
                       <i

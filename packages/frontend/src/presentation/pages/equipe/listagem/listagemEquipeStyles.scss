@@ -24,7 +24,7 @@ body {
   margin: 0 auto;
 }
 
-.tableUsers {
+.tableTeams {
   margin-top: 50px;
   width: 1300px;
   background-color: #46484d;
@@ -43,21 +43,27 @@ body {
 
   table {
     thead {
-      td {
+      td{
         color: #5dcfd7;
         font-weight: bold;
         background-color: #333333;
-        width: 260px;
+        width: 520px;
         border-bottom: 1px solid #fff;
         padding: 10px 0;
-    }
-}
+      }
+      td:last-child {
+        width: 260 !important;
+      }
+  }
 
-tbody {
+  tbody {
     td {
         text-align: center;
-        width: 260px;
+        width: 520px;
         padding: 5px 0;
+      }
+      td:last-child {
+        width: 260 !important;
       }
     }
   }
