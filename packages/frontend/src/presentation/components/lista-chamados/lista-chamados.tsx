@@ -8,24 +8,7 @@ import { TipoChamado } from '@/main/enums/tipo-chamado'
 import { VisualizarChamado } from '@/main/enums/visualizar-chamado'
 import { getAllRequests, getAllRequestsByUser } from '@/main/api/api'
 import { AuthContext } from '@/main/contexts/authcontext'
-
-type FileChamado = {
-  base64: string
-  ext: string
-  file_name: string
-  file_id: string
-}
-
-export type ChamadoType = {
-  request_id: string
-  title: string
-  description: string
-  requestType: TipoChamado
-  created_at: string
-  requestStep: string
-  status: string
-  files: FileChamado[]
-}
+import { ChamadoType } from '@/main/types'
 
 const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: VisualizarChamado }> = (props) => {
   const [chamados, setChamados] = useState<ChamadoType[]>([])

@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import React, { useEffect, useState } from "react";
 import Styles from "./info-chamado-styles.scss";
-import { type ChamadoType } from "../lista-chamados/lista-chamados";
 import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import { useNavigate } from "react-router-dom";
 import Modal from "../modal/modal";
 import { getRatingsByRequest } from "@/main/api/api";
 import { TipoChamado } from "@/main/enums/tipo-chamado";
+import { ChamadoType } from "@/main/types";
 
 const InfoChamado: React.FC<{
   chamado: ChamadoType | undefined;

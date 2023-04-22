@@ -13,9 +13,12 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
 import Styles from "./menuStyle.scss"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "@/main/contexts/authcontext";
 
 const SideMenu = () => {
   const { collapseSidebar } = useProSidebar();
+  const { user } = useContext(AuthContext)
 
   return (
     <div id="app" style={{ height: "100vh", display:"flex", position:"relative", left: "0" }}>
@@ -50,55 +53,72 @@ const SideMenu = () => {
             label="Chamados"
             style={{ color: "#4FB4BC", padding:"10px" }}
           >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newHotfix" />}>
-              Hotfix
-            </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newFeature" />}>
-              Nova feature
-            </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/myRequests" />}>
-              Meus chamados
-            </MenuItem>
+            {user.group.canRequestHotfix ? (
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newHotfix" />}>
+                Hotfix
+              </MenuItem>
+            ): <></>}
+            {user.group.canRequestFeatures ? (
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newFeature" />}>
+                Nova feature
+              </MenuItem>
+            ) : <></>}
+            {user.group.canRequestHotfix || user.group.canRequestFeatures ? (
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/myRequests" />}>
+                Meus chamados
+              </MenuItem>
+            ) : <></>}
+            {user.group.canRateAnalise || user.group.canRateAnalinhamento ? (
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/requests" />}>
+                Avaliar chamados
+              </MenuItem>
+            ) : <></>}
           </SubMenu>
-          <SubMenu
-            id={Styles.menuList}
-            icon={<PersonAddAltRoundedIcon />}
-            label="Usuários"
-            style={{ color: "#4FB4BC", padding:"10px" }}
-          >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newUser" />}>
-              Cadastrar
-            </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/users" />}>
-              Usuários cadastrados
-            </MenuItem>
-          </SubMenu>
-          <SubMenu
-            id={Styles.menuList}
-            icon={<GroupAddIcon />}
-            label="Equipes"
-            style={{ color: "#4FB4BC", padding:"10px" }}
-          >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newTeam" />}>
-              Cadastrar
-            </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/teams" />}>
-              Equipes cadastradas
-            </MenuItem>
-          </SubMenu>
-          <SubMenu
-            icon={<GroupsIcon />}
-            label="Grupos"
-            style={{ color: "#4FB4BC", padding:"10px" }}
-            id={Styles.menuList}
-          >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newGroup" />}>
-              Cadastrar
-            </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/groups" />}>
-              Grupos cadastrados
-            </MenuItem>
-          </SubMenu>
+          {user.team.permissionCreateUsers ? (
+            <SubMenu
+              id={Styles.menuList}
+              icon={<PersonAddAltRoundedIcon />}
+              label="Usuários"
+              style={{ color: "#4FB4BC", padding:"10px" }}
+            >
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newUser" />}>
+                Cadastrar
+              </MenuItem>
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/users" />}>
+                Usuários cadastrados
+              </MenuItem>
+            </SubMenu>
+          ) : <></>}
+          {user.team.permissionCreateTeams ? (
+            <SubMenu
+              id={Styles.menuList}
+              icon={<GroupAddIcon />}
+              label="Equipes"
+              style={{ color: "#4FB4BC", padding:"10px" }}
+            >
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newTeam" />}>
+                Cadastrar
+              </MenuItem>
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/teams" />}>
+                Equipes cadastradas
+              </MenuItem>
+            </SubMenu>
+          ) : <></>}
+          {user.team.permissionCreateGroups ? (
+            <SubMenu
+              icon={<GroupsIcon />}
+              label="Grupos"
+              style={{ color: "#4FB4BC", padding:"10px" }}
+              id={Styles.menuList}
+            >
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newGroup" />}>
+                Cadastrar
+              </MenuItem>
+              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/groups" />}>
+                Grupos cadastrados
+              </MenuItem>
+            </SubMenu>
+          ) : <></>}
         </Menu>
       </Sidebar>
         <main>

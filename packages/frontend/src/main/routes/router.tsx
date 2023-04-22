@@ -2,7 +2,7 @@ import { MakeChamados, MakeLogin } from "@/main/factories/pages";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { EdicaoEquipe, HomeSolicitantes } from "@/presentation/pages";
+import { EdicaoEquipe, Home } from "@/presentation/pages";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { MakeFormularioChamados } from "../factories/pages/formularioChamados-factory";
 import { TipoChamado } from "../enums/tipo-chamado";
@@ -104,7 +104,7 @@ const Router: React.FC = () => {
             path="/home"
             element={
               <Private>
-                <HomeSolicitantes />
+                <Home />
               </Private>
             }
           />
