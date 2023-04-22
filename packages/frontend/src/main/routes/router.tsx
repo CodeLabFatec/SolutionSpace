@@ -18,8 +18,6 @@ import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
 import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
-import HomeFeature from "@/presentation/pages/home-solicitantes/Feature/homeFeature";
-import HomeHotfix from "@/presentation/pages/home-solicitantes/Hotfx/homeHotfix";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -105,22 +103,6 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <Home />
-              </Private>
-            }
-          />
-          <Route
-            path="/homeFeature"
-            element={
-              <Private>
-                <HomeFeature />
-              </Private>
-            }
-          />
-          <Route
-            path="/homeHotfix"
-            element={
-              <Private>
-                <HomeHotfix />
               </Private>
             }
           />

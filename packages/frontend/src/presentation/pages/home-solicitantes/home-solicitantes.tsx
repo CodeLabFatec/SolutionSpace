@@ -12,7 +12,7 @@ const Home: React.FC = () => {
   const BotaoUnicoHotfix = () => {
     if(user.group.canRequestHotfix && !user.group.canRequestFeatures){
       return (
-        <div className={Styles.botoesHomeHotfix}>
+        <div className={Styles.botaoHome}>
           <BotaoSolicitar tipoChamado={TipoChamado.HOTFIX} />
         </div>
       )
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   const BotaoUnicoFeature = () => {
     if(!user.group.canRequestHotfix && user.group.canRequestFeatures){
       return (
-        <div className={Styles.botoesHomeHotfix}>
+        <div className={Styles.botaoHome}>
           <BotaoSolicitar tipoChamado={TipoChamado.FEATURE} />
         </div>
       )
