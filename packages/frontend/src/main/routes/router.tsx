@@ -15,7 +15,7 @@ import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
 import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
 import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
-import CadastroEquipe from "@/presentation/pages/equipe/cadastroEquipe";
+import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
