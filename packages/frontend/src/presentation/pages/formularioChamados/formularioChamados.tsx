@@ -46,7 +46,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
       );
 
       MySwal.fire({
-        html: "Chamado aberto com sucesso!",
+        html: "Chamado aberto com sucesso.",
         icon: "success",
         width: "350px",
         background: "#FAF0E6",
@@ -62,13 +62,13 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         errorMessage === "Missing required informations to create a request"
       ) {
         errorMessage =
-          "Não foi possível criar o chamado, pois faltam informações.";
+          "Preencha todas as informações.";
       } else if (errorMessage === "User not found") {
         errorMessage =
-          "Não foi possível criar o chamado, pois o usuário não encontrado.";
+          "Usuário inválido.";
       } else if (errorMessage === "Authorization not found") {
         errorMessage =
-          "Você precisa estar autenticado para realizar essa operação!";
+          "Você precisa estar autenticado para realizar essa operação.";
       }
 
       MySwal.fire({
@@ -145,7 +145,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
             }}
             className={Styles.inputTitulo}
             id="titulo"
-            maxLength={60}
+            maxLength={40}
           />
           <label htmlFor="detalhes">Detalhes</label>
           <textarea
