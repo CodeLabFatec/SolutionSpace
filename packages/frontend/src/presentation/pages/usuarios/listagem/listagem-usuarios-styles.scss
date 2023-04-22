@@ -2,6 +2,13 @@ body {
     text-align: center;
 }
 
+.container{
+    position: absolute;
+    top: 69px;
+    left: 100px;
+    height: 100vh;
+  }
+
 .title {
     color: #ffffff;
     margin-top: 47px;
@@ -14,7 +21,7 @@ body {
 }
 
 .tableUsers {
-    margin: 80px 110px 0 110px;
+    margin: 80px 60px 0 60px;
     width: 1300px;
 
     table, td, tr {

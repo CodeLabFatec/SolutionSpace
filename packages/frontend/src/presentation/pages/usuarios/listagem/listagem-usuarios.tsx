@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Styles from './listagem-usuarios-styles.scss'
-import { Header } from "@/presentation/components"
 import { deleteUser, getAllUsers } from "@/main/api/api"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -16,7 +15,6 @@ const ListagemUsuarios: React.FC = () => {
     const loadUsers = async () => {
         try { 
             const response = await getAllUsers()
-            console.log(response.data.users)
             setData(response.data.users)
 
         } catch(e) {
@@ -67,8 +65,7 @@ const ListagemUsuarios: React.FC = () => {
     }
 
     return (
-        <>
-            <Header exibirHome={true} />
+        <div className={Styles.container}>
             <div className={Styles.title}>
                 <h1>Usuários</h1>
                 <hr />
@@ -109,7 +106,7 @@ const ListagemUsuarios: React.FC = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header, SelectType } from '@/presentation/components'
 import Styles from './edicao-usuarios-styles.scss'
 import React, { useState, useEffect } from 'react'
-import Footer from '@/presentation/components/footer/footer'
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -243,8 +241,7 @@ const EdicaoUsuario: React.FC = () => {
   }
 
   return (
-    <>
-      <Header exibirHome={true} />
+    <div className={Styles.container}>
       <div className={Styles.titleCadastroUsuarios}>
         <h1>Edição de usuário</h1>
         <hr />
@@ -352,8 +349,7 @@ const EdicaoUsuario: React.FC = () => {
           <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
         </div>
       </form>
-      <Footer />
-    </>
+    </div>
   )
 }
 

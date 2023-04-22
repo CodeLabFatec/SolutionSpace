@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header, SelectType } from '@/presentation/components'
+import { SelectType } from '@/presentation/components'
 import Styles from './cadastro-usuarios-styles.scss'
-import React, { useState, useContext, useEffect } from 'react'
-import Footer from '@/presentation/components/footer/footer'
+import React, { useState, useEffect } from 'react'
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { AuthContext } from '@/main/contexts/authcontext'
 import { useNavigate } from 'react-router-dom'
 import { createUser, getAllTeams, getGroupsByTeam } from '@/main/api/api'
 import Select from 'react-select'
@@ -25,7 +23,6 @@ const CadastroUsuarios: React.FC = () => {
   const [equipes, setEquipes] = useState<any[]>([])
   const [grupos, setGrupos] = useState<any[]>([])
 
-  const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const generos = [
@@ -197,8 +194,7 @@ const CadastroUsuarios: React.FC = () => {
   }
 
   return (
-    <>
-      <Header />
+    <div className={Styles.container}>
       <div className={Styles.titleCadastroUsuarios}>
         <h1>Cadastro de usuário</h1>
         <hr />
@@ -287,8 +283,7 @@ const CadastroUsuarios: React.FC = () => {
           <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
         </div>
       </form>
-      <Footer />
-    </>
+    </div>
   )
 }
 
