@@ -199,6 +199,8 @@ const CadastroUsuarios: React.FC = () => {
 
   return (
     <div className={Styles.container}>
+      <div className={Styles.usuarioForm}>
+        
       <div className={Styles.titleCadastroUsuarios}>
         <h1>Cadastro de usuário</h1>
         <hr />
@@ -276,6 +278,7 @@ const CadastroUsuarios: React.FC = () => {
           <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
         </div>
       </form>
+      </div>
     </div>
   )
 }

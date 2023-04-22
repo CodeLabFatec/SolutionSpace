@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Styles from "./cadastroEquipe.scss";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
+import { createTeam } from "@/main/api/api";
 
 
 const MySwal = withReactContent(Swal);
@@ -64,6 +64,16 @@ const CadastroEquipe: React.FC = () => {
 
   const handleRequest = async () => {
     try {
+
+      await createTeam(
+        nomeEquipe,
+        descricaoEquipe,
+        cadastrarUsuario, 
+        cadastrarEquipe, 
+        cadastrarGrupo, 
+        editarChamado, 
+        desarquivarChamado)
+
       MySwal.fire({
         html: "Equipe cadastrada com sucesso.",
         icon: "success",
@@ -75,10 +85,11 @@ const CadastroEquipe: React.FC = () => {
         navigate("/team");
       });
     } catch (e: any) {
-      let errorMessage = e.response.data;
+      let errorMessage = e.response.data.message;
 
+      console.log(e)
       if (
-        errorMessage === "Missing required informations to create a request"
+        errorMessage === "All properties are required to create a team"
       ) {
         errorMessage = "Preencha todas as informações.";
       } else if (errorMessage === "User not found") {
@@ -102,29 +113,29 @@ const CadastroEquipe: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    // if () {
-    //   MySwal.fire({
-    //     title: "Opss...",
-    //     html: "Título é obrigatório.",
-    //     width: "350px",
-    //     background: "#FAF0E6",
-    //     color: "#000",
-    //     confirmButtonColor: '#4FB4BC'
-    //   });
-    //   return;
-    // }
+    if (!nomeEquipe || nomeEquipe === '' || nomeEquipe === ' ') {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Nome da equipe é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC'
+      });
+      return;
+    }
 
-    // if () {
-    //   MySwal.fire({
-    //     title: "Opss...",
-    //     html: "Detalhes é obrigatório.",
-    //     width: "350px",
-    //     background: "#FAF0E6",
-    //     color: "#000",
-    //     confirmButtonColor: '#4FB4BC'
-    //   });
-    //   return;
-    // }
+    if (!descricaoEquipe || descricaoEquipe === '' || descricaoEquipe === ' ') {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Descrição da equipe é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC'
+      });
+      return;
+    }
 
     MySwal.fire({
       title: "Aviso",

@@ -5,7 +5,12 @@ body {
 .container {
   position: absolute;
   top: 69px;
-  left: 160px;
+  width: 100%;
+}
+
+.usuarioForm{
+  width: 72%;
+  margin: 0 auto;
 }
 
 .titleCadastroUsuarios {
