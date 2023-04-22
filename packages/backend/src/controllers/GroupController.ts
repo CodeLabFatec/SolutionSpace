@@ -4,11 +4,11 @@ import { Request, Response } from 'express'
 
 export class GroupController {
   async create(req: Request, res: Response) {
-    const { group_name, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
+    const { group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
       canRateAnalinhamento, mustRateAnalinhamento, team_id } = req.body
 
-    if (!group_name || !team_id) {
-      return res.status(400).json({ message: 'Group name and team id are required to create a group' })
+    if (!group_name || !description || !team_id) {
+      return res.status(400).json({ message: 'Group name, description and team id are required to create a group' })
     }
 
     try {
@@ -20,6 +20,7 @@ export class GroupController {
       const group: any = {}
       group.team = team
       group.group_name = group_name
+      group.description = description
       if (canRequestFeatures) {
         group.canRequestFeatures = canRequestFeatures
       }
@@ -50,10 +51,10 @@ export class GroupController {
   }
 
   async edit(req: Request, res: Response) {
-    const { group_id, group_name, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
+    const { group_id, description, group_name, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
       canRateAnalinhamento, mustRateAnalinhamento, team_id } = req.body
 
-    if (!group_id || !group_name) {
+    if (!group_id || !group_name || !description) {
       return res.status(400).json({ message: 'All properties are required to edit an Group' })
     }
 

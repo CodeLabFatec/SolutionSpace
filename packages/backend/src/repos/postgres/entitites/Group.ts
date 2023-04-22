@@ -7,6 +7,9 @@ export class Group {
     @PrimaryGeneratedColumn('uuid')
     group_id: string
 
+    @Column({ type: 'text', nullable: true })
+    description: string;
+    
     @Column({ type: 'text', unique: true, nullable: false })
     group_name: string
 

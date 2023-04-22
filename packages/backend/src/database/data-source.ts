@@ -8,7 +8,7 @@ import { Request } from '../repos/postgres/entitites/Request';
 import { Rating } from '../repos/postgres/entitites/Rating';
 import { StatusConfiguration } from '../repos/postgres/entitites/StatusConfiguration';
 import { Group } from '../repos/postgres/entitites/Group';
-import { default1682101351646 } from './migrations/1682101351646-default';
+import { default1682189846479 } from './migrations/1682189846479-default';
 
 const DB_PORT = process.env.DB_PORT as number | undefined;
 
@@ -20,6 +20,6 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
     entities: [User, File, Team, Request, Rating, StatusConfiguration, Group],
-    migrations: [default1682101351646],
+    migrations: [default1682189846479],
     maxQueryExecutionTime: 2000
 });
