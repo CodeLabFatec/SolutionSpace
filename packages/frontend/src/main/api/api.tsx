@@ -106,6 +106,10 @@ export const getAllUsers = async () => {
   return api.get('/listUsers')
 }
 
+export const getAllGroups = async () => {
+  return api.get('/listGroups')
+}
+
 export const getGroupsByTeam = async (teamId: string) => {
   return api.get('/getGroupsByTeam/' + teamId)
 }
@@ -116,6 +120,10 @@ export const deleteUser = async (user_id: string) => {
 
 export const deleteTeam = async (team_id: string) => {
   return api.delete('/deleteTeam/' + team_id)
+}
+
+export const deleteGroup = async (group_id: string) => {
+  return api.delete('/deleteGroup/' + group_id)
 }
 
 export const updateUser = async (
