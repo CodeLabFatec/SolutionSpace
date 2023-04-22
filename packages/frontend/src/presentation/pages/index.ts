@@ -3,3 +3,4 @@ export { default as FormularioChamados } from './formularioChamados/formularioCh
 export { default as HomeSolicitantes } from './home-solicitantes/home-solicitantes'
 export { default as Chamados } from './chamados/chamados'
 export { default as CadastroUsuarios } from './usuarios/cadastro/cadastroUsuarios'
+export { default as CadastroGrupo } from './cadastroGrupo/cadastroGrupo'

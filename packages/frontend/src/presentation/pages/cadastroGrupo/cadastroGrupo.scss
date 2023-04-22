@@ -1,0 +1,56 @@
+body {
+    text-align: center;
+}
+
+.container{
+    position: absolute;
+    top: 50px;
+    left: 150px;
+    
+  }
+
+.H1cadastroGrupo {
+    color: #ffffff;
+    margin-top: 47px;
+    
+}
+
+.H1cadastroGrupo hr {
+    border: 1px dashed #ffffff;
+    width: 600px;
+    margin: 0 auto;
+
+}
+
+.formCadastroGrupo {
+    margin: 67px auto;
+    width: 100%;
+
+    .inputGroup {
+        width: 1200px;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: start;
+        margin: 0 auto;
+      
+    }
+    
+    .inputText {
+        padding: 10px 10px 10px 10px;
+        margin: 7px 91px 19px 0;
+        width: 213%;
+    
+        background-color: #333333;
+        color: #ffffff;
+    
+        outline: none;
+        border: none;
+        border-radius: 4px;
+    }
+    
+   
+
+  }
+    
+
+

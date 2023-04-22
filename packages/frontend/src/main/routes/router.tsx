@@ -2,7 +2,7 @@ import { MakeChamados, MakeLogin } from "@/main/factories/pages";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { HomeSolicitantes } from "@/presentation/pages";
+import { CadastroUsuarios, HomeSolicitantes } from "@/presentation/pages";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { MakeFormularioChamados } from "../factories/pages/formularioChamados-factory";
 import { TipoChamado } from "../enums/tipo-chamado";
@@ -13,6 +13,7 @@ import SideMenu from "@/presentation/components/menu/menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
+import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -163,6 +164,14 @@ const Router: React.FC = () => {
               </Private>
             }
           />
+           <Route
+            path='/newGroup'
+            element={
+              <Private>
+                <CadastroGrupo/>
+              </Private>
+            }
+         />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
