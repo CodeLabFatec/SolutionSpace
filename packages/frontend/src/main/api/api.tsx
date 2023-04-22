@@ -86,6 +86,19 @@ export const createTeam = async (
   return api.post('/createTeam', { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
 }
 
+export const createGroup = async (
+  team_id: string,
+  group_name: string,
+  description: string,
+  canRequestFeatures: boolean,
+  canRequestHotfix: boolean,
+  canRateAnalise: boolean,
+  mustRateAnalise: boolean,
+  canRateAnalinhamento: boolean,
+  mustRateAnalinhamento: boolean
+) => {
+  return api.post('/createGroup', { team_id, group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,canRateAnalinhamento, mustRateAnalinhamento })
+}
 export const getAllRequests = async () => {
   return api.get('/listRequests')
 }

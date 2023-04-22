@@ -13,6 +13,7 @@ import SideMenu from "@/presentation/components/menu/menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
+import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
 import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
 import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
@@ -186,6 +187,14 @@ const Router: React.FC = () => {
               </Private>
             }
           />
+           <Route
+            path='/newGroup'
+            element={
+              <Private>
+                <CadastroGrupo/>
+              </Private>
+            }
+         />
           <Route
             path='/users'
             element={
