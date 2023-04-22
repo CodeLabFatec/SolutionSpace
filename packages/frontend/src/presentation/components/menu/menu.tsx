@@ -64,11 +64,14 @@ const SideMenu = () => {
             style={{ color: "#4FB4BC", padding:"10px" }}
             id={Styles.menuList}
           >
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/teams" />}>
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newTeam" />}>
               Equipe
             </MenuItem>
-            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/groups" />}>
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newGroup" />}>
               Grupo
+            </MenuItem>
+            <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newUser" />}>
+              Usuário
             </MenuItem>
           </SubMenu>
         </Menu>

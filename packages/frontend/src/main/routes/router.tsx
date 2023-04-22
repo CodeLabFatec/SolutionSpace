@@ -14,6 +14,9 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
 import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
+import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
+import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
+import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -172,6 +175,30 @@ const Router: React.FC = () => {
               </Private>
             }
          />
+          <Route
+            path='/users'
+            element={
+              <Private>
+                <MakeListagemUsuarios />
+              </Private>
+            }
+          />
+          <Route
+            path='/editUser'
+            element={
+              <Private>
+                <MakeEdicaoUsuario />
+              </Private>
+            }
+          />
+          <Route 
+            path='/newTeam'
+            element={
+              <Private>
+                <CadastroEquipe />
+              </Private>
+            }
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

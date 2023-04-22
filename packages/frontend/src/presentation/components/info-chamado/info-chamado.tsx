@@ -43,7 +43,7 @@ const InfoChamado: React.FC<{
           const data = response.data;
           setRating(data[data.length - 1]);
         }
-      } catch (e) {}
+      } catch (e) { /*teste*/ }
     }
   };
 

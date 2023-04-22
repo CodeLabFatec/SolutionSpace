@@ -74,6 +74,31 @@ export const createUser = async (
   return api.post('/createUser', { name, email, password, gender, team_id, group_id })
 }
 
+export const createTeam = async (
+  team_name: string,
+  description: string,
+  permissionCreateUsers: boolean,
+  permissionCreateTeams: boolean,
+  permissionCreateGroups: boolean,
+  permissionEditRequests: boolean,
+  permissionUnarchiveRequests: boolean
+) => {
+  return api.post('/createTeam', { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
+}
+
+export const createGroup = async (
+  team_id: string,
+  group_name: string,
+  description: string,
+  canRequestFeatures: boolean,
+  canRequestHotfix: boolean,
+  canRateAnalise: boolean,
+  mustRateAnalise: boolean,
+  canRateAnalinhamento: boolean,
+  mustRateAnalinhamento: boolean
+) => {
+  return api.post('/createGroup', { team_id, group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,canRateAnalinhamento, mustRateAnalinhamento })
+}
 export const getAllRequests = async () => {
   return api.get('/listRequests')
 }
@@ -90,6 +115,25 @@ export const getAllTeams = async () => {
   return api.get('/listTeams')
 }
 
+export const getAllUsers = async () => {
+  return api.get('listUsers')
+}
+
 export const getGroupsByTeam = async (teamId: string) => {
   return api.get('/getGroupsByTeam/' + teamId)
+}
+
+export const deleteUser = async (user_id: string) => {
+  return api.delete('/deleteUser/' + user_id)
+}
+
+export const updateUser = async (
+  user_id: string,
+  name: string,
+  email: string,
+  password: string,
+  gender: string,
+  team_id: string,
+  group_id: string) => {
+  return api.put('/updateUser/' + user_id, { name, email, password, gender, team_id, group_id })
 }

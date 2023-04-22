@@ -28,7 +28,7 @@ const Chamados: React.FC<{ visualizacaoChamado: VisualizarChamado }> = (
             width={width}
           />
         </ProSidebarProvider>
-        <div style={{width:`${width}px`, transition:"ease 1s"}}>
+        <div style={{ width: `${width}px`, transition: "ease 1s" }}>
           <InfoChamado
             chamado={chamado}
             visualizacaoChamado={props.visualizacaoChamado}
