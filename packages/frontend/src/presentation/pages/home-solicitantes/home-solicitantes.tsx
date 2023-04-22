@@ -1,4 +1,4 @@
-import { BotaoSolicitar, Header } from '@/presentation/components'
+import { BotaoSolicitar } from '@/presentation/components'
 import Styles from './home-solicitantes-styles.scss'
 
 import React from 'react'
@@ -7,8 +7,7 @@ import { TipoChamado } from '@/main/enums/tipo-chamado'
 
 const HomeSolicitantes: React.FC = () => {
   return (
-    <div>
-      <Header exibirHome={false} />
+    <div className={Styles.container}> 
       <div className={Styles.abrirChamadoLabel}>
         <h1>Abrir chamado</h1>
       </div>
@@ -18,7 +17,7 @@ const HomeSolicitantes: React.FC = () => {
           <BotaoSolicitar tipoChamado={TipoChamado.HOTFIX} />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

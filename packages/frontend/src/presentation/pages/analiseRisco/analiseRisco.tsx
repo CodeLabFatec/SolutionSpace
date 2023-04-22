@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header } from '@/presentation/components'
-import Styles from './analiseRisco.scss'
+import { Header } from "@/presentation/components";
+import Styles from "./analiseRisco.scss";
 
-import React, { useContext, useState } from 'react'
-import DropZone from '@/presentation/components/dropzone/dropzone'
-import Footer from '@/presentation/components/footer/footer'
-import Modal from '@/presentation/components/modal/modal'
-import { AuthContext } from '@/main/contexts/authcontext'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { createRiskAnalysisRating } from '@/main/api/api'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import React, { useContext, useState } from "react";
+import DropZone from "@/presentation/components/dropzone/dropzone";
+import { AuthContext } from "@/main/contexts/authcontext";
+import { useNavigate, useLocation } from "react-router-dom";
+import { createRiskAnalysisRating } from "@/main/api/api";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal);
 
 const AnaliseRisco: React.FC = () => {
-  const [openModal, setOpenModal] = useState(false)
-  const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [titulo, setTitulo] = useState<string>('')
-  const [detalhes, setDetalhes] = useState<string>('')
-  const [rating, setRating] = useState<string>('')
-  const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
+  const [openModal, setOpenModal] = useState(false);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [titulo, setTitulo] = useState<string>("");
+  const [detalhes, setDetalhes] = useState<string>("");
+  const [rating, setRating] = useState<string>("");
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
 
   const handleRequest = async () => {
     try {
-      const files: any[] = []
+      const files: any[] = [];
       if (uploadedFiles.length > 0) {
         uploadedFiles.forEach((file) => {
           files.push({
             file_name: file.name,
             base64: file.base64,
-            ext: file.type
-          })
-        })
+            ext: file.type,
+          });
+        });
       }
 
       const response = await createRiskAnalysisRating(
@@ -44,168 +42,218 @@ const AnaliseRisco: React.FC = () => {
         titulo,
         detalhes,
         files
-      )
+      );
 
       MySwal.fire({
-        title: 'Sucesso',
-        html: 'Avaliação feita com sucesso!',
-        icon: 'success'
+        html: "Avaliação feita com sucesso!",
+        icon: "success",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
       }).then((r) => {
-        navigate('/home')
-      })
+        navigate("/home");
+      });
     } catch (e: any) {
-      let errorMessage = e.response.data
+      let errorMessage = e.response.data;
 
-      if (errorMessage === 'Missing required informations to create a rating') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois faltam informações.'
-      } else if (errorMessage === 'User not found') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois o usuário não encontrado.'
-      } else if (errorMessage === 'There is already a rating for this request from the same team') {
-        errorMessage = 'Esse chamado já passou por essa avaliação.'
-      } else if (errorMessage === 'Request not found') {
-        errorMessage = 'Não foi possível salvar a avaliação, pois o chamado não foi encontrado.'
-      } else if (errorMessage === 'Authorization not found') {
-        errorMessage = 'Você precisa estar autenticado para realizar essa operação!'
+      if (errorMessage === "Missing required informations to create a rating") {
+        errorMessage =
+          "Preencha todas as informações.";
+      } else if (errorMessage === "User not found") {
+        errorMessage =
+          "Usuário inválido.";
+      } else if (
+        errorMessage ===
+        "There is already a rating for this request from the same team"
+      ) {
+        errorMessage = "Chamado já avaliado.";
+      } else if (errorMessage === "Request not found") {
+        errorMessage =
+          "Chamado não encontrado.";
+      } else if (errorMessage === "Authorization not found") {
+        errorMessage =
+          "Você precisa estar autenticado para realizar essa operação.";
       }
 
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: errorMessage
-      })
+        icon: "error",
+        html: errorMessage,
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
     }
-  }
+  };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (location.state === null) {
-      MySwal.fire('Erro', 'O chamado não foi encontrado.', 'error')
-      return
+      MySwal.fire({
+        icon: "error",
+        html: "Chamado não encontrado.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
+      return;
     }
 
-    if (titulo == null || titulo === '' || titulo === ' ') {
-      MySwal.fire('Erro', 'Título é obrigatório.', 'error')
-      return
+    if (titulo == null || titulo === "" || titulo === " ") {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Título é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
+      return;
     }
 
-    if (detalhes == null || detalhes === '' || detalhes === ' ') {
-      MySwal.fire('Erro', 'Detalhes é obrigatório.', 'error')
-      return
+    if (detalhes == null || detalhes === "" || detalhes === " ") {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Detalhes é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
+      return;
     }
 
-    if (rating == null || rating === '' || rating === ' ') {
-      MySwal.fire('Erro', 'Defina um nível de risco para esse chamado.', 'error')
-      return
+    if (rating == null || rating === "" || rating === " ") {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Defina um nível de risco para esse chamado.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
+      return;
     }
 
     MySwal.fire({
-      title: 'Aviso',
-      html: 'Deseja salvar essa avaliação?',
-      icon: 'question',
+      html: "Deseja salvar avaliação?",
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      confirmButtonColor: '#76ba1b',
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#ff0000'
+      confirmButtonText: "Sim",
+      confirmButtonColor: "#4FB4BC",
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "#A9A9A9",
+      width: "350px",
+      background: "#FAF0E6",
+      color: "#000",
+      reverseButtons: true,
     }).then((r) => {
       if (r.isConfirmed) {
-        handleRequest()
+        handleRequest();
       }
-    })
-  }
+    });
+  };
 
   return (
-    <>
-      <Header exibirHome={true} />
+    <div className={Styles.container}>
       <div className={Styles.H1formularioChamados}>
         <h1>Documento de análise de risco</h1>
         <hr />
       </div>
       <div className={Styles.form}>
         <div className={Styles.tituloDetalhe}>
-          <label htmlFor='titulo'>Título</label>
+          <label htmlFor="titulo">Título</label>
           <input
             value={titulo}
             onChange={(e) => {
-              setTitulo(e.target.value)
+              setTitulo(e.target.value);
             }}
-            type='text'
+            type="text"
             className={Styles.inputTitulo}
-            id='titulo'
+            id="titulo"
             maxLength={60}
           />
-          <label htmlFor='detalhes'>Detalhes</label>
+          <label htmlFor="detalhes">Detalhes</label>
           <textarea
             value={detalhes}
             onChange={(e) => {
-              setDetalhes(e.target.value)
+              setDetalhes(e.target.value);
             }}
             className={Styles.inputDetalhe}
-            name=''
-            id='detalhes'
+            name=""
+            id="detalhes"
             cols={30}
             rows={10}
           ></textarea>
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+            <DropZone
+              uploadedFiles={uploadedFiles}
+              setUploadedFiles={setUploadedFiles}
+            />
           </div>
           <div className={Styles.formWrapper}>
-            <form className={Styles.formAvaliacao} action='' method=''>
+            <form className={Styles.formAvaliacao} action="" method="">
               <h3 className={Styles.formTitle}>Risco</h3>
               <hr />
               <div className={Styles.debtAmountSlider}>
                 <input
-                  type='radio'
+                  type="radio"
                   onChange={(e) => {
-                    setRating(e.target.value)
+                    setRating(e.target.value);
                   }}
-                  name='debt-amount'
-                  id='0'
-                  value='0'
+                  name="debt-amount"
+                  id="0"
+                  value="0"
                   required
                 />
-                <label htmlFor='0' data-debt-amount='Não existe'></label>
+                <label htmlFor="0" data-debt-amount="Não existe"></label>
                 <input
-                  type='radio'
+                  type="radio"
                   onChange={(e) => {
-                    setRating(e.target.value)
+                    setRating(e.target.value);
                   }}
-                  name='debt-amount'
-                  id='1'
-                  value='1'
+                  name="debt-amount"
+                  id="1"
+                  value="1"
                   required
                 />
-                <label htmlFor='1' data-debt-amount='Baixo'></label>
+                <label htmlFor="1" data-debt-amount="Baixo"></label>
                 <input
-                  type='radio'
+                  type="radio"
                   onChange={(e) => {
-                    setRating(e.target.value)
+                    setRating(e.target.value);
                   }}
-                  name='debt-amount'
-                  id='2'
-                  value='2'
+                  name="debt-amount"
+                  id="2"
+                  value="2"
                   required
                 />
-                <label htmlFor='2' data-debt-amount='Médio'></label>
+                <label htmlFor="2" data-debt-amount="Médio"></label>
                 <input
-                  type='radio'
+                  type="radio"
                   onChange={(e) => {
-                    setRating(e.target.value)
+                    setRating(e.target.value);
                   }}
-                  name='debt-amount'
-                  id='3'
-                  value='3'
+                  name="debt-amount"
+                  id="3"
+                  value="3"
                   required
                 />
-                <label htmlFor='3' data-debt-amount='Alto'></label>
+                <label htmlFor="3" data-debt-amount="Alto"></label>
                 <div className={Styles.debtAmountPos}></div>
               </div>
             </form>
           </div>
-          <input type='button' onClick={handleSubmit} value='Confirmar avaliação' className={Styles.buttonEnviar} />
+          <input
+            type="button"
+            onClick={handleSubmit}
+            value="Confirmar avaliação"
+            className={Styles.buttonEnviar}
+          />
           {/* <div
             className={Styles.openModal}
             onClick={() => {
@@ -225,8 +273,8 @@ const AnaliseRisco: React.FC = () => {
           </Modal> */}
         </div>
       </div>
-      <Footer />
-    </>
-  )
-}
-export default AnaliseRisco
+      {/* <Footer /> */}
+    </div>
+  );
+};
+export default AnaliseRisco;

@@ -198,7 +198,7 @@ const CadastroUsuarios: React.FC = () => {
 
   return (
     <>
-      <Header exibirHome={true} />
+      <Header />
       <div className={Styles.titleCadastroUsuarios}>
         <h1>Cadastro de usuário</h1>
         <hr />

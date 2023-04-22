@@ -1,31 +1,25 @@
+#menuList:hover {
+    background-color: #292A2D;
+}
+
+#ContainerMenu{
+    background-color: aqua;
+    border-radius: 0;
+}
+
 .listaChamadosWrapper {
-    width: 375px;
-    background-color: rgba($color: #333333, $alpha: 0.4);
+    width: 100%;
     user-select: none;
-
-
-    .listaChamadosHeader {
-        background-color: aqua;
-        height: 51px;
-
-        .listaChamadosHeaderSwitch {
-            padding: 5px 0 0 311px;
-
-            i {
-                font-size: 35px;
-                color: #FFFFFF;
-            }
-        }
-    }
 
     .listaChamadosPack {
         justify-content: space-between;
-        padding: 20px 19px 0 19px;
-        height: 598px;
+        padding: 20px 19px 0 50px;
+        height: 100vh;
         overflow-y: scroll;
+        overflow-x: hidden;
 
         &::-webkit-scrollbar {
-            background-color: rgba($color: #333333, $alpha: 0.1);
+            background-color: rgba($color: #292A2D, $alpha: 0.1);
             border-radius: 4px;
             width: 10px;
         }
@@ -41,7 +35,7 @@
 
 
         .listaChamadosFiltro {
-            width: 325px;
+            width: 100%;
             height: 24px;
             display: flex;
 

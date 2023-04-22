@@ -20,7 +20,7 @@ const BotaoSolicitar: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
       navigate('/newHotfix')
     }
   }
-
+ 
   return (
     <div>
       <div className={Styles.linhas}>
