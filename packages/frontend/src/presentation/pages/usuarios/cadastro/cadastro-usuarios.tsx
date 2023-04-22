@@ -282,7 +282,7 @@ const CadastroUsuarios: React.FC = () => {
         </div>
         <div className={Styles.buttonWrapper}>
           <input type='button' value='Cancelar' className={Styles.buttonCancelar} />
-          <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
+          <input type='submit' value='Confirmar' className={Styles.buttonEnviar} />
         </div>
       </form>
       </div>
