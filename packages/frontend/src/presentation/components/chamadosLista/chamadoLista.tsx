@@ -114,7 +114,7 @@ const ChamadoLista: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiza
         transitionDuration={1000}
       >
         <Menu
-          transitionDuration={1000}
+          transitionDuration={50000}
           closeOnClick={true}
 
         >

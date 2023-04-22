@@ -1,90 +1,94 @@
 body {
-    text-align: center;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  top: 69px;
+  left: 160px;
 }
 
 .titleCadastroUsuarios {
-    color: #ffffff;
-    margin-top: 47px;
+  color: #ffffff;
+  margin-top: 47px;
 }
 
 .titleCadastroUsuarios hr {
-    border: 1px dashed #ffffff;
-    width: 566px;
-    margin: 0 auto;
+  border: 1px dashed #ffffff;
+  width: 566px;
+  margin: 0 auto;
 }
 
 .formCadastroUsuarios {
-    margin: 67px auto;
-    width: 100%;
+  margin: 67px auto;
+  width: 100%;
 
-    .inputGroup {
-        width: 1200px;
-        display: flex;
-        flex-wrap: wrap;
-        text-align: start;
-        margin: 0 auto;
-    }
-    
-    .inputText {
-        padding: 10px 10px 10px 10px;
-        margin: 7px 91px 17px 0;
-        width: 550px;
-    
-        background-color: #333333;
-        color: #ffffff;
-    
-        outline: none;
-        border: none;
-        border-radius: 4px;
-    }
-    
-    .inputDetalhe {
-        width: 600px;
-        height: 400px;
-        padding: 10px 20px;
-        margin-top: 7px;
-    
-        background-color: #333333;
-        color: #ffffff;
-    
-        outline: none;
-        border: none;
-        border-radius: 4px;
-        text-align: justify;
+  .inputGroup {
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: start;
+    margin: 0 auto;
+  }
+
+  .inputText {
+    padding: 10px 10px 10px 10px;
+    margin: 7px 91px 17px 0;
+    width: 550px;
+
+    background-color: #333333;
+    color: #ffffff;
+
+    outline: none;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .inputDetalhe {
+    width: 600px;
+    height: 400px;
+    padding: 10px 20px;
+    margin-top: 7px;
+
+    background-color: #333333;
+    color: #ffffff;
+
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    text-align: justify;
+  }
+
+  .buttonWrapper {
+    padding-top: 40px;
+
+    .buttonCancelar {
+      background-color: #a2a2a2;
+      color: #fff;
+      padding: 12px 54px;
+      font-size: 16px;
+      border: none;
+      margin: 0 16px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #bfbebe;
+      }
     }
 
-    .buttonWrapper {
-        padding-top: 40px;
+    .buttonEnviar {
+      background-color: #4fb4bc;
+      color: #fff;
+      padding: 12px 54px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
 
-        .buttonCancelar {
-            background-color: #a2a2a2;
-            color: #fff;
-            padding: 12px 54px;
-            font-size: 16px;
-            border: none;
-            margin: 0 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        
-            &:hover {
-                background-color: #bfbebe;
-            }
-        }
-        
-        .buttonEnviar {
-            background-color: #4fb4bc;
-            color: #fff;
-            padding: 12px 54px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        
-            &:hover {
-                background-color: #5dcfd7;
-            }
-        }
+      &:hover {
+        background-color: #5dcfd7;
+      }
     }
-    
+  }
 }
-

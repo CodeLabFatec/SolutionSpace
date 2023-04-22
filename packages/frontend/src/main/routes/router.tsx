@@ -13,6 +13,7 @@ import SideMenu from "@/presentation/components/menu/menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
+import CadastroEquipe from "@/presentation/pages/equipe/cadastroEquipe";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -160,6 +161,14 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <MakeCadastroUsuarios />
+              </Private>
+            }
+          />
+          <Route
+            path='/newTeam'
+            element={
+              <Private>
+                <CadastroEquipe />
               </Private>
             }
           />
