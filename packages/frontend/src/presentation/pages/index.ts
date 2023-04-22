@@ -6,3 +6,4 @@ export { default as CadastroUsuarios } from './usuarios/cadastro/cadastro-usuari
 export { default as ListagemUsuarios } from './usuarios/listagem/listagem-usuarios'
 export { default as EdicaoUsuarios } from './usuarios/edicao/edicao-usuarios'
 export { default as CadastroEquipe } from './equipe/cadastro/cadastroEquipe'
+export { default as EdicaoEquipe } from './equipe/edicao/edicaoEquipe'
