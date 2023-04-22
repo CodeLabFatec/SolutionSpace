@@ -74,6 +74,18 @@ export const createUser = async (
   return api.post('/createUser', { name, email, password, gender, team_id, group_id })
 }
 
+export const createTeam = async (
+  team_name: string,
+  description: string,
+  permissionCreateUsers: boolean,
+  permissionCreateTeams: boolean,
+  permissionCreateGroups: boolean,
+  permissionEditRequests: boolean,
+  permissionUnarchiveRequests: boolean
+) => {
+  return api.post('/createTeam', { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
+}
+
 export const getAllRequests = async () => {
   return api.get('/listRequests')
 }
