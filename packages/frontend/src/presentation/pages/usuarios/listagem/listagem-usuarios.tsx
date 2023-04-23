@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Styles from "./listagem-usuarios-styles.scss";
 import { deleteUser, getAllUsers } from "@/main/api/api";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@/main/contexts/authcontext";
 
 const MySwal = withReactContent(Swal);
 
 const ListagemUsuarios: React.FC = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+
+  const { user } = useContext(AuthContext)
 
   const loadUsers = async () => {
     try {
@@ -128,14 +131,16 @@ const ListagemUsuarios: React.FC = () => {
                       >
                         create
                       </i>
-                      <i
-                        onClick={(e: any) => {
-                          handleDelete(e, item);
-                        }}
-                        className="material-icons"
-                      >
-                        delete
-                      </i>
+                      {item.user_id === user.user_id ? <></> : (
+                        <i
+                          onClick={(e: any) => {
+                            handleDelete(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          delete
+                        </i>
+                      )}
                     </div>
                   </td>
                 </tr>
