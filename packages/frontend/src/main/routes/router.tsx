@@ -1,25 +1,10 @@
-import { MakeChamados, MakeLogin } from "@/main/factories/pages";
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { EdicaoEquipe, Home } from "@/presentation/pages";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
-import { MakeFormularioChamados } from "../factories/pages/formularioChamados-factory";
-import { TipoChamado } from "../enums/tipo-chamado";
-import { VisualizarChamado } from "../enums/visualizar-chamado";
-import AlinhamentoEstrategico from "@/presentation/pages/alinhamentoEstrategico/alinhamentoEstrategico";
-import AnaliseRisco from "@/presentation/pages/analiseRisco/analiseRisco";
-import SideMenu from "@/presentation/components/menu/menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
-import { Header } from "@/presentation/components";
-import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
-import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
-import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
-import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
-import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
-import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
-import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
-import EdicaoGrupo from "@/presentation/pages/grupos/edicao/edicaoGrupo";
+import { Header, SideMenu } from "@/presentation/components";
+import { AlinhamentoEstrategico, AnaliseRisco, CadastroEquipe, CadastroGrupo, CadastroUsuarios, Chamados, EdicaoEquipe, EdicaoGrupo, EdicaoUsuarios, FormularioChamados, Home, ListagemEquipe, ListagemGrupos, ListagemUsuarios, Login } from "@/presentation/pages";
+import { TipoChamado, VisualizarChamado } from "../enums";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -36,11 +21,11 @@ const Router: React.FC = () => {
     return children;
   };
 
-  const Login = () => {
+  const CheckLogin = () => {
     const { authenticated } = useContext(AuthContext);
 
     if (!authenticated) {
-      return <MakeLogin />;
+      return <Login />;
     }
 
     return <Navigate to="/home" />;
@@ -74,7 +59,6 @@ const Router: React.FC = () => {
       return <Navigate to="/login" />;
     }
 
-    // Verificar o team do user para redirecioná-lo à página correta.
     return children;
   };
 
@@ -99,7 +83,7 @@ const Router: React.FC = () => {
               </Origin>
             }
           />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<CheckLogin />} />
           <Route
             path="/home"
             element={
@@ -111,18 +95,16 @@ const Router: React.FC = () => {
           <Route
             path="/newFeature"
             element={
-              <>
-                <Private>
-                  <MakeFormularioChamados tipoChamado={TipoChamado.FEATURE} />
-                </Private>
-              </>
+              <Private>
+                <FormularioChamados tipoChamado={TipoChamado.FEATURE} />
+              </Private>
             }
           />
           <Route
             path="/newHotfix"
             element={
               <Private>
-                <MakeFormularioChamados tipoChamado={TipoChamado.HOTFIX} />
+                <FormularioChamados tipoChamado={TipoChamado.HOTFIX} />
               </Private>
             }
           />
@@ -130,8 +112,8 @@ const Router: React.FC = () => {
             path="/myRequests"
             element={
               <Private>
-                <MakeChamados
-                  visualizacaoChamados={VisualizarChamado.MEUS_CHAMADOS}
+                <Chamados
+                  visualizacaoChamado={VisualizarChamado.MEUS_CHAMADOS}
                 />
               </Private>
             }
@@ -140,8 +122,8 @@ const Router: React.FC = () => {
             path="/requests"
             element={
               <Private>
-                <MakeChamados
-                  visualizacaoChamados={VisualizarChamado.TODOS_CHAMADOS}
+                <Chamados
+                  visualizacaoChamado={VisualizarChamado.TODOS_CHAMADOS}
                 />
               </Private>
             }
@@ -166,7 +148,7 @@ const Router: React.FC = () => {
             path='/newUser'
             element={
               <Private>
-                <MakeCadastroUsuarios />
+                <CadastroUsuarios />
               </Private>
             }
           />
@@ -174,7 +156,7 @@ const Router: React.FC = () => {
             path='/newGroup'
             element={
               <Private>
-                <CadastroGrupo/>
+                <CadastroGrupo />
               </Private>
             }
          />
@@ -182,7 +164,7 @@ const Router: React.FC = () => {
             path='/users'
             element={
               <Private>
-                <MakeListagemUsuarios />
+                <ListagemUsuarios />
               </Private>
             }
           />
@@ -190,7 +172,7 @@ const Router: React.FC = () => {
             path='/editUser'
             element={
               <Private>
-                <MakeEdicaoUsuario />
+                <EdicaoUsuarios />
               </Private>
             }
           />
@@ -215,14 +197,6 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <EdicaoEquipe />
-              </Private>
-            }
-          />
-           <Route 
-            path='/newGroup'
-            element={
-              <Private>
-                {/* <CadastroEquipe /> */}
               </Private>
             }
           />

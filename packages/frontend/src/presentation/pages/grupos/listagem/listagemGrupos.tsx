@@ -16,7 +16,6 @@ const ListagemGrupos: React.FC = () => {
       const response = await getAllGroups();
       setData(response.data);
     } catch (e) {
-      console.log("test " + e);
        MySwal.fire({
         title: "Erro",
         html: "Ocorreu um erro ao carregar os grupos",

@@ -11,6 +11,10 @@ export const createSession = async (email: string, password: string) => {
   return api.post('/auth', { email, password })
 }
 
+export const verifyToken = async (token: string) => {
+  return api.post('/verifyToken/' + token)
+}
+
 export const createRequest = async (
   userid: string,
   title: string,
@@ -97,7 +101,7 @@ export const createGroup = async (
   canRateAnalinhamento: boolean,
   mustRateAnalinhamento: boolean
 ) => {
-  return api.post('/createGroup', { team_id, group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,canRateAnalinhamento, mustRateAnalinhamento })
+  return api.post('/createGroup', { team_id, group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise, canRateAnalinhamento, mustRateAnalinhamento })
 }
 export const getAllRequests = async () => {
   return api.get('/listRequests')
@@ -165,7 +169,7 @@ export const updateTeam = async (
 export const updateGroup = async (
   group_id: string,
   group_name: string,
-  team: string,
+  team_id: string,
   description: string,
   canRequestFeatures:boolean,
   canRequestHotfix:boolean,
@@ -174,5 +178,5 @@ export const updateGroup = async (
   mustRateAnalinhamento :boolean,
   mustRateAnalise :boolean
   ) => {
-  return api.put('/updateGroup', {group_id, group_name, team, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+  return api.put('/updateGroup', {group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 function LogoMenor(props: any) {
   return (
     <svg

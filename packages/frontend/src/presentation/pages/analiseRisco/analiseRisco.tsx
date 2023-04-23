@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header } from "@/presentation/components";
 import Styles from "./analiseRisco.scss";
 
 import React, { useContext, useState } from "react";
-import DropZone from "@/presentation/components/dropzone/dropzone";
+import { Dropzone } from "@/presentation/components";
 import { AuthContext } from "@/main/contexts/authcontext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createRiskAnalysisRating } from "@/main/api/api";
@@ -13,10 +11,11 @@ import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
 const AnaliseRisco: React.FC = () => {
-  const [openModal, setOpenModal] = useState(false);
+
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+
   const [titulo, setTitulo] = useState<string>("");
   const [detalhes, setDetalhes] = useState<string>("");
   const [rating, setRating] = useState<string>("");
@@ -35,7 +34,7 @@ const AnaliseRisco: React.FC = () => {
         });
       }
 
-      const response = await createRiskAnalysisRating(
+      await createRiskAnalysisRating(
         location.state.request_id,
         user.user_id,
         rating,
@@ -190,7 +189,7 @@ const AnaliseRisco: React.FC = () => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone
+            <Dropzone
               uploadedFiles={uploadedFiles}
               setUploadedFiles={setUploadedFiles}
             />
@@ -254,26 +253,8 @@ const AnaliseRisco: React.FC = () => {
             value="Confirmar avaliação"
             className={Styles.buttonEnviar}
           />
-          {/* <div
-            className={Styles.openModal}
-            onClick={() => {
-              setOpenModal(true)
-            }}
-          >
-            <i className='large material-icons'>assignment_turned_in</i>
-          </div>
-          <Modal
-            isOpen={openModal}
-            titulo={''}
-            setModalClose={() => {
-              setOpenModal(!openModal)
-            }}
-          >
-            <div>a</div>
-          </Modal> */}
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

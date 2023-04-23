@@ -1,9 +1,8 @@
-import { InfoChamado } from "@/presentation/components";
+import { InfoChamado, ChamadoLista } from "@/presentation/components";
 import Styles from "./chamados-styles.scss";
 
 import React, { useEffect, useState } from "react";
-import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
-import ChamadoLista from "@/presentation/components/chamadosLista/chamadoLista";
+import { VisualizarChamado } from "@/main/enums";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { ChamadoType } from "@/main/types";
 

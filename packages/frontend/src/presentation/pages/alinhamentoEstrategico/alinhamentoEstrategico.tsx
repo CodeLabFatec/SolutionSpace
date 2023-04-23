@@ -1,27 +1,23 @@
-/* eslint-disable no-empty */
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header, SelectType } from '@/presentation/components'
+import { Modal, SelectType, Dropzone } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
 import React, { useContext, useState, useEffect } from 'react'
-import DropZone from '@/presentation/components/dropzone/dropzone'
-import Footer from '@/presentation/components/footer/footer'
-import Modal from '@/presentation/components/modal/modal'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/main/contexts/authcontext'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { createStrategicAlignmentRating, getRatingsByRequest } from '@/main/api/api'
+import { createStrategicAlignmentRating, getAllGroups, getRatingsByRequest } from '@/main/api/api'
 import { TipoChamado } from '@/main/enums/tipo-chamado'
 
 const MySwal = withReactContent(Swal)
 
 const AlinhamentoEstrategico: React.FC = () => {
+
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
+
+
   const [openModal, setOpenModal] = useState(false)
   const [titulo, setTitulo] = useState<string>('')
   const [detalhes, setDetalhes] = useState<string>('')
@@ -29,16 +25,30 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [targetGroup, setTargetGroup] = useState<string>('')
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
   const [ratingAnalise, setRatingAnalise] = useState<any>(null)
+  const [grupos, setGrupo] = useState<any[]>([])
 
-  const options = [
-    { value: 'Desenvolvimento', label: 'Desenvolvimento' },
-    { value: 'PO', label: 'PO' },
-    { value: 'Q&A', label: 'Q&A' }
-  ]
+  const loadGrupos = async () => {
+    try {
+      const response = await getAllGroups()
+      response.data.map((item: any) => {
+        grupos.push({ label: item.group_name, value: item.group_name })
+      })
+    } catch(e) {
+      MySwal.fire({
+        title: "Erro",
+        html: 'Ocorreu um erro ao carregar os grupos.',
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC',
+      });
+    }
+  }
 
   useEffect(() => {
     setRatingAnalise(null)
     loadRatings()
+    loadGrupos()
   }, [])
 
   const loadRatings = async () => {
@@ -76,7 +86,7 @@ const AlinhamentoEstrategico: React.FC = () => {
         })
       }
 
-      const response = await createStrategicAlignmentRating(
+      await createStrategicAlignmentRating(
         location.state.request_id,
         user.user_id,
         rating,
@@ -328,16 +338,17 @@ const AlinhamentoEstrategico: React.FC = () => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+            <Dropzone uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
           </div>
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos
           </label>
-          <SelectType onChange={setTargetGroup} options={options} />
+          <div style={{marginLeft: '25px'}}>
+            <SelectType width="685px" onChange={setTargetGroup} options={grupos} />
+          </div>
           <input type='button' onClick={handleSubmit} className={Styles.buttonEnviar} value='Enviar' />
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   )
 }

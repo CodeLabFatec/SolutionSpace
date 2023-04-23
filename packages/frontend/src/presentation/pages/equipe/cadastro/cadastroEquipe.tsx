@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Styles from "./cadastroEquipe.scss";
 import React, { useState } from "react";
 
@@ -23,43 +22,23 @@ const CadastroEquipe: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCadatrarUsuario = () => {
-    if (!cadastrarUsuario){
-        setCadastrarUsuario(true)
-    }else{
-        setCadastrarUsuario(false)
-    }
+    setCadastrarUsuario(!cadastrarUsuario)
   }
 
   const handleCadatrarEquipe = () => {
-    if (!cadastrarEquipe){
-        setCadastrarEquipe(true)
-    }else{
-        setCadastrarEquipe(false)
-    }
+    setCadastrarEquipe(!cadastrarEquipe)
   }
 
   const handleCadatrarGrupo = () => {
-    if (!cadastrarGrupo){
-        setCadastrarGrupo(true)
-    }else{
-        setCadastrarGrupo(false)
-    }
+    setCadastrarGrupo(!cadastrarGrupo)
   }
 
   const handleDesarquivarChamado = () => {
-    if (!desarquivarChamado){
-        setDesarquivarChamado(true)
-    }else{
-        setDesarquivarChamado(false)
-    }
+    setDesarquivarChamado(!desarquivarChamado)
   }
 
   const handleEditarChamado = () => {
-    if (!editarChamado){
-        setEditarChamado(true)
-    }else{
-        setEditarChamado(false)
-    }
+    setEditarChamado(!editarChamado)
   }
 
   const handleRequest = async () => {
@@ -75,7 +54,7 @@ const CadastroEquipe: React.FC = () => {
         desarquivarChamado)
 
       MySwal.fire({
-        html: "Equipe cadastrada com sucesso.",
+        html: "Equipe salva com sucesso.",
         icon: "success",
         width: "350px",
         background: "#FAF0E6",
@@ -87,7 +66,6 @@ const CadastroEquipe: React.FC = () => {
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
-      console.log(e)
       if (
         errorMessage === "All properties are required to create a team"
       ) {
@@ -139,7 +117,7 @@ const CadastroEquipe: React.FC = () => {
 
     MySwal.fire({
       title: "Aviso",
-      html: "Deseja salvar equipe?",
+      html: "Deseja salvar a equipe?",
       showCancelButton: true,
       confirmButtonText: "Sim",
       confirmButtonColor: "#4FB4BC",

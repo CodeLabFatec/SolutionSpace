@@ -29,7 +29,7 @@ const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiz
         setChamadosFiltrados(response.data)
       }
     } catch (e: any) {
-      console.log(e.response.data.message)
+      /* */
     }
   }
 

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 import Select from 'react-select'
 
-const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
+const SelectType: React.FC<{ width: any, options: any, onChange: any }> = (props) => {
   const colourStyles = {
     menuList: (styles: any) => ({
       ...styles,
@@ -18,12 +18,12 @@ const SelectType: React.FC<{ options: any, onChange: any }> = (props) => {
     menu: (base: any) => ({
       ...base,
       marginLeft: '0',
-      width: '550px',
+      width: props.width,
       zIndex: 100
     }),
     control: (styles: any) => ({
       ...styles,
-      width: '550px',
+      width: props.width,
       backgroundColor: '#333333',
       border: 'none',
       borderRadius: '4px',

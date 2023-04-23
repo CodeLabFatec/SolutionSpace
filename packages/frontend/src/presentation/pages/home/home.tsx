@@ -1,5 +1,5 @@
 import { BotaoSolicitar } from '@/presentation/components'
-import Styles from './home-solicitantes-styles.scss'
+import Styles from './home-styles.scss'
 
 import React, { useContext } from 'react'
 import { TipoChamado } from '@/main/enums'

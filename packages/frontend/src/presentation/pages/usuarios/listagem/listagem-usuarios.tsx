@@ -16,7 +16,6 @@ const ListagemUsuarios: React.FC = () => {
       const response = await getAllUsers();
       setData(response.data.users);
     } catch (e) {
-      console.log("test " + e);
        MySwal.fire({
         title: "Erro",
         html: "Ocorreu um erro ao carregar os usuários",

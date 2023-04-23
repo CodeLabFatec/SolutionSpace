@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import Styles from "./edicaoGrupo.scss";
 import { useEffect, useState } from "react";
@@ -26,7 +24,7 @@ const EdicaoGrupo: React.FC = () => {
   const [analiseObrigatoria, setAnaliseObrigatoria] = useState(false);
   const [avaliarAlinhamento, setAvaliarAlinhamento] = useState(false);
   const [alinhamentoObrigarorio, setAlinhamentoObrigarorio] = useState(false);
-  const [equipes, setEquipes] = useState<any[]>([]);
+  const [equipes] = useState<any[]>([]);
 
   const loadEquipes = async () => {
     try {
@@ -68,9 +66,9 @@ const EdicaoGrupo: React.FC = () => {
     setSolicicitarFeature(group.canRequestFeatures);
     setSolicitarHotfix(group.canRequestHotfix);
     setAvaliarAnaliseRisco(group.canRateAnalinhamento);
-    setAnaliseObrigatoria(group.canRateAnalise);
-    setAvaliarAlinhamento(group.mustRateAnalinhamento);
-    setAlinhamentoObrigarorio(group.mustRateAnalise);
+    setAnaliseObrigatoria(group.mustRateAnalise);
+    setAvaliarAlinhamento(group.canRateAnalinhamento);
+    setAlinhamentoObrigarorio(group.mustRateAnalinhamento);
   };
 
   useEffect(() => {
@@ -130,7 +128,6 @@ const EdicaoGrupo: React.FC = () => {
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
-      console.log(e);
       if (errorMessage === "All properties are required to create a group") {
         errorMessage = "Preencha todas as informações.";
       } else if (errorMessage === "User not found") {
@@ -192,7 +189,7 @@ const EdicaoGrupo: React.FC = () => {
 
     MySwal.fire({
       title: "Aviso",
-      html: "Deseja salvar grupo?",
+      html: "Deseja alterar grupo?",
       showCancelButton: true,
       confirmButtonText: "Sim",
       confirmButtonColor: "#4FB4BC",
@@ -214,7 +211,7 @@ const EdicaoGrupo: React.FC = () => {
   return (
     <div className={Styles.container}>
       <div className={Styles.H1cadastroGrupo}>
-        <h1>Cadastro de grupos</h1>
+        <h1>Edição de grupo</h1>
         <hr />
         <form className={Styles.formCadastroGrupo} onSubmit={handleSubmit}>
           <div className={Styles.inputGroup}>
@@ -240,15 +237,15 @@ const EdicaoGrupo: React.FC = () => {
               <label htmlFor="nome">Equipe</label>
               <div style={{ width: "100%" }}>
               <Select
-              isSearchable={true}
-              onChange={(e: any) => {
-                setEquipe(e)
-              }}
-              value={equipe}
-              options={equipes}
-              styles={selectStyles}
-              placeholder={'Selecione...'}
-            />
+                isSearchable={true}
+                onChange={(e: any) => {
+                  setEquipe(e)
+                }}
+                value={equipe}
+                options={equipes}
+                styles={selectStyles}
+                placeholder={'Selecione...'}
+              />
               </div>
             </div>
             <div className={Styles.permissionsContainer}>
@@ -327,7 +324,7 @@ const EdicaoGrupo: React.FC = () => {
             <div className={Styles.botao}>
               <input
                 type="submit"
-                value="Cadastrar"
+                value="Editar"
                 className={Styles.buttonEnviar}
               />
             </div>
