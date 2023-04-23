@@ -161,3 +161,18 @@ export const updateTeam = async (
   permissionUnarchiveRequests: boolean) => {
   return api.put('/updateTeam/' + team_id, { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
 }
+
+export const updateGroup = async (
+  group_id: string,
+  group_name: string,
+  team: string,
+  description: string,
+  canRequestFeatures:boolean,
+  canRequestHotfix:boolean,
+  canRateAnalinhamento :boolean,
+  canRateAnalise :boolean,
+  mustRateAnalinhamento :boolean,
+  mustRateAnalise :boolean
+  ) => {
+  return api.put('/updateGroup', {group_id, group_name, team, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+}
