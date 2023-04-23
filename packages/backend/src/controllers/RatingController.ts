@@ -128,7 +128,7 @@ export class RatingController {
             const createdRating = await ratingRepository.save(newRating);
 
             if (
-                createdRating.rating !== '0' &&
+                createdRating.rating === '0' &&
                 createdRating.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
                 createdRating.targetGroup &&
                 userGroupPermissions.mustRateAlinhamento === true
