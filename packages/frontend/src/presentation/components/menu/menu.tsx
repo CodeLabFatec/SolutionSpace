@@ -35,45 +35,48 @@ const SideMenu = () => {
                 collapseSidebar();
             }}
             icon={<MenuOutlinedIcon />}
-            style={{padding:"10px"}}
+            style={ { padding:"10px" } }
             id={Styles.menuList}
             >
           </MenuItem>
           <MenuItem
             icon={<HomeIcon />}
-            style={{padding:"10px"}}
+            style={ { padding:"10px" } }
             id={Styles.menuList}
             component={<Link to="/home" />}
             >
               <p>Home</p>
           </MenuItem>
-          <SubMenu
-            id={Styles.menuList}
-            icon={<AddCircleIcon />}
-            label="Chamados"
-            style={{ color: "#4FB4BC", padding:"10px" }}
-          >
-            {user.group.canRequestHotfix ? (
-              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newHotfix" />}>
-                Hotfix
-              </MenuItem>
-            ): <></>}
-            {user.group.canRequestFeatures ? (
-              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newFeature" />}>
-                Nova feature
-              </MenuItem>
-            ) : <></>}
-            {user.group.canRequestHotfix || user.group.canRequestFeatures ? (
-              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/myRequests" />}>
-                Meus chamados
-              </MenuItem>
-            ) : <></>}
-            {user.group.canRateAnalise || user.group.canRateAnalinhamento ? (
-              <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/requests" />}>
-                Avaliar chamados
-              </MenuItem>
-            ) : <></>}
-          </SubMenu>
+          {user.group.canRequestHotfix || user.group.canRequestFeatures || user.group.canRateAnalise || user.group.canRateAnalinhamento ? 
+          (
+            <SubMenu
+              id={Styles.menuList}
+              icon={<AddCircleIcon />}
+              label="Chamados"
+              style={{ color: "#4FB4BC", padding:"10px" }}
+            >
+              {user.group.canRequestHotfix ? (
+                <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newHotfix" />}>
+                  Hotfix
+                </MenuItem>
+              ): <></>}
+              {user.group.canRequestFeatures ? (
+                <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/newFeature" />}>
+                  Nova feature
+                </MenuItem>
+              ) : <></>}
+              {user.group.canRequestHotfix || user.group.canRequestFeatures ? (
+                <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/myRequests" />}>
+                  Meus chamados
+                </MenuItem>
+              ) : <></>}
+              {user.group.canRateAnalise || user.group.canRateAnalinhamento ? (
+                <MenuItem style={{ color: "#4FB4BC", backgroundColor: "#333333" }} component={<Link to="/requests" />}>
+                  Avaliar chamados
+                </MenuItem>
+              ) : <></>}
+            </SubMenu>
+          ) : <></>}
           {user.team.permissionCreateUsers ? (
             <SubMenu
               id={Styles.menuList}
