@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect } from 'react'
 import { Container, Content } from './dropzone-styles'
 import { uniqueId } from 'lodash'
@@ -7,8 +5,9 @@ import Upload from './upload/upload'
 import FileList from './file-list/file-list'
 import GlobalStyle from './dropzone-global-styles'
 import { filesize } from 'filesize'
-const DropZone: React.FC<{ uploadedFiles: any[]; setUploadedFiles: any }> = (props) => {
-  useEffect(() => {}, [props])
+
+const DropZone: React.FC<{ uploadedFiles: any[]; setUploadedFiles: any }> = (props: any) => {
+  useEffect(() => {/* */ }, [props])
 
   const handleDelete = async (id: any) => {
     props.setUploadedFiles(props.uploadedFiles.filter((file: any) => file.id !== id))

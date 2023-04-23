@@ -1,9 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-
-import { Sidebar, Menu, MenuItem, useProSidebar, sidebarClasses } from "react-pro-sidebar";
-import Styles from "./chamadoListaStyle.scss";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
+import Styles from "./chamado-lista-style.scss";
 import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 
@@ -12,25 +8,10 @@ import Chamado from "@/presentation/components/chamado/chamado";
 import { TipoChamado } from "@/main/enums/tipo-chamado";
 import { getAllRequests, getAllRequestsByUser } from "@/main/api/api";
 import { AuthContext } from "@/main/contexts/authcontext";
-type FileChamado = {
-  base64: string;
-  ext: string;
-  file_name: string;
-  file_id: string;
-};
+import { ChamadoType } from "@/main/types";
 
-export type ChamadoType = {
-  request_id: string;
-  title: string;
-  description: string;
-  requestType: TipoChamado;
-  created_at: string;
-  requestStep: string;
-  status: string;
-  files: FileChamado[];
-};
-
-const ChamadoLista: React.FC<{ chamadoState: any; visualizacaoChamado: VisualizarChamado; width:any; setWidht:any;}> = (props) => {
+const ChamadoLista: React.FC<{ 
+  chamadoState: any; visualizacaoChamado: VisualizarChamado; width:any; setWidht:any;}> = (props) => {
   const { collapseSidebar } = useProSidebar();
 
   const [chamados, setChamados] = useState<ChamadoType[]>([]);
@@ -55,7 +36,7 @@ const ChamadoLista: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiza
         setChamadosFiltrados(response.data);
       }
     } catch (e: any) {
-      console.log(e.response.data.message);
+      /* */
     }
   };
 
@@ -121,13 +102,11 @@ const ChamadoLista: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiza
           <MenuItem
             onClick={() => {
               if (aberto){
-                console.log("teste")
                 props.setWidht(1390)
                 setAberto(false)
               }else{
                 props.setWidht(1150)
                 setAberto(true)
-                console.log('Teste2')
               }
               collapseSidebar();
             }}

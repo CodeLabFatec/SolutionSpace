@@ -64,36 +64,24 @@ body {
     text-align: justify;
   }
 
-  .buttonWrapper {
-    padding-top: 40px;
+}
 
-    .buttonCancelar {
-      background-color: #a2a2a2;
-      color: #fff;
-      padding: 12px 54px;
-      font-size: 16px;
-      border: none;
-      margin: 0 16px;
-      border-radius: 4px;
-      cursor: pointer;
+.buttonWrapper {
+  padding-top: 40px;
+  width: 105%;
 
-      &:hover {
-        background-color: #bfbebe;
-      }
-    }
-
-    .buttonEnviar {
-      background-color: #4fb4bc;
-      color: #fff;
-      padding: 12px 54px;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #5dcfd7;
-      }
+  .buttonEnviar {
+    float: right;
+    background-color: #4fb4bc;
+    color: #fff;
+    padding: 12px 54px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #5dcfd7;
     }
   }
 }

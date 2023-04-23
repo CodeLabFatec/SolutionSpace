@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import 'dotenv/config';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { comparePassword } from '../utils/encryptor';
@@ -30,6 +30,30 @@ export class AuthController {
             });
         } catch (error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
+    async verifyToken(req: Request, res: Response) {
+        const { authorization } = req.params;
+        
+        if (!authorization) return res.status(401).json('Authorization not found');
+    
+        try {
+            const { id } = jwt.verify(authorization, process.env.JWT_PASS ?? '') as JwtPayload;
+
+            const user = await userRepository.findOne({
+                where: { user_id: id.toString() },
+                relations: { team: true, group: true }
+            });
+
+            if (!user) {
+                return res.status(401).json('User not found');
+            }
+
+            return res.status(200).json({ user })
+            
+        } catch(e) {
+            if (!authorization) return res.status(401).json('Authorization not found');
         }
     }
 }

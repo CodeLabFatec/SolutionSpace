@@ -1,9 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable react/prop-types */
 import Styles from './modal.scss'
 
-const Modal: React.FC<{ isOpen: boolean; titulo: string; children: any; setModalClose: any }> = (props) => {
+const Modal: React.FC<{ isOpen: boolean; titulo: string; children: any; setModalClose: any }> = (props: any) => {
   if (props.isOpen) {
     return (
       <div className={Styles.background}>

@@ -150,7 +150,7 @@ const EdicaoEquipe: React.FC = () => {
 
     MySwal.fire({
       title: "Aviso",
-      html: "Deseja salvar equipe?",
+      html: "Deseja alterar a equipe?",
       showCancelButton: true,
       confirmButtonText: "Sim",
       confirmButtonColor: "#4FB4BC",
@@ -170,7 +170,7 @@ const EdicaoEquipe: React.FC = () => {
   return (
     <div className={Styles.container}>
       <div className={Styles.H1CadastroEquipe}>
-        <h1>Cadastrar equipe</h1>
+        <h1>Edição de equipe</h1>
         <hr />
       </div>
       <form onSubmit={handleSubmit} className={Styles.formEquipe}>
@@ -241,7 +241,7 @@ const EdicaoEquipe: React.FC = () => {
         <div className={Styles.botao}>
           <input
             type="submit"
-            value="Cadastrar"
+            value="Editar"
             className={Styles.buttonEnviar}
           />
         </div>

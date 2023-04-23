@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 
 // Auth
 router.post('/auth', new AuthController().authenticate);
+router.post('/verifyToken/:authorization', new AuthController().verifyToken);
 
 // User
 router.get('/listUsers', new UserController().listUser);

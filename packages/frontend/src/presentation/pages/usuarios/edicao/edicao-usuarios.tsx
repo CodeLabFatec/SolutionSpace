@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Styles from './edicao-usuarios-styles.scss'
 import React, { useState, useEffect } from 'react'
 
@@ -22,8 +21,8 @@ const EdicaoUsuario: React.FC = () => {
   const [genero, setGenero] = useState<any>()
   const [equipe, setEquipe] = useState<any>()
   const [grupo, setGrupo] = useState<any>()
-  const [equipes, setEquipes] = useState<any[]>([])
-  const [grupos, setGrupos] = useState<any[]>([])
+  const [equipes] = useState<any[]>([])
+  const [grupos] = useState<any[]>([])
 
   const generos = [
     { value: 'male', label: 'Masculino' },
@@ -85,7 +84,6 @@ const EdicaoUsuario: React.FC = () => {
       }
 
     } catch(e) {
-      console.log(e)
       Swal.fire('Erro', 'Ocorreu um erro ao carregar os grupos.', 'error')
     }
 
@@ -114,9 +112,12 @@ const EdicaoUsuario: React.FC = () => {
       )
 
       MySwal.fire({
-        title: 'Sucesso',
-        html: 'Usuário alterado com sucesso!',
-        icon: 'success'
+        html: "Usuário alterado com sucesso.",
+        icon: "success",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
       }).then((r) => {
         navigate('/users')
       })
@@ -136,10 +137,13 @@ const EdicaoUsuario: React.FC = () => {
       }
 
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: errorMessage
-      })
+        icon: "error",
+        html: errorMessage,
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
     }
   }
 
@@ -148,78 +152,100 @@ const EdicaoUsuario: React.FC = () => {
 
     if (nome == null || nome === '' || nome === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Nome é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Nome é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (email == null || email === '' || email === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Email é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Email é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (senha == null || senha === '' || senha === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Senha é obrigatória.'
-      })
+        title: "Opss...",
+        html: "Senha é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (senha !== confirmacaoSenha) {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Senha e confirmação de senha devem ser iguais.'
-      })
+        title: "Opss...",
+        html: "Senha e confirmação de senha devem ser iguais.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
-    if (genero == null || genero.value === '' || genero.value === ' ') {
+    if (genero == null || genero === '' || genero === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Gênero é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Gênero é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
-    if (equipe.value == null || equipe.value === '' || equipe.value === ' ') {
+    if (equipe == null || equipe === '' || equipe === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Equipe é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Equipe é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (grupo == null || grupo.value === '' || grupo.value === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Grupo é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Grupo é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
-    console.log(grupo)
-
     MySwal.fire({
-      title: 'Aviso',
-      html: 'Deseja salvar esse usuário?',
-      icon: 'question',
+      title: "Aviso",
+      html: "Deseja alterar o usuário?",
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      confirmButtonColor: '#76ba1b',
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#ff0000'
+      confirmButtonText: "Sim",
+      confirmButtonColor: "#4FB4BC",
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "#A9A9A9",
+      width: "350px",
+      background: "#FAF0E6",
+      color: "#000",
+      reverseButtons: true,
     }).then((r) => {
       if (r.isConfirmed) {
         handleRequest()
@@ -250,113 +276,117 @@ const EdicaoUsuario: React.FC = () => {
 
   return (
     <div className={Styles.container}>
-      <div className={Styles.titleCadastroUsuarios}>
-        <h1>Edição de usuário</h1>
-        <hr />
-      </div>
-      <form onSubmit={handleSubmit} className={Styles.formCadastroUsuarios}>
-        <div className={Styles.inputGroup}>
-          <div style={ { width: '50%' } }>
-            <label htmlFor='nome'>Nome</label>
-            <input
-              type='text'
-              value={nome}
-              onChange={(e: any) => {
-                setNome(e.target.value)
-              }}
-              className={Styles.inputText}
-              maxLength={60}
-            />
-          </div>
-          <div style={ { width: '50% !important' } }>
-            <label htmlFor='nome'>Gênero</label>
-            <Select
-              isSearchable={true}
-              onChange={(e: any) => {
-                setGenero(e)
-                console.log(e)
-              }}
-              value={genero}
-              options={generos}
-              styles={selectStyles}
-              placeholder={'Selecione...'}
-            />         
+      <div className={Styles.usuarioForm}>
+        <div className={Styles.titleCadastroUsuarios}>
+          <h1>Edição de usuário</h1>
+          <hr />
+        </div>
+        <form onSubmit={handleSubmit} className={Styles.formCadastroUsuarios}>
+          <div className={Styles.inputGroup}>
+            <div style={ { width: '50%' } }>
+              <label htmlFor='nome'>Nome</label>
+              <input
+                type='text'
+                value={nome}
+                onChange={(e: any) => {
+                  setNome(e.target.value)
+                }}
+                className={Styles.inputText}
+                maxLength={60}
+              />
             </div>
-        </div>
-        <div className={Styles.inputGroup}>
-          <div style={ { width: '1150px' } }>
-            <label htmlFor='nome'>Email</label>
-            <input
-              type='text'
-              value={email}
-              onChange={(e: any) => {
-                setEmail(e.target.value)
-              }}
-              style={ { width: '100%' } }
-              className={Styles.inputText}
-              maxLength={60}
-            />
+            <div style={ { width: '50% !important' } }>
+              <label htmlFor='nome'>Gênero</label>
+              <Select
+                isSearchable={true}
+                onChange={(e: any) => {
+                  setGenero(e)
+                }}
+                value={genero}
+                options={generos}
+                styles={selectStyles}
+                placeholder={'Selecione...'}
+              />         
+              </div>
           </div>
-        </div>
-        <div className={Styles.inputGroup}>
-          <div style={ { width: '50%' } }>
-            <label htmlFor='nome'>Senha</label>
-            <input
-              type='password'
-              value={senha}
-              onChange={(e: any) => {
-                setSenha(e.target.value)
-              }}
-              className={Styles.inputText}
-              maxLength={60}
-            />
+          <div className={Styles.inputGroup}>
+            <div style={ { width: '1150px' } }>
+              <label htmlFor='nome'>Email</label>
+              <input
+                type='text'
+                value={email}
+                onChange={(e: any) => {
+                  setEmail(e.target.value)
+                }}
+                style={ { width: '100%' } }
+                className={Styles.inputText}
+                maxLength={60}
+              />
+            </div>
           </div>
-          <div style={ { width: '50%' } }>
-            <label htmlFor='nome'>Confirmação de Senha</label>
-            <input
-              type='password'
-              value={confirmacaoSenha}
-              onChange={(e: any) => {
-                setConfirmacaoSenha(e.target.value)
-              }}
-              className={Styles.inputText}
-              maxLength={60}
-            />
+          <div className={Styles.inputGroup}>
+            <div style={ { width: '50%' } }>
+              <label htmlFor='nome'>Senha</label>
+              <input
+                type='password'
+                value={senha}
+                onChange={(e: any) => {
+                  setSenha(e.target.value)
+                }}
+                className={Styles.inputText}
+                maxLength={60}
+              />
+            </div>
+            <div style={ { width: '50%' } }>
+              <label htmlFor='nome'>Confirmação de Senha</label>
+              <input
+                type='password'
+                value={confirmacaoSenha}
+                onChange={(e: any) => {
+                  setConfirmacaoSenha(e.target.value)
+                }}
+                className={Styles.inputText}
+                maxLength={60}
+              />
+            </div>
           </div>
-        </div>
-        <div className={Styles.inputGroup}>
-          <div style={ { width: '50% !important' } }>
-            <label htmlFor='nome'>Equipe</label>
-            <Select
-              isSearchable={true}
-              onChange={(e: any) => {
-                handleEquipeChange(e)
-              }}
-              value={equipe}
-              options={equipes}
-              styles={selectStyles}
-              placeholder={'Selecione...'}
-            />
+          <div className={Styles.inputGroup}>
+            <div style={ { width: '50% !important' } }>
+              <label htmlFor='nome'>Equipe</label>
+              <Select
+                isSearchable={true}
+                onChange={(e: any) => {
+                  handleEquipeChange(e)
+                }}
+                value={equipe}
+                options={equipes}
+                styles={selectStyles}
+                placeholder={'Selecione...'}
+              />
+            </div>
+            <div style={ equipe === '' || equipe == null ? { width: '50% !important', marginLeft: '50px', display: 'none' } : { width: '50% !important', marginLeft: '50px' } }>
+              <label htmlFor='nome'>Grupo</label>
+              <Select
+                isSearchable={true}
+                onChange={(e: any) => {
+                  setGrupo(e)
+                }}
+                value={grupo}
+                options={grupos}
+                styles={selectStyles}
+                placeholder={'Selecione...'}
+              />
+            </div>
           </div>
-          <div style={ equipe === '' || equipe == null ? { width: '50% !important', marginLeft: '50px', display: 'none' } : { width: '50% !important', marginLeft: '50px' } }>
-            <label htmlFor='nome'>Grupo</label>
-            <Select
-              isSearchable={true}
-              onChange={(e: any) => {
-                setGrupo(e)
-              }}
-              value={grupo}
-              options={grupos}
-              styles={selectStyles}
-              placeholder={'Selecione...'}
-            />
-          </div>
+          <div className={Styles.buttonWrapper}>
+          <input
+            type="submit"
+            value="Editar"
+            className={Styles.buttonEnviar}
+          />
         </div>
-        <div className={Styles.buttonWrapper}>
-          <input type='button' value='Cancelar' className={Styles.buttonCancelar} />
-          <input type='submit' value='Enviar para o comitê de aprovação' className={Styles.buttonEnviar} />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }

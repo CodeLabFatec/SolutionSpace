@@ -1,6 +1,6 @@
 import { useEffect, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createSession, api } from '../api/api'
+import { createSession, api, verifyToken } from '../api/api'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -13,17 +13,40 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
+  const loadCookies = async () => {
     const recoveredUser = localStorage.getItem('user')
     const recoveredToken = localStorage.getItem('token')
 
     if (recoveredUser && recoveredToken) {
-      setUser(JSON.parse(recoveredUser))
-      api.defaults.headers.Authorization = `Bearer ${recoveredToken}`
-      api.defaults.headers.common = { Authorization: `Bearer ${recoveredToken}` }
-      api.defaults.withCredentials = true
+      try {
+        const response = await verifyToken(recoveredToken) 
+
+        setUser(response.data.user)
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+        api.defaults.headers.Authorization = `Bearer ${recoveredToken}`
+        api.defaults.headers.common = { Authorization: `Bearer ${recoveredToken}` }
+        api.defaults.withCredentials = true
+        
+      } catch(e) {
+
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        
+        api.defaults.headers.Authorization = null
+        api.defaults.headers.common = { Authorization: `` }
+        api.defaults.withCredentials = false
+    
+        setUser(null)
+    
+        navigate('/login')
+      }
+
     }
 
+  }
+  
+  useEffect(() => {
+    loadCookies()
     setLoading(false)
   }, [])
 
@@ -44,9 +67,7 @@ export const AuthProvider = ({ children }: any) => {
 
       navigate('/home')
 
-      // verificar pelo equipe (team) do usuário para qual página redirecioná-lo
     } catch (e: any) {
-      console.log(e.response.data)
       const responseMessage = e.response.data
       let errorMessage
 

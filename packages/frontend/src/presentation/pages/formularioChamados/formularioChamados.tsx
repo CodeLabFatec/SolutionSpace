@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Header } from "@/presentation/components";
 import Styles from "./formularioChamados.scss";
 import { createRequest } from "@/main/api/api";
 import React, { useState, useContext } from "react";
-import DropZone from "@/presentation/components/dropzone/dropzone";
-import Footer from "@/presentation/components/footer/footer";
-import { TipoChamado } from "@/main/enums/tipo-chamado";
+import { Dropzone } from "@/presentation/components";
+import { TipoChamado } from "@/main/enums";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -37,7 +34,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         });
       }
 
-      const response = await createRequest(
+      await createRequest(
         user.user_id,
         titulo,
         detalhes,
@@ -162,7 +159,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
-            <DropZone
+            <Dropzone
               uploadedFiles={uploadedFiles}
               setUploadedFiles={setUploadedFiles}
             />
@@ -179,7 +176,6 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
           />
         </div>
       </form>
-      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,11 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import Styles from './login.scss'
-import LogoMenor from '@/presentation/components/logomenor/logomenor'
+import { LogoMenor } from '@/presentation/components'
 import { AuthContext } from '@/main/contexts/authcontext'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Login: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { authenticated, login } = useContext(AuthContext)
+
+  const { login } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -14,10 +18,26 @@ const Login: React.FC = () => {
     e.preventDefault()
 
     if (email == null || email === '' || email === ' ') {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Email é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC'
+      });
       return
     }
 
     if (password == null || password === '' || password === ' ') {
+      MySwal.fire({
+        title: "Opss...",
+        html: "Senha é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC'
+      });
       return
     }
 

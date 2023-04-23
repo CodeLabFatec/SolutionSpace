@@ -20,8 +20,8 @@ const CadastroUsuarios: React.FC = () => {
   const [genero, setGenero] = useState<string>()
   const [equipe, setEquipe] = useState<string>()
   const [grupo, setGrupo] = useState<any>()
-  const [equipes, setEquipes] = useState<any[]>([])
-  const [grupos, setGrupos] = useState<any[]>([])
+  const [equipes] = useState<any[]>([])
+  const [grupos] = useState<any[]>([])
 
   const navigate = useNavigate()
 
@@ -62,9 +62,12 @@ const CadastroUsuarios: React.FC = () => {
       )
 
       MySwal.fire({
-        title: 'Sucesso',
-        html: 'Usuário criado com sucesso!',
-        icon: 'success'
+        html: "Usuário salvo com sucesso.",
+        icon: "success",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
       }).then((r) => {
         navigate('/users')
       })
@@ -84,10 +87,13 @@ const CadastroUsuarios: React.FC = () => {
       }
 
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: errorMessage
-      })
+        icon: "error",
+        html: errorMessage,
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
     }
   }
 
@@ -96,76 +102,100 @@ const CadastroUsuarios: React.FC = () => {
 
     if (nome == null || nome === '' || nome === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Nome é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Nome é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (email == null || email === '' || email === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Email é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Email é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (senha == null || senha === '' || senha === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Senha é obrigatória.'
-      })
+        title: "Opss...",
+        html: "Senha é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (senha !== confirmacaoSenha) {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Senha e confirmação de senha devem ser iguais.'
-      })
+        title: "Opss...",
+        html: "Senha e confirmação de senha devem ser iguais.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (genero == null || genero === '' || genero === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Gênero é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Gênero é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (equipe == null || equipe === '' || equipe === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Equipe é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Equipe é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     if (grupo == null || grupo.value === '' || grupo.value === ' ') {
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: 'Grupo é obrigatório.'
-      })
+        title: "Opss...",
+        html: "Grupo é obrigatório.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       return
     }
 
     MySwal.fire({
-      title: 'Aviso',
-      html: 'Deseja salvar esse usuário?',
-      icon: 'question',
+      title: "Aviso",
+      html: "Deseja salvar o usuário?",
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      confirmButtonColor: '#76ba1b',
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#ff0000'
+      confirmButtonText: "Sim",
+      confirmButtonColor: "#4FB4BC",
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "#A9A9A9",
+      width: "350px",
+      background: "#FAF0E6",
+      color: "#000",
+      reverseButtons: true,
     }).then((r) => {
       if (r.isConfirmed) {
         handleRequest()
@@ -217,7 +247,7 @@ const CadastroUsuarios: React.FC = () => {
           </div>
           <div style={ { width: '50% !important' } }>
             <label htmlFor='nome'>Gênero</label>
-            <SelectType onChange={setGenero} options={generos} />
+            <SelectType width="550px" onChange={setGenero} options={generos} />
           </div>
         </div>
         <div className={Styles.inputGroup}>
@@ -264,7 +294,7 @@ const CadastroUsuarios: React.FC = () => {
         <div className={Styles.inputGroup}>
           <div style={ { width: '50% !important' } }>
             <label htmlFor='nome'>Equipe</label>
-            <SelectType onChange={handleEquipeChange} options={equipes} />
+            <SelectType width="550px" onChange={handleEquipeChange} options={equipes} />
           </div>
           <div style={ equipe === '' || equipe == null ? { width: '50% !important', marginLeft: '50px', display: 'none' } : { width: '50% !important', marginLeft: '50px' } }>
             <label htmlFor='nome'>Grupo</label>
@@ -281,8 +311,11 @@ const CadastroUsuarios: React.FC = () => {
           </div>
         </div>
         <div className={Styles.buttonWrapper}>
-          <input type='button' value='Cancelar' className={Styles.buttonCancelar} />
-          <input type='submit' value='Confirmar' className={Styles.buttonEnviar} />
+          <input
+            type="submit"
+            value="Cadastrar"
+            className={Styles.buttonEnviar}
+          />
         </div>
       </form>
       </div>
