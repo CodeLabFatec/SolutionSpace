@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "start": "echo \"Error: no script defined\" && exit 1",
-    "start:front": "npm run dev -w frontend"
+    "start:front": "npm run dev -w frontend",
+    "start:back": "npm run dev -w backend"
   },
   "repository": {
     "type": "git",

@@ -104,7 +104,7 @@ export class GroupController {
 
   async listGroups(req: Request, res: Response) {
     try {
-      const groups = await groupRepository.find({ relations:{ team:true } })
+      const groups = await groupRepository.find({ relations: { team: true } })
 
       return res.status(200).json(groups)
     } catch (error) {
@@ -132,11 +132,30 @@ export class GroupController {
     try {
       const groups = await groupRepository.find({ where: { team: { team_id } } })
 
-      if(!groups) return res.status(404).json('Team not found')
-      
+      if (!groups) return res.status(404).json('Groups not found for this team')
+
       return res.status(200).json(groups)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
+
+  async checkGroupPermission(req: Request, res: Response) {
+    const { group_id } = req.params;
+
+    try {
+      const group = await groupRepository.findOneBy({ group_id });
+
+      if (!group) return res.status(404).json('Group not found')
+
+      return res.status(200).json({
+        canRateAnalise: group.canRateAnalise,
+        mustRateAnalise: group.mustRateAnalise,
+        canRateAlinhamento: group.canRateAnalinhamento,
+        mustRateAlinhamento: group.mustRateAnalinhamento
+      })
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` });
     }
   }
 }

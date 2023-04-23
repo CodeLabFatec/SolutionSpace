@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class default1682040229012 implements MigrationInterface {
-    name = 'default1682040229012'
+export class default1682262938570 implements MigrationInterface {
+    name = 'default1682262938570'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "groups" DROP COLUMN "canRatingAnalise"`);
         await queryRunner.query(`ALTER TABLE "groups" DROP COLUMN "canRatingAnalinhamento"`);
+        await queryRunner.query(`ALTER TABLE "groups" ADD "description" text`);
         await queryRunner.query(`ALTER TABLE "groups" ADD "canRateAnalise" boolean NOT NULL DEFAULT false`);
         await queryRunner.query(`ALTER TABLE "groups" ADD "canRateAnalinhamento" boolean NOT NULL DEFAULT false`);
-        await queryRunner.query(`ALTER TABLE "teams" ADD "description" text`);
         await queryRunner.query(`ALTER TABLE "teams" ADD "permissionCreateUsers" boolean NOT NULL DEFAULT false`);
         await queryRunner.query(`ALTER TABLE "teams" ADD "permissionCreateTeams" boolean NOT NULL DEFAULT false`);
         await queryRunner.query(`ALTER TABLE "teams" ADD "permissionCreateGroups" boolean NOT NULL DEFAULT false`);
@@ -26,9 +26,9 @@ export class default1682040229012 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "teams" DROP COLUMN "permissionCreateGroups"`);
         await queryRunner.query(`ALTER TABLE "teams" DROP COLUMN "permissionCreateTeams"`);
         await queryRunner.query(`ALTER TABLE "teams" DROP COLUMN "permissionCreateUsers"`);
-        await queryRunner.query(`ALTER TABLE "teams" DROP COLUMN "description"`);
         await queryRunner.query(`ALTER TABLE "groups" DROP COLUMN "canRateAnalinhamento"`);
         await queryRunner.query(`ALTER TABLE "groups" DROP COLUMN "canRateAnalise"`);
+        await queryRunner.query(`ALTER TABLE "groups" DROP COLUMN "description"`);
         await queryRunner.query(`ALTER TABLE "groups" ADD "canRatingAnalinhamento" boolean NOT NULL DEFAULT false`);
         await queryRunner.query(`ALTER TABLE "groups" ADD "canRatingAnalise" boolean NOT NULL DEFAULT false`);
     }
