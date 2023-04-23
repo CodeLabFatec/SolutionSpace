@@ -6,6 +6,7 @@ import { RequestStep } from '../repos/postgres/entitites/Rating';
 import { File } from '../repos/postgres/entitites/File';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
+import { checkGroupPermission } from '../utils/checkGroupPermissions';
 
 export class RatingController {
     async create(req: Request, res: Response) {
@@ -19,9 +20,11 @@ export class RatingController {
         const ratingFiles: File[] = files;
         const createdFiles: File[] = [];
 
-        const user = await userRepository.findOne({ where: { user_id }, relations: { team: true } });
+        const user = await userRepository.findOne({ where: { user_id }, relations: { team: true, group: true } });
 
         if (!user) return res.status(404).json('User not found');
+
+        const userGroupPermissions = await checkGroupPermission(user.group.group_id);
 
         const alreadyRated = await ratingRepository.find({
             where: {
@@ -37,6 +40,18 @@ export class RatingController {
         const request = await requestRepository.findOneBy({ request_id: requestId });
 
         if (!request) return res.status(404).json('Request not found');
+
+        if (
+            request.requestStep === RequestStep.ANALISE_RISCO &&
+            userGroupPermissions.canRateAnalise === false
+        )
+            return res.status(401).json({ message: "Não autorizado - O seu grupo não tem permissão para avaliar este chamado" })
+
+        if (
+            request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
+            userGroupPermissions.canRateAlinhamento === false
+        )
+            return res.status(401).json({ message: "Não autorizado - O seu grupo não tem permissão para avaliar este chamado" })
 
         const forbiddenStatus = await statusConfigurationRepository.find({
             where: [
@@ -115,7 +130,8 @@ export class RatingController {
             if (
                 createdRating.rating !== '0' &&
                 createdRating.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
-                createdRating.targetGroup
+                createdRating.targetGroup &&
+                userGroupPermissions.mustRateAlinhamento === true
             ) {
                 await requestRepository.save({
                     ...request,
@@ -128,7 +144,8 @@ export class RatingController {
                 });
             }
 
-            if (createdRating.requestStep === RequestStep.ANALISE_RISCO) {
+            if (createdRating.requestStep === RequestStep.ANALISE_RISCO &&
+                userGroupPermissions.mustRateAnalise === true) {
                 await requestRepository.save({
                     ...request,
                     status: statusConfig.status,
