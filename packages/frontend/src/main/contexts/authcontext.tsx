@@ -72,17 +72,20 @@ export const AuthProvider = ({ children }: any) => {
       let errorMessage
 
       if (responseMessage.includes('Email not found')) {
-        errorMessage = 'Email ou senha incorreta.'
+        errorMessage = 'E-mail ou senha inválidos.'
       } else if (responseMessage.includes('Incorrect password')) {
-        errorMessage = 'Email ou senha incorreta.'
+        errorMessage = 'E-mail ou senha inválidos.'
       } else {
         errorMessage = responseMessage
       }
 
       MySwal.fire({
-        title: 'Erro',
-        icon: 'error',
-        html: errorMessage
+        title: 'Opss...',
+        html: errorMessage,
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC'
       })
     }
   }

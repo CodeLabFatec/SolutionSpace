@@ -17,10 +17,10 @@ const Login: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
-    if (email == null || email === '' || email === ' ') {
+    if (email == null || email === '' || email === ' ' || password == null || password === '' || password === ' ') {
       MySwal.fire({
         title: "Opss...",
-        html: "Email é obrigatório.",
+        html: "E-mail ou senha inválidos.",
         width: "350px",
         background: "#FAF0E6",
         color: "#000",
@@ -29,17 +29,6 @@ const Login: React.FC = () => {
       return
     }
 
-    if (password == null || password === '' || password === ' ') {
-      MySwal.fire({
-        title: "Opss...",
-        html: "Senha é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
-      return
-    }
 
     login(email, password)
   }
@@ -60,7 +49,7 @@ const Login: React.FC = () => {
                   setEmail(e.target.value)
                 }}
               />
-              <span className={Styles.focus_input} data-placeholder='Endereço de email'></span>
+              <span className={Styles.focus_input} data-placeholder='Endereço de e-mail'></span>
             </div>
             <div className={Styles.wrap_input}>
               <input

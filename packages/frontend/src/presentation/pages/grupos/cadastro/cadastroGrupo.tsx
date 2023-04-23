@@ -16,8 +16,8 @@ const CadastroGrupo: React.FC = () => {
   const [nomeEquipe, setNomeEquipe] = useState("");
   const [solicicitarFeature, setSolicicitarFeature] = useState(false);
   const [solicitarHotfix, setSolicitarHotfix] = useState(false);
-  const [avaliarAnaliseRisco, setAvaliarAnaliseRisco] = useState(false);
-  const [analiseObrigatoria, setAnaliseObrigatoria] = useState(false);
+  const [avaliarAnaliseRisco, setAvaliarAnaliseRisco] = useState<boolean>(false);
+  const [analiseObrigatoria, setAnaliseObrigatoria] = useState<boolean>(false);
   const [avaliarAlinhamento, setAvaliarAlinhamento] = useState(false);
   const [alinhamentoObrigarorio, setAlinhamentoObrigarorio] = useState(false);
   const [equipes] = useState<any[]>([])
@@ -56,18 +56,30 @@ const CadastroGrupo: React.FC = () => {
 
   const handleAvaliarAnaliseRisco = () => {
     setAvaliarAnaliseRisco(!avaliarAnaliseRisco)
+    if (analiseObrigatoria == true){
+      setAvaliarAnaliseRisco(true)
+    }
   }
 
   const handleAvaliarAlinhamento = () => {
     setAvaliarAlinhamento(!avaliarAlinhamento)
+    if (alinhamentoObrigarorio == true){
+      setAvaliarAlinhamento(true)
+    }
   }
 
   const handleAnaliseObrigatoria = () => {
     setAnaliseObrigatoria(!analiseObrigatoria)
+    if (avaliarAnaliseRisco == false){
+      setAvaliarAnaliseRisco(true)
+    }
   }
 
   const handleAlinhamentoObrigarorio = () => {
     setAlinhamentoObrigarorio(!alinhamentoObrigarorio)
+    if (avaliarAlinhamento == false){
+      setAvaliarAlinhamento(true)
+    }
   }
 
   const handleRequest = async () => {
@@ -92,7 +104,7 @@ const CadastroGrupo: React.FC = () => {
         color: "#000",
         confirmButtonColor: "#4FB4BC",
       }).then((r) => {
-        navigate("/team");
+        navigate("/groups");
       });
     } catch (e: any) {
       let errorMessage = e.response.data.message;
@@ -107,7 +119,6 @@ const CadastroGrupo: React.FC = () => {
         errorMessage =
           "Você precisa estar autenticado para realizar essa operação.";
       }
-
       MySwal.fire({
         icon: "error",
         html: errorMessage,
@@ -215,7 +226,7 @@ const CadastroGrupo: React.FC = () => {
                   id={Styles.Switch}
                 />
                 <FormControlLabel
-                  control={<Switch value={avaliarAnaliseRisco} />}
+                  control={<Switch value={avaliarAnaliseRisco} checked={avaliarAnaliseRisco}/>}
                   onChange={handleAvaliarAnaliseRisco}
                   label="Poderá avaliar a Análise de Risco?"
                   labelPlacement="start"
@@ -229,7 +240,7 @@ const CadastroGrupo: React.FC = () => {
                   id={Styles.Switch}
                 />
                 <FormControlLabel
-                  control={<Switch value={avaliarAlinhamento} />}
+                  control={<Switch value={avaliarAlinhamento} checked={avaliarAlinhamento}/>}
                   onChange={handleAvaliarAlinhamento}
                   label="Poderá avaliar o Alinhamento Estratégico?"
                   labelPlacement="start"

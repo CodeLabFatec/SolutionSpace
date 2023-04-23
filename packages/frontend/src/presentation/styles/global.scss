@@ -11,16 +11,16 @@
 
 html,
 body {
-  height: 100vh;
+  font-family: 'Open Sans', sans-serif;
   width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  color: $white;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
   color: #ffffff;
   background-color: $background;
-  color: $white;
-  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {

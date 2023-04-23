@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Styles from "./listagemEquipeStyles.scss";
-import {  deleteTeam, getAllTeams } from "@/main/api/api";
+import { deleteTeam, getAllTeams } from "@/main/api/api";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "@/main/contexts/authcontext";
 
 const MySwal = withReactContent(Swal);
 
 const ListagemEquipe: React.FC = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+
+  const { user } = useContext(AuthContext);
 
   const loadTeams = async () => {
     try {
@@ -47,10 +51,10 @@ const ListagemEquipe: React.FC = () => {
       confirmButtonColor: "#4FB4BC",
       cancelButtonText: "Cancelar",
       cancelButtonColor: "#A9A9A9",
-      width: '350px',
-      background:'#FAF0E6',
-      color: '#000',
-      reverseButtons: true
+      width: "350px",
+      background: "#FAF0E6",
+      color: "#000",
+      reverseButtons: true,
     }).then(async (r) => {
       if (r.isConfirmed) {
         try {
@@ -63,7 +67,7 @@ const ListagemEquipe: React.FC = () => {
             background: "#FAF0E6",
             color: "#000",
             confirmButtonColor: "#4FB4BC",
-          })
+          });
           loadTeams();
         } catch (e) {
           let errorMessage = e.response.data.message;
@@ -78,7 +82,7 @@ const ListagemEquipe: React.FC = () => {
             background: "#FAF0E6",
             color: "#000",
             confirmButtonColor: "#4FB4BC",
-          })
+          });
         }
       }
     });
@@ -116,22 +120,30 @@ const ListagemEquipe: React.FC = () => {
                   <td>{item.description}</td>
                   <td>
                     <div className={Styles.icons}>
-                      <i
-                        onClick={(e: any) => {
-                          handleEdit(e, item);
-                        }}
-                        className="material-icons"
-                      >
-                        create
-                      </i>
-                      <i
-                        onClick={(e: any) => {
-                          handleDelete(e, item);
-                        }}
-                        className="material-icons"
-                      >
-                        delete
-                      </i>
+                      {item.team_id === user.team.team_id ? (
+                        <></>
+                      ) : (
+                        <i
+                          onClick={(e: any) => {
+                            handleEdit(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          create
+                        </i>
+                      )}
+                      {item.team_id === user.team.team_id ? (
+                        <></>
+                      ) : (
+                        <i
+                          onClick={(e: any) => {
+                            handleDelete(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          delete
+                        </i>
+                      )}
                     </div>
                   </td>
                 </tr>

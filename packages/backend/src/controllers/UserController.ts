@@ -29,7 +29,7 @@ export class UserController {
             return res.status(201).json(newUser);
         } catch (error) {
             if (error.message.includes("duplicate key value violates unique constraint")) {
-                return res.status(500).json({ message: "Email já cadastrado" })
+                return res.status(500).json({ message: "E-mail já cadastrado." })
             }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
@@ -92,7 +92,7 @@ export class UserController {
                 const emailExists = await verifyEmailExists(email);
 
                 if (emailExists) {
-                    return res.status(400).json({ message: "Email já cadastrado" });
+                    return res.status(400).json({ message: "E-mail já cadastrado." });
                 }
             }
 

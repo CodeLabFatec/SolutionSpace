@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Styles from "./listagemGrupos.scss";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { deleteGroup, getAllGroups } from "@/main/api/api";
 
+import { AuthContext } from "@/main/contexts/authcontext";
+
 const MySwal = withReactContent(Swal);
 
 const ListagemGrupos: React.FC = () => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -16,7 +19,7 @@ const ListagemGrupos: React.FC = () => {
       const response = await getAllGroups();
       setData(response.data);
     } catch (e) {
-       MySwal.fire({
+      MySwal.fire({
         title: "Erro",
         html: "Ocorreu um erro ao carregar os grupos",
         width: "350px",
@@ -47,23 +50,23 @@ const ListagemGrupos: React.FC = () => {
       confirmButtonColor: "#4FB4BC",
       cancelButtonText: "Cancelar",
       cancelButtonColor: "#A9A9A9",
-      width: '350px',
-      background:'#FAF0E6',
-      color: '#000',
-      reverseButtons: true
+      width: "350px",
+      background: "#FAF0E6",
+      color: "#000",
+      reverseButtons: true,
     }).then(async (r) => {
       if (r.isConfirmed) {
         try {
           await deleteGroup(item.group_id);
 
-           MySwal.fire({
+          MySwal.fire({
             html: `Grupo ${item.group_name} excluído com sucesso!`,
             icon: "success",
             width: "350px",
             background: "#FAF0E6",
             color: "#000",
             confirmButtonColor: "#4FB4BC",
-          })
+          });
           loadGroups();
         } catch (e) {
           let errorMessage = e.response.data.message;
@@ -78,7 +81,7 @@ const ListagemGrupos: React.FC = () => {
             background: "#FAF0E6",
             color: "#000",
             confirmButtonColor: "#4FB4BC",
-          })
+          });
         }
       }
     });
@@ -116,22 +119,30 @@ const ListagemGrupos: React.FC = () => {
                   <td>{item.description}</td>
                   <td>
                     <div className={Styles.icons}>
-                      <i
-                        onClick={(e: any) => {
-                          handleEdit(e, item);
-                        }}
-                        className="material-icons"
-                      >
-                        create
-                      </i>
-                      <i
-                        onClick={(e: any) => {
-                          handleDelete(e, item);
-                        }}
-                        className="material-icons"
-                      >
-                        delete
-                      </i>
+                      {item.group_id === user.group.group_id ? (
+                        <></>
+                      ) : (
+                        <i
+                          onClick={(e: any) => {
+                            handleEdit(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          create
+                        </i>
+                      )}
+                      {item.group_id === user.group.group_id ? (
+                        <></>
+                      ) : (
+                        <i
+                          onClick={(e: any) => {
+                            handleDelete(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          delete
+                        </i>
+                      )}
                     </div>
                   </td>
                 </tr>

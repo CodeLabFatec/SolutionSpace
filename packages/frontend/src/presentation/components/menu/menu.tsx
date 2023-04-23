@@ -23,7 +23,7 @@ const SideMenu = () => {
   return (
     <div id="app" style={{ height: "100vh", display:"flex", position:"relative", left: "0" }}>
       <Sidebar
-        style={{ height: "108vh",color: "#4FB4BC" , border:"none", textAlign: "left"}}
+        style={{ height: "169vh",color: "#4FB4BC" , border:"none", textAlign: "left"}}
         backgroundColor="#333333"
         transitionDuration={1000}
         defaultCollapsed={true}

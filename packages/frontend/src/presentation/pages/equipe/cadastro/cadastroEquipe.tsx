@@ -170,21 +170,21 @@ const CadastroEquipe: React.FC = () => {
             <FormControlLabel
               control={<Switch  value={cadastrarUsuario}/>}
               onChange={handleCadatrarUsuario}
-              label="Poderá cadastrar usuários?"
+              label="Poderá gerenciar usuários?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
               control={<Switch value={cadastrarEquipe}/>}
               onChange={handleCadatrarEquipe}
-              label="Poderá cadastrar equipes?"
+              label="Poderá gerenciar equipes?"
               labelPlacement="start"
               id={Styles.Switch}
             />
             <FormControlLabel
               control={<Switch value={cadastrarGrupo} />}
               onChange={handleCadatrarGrupo}
-              label="Poderá cadastrar grupos?"
+              label="Poderá gerenciar grupos?"
               labelPlacement="start"
               id={Styles.Switch}
             />
