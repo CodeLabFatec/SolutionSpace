@@ -32,8 +32,19 @@ const ChamadoLista: React.FC<{
       ) {
         const response = await getAllRequests();
 
-        setChamados(response.data);
-        setChamadosFiltrados(response.data);
+        let requests: any[] = []
+
+        if(user.group.canRateAnalise){
+          requests = response.data.filter((x: any) => x.requestType === TipoChamado.FEATURE)
+        }
+
+        if(user.group.canRateAnalinhamento){
+          requests = response.data
+        }
+
+        setChamados(requests)
+        setChamadosFiltrados(requests)
+
       }
     } catch (e: any) {
       /* */

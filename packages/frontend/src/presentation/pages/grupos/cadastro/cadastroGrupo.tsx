@@ -104,7 +104,7 @@ const CadastroGrupo: React.FC = () => {
         color: "#000",
         confirmButtonColor: "#4FB4BC",
       }).then((r) => {
-        navigate("/team");
+        navigate("/groups");
       });
     } catch (e: any) {
       let errorMessage = e.response.data.message;
