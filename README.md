@@ -77,11 +77,9 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <p align="center"> <img width="1500" src = "./docs/images/sprint1.gif" /></p>
 
 <h4> Entrega da Sprint 2 </h4>
-<p align="center"> <img width="1500" src="" /> </p>
-  
+<p align="center"></p>
 
   https://user-images.githubusercontent.com/80860267/233869076-704b465b-4d16-4855-a218-adcaa374ca58.mp4
-
 
 <br />
 
