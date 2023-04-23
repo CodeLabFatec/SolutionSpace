@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import Styles from "./cadastroGrupo.scss"
@@ -30,7 +31,14 @@ const CadastroGrupo : React.FC =() => {
           equipes.push({ label: item.team_name, value: item.team_id })
         })
       } catch(e) {
-        Swal.fire('Erro', 'Ocorreu um erro ao carregar as equipes.', 'error')
+        MySwal.fire({
+          title: "Erro",
+          html: 'Ocorreu um erro ao carregar as equipes.',
+          width: "350px",
+          background: "#FAF0E6",
+          color: "#000",
+          confirmButtonColor: '#4FB4BC',
+        });
       }
     }
 
@@ -158,7 +166,7 @@ const CadastroGrupo : React.FC =() => {
         if (!descricaoGrupo || descricaoGrupo === '' || descricaoGrupo === ' ') {
           MySwal.fire({
             title: "Opss...",
-            html: "Descrição do grupo é obrigatório.",
+            html: "Descrição do grupo é obrigatória.",
             width: "350px",
             background: "#FAF0E6",
             color: "#000",

@@ -35,7 +35,7 @@ const ListagemGrupos: React.FC = () => {
   const handleEdit = (e: any, item: any) => {
     e.preventDefault();
 
-    navigate("/editGroups", { replace: true, state: item });
+    navigate("/editGroup", { replace: true, state: item });
   };
 
   const handleDelete = (e: any, item: any) => {

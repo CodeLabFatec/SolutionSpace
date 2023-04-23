@@ -21,6 +21,7 @@ import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe"
 import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
 import HomeFeature from "@/presentation/pages/home-solicitantes/Feature/homeFeature";
 import HomeHotfix from "@/presentation/pages/home-solicitantes/Hotfx/homeHotfix";
+import EdicaoGrupo from "@/presentation/pages/grupos/edicao/edicaoGrupo";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -255,7 +256,7 @@ const Router: React.FC = () => {
             path='/editGroup'
             element={
               <Private>
-                {/* <EdicaoEquipe /> */}
+                <EdicaoGrupo />
               </Private>
             }
           />

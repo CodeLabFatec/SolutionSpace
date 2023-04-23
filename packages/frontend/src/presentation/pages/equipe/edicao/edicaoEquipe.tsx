@@ -28,7 +28,14 @@ const EdicaoEquipe: React.FC = () => {
     const team = location.state
 
     if(!team){
-      Swal.fire('Erro', 'Ocorreu um erro ao carregar as informações da equipe a ser editada.', 'error')
+      MySwal.fire({
+        title: "Erro",
+        html: "Ocorreu um erro ao carregar as informações da equipe a ser editada.",
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: "#4FB4BC",
+      });
       navigate('/teams')
       return
     }
