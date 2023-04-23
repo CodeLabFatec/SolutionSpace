@@ -6,4 +6,23 @@
     position: absolute;
     top: 69px;
     left: 60px;
+    width: 96%;
+    height: 90vh;
+    overflow-y: scroll;
   }
+
+  .container::-webkit-scrollbar {
+    background-color: #333333;
+    border-radius: 4px;
+    width: 10px;
+  }
+  
+  .container::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background-color: #535252;
+    border-radius: 20px;
+  }
+  
