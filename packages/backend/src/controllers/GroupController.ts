@@ -1,6 +1,7 @@
 import { teamRepository } from '../repos/postgres/repositories/teamRepository'
 import { groupRepository } from '../repos/postgres/repositories/groupRepository'
 import { Request, Response } from 'express'
+import { checkGroupPermission } from '../utils/checkGroupPermissions'
 
 export class GroupController {
   async create(req: Request, res: Response) {
@@ -138,11 +139,26 @@ export class GroupController {
     try {
       const groups = await groupRepository.find({ where: { team: { team_id } } })
 
-      if (!groups) return res.status(404).json('Team not found')
+      if (!groups) return res.status(404).json('Groups not found for this team')
 
       return res.status(200).json(groups)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
+    }
+  }
+
+  async checkGroupPermission(req: Request, res: Response) {
+    const { group_id } = req.params;
+
+    try {
+      const userGroupPermissions = await checkGroupPermission(group_id);
+
+      if (!userGroupPermissions.groupName)
+        return res.status(404).json({ message: "Group not found" })
+
+      return res.status(200).json(userGroupPermissions)
+    } catch (error) {
+      return res.status(500).json({ message: `Internal Server Error - ${error}` });
     }
   }
 }
