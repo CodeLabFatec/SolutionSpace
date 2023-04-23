@@ -13,7 +13,7 @@
 <span id="mvp">
  
 <h1> :dart: MVP </h1>
-<p align="justify">O mvp dessa segunda entrega foi a adição dos cadastros de equipes e grupos e a inclusão dessas entidades ao fluxo de chamados e de sistema.</p>
+<p align="justify">O MVP dessa entrega foi a inclusão de permissões ao sistema e ao fluxo de chamados, por meio dos cadastros de equipes, grupos e usuários.</p>
   
 <span id="backlog">
 
@@ -38,12 +38,14 @@
 <span id="burndown">
 
 ## 📉  Burndown
+![burndownSprint2](https://user-images.githubusercontent.com/26208169/233863635-3b72093e-6e21-4b8b-b01f-6259619e9749.png)
 
 <br>  
 
 <span id="modeloConceitual">
 
 ## Modelo Conceitual das Entidades
+![modeloConceitualSprint2](https://user-images.githubusercontent.com/26208169/233863687-1e1b8507-bf11-4273-9e06-9a0a1bcbd87f.png)
 
 <br>
 
