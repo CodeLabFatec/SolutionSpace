@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export class TeamController {
     async create(req: Request, res: Response) {
-        const { team_name, description, permissionCreateUsers, permissionCreateTeams, 
+        const { team_name, description, permissionCreateUsers, permissionCreateTeams,
             permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
 
         if (!team_name || !description) {
@@ -12,20 +12,23 @@ export class TeamController {
 
         try {
             const newTeam = teamRepository.create(
-                { 
-                    team_name, 
+                {
+                    team_name,
                     description,
                     permissionCreateGroups,
-                    permissionCreateTeams, 
+                    permissionCreateTeams,
                     permissionCreateUsers,
-                    permissionEditRequests, 
-                    permissionUnarchiveRequests 
+                    permissionEditRequests,
+                    permissionUnarchiveRequests
                 });
 
             await teamRepository.save(newTeam);
 
             return res.status(201).json(newTeam);
         } catch (error) {
+            if (error.message.includes("duplicate key value violates unique constraint")) {
+                return res.status(500).json({ message: "Time já cadastrado" })
+            }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
     }
@@ -55,7 +58,7 @@ export class TeamController {
     }
 
     async editTeam(req: Request, res: Response) {
-        const { team_name, description, permissionCreateUsers, permissionCreateTeams, 
+        const { team_name, description, permissionCreateUsers, permissionCreateTeams,
             permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
         const { team_id } = req.params;
 
@@ -65,7 +68,8 @@ export class TeamController {
 
         try {
             const team = await teamRepository.findOne({
-                where: { team_id } });
+                where: { team_id }
+            });
 
             if (!team) return res.status(404).json('Team not found');
 
@@ -82,6 +86,9 @@ export class TeamController {
             return res.status(201).json(team);
         }
         catch (error) {
+            if (error.message.includes("duplicate key value violates unique constraint")) {
+                return res.status(500).json({ message: "Time já cadastrado" })
+            }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
     }
