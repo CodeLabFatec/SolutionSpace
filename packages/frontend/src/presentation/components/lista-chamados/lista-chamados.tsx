@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Styles from './lista-chamados.scss'
 
 import React, { useContext, useEffect, useState } from 'react'
@@ -25,8 +23,18 @@ const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiz
       } else if (props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS) {
         const response = await getAllRequests()
 
-        setChamados(response.data)
-        setChamadosFiltrados(response.data)
+        let requests: any[] = []
+
+        if(user.group.canRateAnalise){
+          requests = response.data.filter((x: any) => x.requestType === TipoChamado.FEATURE)
+        }
+
+        if(user.group.canRateAnalinhamento){
+          requests = response.data
+        }
+
+        setChamados(requests)
+        setChamadosFiltrados(requests)
       }
     } catch (e: any) {
       /* */
@@ -70,7 +78,6 @@ const ListaChamados: React.FC<{ chamadoState: any; visualizacaoChamado: Visualiz
           </div>
         </div>
         {chamadosFiltrados.map((item) => (
-          // eslint-disable-next-line react/jsx-key
           <div
             key={item.request_id}
             onClick={() => {
