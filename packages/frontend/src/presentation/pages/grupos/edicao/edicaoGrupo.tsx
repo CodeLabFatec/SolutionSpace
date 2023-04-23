@@ -5,8 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { getAllTeams, updateGroup } from "@/main/api/api";
-import Select from 'react-select'
-
+import Select from "react-select";
 
 const MySwal = withReactContent(Swal);
 
@@ -62,10 +61,10 @@ const EdicaoGrupo: React.FC = () => {
     setId(group.group_id);
     setNomeGrupo(group.group_name);
     setDescricaoGrupo(group.description);
-    setEquipe({ value: group.team.team_id, label: group.team.team_name })
+    setEquipe({ value: group.team.team_id, label: group.team.team_name });
     setSolicicitarFeature(group.canRequestFeatures);
     setSolicitarHotfix(group.canRequestHotfix);
-    setAvaliarAnaliseRisco(group.canRateAnalinhamento);
+    setAvaliarAnaliseRisco(group.canRateAnalise);
     setAnaliseObrigatoria(group.mustRateAnalise);
     setAvaliarAlinhamento(group.canRateAnalinhamento);
     setAlinhamentoObrigarorio(group.mustRateAnalinhamento);
@@ -86,6 +85,9 @@ const EdicaoGrupo: React.FC = () => {
 
   const handleAvaliarAnaliseRisco = () => {
     setAvaliarAnaliseRisco(!avaliarAnaliseRisco);
+    if (analiseObrigatoria == true) {
+      setAvaliarAnaliseRisco(true);
+    }
   };
 
   const handleAvaliarAlinhamento = () => {
@@ -94,6 +96,9 @@ const EdicaoGrupo: React.FC = () => {
 
   const handleAnaliseObrigatoria = () => {
     setAnaliseObrigatoria(!analiseObrigatoria);
+    if (avaliarAnaliseRisco == false) {
+      setAvaliarAnaliseRisco(true);
+    }
   };
 
   const handleAlinhamentoObrigarorio = () => {
@@ -206,8 +211,6 @@ const EdicaoGrupo: React.FC = () => {
     });
   };
 
-
-
   return (
     <div className={Styles.container}>
       <div className={Styles.H1cadastroGrupo}>
@@ -236,16 +239,16 @@ const EdicaoGrupo: React.FC = () => {
               ></input>
               <label htmlFor="nome">Equipe</label>
               <div style={{ width: "100%" }}>
-              <Select
-                isSearchable={true}
-                onChange={(e: any) => {
-                  setEquipe(e)
-                }}
-                value={equipe}
-                options={equipes}
-                styles={selectStyles}
-                placeholder={'Selecione...'}
-              />
+                <Select
+                  isSearchable={true}
+                  onChange={(e: any) => {
+                    setEquipe(e);
+                  }}
+                  value={equipe}
+                  options={equipes}
+                  styles={selectStyles}
+                  placeholder={"Selecione..."}
+                />
               </div>
             </div>
             <div className={Styles.permissionsContainer}>
@@ -338,33 +341,33 @@ const EdicaoGrupo: React.FC = () => {
 const selectStyles = {
   menuList: (styles: any) => ({
     ...styles,
-    background: '#333333',
-    color: '#FFF'
+    background: "#333333",
+    color: "#FFF",
   }),
   option: (styles: any) => ({
     ...styles,
-    backgroundColor: '#333333',
-    zIndex: 1
+    backgroundColor: "#333333",
+    zIndex: 1,
   }),
   menu: (base: any) => ({
     ...base,
-    marginLeft: '0',
-    width: '550px',
-    zIndex: 100
+    marginLeft: "0",
+    width: "550px",
+    zIndex: 100,
   }),
   control: (styles: any) => ({
     ...styles,
-    width: '1200px',
-    backgroundColor: '#333333',
-    border: 'none',
-    borderRadius: '4px',
-    boxShadow: 'none',
-    margin: '7px 0 17px 0'
+    width: "1200px",
+    backgroundColor: "#333333",
+    border: "none",
+    borderRadius: "4px",
+    boxShadow: "none",
+    margin: "7px 0 17px 0",
   }),
   singleValue: (styles: any) => ({
     ...styles,
-    color: '#FFF'
-  })
-}
+    color: "#FFF",
+  }),
+};
 
 export default EdicaoGrupo;
