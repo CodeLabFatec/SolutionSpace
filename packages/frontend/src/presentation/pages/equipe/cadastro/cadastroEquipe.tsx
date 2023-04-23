@@ -159,7 +159,7 @@ const CadastroEquipe: React.FC = () => {
   return (
     <div className={Styles.container}>
       <div className={Styles.H1CadastroEquipe}>
-        <h1>Cadastrar equipe</h1>
+        <h1>Cadastro de equipe</h1>
         <hr />
       </div>
       <form onSubmit={handleSubmit} className={Styles.formEquipe}>

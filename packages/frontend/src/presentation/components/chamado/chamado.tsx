@@ -3,7 +3,7 @@ import { TipoChamado } from '@/main/enums/tipo-chamado'
 import Styles from './chamado-styles.scss'
 
 import React from 'react'
-import { type ChamadoType } from '../lista-chamados/lista-chamados'
+import { ChamadoType } from '@/main/types'
 
 const Chamado: React.FC<{ chamado: ChamadoType }> = (props) => {
   const backgroundTipoChamado: any =

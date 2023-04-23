@@ -2,7 +2,7 @@ import { MakeChamados, MakeLogin } from "@/main/factories/pages";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { EdicaoEquipe, HomeSolicitantes } from "@/presentation/pages";
+import { EdicaoEquipe, Home } from "@/presentation/pages";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { MakeFormularioChamados } from "../factories/pages/formularioChamados-factory";
 import { TipoChamado } from "../enums/tipo-chamado";
@@ -19,8 +19,6 @@ import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
 import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
-import HomeFeature from "@/presentation/pages/home-solicitantes/Feature/homeFeature";
-import HomeHotfix from "@/presentation/pages/home-solicitantes/Hotfx/homeHotfix";
 import EdicaoGrupo from "@/presentation/pages/grupos/edicao/edicaoGrupo";
 
 const Router: React.FC = () => {
@@ -106,23 +104,7 @@ const Router: React.FC = () => {
             path="/home"
             element={
               <Private>
-                <HomeSolicitantes />
-              </Private>
-            }
-          />
-          <Route
-            path="/homeFeature"
-            element={
-              <Private>
-                <HomeFeature />
-              </Private>
-            }
-          />
-          <Route
-            path="/homeHotfix"
-            element={
-              <Private>
-                <HomeHotfix />
+                <Home />
               </Private>
             }
           />

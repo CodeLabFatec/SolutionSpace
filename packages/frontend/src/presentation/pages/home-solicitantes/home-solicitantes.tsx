@@ -1,25 +1,69 @@
 import { BotaoSolicitar } from '@/presentation/components'
 import Styles from './home-solicitantes-styles.scss'
 
-import React from 'react'
-import Footer from '@/presentation/components/footer/footer'
-import { TipoChamado } from '@/main/enums/tipo-chamado'
+import React, { useContext } from 'react'
+import { TipoChamado } from '@/main/enums'
+import { AuthContext } from '@/main/contexts/authcontext'
 
-const HomeSolicitantes: React.FC = () => {
-  return (
-    <div className={Styles.container}> 
-      <div className={Styles.abrirChamadoLabel}>
-        <h1>Abrir chamado</h1>
-      </div>
-      <div className={Styles.retanguloHomeSolicitantes}>
+const Home: React.FC = () => {
+
+  const { user } = useContext(AuthContext)
+
+  const BotaoUnicoHotfix = () => {
+    if(user.group.canRequestHotfix && !user.group.canRequestFeatures){
+      return (
+        <div className={Styles.botaoHome}>
+          <BotaoSolicitar tipoChamado={TipoChamado.HOTFIX} />
+        </div>
+      )
+    }
+    return <></>
+  }
+
+  const BotaoUnicoFeature = () => {
+    if(!user.group.canRequestHotfix && user.group.canRequestFeatures){
+      return (
+        <div className={Styles.botaoHome}>
+          <BotaoSolicitar tipoChamado={TipoChamado.FEATURE} />
+        </div>
+      )
+    }
+    return <></>
+  }
+
+  const BotaoGeral = () => {
+    if(user.group.canRequestHotfix && user.group.canRequestFeatures){
+      return (
         <div className={Styles.botoesHomeSolicitantes}>
           <BotaoSolicitar tipoChamado={TipoChamado.FEATURE} />
           <BotaoSolicitar tipoChamado={TipoChamado.HOTFIX} />
         </div>
-      </div>
-      {/* <Footer /> */}
+      )
+    }
+    return <></>
+  }
+
+  return (
+    <div className={Styles.container}> 
+      {user.group.canRequestHotfix || user.group.canRequestFeatures ? (
+        <>
+          <div className={Styles.abrirChamadoLabel}>
+            <h1>Abrir chamado</h1>
+          </div>
+          <div className={Styles.retanguloHomeSolicitantes}>
+            <BotaoUnicoHotfix />
+            <BotaoUnicoFeature />
+            <BotaoGeral />
+          </div>
+        </>
+      ) :
+      <>
+        <div className={Styles.abrirChamadoLabel}>
+          <h1>Abrir chamado</h1>
+          </div>
+      </>}
     </div>
   )
 }
 
-export default HomeSolicitantes
+export default Home

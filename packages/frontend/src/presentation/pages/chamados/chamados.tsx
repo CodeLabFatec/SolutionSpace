@@ -2,10 +2,10 @@ import { InfoChamado } from "@/presentation/components";
 import Styles from "./chamados-styles.scss";
 
 import React, { useEffect, useState } from "react";
-import { ChamadoType } from "@/presentation/components/lista-chamados/lista-chamados";
 import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import ChamadoLista from "@/presentation/components/chamadosLista/chamadoLista";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { ChamadoType } from "@/main/types";
 
 const Chamados: React.FC<{ visualizacaoChamado: VisualizarChamado }> = (
   props
