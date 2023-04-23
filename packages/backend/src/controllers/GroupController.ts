@@ -46,6 +46,9 @@ export class GroupController {
 
       return res.status(201).json(newGroup)
     } catch (error) {
+      if (error.message.includes("duplicate key value violates unique constraint")) {
+        return res.status(500).json({ message: "Grupo já cadastrado" })
+      }
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
   }
@@ -82,6 +85,9 @@ export class GroupController {
       return res.status(200).json({ group })
 
     } catch (error) {
+      if (error.message.includes("duplicate key value violates unique constraint")) {
+        return res.status(500).json({ message: "Grupo já cadastrado" })
+      }
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
   }
@@ -104,7 +110,7 @@ export class GroupController {
 
   async listGroups(req: Request, res: Response) {
     try {
-      const groups = await groupRepository.find({ relations:{ team:true } })
+      const groups = await groupRepository.find({ relations: { team: true } })
 
       return res.status(200).json(groups)
     } catch (error) {
@@ -132,8 +138,8 @@ export class GroupController {
     try {
       const groups = await groupRepository.find({ where: { team: { team_id } } })
 
-      if(!groups) return res.status(404).json('Team not found')
-      
+      if (!groups) return res.status(404).json('Team not found')
+
       return res.status(200).json(groups)
     } catch (error) {
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
