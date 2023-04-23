@@ -27,7 +27,7 @@ export class TeamController {
             return res.status(201).json(newTeam);
         } catch (error) {
             if (error.message.includes("duplicate key value violates unique constraint")) {
-                return res.status(500).json({ message: "Time já cadastrado" })
+                return res.status(500).json({ message: "Equipe já cadastrada." })
             }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
@@ -87,7 +87,7 @@ export class TeamController {
         }
         catch (error) {
             if (error.message.includes("duplicate key value violates unique constraint")) {
-                return res.status(500).json({ message: "Time já cadastrado" })
+                return res.status(500).json({ message: "Equipe já cadastrada." })
             }
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }

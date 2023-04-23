@@ -47,7 +47,7 @@ export class GroupController {
       return res.status(201).json(newGroup)
     } catch (error) {
       if (error.message.includes("duplicate key value violates unique constraint")) {
-        return res.status(500).json({ message: "Grupo já cadastrado" })
+        return res.status(500).json({ message: "Grupo já cadastrado." })
       }
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }
@@ -86,7 +86,7 @@ export class GroupController {
 
     } catch (error) {
       if (error.message.includes("duplicate key value violates unique constraint")) {
-        return res.status(500).json({ message: "Grupo já cadastrado" })
+        return res.status(500).json({ message: "Grupo já cadastrado." })
       }
       return res.status(500).json({ message: `Internal Server Error - ${error}` })
     }

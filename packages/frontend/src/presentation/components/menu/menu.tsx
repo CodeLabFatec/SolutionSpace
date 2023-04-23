@@ -21,7 +21,7 @@ const SideMenu = () => {
   const { user } = useContext(AuthContext)
 
   return (
-    <div id="app" style={{ height: "100vh", display:"flex", position:"relative", left: "0" }}>
+    <div id="app" style={{ height: "auto", display:"flex", position:"relative", left: "0" }}>
       <Sidebar
         style={{ height: "108vh",color: "#4FB4BC" , border:"none", textAlign: "left"}}
         backgroundColor="#333333"
