@@ -69,6 +69,7 @@ export class GroupController {
 
       group.group_name = group_name
       group.team = team
+      group.description = description
       group.canRequestFeatures = canRequestFeatures
       group.canRequestHotfix = canRequestHotfix
       group.canRateAnalinhamento = canRateAnalinhamento
@@ -103,7 +104,7 @@ export class GroupController {
 
   async listGroups(req: Request, res: Response) {
     try {
-      const groups = await groupRepository.find()
+      const groups = await groupRepository.find({ relations:{ team:true } })
 
       return res.status(200).json(groups)
     } catch (error) {

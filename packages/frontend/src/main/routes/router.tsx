@@ -13,11 +13,13 @@ import SideMenu from "@/presentation/components/menu/menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header } from "@/presentation/components";
 import { MakeCadastroUsuarios } from '../factories/pages/cadastro-usuarios'
+import CadastroGrupo from "@/presentation/pages/cadastroGrupo/cadastroGrupo";
 import { MakeListagemUsuarios } from '../factories/pages/listagem-usuarios'
 import { MakeEdicaoUsuario } from '../factories/pages/edicao-usuarios'
 import CadastroEquipe from "@/presentation/pages/equipe/cadastro/cadastroEquipe";
 import ListagemEquipe from "@/presentation/pages/equipe/listagem/listagemEquipe";
 import ListagemGrupos from "@/presentation/pages/grupos/listagem/listagemGrupos";
+import EdicaoGrupo from "@/presentation/pages/grupos/edicao/edicaoGrupo";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -168,6 +170,14 @@ const Router: React.FC = () => {
               </Private>
             }
           />
+           <Route
+            path='/newGroup'
+            element={
+              <Private>
+                <CadastroGrupo/>
+              </Private>
+            }
+         />
           <Route
             path='/users'
             element={
@@ -228,7 +238,7 @@ const Router: React.FC = () => {
             path='/editGroup'
             element={
               <Private>
-                {/* <EdicaoEquipe /> */}
+                <EdicaoGrupo />
               </Private>
             }
           />

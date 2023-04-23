@@ -46,7 +46,14 @@ const EdicaoUsuario: React.FC = () => {
     const user = location.state
 
     if(!user){
-      Swal.fire('Erro', 'Ocorreu um erro ao carregar as informações do usuário a ser editado.', 'error')
+      MySwal.fire({
+        title: "Erro",
+        html: 'Ocorreu um erro ao carregar as informações do usuário a ser editado.',
+        width: "350px",
+        background: "#FAF0E6",
+        color: "#000",
+        confirmButtonColor: '#4FB4BC',
+      });
       navigate('/users')
       return
     }
