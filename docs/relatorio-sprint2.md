@@ -31,9 +31,11 @@
 <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "./images/sprint2.gif"></p>
-<br>
+<p align="center"></p>
 
+  https://user-images.githubusercontent.com/80860267/233869076-704b465b-4d16-4855-a218-adcaa374ca58.mp4
+
+<br />
 
 <span id="burndown">
 
