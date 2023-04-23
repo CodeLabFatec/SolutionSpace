@@ -1,6 +1,4 @@
-/* eslint-disable no-empty */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Styles from "./info-chamado-styles.scss";
 import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import { useNavigate } from "react-router-dom";
@@ -8,16 +6,20 @@ import Modal from "../modal/modal";
 import { getRatingsByRequest } from "@/main/api/api";
 import { TipoChamado } from "@/main/enums/tipo-chamado";
 import { ChamadoType } from "@/main/types";
+import { AuthContext } from "@/main/contexts/authcontext";
 
 const InfoChamado: React.FC<{
   chamado: ChamadoType | undefined;
   visualizacaoChamado: VisualizarChamado;
 }> = (props) => {
+
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext)
+
   const [openModal, setOpenModal] = useState(false);
   const [rating, setRating] = useState<any>(null);
 
-  const applyMarginToButton =
+  const applyMarginToButton: any =
     props.chamado?.status === "Aprovado" ||
     props.chamado?.status === "Arquivado"
       ? { marginRight: "8vh" }
@@ -58,8 +60,7 @@ const InfoChamado: React.FC<{
 
     if (props.chamado.files.length <= 0) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    props.chamado.files.forEach(async (file) => {
+    props.chamado.files.forEach(async (file: any) => {
       await downloadBase64File(file.ext, file.base64, file.file_name);
     });
   };
@@ -115,75 +116,77 @@ const InfoChamado: React.FC<{
             )}
           </div>
 
-          <div className={Styles.botoesInfochamado}>
-            {props.chamado.status === "Arquivado" ? (
-              <></>
-            ) : props.chamado.status === "Aprovado" ? (
-              <></>
-            ) : props.chamado.requestStep === "Analise de risco" ? (
-              <button
-                className={Styles.botaoAvaliar}
-                onClick={() => {
-                  navigate("/riskAnalysis", {
-                    replace: true,
-                    state: props.chamado,
-                  });
-                }}
-              >
-                Avaliar
-              </button>
-            ) : (
-              <button
-                className={Styles.botaoAvaliar}
-                onClick={() => {
-                  navigate("/strategicAlignment", {
-                    replace: true,
-                    state: props.chamado,
-                  });
-                }}
-              >
-                Avaliar
-              </button>
-            )}
-
-            {rating != null ? (
-              <>
+          {props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS ? (
+            <div className={Styles.botoesInfochamado}>
+              {props.chamado.status === "Arquivado" ? (
+                <></>
+              ) : props.chamado.status === "Aprovado" ? (
+                <></>
+              ) : (user.group.canRateAnalise || user.group.mustRateAnalise) && props.chamado.requestStep === "Analise de risco" ? (
                 <button
-                  style={applyMarginToButton}
-                  className={Styles.botaoVisualizarAnalise}
+                  className={Styles.botaoAvaliar}
                   onClick={() => {
-                    setOpenModal(true);
+                    navigate("/riskAnalysis", {
+                      replace: true,
+                      state: props.chamado,
+                    });
                   }}
                 >
-                  Visualizar avaliação
+                  Avaliar
                 </button>
-                <Modal
-                  isOpen={openModal}
-                  titulo={
-                    rating != null
-                      ? rating.title +
-                        " - " +
-                        rating.user.name +
-                        " (Avaliação: " +
-                        rating.rating +
-                        ")"
-                      : "Avaliação"
-                  }
-                  setModalClose={() => {
-                    setOpenModal(!openModal);
+              ) : (user.group.canRateAnalinhamento || user.group.mustRateAnalinhamento) ? (
+                <button
+                  className={Styles.botaoAvaliar}
+                  onClick={() => {
+                    navigate("/strategicAlignment", {
+                      replace: true,
+                      state: props.chamado,
+                    });
                   }}
                 >
-                  {rating != null ? (
-                    <p>{rating.description}</p>
-                  ) : (
-                    <p>Ocorreu um erro ao carregar a avaliação.</p>
-                  )}
-                </Modal>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
+                  Avaliar
+                </button>
+              ) : <></>}
+
+              {(user.group.canRateAnalise || user.group.canRateAnalinhamento) && rating != null ? (
+                <>
+                  <button
+                    style={applyMarginToButton}
+                    className={Styles.botaoVisualizarAnalise}
+                    onClick={() => {
+                      setOpenModal(true);
+                    }}
+                  >
+                    Visualizar avaliação
+                  </button>
+                  <Modal
+                    isOpen={openModal}
+                    titulo={
+                      rating != null
+                        ? rating.title +
+                          " - " +
+                          rating.user.name +
+                          " (Avaliação: " +
+                          rating.rating +
+                          ")"
+                        : "Avaliação"
+                    }
+                    setModalClose={() => {
+                      setOpenModal(!openModal);
+                    }}
+                  >
+                    {rating != null ? (
+                      <p>{rating.description}</p>
+                    ) : (
+                      <p>Ocorreu um erro ao carregar a avaliação.</p>
+                    )}
+                  </Modal>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          ): <></>}
         </div>
       );
     }
