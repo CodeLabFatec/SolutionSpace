@@ -28,31 +28,31 @@
 
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
 
-| Sprint | Atividade |       Status       |
-| :----: | :-------- | :----------------: |
-|   01   |   Criação da página home para solicitantes   | :heavy_check_mark: |
-|   01   |   Criação da página para cadastro de chamados (Feature/Hotfix)   | :heavy_check_mark: |
-|   01   |   Criação da página de listagem de chamados individual   | :heavy_check_mark: |
-|   01   |   Criação da página de listagem de chamados   | :heavy_check_mark: |
-|   01   |   Criação da página de realização da etapa 'análise de risco'   | :heavy_check_mark: |
-|   01   |   Criação da página de realização da etapa 'alinhamento estratégico'   | :heavy_check_mark: |
-|   01   |   Criação da página de login   | :heavy_check_mark: |
+| Sprint | Atividade |       Status       |       Prioridade       |
+| :----: | :-------- | :----------------: | :----------------: |
+|   01   |   Criação da página home para solicitantes   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página para cadastro de chamados (Feature/Hotfix)   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página de listagem de chamados individual   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página de listagem de chamados   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página de realização da etapa 'análise de risco'   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página de realização da etapa 'alinhamento estratégico'   | :heavy_check_mark: | Alta |
+|   01   |   Criação da página de login   | :heavy_check_mark: | Alta |
 |    |
-|   02   |   Criação de páginas para cadastro, listagem e edição de usuários   | :heavy_check_mark: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :heavy_check_mark: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :heavy_check_mark: |
-|   02   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :heavy_check_mark: |
-|   02   |   Adição de permissões de equipes ao fluxo de chamados   | :heavy_check_mark: |
-|   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: |
+|   02   |   Criação de páginas para cadastro, listagem e edição de usuários   | :heavy_check_mark: | Alta |
+|   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :heavy_check_mark: | Alta |
+|   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :heavy_check_mark: | Alta |
+|   02   |   Adição de permissões de equipes ao fluxo de chamados   | :heavy_check_mark: | Média |
+|   02   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: | Média |
+|   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: | Média |
 |    |
-|   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: |
-|   03   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: |
-|   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: |
-|   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: |
+|   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: | Média |
+|   03   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :heavy_check_mark: | Média |
+|   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Média |
+|   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: | Média |
 |    |
-|   04   |   Realizar ajustes nos layouts das páginas  | :hourglass: |
-|   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: |
-|   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: |
+|   04   |   Realizar ajustes nos layouts das páginas  | :hourglass: | Baixa |
+|   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: | Baixa |
+|   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: | Baixa |
 
 <br>
 
