@@ -42,11 +42,11 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   02   |   Criação de páginas para cadastro, listagem e edição de equipes   | :heavy_check_mark: | Alta |
 |   02   |   Criação de páginas para cadastro, listagem e edição de grupos   | :heavy_check_mark: | Alta |
 |   02   |   Adição de permissões de equipes ao fluxo de chamados   | :heavy_check_mark: | Média |
-|   02   |   Adição de permissões de nível de sistema aos usuário   | :hourglass: | Média |
+|   02   |   Adição de permissões de nível de sistema aos usuário   | :heavy_check_mark: | Média |
 |   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: | Média |
 |    |
 |   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: | Média |
-|   03   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :heavy_check_mark: | Média |
+|   03   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :hourglass: | Média |
 |   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Média |
 |   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: | Média |
 |    |
