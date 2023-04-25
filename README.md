@@ -47,9 +47,9 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |    |
 |   03   |   Adicionar controle de status de chamados (Kanban)   | :hourglass: | Média |
 |   03   |   Criação de páginas para cadastro, listagem e edição de status de chamados   | :hourglass: | Média |
-|   03   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Média |
 |   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: | Média |
 |    |
+|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Média |
 |   04   |   Realizar ajustes nos layouts das páginas  | :hourglass: | Baixa |
 |   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: | Baixa |
 |   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: | Baixa |
