@@ -107,6 +107,10 @@ export const getAllRequests = async () => {
   return api.get('/listRequests')
 }
 
+export const getAllArchivedRequests = async () => {
+  return api.get('/listArchivedRequests')
+}
+
 export const getAllRequestsByUser = async (userid: string) => {
   return api.get('/listRequestsByUser/' + userid)
 }
@@ -179,4 +183,8 @@ export const updateGroup = async (
   mustRateAnalise :boolean
   ) => {
   return api.put('/updateGroup', {group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+}
+
+export const unarchiveRequest = async (request_id: string) => {
+  return api.post('/unarchiveRequest/' + request_id)
 }
