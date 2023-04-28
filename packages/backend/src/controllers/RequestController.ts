@@ -7,6 +7,7 @@ import { ratingRepository } from '../repos/postgres/repositories/ratingRepositor
 import { In } from 'typeorm';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { File } from '../repos/postgres/entitites/File';
+import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 
 export class RequestController {
     async create(req: Request, res: Response) {
@@ -166,4 +167,83 @@ export class RequestController {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
     }
+
+    async listArchivedRequests(req: Request, res: Response) {
+        try {
+            const requests = await requestRepository.find({
+                where: { status: 'Arquivado' },
+                relations: { user: { team: true, group: true }, files: true }
+            });
+
+            return res.status(200).json(requests);
+        } catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
+    async unarchiveRequest(req: Request, res: Response) {
+        const { request_id } = req.params;
+
+        try {
+            const request = await requestRepository.findOne({
+                where: { request_id: request_id }
+            });
+
+            if (!request) return res.status(404).json('Request not found');
+
+            if(request.requestType === RequestType.HOTFIX) {
+                requestRepository.save({
+                    ...request,
+                    status: 'Aberto'
+                })
+
+                return res.status(200).json({ request })
+            }else {
+
+                if(request.requestStep === RequestStep.ANALISE_RISCO) {
+                    requestRepository.save({
+                        ...request,
+                        status: 'Aberto'
+                    })
+
+                    return res.status(200).json({ request })
+                }else if(request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO) {
+                                       
+                    const requestRatings = await ratingRepository.find(
+                        { where: { request: { request_id } } }
+                    )
+
+                    if(!requestRatings || requestRatings.length === 0) return res.status(404).json('Ratings not found for this request.')
+
+                    const analiseRiscoRatings = requestRatings.find(r=> r.requestStep === RequestStep.ANALISE_RISCO)
+
+                    if(!analiseRiscoRatings) return res.status(404).json('Rating not found for this request.')
+
+                    const rating = analiseRiscoRatings.rating
+
+                    const statusConfig = await statusConfigurationRepository.findOne({
+                        where: {
+                            rating,
+                            requestStep: request.requestStep as RequestStep
+                        }
+                    });
+                    
+                    if(!statusConfig) return res.status(404).json('Status not found.')
+
+                    requestRepository.save({
+                        ...request,
+                        status: statusConfig.status
+                    })
+
+                    return res.status(200).json({ request })
+                }
+
+            }
+
+            return res.status(404).json('Um erro inesperado ocorreu.')
+        } catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+    
 }

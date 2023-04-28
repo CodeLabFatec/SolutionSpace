@@ -38,6 +38,8 @@ router.get('/listRequestsByUser/:user_id', authMiddleware, new RequestController
 router.get('/listRequestsByTeam/:user_id', authMiddleware, new RequestController().listRequestsByTeam);
 router.get('/request/:id', authMiddleware, new RequestController().getRequestById);
 router.post('/createRequest/:userId', authMiddleware, new RequestController().create);
+router.post('/listArchivedRequests', authMiddleware, new RequestController().listArchivedRequests)
+router.post('/unarchiveRequest/:request_id', authMiddleware, new RequestController().unarchiveRequest)
 
 // Rating
 router.get('/listRatings', authMiddleware, new RatingController().listRatings);
