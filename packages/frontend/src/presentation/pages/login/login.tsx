@@ -2,10 +2,7 @@ import React, { useState, useContext } from 'react'
 import Styles from './login.scss'
 import { LogoMenor } from '@/presentation/components'
 import { AuthContext } from '@/main/contexts/authcontext'
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from '@/main/services';
 
 const Login: React.FC = () => {
 
@@ -13,19 +10,17 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const alert = useAlert()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
     if (email == null || email === '' || email === ' ' || password == null || password === '' || password === ' ') {
-      MySwal.fire({
-        title: "Opss...",
-        html: "E-mail ou senha inválidos.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
+
+      alert.criarAlerta({
+        title: 'Opss...',
+        html: 'E-mail ou senha inválidos.'
+      })
       return
     }
 

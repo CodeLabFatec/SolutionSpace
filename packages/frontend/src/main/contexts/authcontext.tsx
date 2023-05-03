@@ -1,10 +1,7 @@
 import { useEffect, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createSession, api, verifyToken } from '../api/api'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+import { useAlert } from '../services'
 
 export const AuthContext = createContext({} as any)
 
@@ -12,6 +9,7 @@ export const AuthProvider = ({ children }: any) => {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const alert = useAlert()
 
   const loadCookies = async () => {
     const recoveredUser = localStorage.getItem('user')
@@ -79,13 +77,9 @@ export const AuthProvider = ({ children }: any) => {
         errorMessage = responseMessage
       }
 
-      MySwal.fire({
-        title: 'Opss...',
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
       })
     }
   }

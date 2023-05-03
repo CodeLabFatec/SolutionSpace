@@ -2,16 +2,14 @@ import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import Styles from "./edicaoGrupo.scss";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { getAllTeams, updateGroup } from "@/main/api/api";
 import Select from "react-select";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const EdicaoGrupo: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const alert = useAlert()
 
   const [id, setId] = useState<string>("");
   const [nomeGrupo, setNomeGrupo] = useState("");
@@ -32,14 +30,11 @@ const EdicaoGrupo: React.FC = () => {
         equipes.push({ label: item.team_name, value: item.team_id });
       });
     } catch (e) {
-      MySwal.fire({
-        title: "Erro",
-        html: "Ocorreu um erro ao carregar as equipes.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar as equipes.',
+        title: 'Erro'
+      })
     }
   };
 
@@ -47,14 +42,11 @@ const EdicaoGrupo: React.FC = () => {
     const group = location.state;
 
     if (!group) {
-      MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
+        icon: 'error',
         html: "Ocorreu um erro ao carregar as informações do grupo a ser editado.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro'
+      })
       navigate("/groups");
       return;
     }
@@ -120,16 +112,13 @@ const EdicaoGrupo: React.FC = () => {
         analiseObrigatoria
       );
 
-      MySwal.fire({
-        html: "Grupo alterado com sucesso.",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate("/groups");
-      });
+      alert.criarAlerta({
+        icon: 'success',
+        html: 'Grupo alterado com sucesso.',
+        confirmAction: () => {
+          navigate("/groups");
+        }
+      })
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
@@ -142,14 +131,10 @@ const EdicaoGrupo: React.FC = () => {
           "Você precisa estar autenticado para realizar essa operação.";
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   };
 
@@ -157,58 +142,36 @@ const EdicaoGrupo: React.FC = () => {
     e.preventDefault();
 
     if (!nomeGrupo || nomeGrupo === "" || nomeGrupo === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Nome do grupo é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (!descricaoGrupo || descricaoGrupo === "" || descricaoGrupo === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Descrição do grupo é obrigatória.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (!equipe || equipe.value === "" || equipe.value === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Escolha de uma equipe é obrigatória.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
       title: "Aviso",
-      html: "Deseja alterar grupo?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
+      html: "Deseja alterar o grupo?",
+      confirmAction: () => {
         handleRequest();
       }
-    });
+    })
   };
 
   return (

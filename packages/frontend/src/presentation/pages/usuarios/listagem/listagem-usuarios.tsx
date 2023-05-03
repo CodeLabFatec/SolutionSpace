@@ -1,15 +1,13 @@
 import { useEffect, useState, useContext } from "react";
 import Styles from "./listagem-usuarios-styles.scss";
 import { deleteUser, getAllUsers } from "@/main/api/api";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/main/contexts/authcontext";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const ListagemUsuarios: React.FC = () => {
   const navigate = useNavigate();
+  const alert = useAlert()
   const [data, setData] = useState([]);
 
   const { user } = useContext(AuthContext)
@@ -19,14 +17,11 @@ const ListagemUsuarios: React.FC = () => {
       const response = await getAllUsers();
       setData(response.data.users);
     } catch (e) {
-       MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
+        icon: 'error',
         html: "Ocorreu um erro ao carregar os usuários",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro'
+      }) 
     }
   };
 
@@ -43,30 +38,17 @@ const ListagemUsuarios: React.FC = () => {
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
-    MySwal.fire({
+    alert.criarConfirmacao({
+      title: "Aviso",
       html: `Deseja excluir ${item.name}?`,
-      showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: '350px',
-      background:'#FAF0E6',
-      color: '#000',
-      reverseButtons: true
-    }).then(async (r) => {
-      if (r.isConfirmed) {
+      confirmAction: async () => {
         try {
           await deleteUser(item.user_id);
 
-           MySwal.fire({
-            html: `Usuário ${item.name} excluído com sucesso!`,
-            icon: "success",
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          })
+          alert.criarAlerta({
+            icon: 'success',
+            html: `Usuário ${item.name} excluído com sucesso!`
+          }) 
           loadUsers();
         } catch (e) {
           let errorMessage = e.response.data.message;
@@ -74,17 +56,14 @@ const ListagemUsuarios: React.FC = () => {
             errorMessage =
               "Existem chamados vinculadas este usuário.";
           }
-          MySwal.fire({
-            title: "Erro",
+          alert.criarAlerta({
+            icon: 'error',
             html: errorMessage,
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          })
-        }
+            title: 'Erro'
+          }) 
+        }      
       }
-    });
+    })
   };
 
   return (

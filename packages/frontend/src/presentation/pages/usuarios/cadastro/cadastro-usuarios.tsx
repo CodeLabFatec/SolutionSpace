@@ -3,13 +3,10 @@ import { SelectType } from "@/presentation/components";
 import Styles from "./cadastro-usuarios-styles.scss";
 import React, { useState, useEffect } from "react";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { createUser, getAllTeams, getGroupsByTeam } from "@/main/api/api";
 import Select from "react-select";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const CadastroUsuarios: React.FC = () => {
   const [nome, setNome] = useState<string>("");
@@ -23,6 +20,7 @@ const CadastroUsuarios: React.FC = () => {
   const [grupos] = useState<any[]>([]);
 
   const navigate = useNavigate();
+  const alert = useAlert();
 
   const generos = [
     { value: "male", label: "Masculino" },
@@ -37,7 +35,11 @@ const CadastroUsuarios: React.FC = () => {
         equipes.push({ label: item.team_name, value: item.team_id });
       });
     } catch (e) {
-      Swal.fire("Erro", "Ocorreu um erro ao carregar as equipes.", "error");
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar as equipes.',
+        title: 'Erro'
+      })
     }
   };
 
@@ -52,16 +54,14 @@ const CadastroUsuarios: React.FC = () => {
     try {
       await createUser(nome, email, senha, genero, equipe, grupo.value);
 
-      MySwal.fire({
-        html: "Usuário salvo com sucesso.",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate("/users");
-      });
+      alert.criarAlerta({
+        icon: 'success',
+        html: 'Usuário salvo com sucesso.',
+        confirmAction: () => {
+          navigate("/users");
+        }
+      })
+
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
@@ -88,14 +88,10 @@ const CadastroUsuarios: React.FC = () => {
         errorMessage = "E-mail já cadastrado.";
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   };
 
@@ -114,130 +110,84 @@ const CadastroUsuarios: React.FC = () => {
     e.preventDefault();
 
     if (nome == null || nome === "" || nome === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Nome é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (email == null || email === "" || email === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Email é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (senha == null || senha === "" || senha === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Senha é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (senha.length < 6) {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Senha deve conter mais que 6 caracteres.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (senha !== confirmacaoSenha) {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Senha e confirmação de senha devem ser iguais.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (genero == null || genero === "" || genero === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Gênero é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (equipe == null || equipe === "" || equipe === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Equipe é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (grupo == null || grupo.value === "" || grupo.value === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Grupo é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (!validateEmail(email)) {
-      MySwal.fire({
-        title: "Opss...",
-        html: "E-mail inválido.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        html: "Email inválido.",
+        title: 'Opss...'
+      })
       return;
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
       title: "Aviso",
       html: "Deseja salvar o usuário?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
+      confirmAction: () => {
         handleRequest();
       }
-    });
+    })
   };
 
   const handleEquipeChange = async (value: any) => {
@@ -255,7 +205,11 @@ const CadastroUsuarios: React.FC = () => {
         });
       }
     } catch (e) {
-      Swal.fire("Erro", "Ocorreu um erro ao carregar os grupos.", "error");
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar as equipes.',
+        title: 'Erro'
+      })    
     }
   };
 

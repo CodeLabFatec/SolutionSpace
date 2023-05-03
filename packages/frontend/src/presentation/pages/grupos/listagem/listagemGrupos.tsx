@@ -1,32 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import Styles from "./listagemGrupos.scss";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { deleteGroup, getAllGroups } from "@/main/api/api";
 
 import { AuthContext } from "@/main/contexts/authcontext";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const ListagemGrupos: React.FC = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const alert = useAlert()
 
   const loadGroups = async () => {
     try {
       const response = await getAllGroups();
       setData(response.data);
     } catch (e) {
-      MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
+        icon: 'error',
         html: "Ocorreu um erro ao carregar os grupos",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro'
+      }) 
     }
   };
 
@@ -43,48 +38,32 @@ const ListagemGrupos: React.FC = () => {
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
-    MySwal.fire({
+    alert.criarConfirmacao({
+      title: "Aviso",
       html: `Deseja excluir ${item.group_name}?`,
-      showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then(async (r) => {
-      if (r.isConfirmed) {
+      confirmAction: async () => {
         try {
           await deleteGroup(item.group_id);
 
-          MySwal.fire({
-            html: `Grupo ${item.group_name} excluído com sucesso!`,
-            icon: "success",
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          });
-          loadGroups();
+          alert.criarAlerta({
+            icon: 'success',
+            html: `Grupo ${item.group_name} excluído com sucesso!`
+          }) 
+          loadGroups()
         } catch (e) {
           let errorMessage = e.response.data.message;
           if (errorMessage.includes("QueryFailedError: update or delete")) {
             errorMessage =
               "Existem usuários ou equipes vinculados a este grupo.";
           }
-          MySwal.fire({
-            title: "Erro",
+          alert.criarAlerta({
+            icon: 'error',
             html: errorMessage,
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          });
-        }
+            title: 'Erro'
+          }) 
+        }      
       }
-    });
+    })
   };
 
   return (

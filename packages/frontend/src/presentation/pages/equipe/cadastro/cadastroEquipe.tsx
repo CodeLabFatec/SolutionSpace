@@ -1,14 +1,10 @@
 import Styles from "./cadastroEquipe.scss";
 import React, { useState } from "react";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { createTeam } from "@/main/api/api";
-
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const CadastroEquipe: React.FC = () => {
   const [nomeEquipe, setNomeEquipe] = useState("");
@@ -20,6 +16,7 @@ const CadastroEquipe: React.FC = () => {
   const [desarquivarChamado, setDesarquivarChamado] = useState(false);
 
   const navigate = useNavigate();
+  const alert = useAlert()
 
   const handleCadatrarUsuario = () => {
     setCadastrarUsuario(!cadastrarUsuario)
@@ -53,16 +50,13 @@ const CadastroEquipe: React.FC = () => {
         editarChamado, 
         desarquivarChamado)
 
-      MySwal.fire({
-        html: "Equipe salva com sucesso.",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate("/teams");
-      });
+      alert.criarAlerta({
+        icon: 'success',
+        html: 'Equipe salva com sucesso.',
+        confirmAction: () => {
+          navigate("/teams");
+        }
+      })
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
@@ -77,14 +71,10 @@ const CadastroEquipe: React.FC = () => {
           "Você precisa estar autenticado para realizar essa operação.";
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   };
 
@@ -92,46 +82,28 @@ const CadastroEquipe: React.FC = () => {
     e.preventDefault();
 
     if (!nomeEquipe || nomeEquipe === '' || nomeEquipe === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Nome da equipe é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (!descricaoEquipe || descricaoEquipe === '' || descricaoEquipe === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Descrição da equipe é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
       title: "Aviso",
       html: "Deseja salvar a equipe?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
+      confirmAction: () => {
         handleRequest();
       }
-    });
+    })
   };
 
   return (

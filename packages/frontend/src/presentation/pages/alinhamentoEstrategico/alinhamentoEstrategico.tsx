@@ -4,18 +4,16 @@ import Styles from './alinhamentoEstrategico.scss'
 import React, { useContext, useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/main/contexts/authcontext'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { createStrategicAlignmentRating, getAllGroups, getRatingsByRequest } from '@/main/api/api'
 import { TipoChamado } from '@/main/enums/tipo-chamado'
-
-const MySwal = withReactContent(Swal)
+import { useAlert } from '@/main/services'
 
 const AlinhamentoEstrategico: React.FC = () => {
 
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
+  const alert = useAlert()
 
 
   const [openModal, setOpenModal] = useState(false)
@@ -25,7 +23,7 @@ const AlinhamentoEstrategico: React.FC = () => {
   const [targetGroup, setTargetGroup] = useState<string>('')
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
   const [ratingAnalise, setRatingAnalise] = useState<any>(null)
-  const [grupos, setGrupo] = useState<any[]>([])
+  const [grupos] = useState<any[]>([])
 
   const loadGrupos = async () => {
     try {
@@ -34,14 +32,11 @@ const AlinhamentoEstrategico: React.FC = () => {
         grupos.push({ label: item.group_name, value: item.group_name })
       })
     } catch(e) {
-      MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
         html: 'Ocorreu um erro ao carregar os grupos.',
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC',
-      });
+        title: 'Erro',
+        icon: 'error'
+      })
     }
   }
 
@@ -96,15 +91,12 @@ const AlinhamentoEstrategico: React.FC = () => {
         files
       )
 
-      MySwal.fire({
+      alert.criarAlerta({
+        icon: 'success',
         html: "Avaliação feita com sucesso!",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate('/home')
+        confirmAction: () => {
+          navigate("/home");
+        }
       })
     } catch (e: any) {
       let errorMessage = e.response.data
@@ -121,14 +113,10 @@ const AlinhamentoEstrategico: React.FC = () => {
         errorMessage = 'Você precisa estar autenticado para realizar essa operação.'
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
       
     }
   }
@@ -137,80 +125,51 @@ const AlinhamentoEstrategico: React.FC = () => {
     e.preventDefault()
 
     if (location.state === null) {
-      MySwal.fire({
-        icon: "error",
+      alert.criarAlerta({
         html: "Chamado não encontrado.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro',
+        icon: 'error'
+      })
       return
     }
 
     if (titulo == null || titulo === '' || titulo === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Título é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (detalhes == null || detalhes === '' || detalhes === ' ') {
-      MySwal.fire('Erro', '', 'error')
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Detalhes é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (rating == null || rating === '' || rating === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Defina um nível de impacto.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (targetGroup == null || targetGroup === '' || targetGroup === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Selecione um grupo.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
+      title: "Aviso",
       html: 'Deseja salvar avaliação?',
-      showCancelButton: true,
-      confirmButtonText: 'Sim',
-      confirmButtonColor: '#4FB4BC',
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#A9A9A9',
-      width: '350px',
-      background:'#FAF0E6',
-      color: '#000',
-      reverseButtons: true
-    }).then((r) => {
-      if (r.isConfirmed) {
-        handleRequest()
+      confirmAction: () => {
+        handleRequest();
       }
     })
   }
@@ -343,7 +302,7 @@ const AlinhamentoEstrategico: React.FC = () => {
           <label htmlFor='grupo' className={Styles.grupo}>
             Grupos
           </label>
-          <div style={{marginLeft: '25px'}}>
+          <div style={{ marginLeft: '25px' }}>
             <SelectType width="685px" onChange={setTargetGroup} options={grupos} />
           </div>
           <input type='button' onClick={handleSubmit} className={Styles.buttonEnviar} value='Enviar' />
