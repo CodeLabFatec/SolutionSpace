@@ -1,17 +1,15 @@
 import Styles from './edicao-usuarios-styles.scss'
 import React, { useState, useEffect } from 'react'
 
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updateUser, getAllTeams, getGroupsByTeam } from '@/main/api/api'
 import Select from 'react-select'
-
-const MySwal = withReactContent(Swal)
+import { useAlert } from '@/main/services'
 
 const EdicaoUsuario: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const alert = useAlert()
 
   const [id, setId] = useState<string>('')
   const [nome, setNome] = useState<string>('')
@@ -37,7 +35,11 @@ const EdicaoUsuario: React.FC = () => {
         equipes.push({ label: item.team_name, value: item.team_id })
       })
     } catch(e) {
-      Swal.fire('Erro', 'Ocorreu um erro ao carregar as equipes.', 'error')
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar as equipes.',
+        title: 'Erro'
+      })
     }
   }
 
@@ -45,14 +47,11 @@ const EdicaoUsuario: React.FC = () => {
     const user = location.state
 
     if(!user){
-      MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
+        icon: 'error',
         html: 'Ocorreu um erro ao carregar as informações do usuário a ser editado.',
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC',
-      });
+        title: 'Erro'
+      })
       navigate('/users')
       return
     }
@@ -84,7 +83,11 @@ const EdicaoUsuario: React.FC = () => {
       }
 
     } catch(e) {
-      Swal.fire('Erro', 'Ocorreu um erro ao carregar os grupos.', 'error')
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar os grupos.',
+        title: 'Erro'
+      })   
     }
 
     setGrupo(user.group?.group_id)
@@ -111,15 +114,12 @@ const EdicaoUsuario: React.FC = () => {
         grupo.value
       )
 
-      MySwal.fire({
-        html: "Usuário alterado com sucesso.",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate('/users')
+      alert.criarAlerta({
+        icon: 'success',
+        html: 'Usuário alterado com sucesso.',
+        confirmAction: () => {
+          navigate("/users");
+        }
       })
     } catch (e: any) {
       let errorMessage = e.response.data.message
@@ -136,14 +136,10 @@ const EdicaoUsuario: React.FC = () => {
         errorMessage = 'Você precisa estar autenticado para realizar essa operação!'
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   }
 
@@ -151,104 +147,66 @@ const EdicaoUsuario: React.FC = () => {
     e.preventDefault()
 
     if (nome == null || nome === '' || nome === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Nome é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (email == null || email === '' || email === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Email é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (senha == null || senha === '' || senha === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Senha é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (senha !== confirmacaoSenha) {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Senha e confirmação de senha devem ser iguais.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (genero == null || genero === '' || genero === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Gênero é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (equipe == null || equipe === '' || equipe === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Equipe é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
     if (grupo == null || grupo.value === '' || grupo.value === ' ') {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Grupo é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
       title: "Aviso",
       html: "Deseja alterar o usuário?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
-        handleRequest()
+      confirmAction: () => {
+        handleRequest();
       }
     })
   }
@@ -270,7 +228,11 @@ const EdicaoUsuario: React.FC = () => {
       }
 
     } catch(e) {
-      Swal.fire('Erro', 'Ocorreu um erro ao carregar os grupos.', 'error')
+      alert.criarAlerta({
+        icon: 'error',
+        html: 'Ocorreu um erro ao carregar os grupos.',
+        title: 'Erro'
+      }) 
     }
   }
 

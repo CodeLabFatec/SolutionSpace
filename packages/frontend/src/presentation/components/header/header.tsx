@@ -3,34 +3,20 @@ import Styles from './header-styles.scss'
 
 import React, { useContext } from 'react'
 import { AuthContext } from '@/main/contexts/authcontext'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+import { useAlert } from '@/main/services'
 
 const Header: React.FC = () => {
-  const { logout, user} = useContext(AuthContext)
+  const { logout, user } = useContext(AuthContext)
+  const alert = useAlert()
 
   const handleLogout = (e: any) => {
     e.preventDefault()
  
-
-    MySwal.fire({
-      title: 'Aviso',
+    alert.criarConfirmacao({
+      title: "Aviso",
       html: 'Deseja sair?',
-      focusConfirm: true,
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#A9A9A9',
-      showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      confirmButtonColor: '#4FB4BC',
-      width: '350px',
-      background:'#FAF0E6',
-      color: '#000',
-      reverseButtons: true
-    }).then((r) => {
-      if (r.isConfirmed) {
-        logout()
+      confirmAction: () => {
+        logout();
       }
     })
   }

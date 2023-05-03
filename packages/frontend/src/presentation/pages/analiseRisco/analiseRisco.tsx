@@ -5,16 +5,14 @@ import { Dropzone } from "@/presentation/components";
 import { AuthContext } from "@/main/contexts/authcontext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createRiskAnalysisRating } from "@/main/api/api";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const AnaliseRisco: React.FC = () => {
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const alert = useAlert()
 
   const [titulo, setTitulo] = useState<string>("");
   const [detalhes, setDetalhes] = useState<string>("");
@@ -43,15 +41,12 @@ const AnaliseRisco: React.FC = () => {
         files
       );
 
-      MySwal.fire({
+      alert.criarAlerta({
+        icon: 'success',
         html: "Avaliação feita com sucesso!",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      }).then((r) => {
-        navigate("/home");
+        confirmAction: () => {
+          navigate("/home");
+        }
       });
     } catch (e: any) {
       let errorMessage = e.response.data;
@@ -75,14 +70,10 @@ const AnaliseRisco: React.FC = () => {
           "Você precisa estar autenticado para realizar essa operação.";
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   };
 
@@ -90,69 +81,45 @@ const AnaliseRisco: React.FC = () => {
     e.preventDefault();
 
     if (location.state === null) {
-      MySwal.fire({
-        icon: "error",
+      alert.criarAlerta({
         html: "Chamado não encontrado.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro',
+        icon: 'error'
+      })
       return;
     }
 
     if (titulo == null || titulo === "" || titulo === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Título é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (detalhes == null || detalhes === "" || detalhes === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Detalhes é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (rating == null || rating === "" || rating === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Defina um nível de risco para esse chamado.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
-    MySwal.fire({
-      html: "Deseja salvar avaliação?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
+    alert.criarConfirmacao({
+      title: "Aviso",
+      html: 'Deseja salvar avaliação?',
+      confirmAction: () => {
         handleRequest();
       }
-    });
+    })
   };
 
   return (

@@ -1,33 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import Styles from "./listagemEquipeStyles.scss";
 import { deleteTeam, getAllTeams } from "@/main/api/api";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "@/main/contexts/authcontext";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const ListagemEquipe: React.FC = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   const { user } = useContext(AuthContext);
+  const alert = useAlert()
 
   const loadTeams = async () => {
     try {
       const response = await getAllTeams();
       setData(response.data);
     } catch (e) {
-      MySwal.fire({
-        title: "Erro",
+      alert.criarAlerta({
+        icon: 'error',
         html: "Ocorreu um erro ao carregar as equipes",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: "#4FB4BC",
-      });
+        title: 'Erro'
+      }) 
     }
   };
 
@@ -44,48 +39,32 @@ const ListagemEquipe: React.FC = () => {
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
-    MySwal.fire({
+    alert.criarConfirmacao({
+      title: "Aviso",
       html: `Deseja excluir ${item.team_name}?`,
-      showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true,
-    }).then(async (r) => {
-      if (r.isConfirmed) {
+      confirmAction: async () => {
         try {
           await deleteTeam(item.team_id);
 
-          MySwal.fire({
-            html: `Equipe ${item.team_name} excluída com sucesso!`,
-            icon: "success",
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          });
+          alert.criarAlerta({
+            icon: 'success',
+            html: `Equipe ${item.team_name} excluída com sucesso!`
+          }) 
           loadTeams();
         } catch (e) {
           let errorMessage = e.response.data.message;
           if (errorMessage.includes("QueryFailedError: update or delete")) {
             errorMessage =
-              "Existem usuários ou grupos vinculados a esta equipe.";
+             "Existem usuários ou grupos vinculados a esta equipe.";
           }
-          MySwal.fire({
-            title: "Erro",
+          alert.criarAlerta({
+            icon: 'error',
             html: errorMessage,
-            width: "350px",
-            background: "#FAF0E6",
-            color: "#000",
-            confirmButtonColor: "#4FB4BC",
-          });
-        }
+            title: 'Erro'
+          }) 
+        }      
       }
-    });
+    })
   };
 
   return (

@@ -4,12 +4,9 @@ import React, { useState, useContext } from "react";
 import { Dropzone } from "@/presentation/components";
 import { TipoChamado } from "@/main/enums";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { AuthContext } from "@/main/contexts/authcontext";
 import { useNavigate } from "react-router-dom";
-
-const MySwal = withReactContent(Swal);
+import { useAlert } from "@/main/services";
 
 const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
   const title =
@@ -20,6 +17,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const alert = useAlert()
 
   const handleRequest = async () => {
     try {
@@ -42,16 +40,13 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         files
       );
 
-      MySwal.fire({
+      alert.criarAlerta({
+        icon: 'success',
         html: "Chamado aberto com sucesso.",
-        icon: "success",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC',
-      }).then((r) => {
-        navigate("/home");
-      });
+        confirmAction: () => {
+          navigate("/home");
+        }
+      })
     } catch (e: any) {
       let errorMessage = e.response.data;
 
@@ -68,14 +63,10 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
           "Você precisa estar autenticado para realizar essa operação.";
       }
 
-      MySwal.fire({
-        icon: "error",
-        html: errorMessage,
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC',
-      });
+      alert.criarAlerta({
+        icon: 'error',
+        html: errorMessage
+      })
     }
   };
 
@@ -83,46 +74,28 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
     e.preventDefault();
 
     if (titulo == null || titulo === "" || titulo === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Título é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
     if (detalhes == null || detalhes === "" || detalhes === " ") {
-      MySwal.fire({
-        title: "Opss...",
+      alert.criarAlerta({
         html: "Detalhes é obrigatório.",
-        width: "350px",
-        background: "#FAF0E6",
-        color: "#000",
-        confirmButtonColor: '#4FB4BC'
-      });
+        title: 'Opss...'
+      })
       return;
     }
 
-    MySwal.fire({
+    alert.criarConfirmacao({
       title: "Aviso",
       html: "Deseja salvar esse chamado?",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      confirmButtonColor: "#4FB4BC",
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "#A9A9A9",
-      width: "350px",
-      background: "#FAF0E6",
-      color: "#000",
-      reverseButtons: true
-    }).then((r) => {
-      if (r.isConfirmed) {
+      confirmAction: () => {
         handleRequest();
       }
-    });
+    })
   };
 
   return (
