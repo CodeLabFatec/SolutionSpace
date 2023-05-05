@@ -3,6 +3,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import 'dotenv/config';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { comparePassword } from '../utils/encryptor';
+import { sendEmail } from '../services';
 
 export class AuthController {
     async authenticate(req: Request, res: Response) {
@@ -49,10 +50,10 @@ export class AuthController {
             if (!user) {
                 return res.status(401).json('User not found');
             }
-
             return res.status(200).json({ user })
             
         } catch(e) {
+            console.log(e)
             if (!authorization) return res.status(401).json('Authorization not found');
         }
     }

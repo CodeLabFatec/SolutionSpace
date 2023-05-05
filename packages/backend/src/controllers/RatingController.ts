@@ -7,6 +7,7 @@ import { File } from '../repos/postgres/entitites/File';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 import { checkGroupPermission } from '../utils/checkGroupPermissions';
+import { notifyUserByRequest } from '../utils/notifyUser';
 
 export class RatingController {
     async create(req: Request, res: Response) {
@@ -37,7 +38,10 @@ export class RatingController {
         if (alreadyRated.length > 0)
             return res.status(400).json('There is already a rating for this request from the same team');
 
-        const request = await requestRepository.findOneBy({ request_id: requestId });
+        const request = await requestRepository.findOne({
+            where: { request_id: requestId },
+            relations: { user: true }
+        });
 
         if (!request) return res.status(404).json('Request not found');
 
@@ -137,11 +141,17 @@ export class RatingController {
                     ...request,
                     status: ClosedStatus.status
                 });
+
+                request.status = ClosedStatus.status
+                await notifyUserByRequest(request)
             } else {
                 await requestRepository.save({
                     ...request,
                     status: statusConfig.status
                 });
+
+                request.status = statusConfig.status
+                await notifyUserByRequest(request)
             }
 
             if (createdRating.requestStep === RequestStep.ANALISE_RISCO &&
@@ -151,6 +161,9 @@ export class RatingController {
                     status: statusConfig.status,
                     requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
                 });
+                
+                request.status = statusConfig.status
+                await notifyUserByRequest(request)
             }
 
             if (createdFiles.length > 0) {
