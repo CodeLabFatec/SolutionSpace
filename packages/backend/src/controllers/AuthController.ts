@@ -50,10 +50,10 @@ export class AuthController {
             if (!user) {
                 return res.status(401).json('User not found');
             }
+            
             return res.status(200).json({ user })
             
         } catch(e) {
-            console.log(e)
             if (!authorization) return res.status(401).json('Authorization not found');
         }
     }
