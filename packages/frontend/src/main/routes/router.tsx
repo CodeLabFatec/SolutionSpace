@@ -3,8 +3,25 @@ import React, { useContext } from "react";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header, SideMenu } from "@/presentation/components";
-import { AlinhamentoEstrategico, AnaliseRisco, CadastroEquipe, CadastroGrupo, CadastroUsuarios, Chamados, EdicaoEquipe, EdicaoGrupo, EdicaoUsuarios, FormularioChamados, Home, ListagemEquipe, ListagemGrupos, ListagemUsuarios, Login } from "@/presentation/pages";
+import {
+  AlinhamentoEstrategico,
+  AnaliseRisco,
+  CadastroEquipe,
+  CadastroGrupo,
+  CadastroUsuarios,
+  Chamados,
+  EdicaoEquipe,
+  EdicaoGrupo,
+  EdicaoUsuarios,
+  FormularioChamados,
+  Home,
+  ListagemEquipe,
+  ListagemGrupos,
+  ListagemUsuarios,
+  Login,
+} from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
+import PersonalizacaoStatus from "@/presentation/pages/personalizacaoStatus/listagem/personalizacaoStatus";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -145,23 +162,23 @@ const Router: React.FC = () => {
             }
           />
           <Route
-            path='/newUser'
+            path="/newUser"
             element={
               <Private>
                 <CadastroUsuarios />
               </Private>
             }
           />
-           <Route
-            path='/newGroup'
+          <Route
+            path="/newGroup"
             element={
               <Private>
                 <CadastroGrupo />
               </Private>
             }
-         />
+          />
           <Route
-            path='/users'
+            path="/users"
             element={
               <Private>
                 <ListagemUsuarios />
@@ -169,50 +186,58 @@ const Router: React.FC = () => {
             }
           />
           <Route
-            path='/editUser'
+            path="/editUser"
             element={
               <Private>
                 <EdicaoUsuarios />
               </Private>
             }
           />
-          <Route 
-            path='/newTeam'
+          <Route
+            path="/newTeam"
             element={
               <Private>
                 <CadastroEquipe />
               </Private>
             }
           />
-          <Route 
-            path='/teams'
+          <Route
+            path="/teams"
             element={
               <Private>
                 <ListagemEquipe />
               </Private>
             }
           />
-          <Route 
-            path='/editTeam'
+          <Route
+            path="/editTeam"
             element={
               <Private>
                 <EdicaoEquipe />
               </Private>
             }
           />
-          <Route 
-            path='/groups'
+          <Route
+            path="/groups"
             element={
               <Private>
                 <ListagemGrupos />
               </Private>
             }
           />
-          <Route 
-            path='/editGroup'
+          <Route
+            path="/editGroup"
             element={
               <Private>
                 <EdicaoGrupo />
+              </Private>
+            }
+          />
+          <Route
+            path="/editStatus"
+            element={
+              <Private>
+                <PersonalizacaoStatus />
               </Private>
             }
           />

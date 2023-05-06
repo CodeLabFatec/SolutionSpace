@@ -11,6 +11,7 @@ import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HomeIcon from '@mui/icons-material/Home';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Styles from "./menuStyle.scss"
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -46,6 +47,14 @@ const SideMenu = () => {
             component={<Link to="/home" />}
             >
               <p>Home</p>
+          </MenuItem>
+          <MenuItem
+            icon={<BorderColorIcon />}
+            style={ { padding:"10px" } }
+            id={Styles.menuList}
+            component={<Link to="/editStatus" />}
+            >
+              <p>Status</p>
           </MenuItem>
           {user.group.canRequestHotfix || user.group.canRequestFeatures || user.group.canRateAnalise || user.group.canRateAnalinhamento ? 
           (
