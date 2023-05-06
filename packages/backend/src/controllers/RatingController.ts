@@ -74,6 +74,16 @@ export class RatingController {
         if (request.status === forbiddenStatus[0].status)
             return res.status(200).json('This request has already been archived');
 
+        const alinhamentoForbidden = forbiddenStatus.find(
+            i=> i.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO)
+
+        const analiseForbidden = forbiddenStatus.find(
+            i=> i.requestStep === RequestStep.ANALISE_RISCO)
+
+        if(!alinhamentoForbidden || !analiseForbidden) {
+            return res.status(404).json('No forbidden status found')
+        }
+
         try {
             const statusConfig = await statusConfigurationRepository.findOne({
                 where: {
@@ -87,20 +97,6 @@ export class RatingController {
                     .status(404)
                     .json(
                         `Status not found - Please Insert a new status for request step '${request.requestStep}' and rating '${rating}'`
-                    );
-
-            const ClosedStatus = await statusConfigurationRepository.findOne({
-                where: {
-                    rating: '3',
-                    requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
-                }
-            });
-
-            if (!ClosedStatus)
-                return res
-                    .status(404)
-                    .json(
-                        `Status not found - Please Insert a new status for request step '${RequestStep.ALINHAMENTO_ESTRATEGICO}' and rating '3'`
                     );
 
             if (ratingFiles.length > 0) {
@@ -119,7 +115,7 @@ export class RatingController {
                 });
             }
 
-            const newRating = ratingRepository.create({
+            let newRating = ratingRepository.create({
                 rating,
                 user,
                 request,
@@ -131,53 +127,70 @@ export class RatingController {
 
             const createdRating = await ratingRepository.save(newRating);
 
-            if (
-                createdRating.rating === '0' &&
-                createdRating.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
-                createdRating.targetGroup &&
-                userGroupPermissions.mustRateAlinhamento === true
-            ) {
-                await requestRepository.save({
-                    ...request,
-                    status: ClosedStatus.status
-                });
-
-                request.status = ClosedStatus.status
-                await notifyUserByRequest(request)
-            } else {
-                await requestRepository.save({
-                    ...request,
-                    status: statusConfig.status
-                });
-
-                request.status = statusConfig.status
-                await notifyUserByRequest(request)
-            }
-
-            if (createdRating.requestStep === RequestStep.ANALISE_RISCO &&
-                userGroupPermissions.mustRateAnalise === true) {
-                await requestRepository.save({
-                    ...request,
-                    status: statusConfig.status,
-                    requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
-                });
-                
-                request.status = statusConfig.status
-                await notifyUserByRequest(request)
-            }
-
             if (createdFiles.length > 0) {
-                const createdRatingWithFiles = await ratingRepository.save({
+                newRating = await ratingRepository.save({
                     ...createdRating,
                     files: createdFiles
                 });
-
-                return res.status(201).json(createdRatingWithFiles);
             }
 
-            const returnedRating = await ratingRepository.findOneBy({ rating_id: createdRating.rating_id });
+            if(createdRating.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO){
 
-            return res.status(201).json(returnedRating);
+                // Checar as condições para arquivar na etapa de alinhamento estratégico
+                // (atualizar posteriormente com nova regra)
+                if(createdRating.rating === '0' && createdRating.targetGroup && userGroupPermissions.mustRateAlinhamento){
+                    await requestRepository.save({
+                        ...request,
+                        status: alinhamentoForbidden.status
+                    });
+    
+                    request.status = alinhamentoForbidden.status
+                    await notifyUserByRequest(request, createdRating)
+
+                    return res.status(201).json(newRating);
+                }
+                
+                if(userGroupPermissions.mustRateAlinhamento){
+                    await requestRepository.save({
+                        ...request,
+                        status: statusConfig.status
+                    });
+    
+                    request.status = statusConfig.status
+                    await notifyUserByRequest(request, createdRating)
+                }
+
+            } else if(createdRating.requestStep === RequestStep.ANALISE_RISCO) {
+
+                // Checar as condições para arquivar na etapa de análise de risco
+                // (atualizar posteriormente com nova regra)
+                if(userGroupPermissions.mustRateAnalise){
+                    if(createdRating.rating === '3'){
+                        await requestRepository.save({
+                            ...request,
+                            status: analiseForbidden.status
+                        });
+        
+                        request.status = analiseForbidden.status
+                        await notifyUserByRequest(request, createdRating)
+    
+                        return res.status(201).json(newRating);
+                    } else {
+                        await requestRepository.save({
+                            ...request,
+                            status: statusConfig.status,
+                            requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
+                        });
+                        
+                        request.status = statusConfig.status
+                        await notifyUserByRequest(request, createdRating)
+
+                        return res.status(201).json(newRating);
+                    }
+                }
+            }
+
+            return res.status(201).json(newRating);
         } catch (error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }

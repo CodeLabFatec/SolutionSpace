@@ -23,6 +23,9 @@ export class Notifications {
     @Column({ type: 'text', nullable: true })
     message: string;
 
+    @Column({ type: 'boolean', nullable: false, default: false })
+    hasRead: boolean;
+
     @ManyToOne(() => User, (user) => user.user_id, { 
         onDelete: 'CASCADE' 
     })
