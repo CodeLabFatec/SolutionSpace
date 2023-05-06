@@ -1,39 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Styles from "./personalizacaoStatusStyles.scss";
-import { deleteTeam, getAllTeams } from "@/main/api/api";
 import { useNavigate } from "react-router-dom";
-import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { FormGroup, Switch } from "@mui/material";
 
-import { AuthContext } from "@/main/contexts/authcontext";
 import { useAlert } from "@/main/services";
 import ColorPicker from "@/presentation/components/colorPicker/colorPicker";
+import { Avaliacao } from "@/main/types";
 
 const PersonalizacaoStatus: React.FC = () => {
   const navigate = useNavigate();
 
-  const [nota0, setNota0] = useState(false);
-  const [nota1, setNota1] = useState(false);
-  const [nota2, setNota2] = useState(false);
-  const [nota3, setNota3] = useState(false);
-  const [textoNota0, setTextoNota0] = useState("");
-  const [textoNota1, setTextoNota1] = useState("");
-  const [textoNota2, setTextoNota2] = useState("");
-  const [textoNota3, setTextoNota3] = useState("");
+  const [avaliacao0,setAvaliacao0] = useState<Avaliacao>({ Nota: '0', Status: '', Cor: '#312fa2', Arquiva: false } as Avaliacao)
+  const [avaliacao1,setAvaliacao1] = useState<Avaliacao>({ Nota: '1', Status: '', Cor: '#312fa2', Arquiva: false } as Avaliacao)
+  const [avaliacao2,setAvaliacao2] = useState<Avaliacao>({ Nota: '2', Status: '', Cor: '#312fa2', Arquiva: false } as Avaliacao)
+  const [avaliacao3,setAvaliacao3] = useState<Avaliacao>({ Nota: '3', Status: '', Cor: '#312fa2', Arquiva: false } as Avaliacao)
 
   const alert = useAlert();
-
-  const handleNota0 = () => {
-    setNota0(!nota0);
-  };
-  const handleNota1 = () => {
-    setNota1(!nota1);
-  };
-  const handleNota2 = () => {
-    setNota2(!nota2);
-  };
-  const handleNota3 = () => {
-    setNota3(!nota3);
-  };
 
   return (
     <div className={Styles.container}>
@@ -58,9 +40,9 @@ const PersonalizacaoStatus: React.FC = () => {
                 <td>
                   <input
                     type="text"
-                    value={textoNota0}
+                    value={avaliacao0.Status}
                     onChange={(e: any) => {
-                      setTextoNota0(e.target.value);
+                      avaliacao0.Status = e.target.value;
                     }}
                     className={Styles.textoNota}
                     maxLength={25}
@@ -68,13 +50,15 @@ const PersonalizacaoStatus: React.FC = () => {
                   />
                 </td>
                 <td className={Styles.main}>
-                  <ColorPicker value={"#312fa2"} />
+                  <ColorPicker value={avaliacao0.Cor} />
                 </td>
                 <td>
                   <FormGroup id={Styles.switch}>
                     <Switch
-                      value={nota0}
-                      onChange={handleNota0}
+                      value={avaliacao0.Arquiva}
+                      onChange={() => {
+                        avaliacao0.Arquiva = !avaliacao0.Arquiva
+                      }}
                       id={Styles.switch}
                     />
                   </FormGroup>
@@ -85,9 +69,9 @@ const PersonalizacaoStatus: React.FC = () => {
                 <td>
                   <input
                     type="text"
-                    value={textoNota1}
+                    value={avaliacao1.Status}
                     onChange={(e: any) => {
-                      setTextoNota1(e.target.value);
+                      avaliacao1.Status = e.target.value;
                     }}
                     className={Styles.textoNota}
                     maxLength={25}
@@ -95,13 +79,15 @@ const PersonalizacaoStatus: React.FC = () => {
                   />
                 </td>
                 <td className={Styles.main}>
-                  <ColorPicker value={"#b92d2d"} />
+                  <ColorPicker value={avaliacao1.Cor} />
                 </td>
                 <td>
                   <FormGroup id={Styles.switch}>
                     <Switch
-                      value={nota1}
-                      onChange={handleNota1}
+                      value={avaliacao1.Arquiva}
+                      onChange={() => {
+                        avaliacao1.Arquiva = !avaliacao1.Arquiva
+                      }}
                       id={Styles.switch}
                     />
                   </FormGroup>
@@ -112,9 +98,9 @@ const PersonalizacaoStatus: React.FC = () => {
                 <td>
                   <input
                     type="text"
-                    value={textoNota2}
+                    value={avaliacao2.Status}
                     onChange={(e: any) => {
-                      setTextoNota2(e.target.value);
+                      avaliacao2.Status = e.target.value;
                     }}
                     className={Styles.textoNota}
                     maxLength={25}
@@ -122,13 +108,15 @@ const PersonalizacaoStatus: React.FC = () => {
                   />
                 </td>
                 <td className={Styles.main}>
-                  <ColorPicker value={"#1f9833"} />
+                  <ColorPicker value={avaliacao2.Cor} />
                 </td>
                 <td>
                   <FormGroup id={Styles.switch}>
                     <Switch
-                      value={nota2}
-                      onChange={handleNota2}
+                     value={avaliacao2.Arquiva}
+                     onChange={() => {
+                       avaliacao2.Arquiva = !avaliacao2.Arquiva
+                     }}
                       id={Styles.switch}
                     />
                   </FormGroup>
@@ -139,9 +127,9 @@ const PersonalizacaoStatus: React.FC = () => {
                 <td>
                   <input
                     type="text"
-                    value={textoNota3}
+                    value={avaliacao3.Status}
                     onChange={(e: any) => {
-                      setTextoNota3(e.target.value);
+                      avaliacao3.Status = e.target.value;
                     }}
                     className={Styles.textoNota}
                     maxLength={25}
@@ -149,13 +137,15 @@ const PersonalizacaoStatus: React.FC = () => {
                   />
                 </td>
                 <td className={Styles.main}>
-                  <ColorPicker value={"#a8b734"} />
+                  <ColorPicker value={avaliacao3.Cor} />
                 </td>
                 <td>
                   <FormGroup id={Styles.switch}>
                     <Switch
-                      value={nota3}
-                      onChange={handleNota3}
+                      value={avaliacao3.Arquiva}
+                      onChange={() => {
+                        avaliacao3.Arquiva = !avaliacao3.Arquiva
+                      }}
                       id={Styles.switch}
                     />
                   </FormGroup>
