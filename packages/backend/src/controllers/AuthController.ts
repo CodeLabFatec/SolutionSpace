@@ -14,7 +14,8 @@ export class AuthController {
         }
 
         try {
-            const user = await userRepository.findOne({ where: { email }, relations: { team: true, group: true } });
+            const user = await userRepository.findOne(
+                { where: { email }, relations: { team: true, group: true, notifications: true,  } });
 
             if (!user) return res.status(401).json('Unauthorized - Email not found');
 
@@ -44,7 +45,7 @@ export class AuthController {
 
             const user = await userRepository.findOne({
                 where: { user_id: id.toString() },
-                relations: { team: true, group: true }
+                relations: { team: true, group: true, notifications: true }
             });
 
             if (!user) {

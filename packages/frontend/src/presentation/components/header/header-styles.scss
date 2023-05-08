@@ -34,7 +34,27 @@
   user-select: none;
 }
 
+
 #logout{
   font-size: 30px;
+  
+}
 
+
+.notification {
+  position: absolute;
+  right: 24px;
+  top: 20px;
+  
+  text-align: center;
+  
+  cursor: pointer;
+  user-select: none;
+
+  i {
+    font-size: 30px;
+    color: #4fb4bc;
+    color: #4fb4bc;
+  
+  }
 }

@@ -57,7 +57,7 @@ export class UserController {
         try {
             const user = await userRepository.findOne({
                 where: { user_id: id },
-                relations: { team: true, group: true }
+                relations: { team: true, group: true, notifications: true }
             });
 
             if (!user) return res.status(404).json('User not found');
