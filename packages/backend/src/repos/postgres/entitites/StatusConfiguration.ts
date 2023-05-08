@@ -18,4 +18,10 @@ export class StatusConfiguration {
         nullable: true
     })
     requestStep: RequestStep;
+
+    @Column({ type: 'text', nullable: true })
+    color: string;
+
+    @Column({ type: 'boolean', nullable: false, default: false })
+    archiveRequests: boolean
 }
