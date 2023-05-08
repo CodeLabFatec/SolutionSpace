@@ -7,6 +7,7 @@ import { RatingController } from './controllers/RatingController';
 import { RequestController } from './controllers/RequestController';
 import { StatusConfigurationController } from './controllers/statusConfigurationController';
 import { GroupController } from './controllers/GroupController';
+import { NotificationsController } from './controllers/NotificationsController';
 
 const router = Router();
 
@@ -60,5 +61,11 @@ router.get('/group/checkPermissions/:group_id', authMiddleware, new GroupControl
 router.post('/createGroup', authMiddleware, new GroupController().create)
 router.put('/updateGroup', authMiddleware, new GroupController().edit)
 router.delete('/deleteGroup/:id', authMiddleware, new GroupController().delete)
+
+// Notifications
+router.get('/getNotificationById/:notification_id', authMiddleware, new NotificationsController().getNotificationById)
+router.get('/getNotificationsByUser/:user_id', authMiddleware, new NotificationsController().getNotificationsByUser)
+router.get('/updateNotification/notification_id', authMiddleware, new NotificationsController().updateNotification)
+router.get('/updateAllNotifications/:user_id', authMiddleware, new NotificationsController().updateAllNotifications)
 
 export default router;
