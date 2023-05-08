@@ -51,7 +51,9 @@ router.post('/createRating/:requestId', authMiddleware, new RatingController().c
 // Status
 router.get('/listStatus', authMiddleware, new StatusConfigurationController().listStatus);
 router.get('/status/:status_id', authMiddleware, new StatusConfigurationController().getStatusById);
+router.get('/statusByRequestStep/:requestStep', authMiddleware, new StatusConfigurationController().getStatusRequestStep);
 router.post('/createStatus', authMiddleware, new StatusConfigurationController().create);
+router.put('/updateStatus', authMiddleware, new StatusConfigurationController().updateStatus)
 
 // Group
 router.get('/listGroups', authMiddleware, new GroupController().listGroups)
