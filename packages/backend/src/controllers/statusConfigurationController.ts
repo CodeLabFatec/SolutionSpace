@@ -3,7 +3,7 @@ import { RequestStep } from '../repos/postgres/entitites/Rating';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 import { Request, Response } from 'express';
 
-export class StatusConfigurationController {
+class StatusConfigurationController {
     private static statusConfigurationRequestStep: Record<string, string> = {
         ANALISE_RISCO: 'Analise de risco',
         ALINHAMENTO_ESTRATEGICO: 'Alinhamento estratégico'
@@ -113,3 +113,6 @@ export class StatusConfigurationController {
         })
     }
 }
+
+const statusConfigurationController = new StatusConfigurationController()
+export default statusConfigurationController

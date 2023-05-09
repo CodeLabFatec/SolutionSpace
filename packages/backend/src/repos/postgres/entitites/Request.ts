@@ -72,4 +72,7 @@ export class Request {
 
     @Column({ type: 'boolean', nullable: false, default: false })
     arquived: boolean
+
+    @Column({ type: 'boolean', nullable: false, default: false })
+    approved: boolean
 }

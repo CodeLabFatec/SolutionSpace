@@ -219,9 +219,9 @@ const Router: React.FC = () => {
           <Route 
             path='/history'
             element={
-              // <Private>
+              <Private>
                 <HistoricoAvaliacao />
-              // </Private>
+              </Private>
             }
           />
         </Routes>
