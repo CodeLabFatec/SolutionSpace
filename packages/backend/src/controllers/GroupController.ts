@@ -3,7 +3,7 @@ import { groupRepository } from '../repos/postgres/repositories/groupRepository'
 import { Request, Response } from 'express'
 import { checkGroupPermission } from '../utils/checkGroupPermissions'
 
-export class GroupController {
+class GroupController {
   async create(req: Request, res: Response) {
     const { group_name, description, canRequestFeatures, canRequestHotfix, canRateAnalise, mustRateAnalise,
       canRateAnalinhamento, mustRateAnalinhamento, team_id } = req.body
@@ -162,3 +162,6 @@ export class GroupController {
     }
   }
 }
+
+const groupController = new GroupController()
+export default groupController

@@ -9,7 +9,7 @@ import { statusConfigurationRepository } from '../repos/postgres/repositories/st
 import { checkGroupPermission } from '../utils/checkGroupPermissions';
 import { notifyUserByRequest } from '../utils/notifyUser';
 
-export class RatingController {
+class RatingController {
     async create(req: Request, res: Response) {
         const { rating, user_id, title, description, requestStep, targetGroup, files } = req.body;
         const { requestId } = req.params;
@@ -231,7 +231,8 @@ export class RatingController {
         try {
             const ratings = await ratingRepository.find({
                 where: { request: { request_id } },
-                relations: { user: { team: true }, request: { user: true }, files: true }
+                relations: { user: { team: true }, request: { user: true }, files: true },
+                order: { created_at: 'ASC' }
             });
 
             if (!ratings) return res.status(404).json('Ratings not found for this request id');
@@ -242,3 +243,6 @@ export class RatingController {
         }
     }
 }
+
+const ratingController = new RatingController()
+export default ratingController

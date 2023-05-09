@@ -3,9 +3,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import 'dotenv/config';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { comparePassword } from '../utils/encryptor';
-import { sendEmail } from '../services';
 
-export class AuthController {
+class AuthController {
     async authenticate(req: Request, res: Response) {
         const { email, password } = req.body;
 
@@ -58,3 +57,6 @@ export class AuthController {
         }
     }
 }
+
+const authController = new AuthController()
+export default authController

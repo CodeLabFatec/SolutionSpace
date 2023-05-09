@@ -9,7 +9,7 @@ import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { File } from '../repos/postgres/entitites/File';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 
-export class RequestController {
+class RequestController {
     async create(req: Request, res: Response) {
         const { title, description, requestType, files } = req.body;
         const { userId } = req.params;
@@ -247,3 +247,6 @@ export class RequestController {
     }
     
 }
+
+const requestController = new RequestController()
+export default requestController
