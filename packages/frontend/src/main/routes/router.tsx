@@ -19,9 +19,10 @@ import {
   ListagemGrupos,
   ListagemUsuarios,
   Login,
+  PersonalizacaoAnalise,
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
-import PersonalizacaoStatus from "@/presentation/pages/personalizacaoStatus/listagem/personalizacaoStatus";
+import PersonalizacaoAlinhamento from "@/presentation/pages/personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -234,10 +235,18 @@ const Router: React.FC = () => {
             }
           />
           <Route
-            path="/editStatus"
+            path="/StatusAlinhamento"
             element={
               <Private>
-                <PersonalizacaoStatus />
+                <PersonalizacaoAlinhamento />
+              </Private>
+            }
+          />
+          <Route
+            path="/StatusAnalise"
+            element={
+              <Private>
+                <PersonalizacaoAnalise />
               </Private>
             }
           />

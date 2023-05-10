@@ -7,7 +7,7 @@ import { useAlert } from "@/main/services";
 import ColorPicker from "@/presentation/components/colorPicker/colorPicker";
 import { Avaliacao } from "@/main/types";
 
-const PersonalizacaoStatus: React.FC = () => {
+const PersonalizacaoAnalise: React.FC = () => {
   const navigate = useNavigate();
 
   const [avaliacao0,setAvaliacao0] = useState<Avaliacao>({ Nota: '0', Status: '', Cor: '#312fa2', Arquiva: false } as Avaliacao)
@@ -21,7 +21,7 @@ const PersonalizacaoStatus: React.FC = () => {
     <div className={Styles.container}>
       <div className={Styles.tableContainer}>
         <div className={Styles.title}>
-          <h1>Personalização de status</h1>
+          <h1>Status de análise de risco</h1>
           <hr />
         </div>
         <div className={Styles.tableTeams}>
@@ -159,4 +159,4 @@ const PersonalizacaoStatus: React.FC = () => {
   );
 };
 
-export default PersonalizacaoStatus;
+export default PersonalizacaoAnalise;
