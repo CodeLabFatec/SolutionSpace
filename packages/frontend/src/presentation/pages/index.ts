@@ -14,3 +14,5 @@ export { default as CadastroUsuarios } from './usuarios/cadastro/cadastro-usuari
 export { default as ListagemUsuarios } from './usuarios/listagem/listagem-usuarios'
 export { default as EdicaoUsuarios } from './usuarios/edicao/edicao-usuarios'
 export { default as HistoricoAvaliacao } from './historicoAvaliacao/historicoAvaliacao'
+export { default as PersonalizacaoAnalise} from './personalizacaoStatus/AnaliseRisco/personalizacaoAnalise'
+export { default as PersonalizacaoAlinhamento} from './personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento'

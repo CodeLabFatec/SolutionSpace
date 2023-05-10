@@ -135,6 +135,10 @@ export const getGroupsByTeam = async (teamId: string) => {
   return api.get('/getGroupsByTeam/' + teamId)
 }
 
+export const getStatusConfigurationByRequestStep = async (requestStep: string) => {
+  return api.get('/statusByRequestStep/' + requestStep)
+}
+
 export const deleteUser = async (user_id: string) => {
   return api.delete('/deleteUser/' + user_id)
 }
@@ -182,7 +186,13 @@ export const updateGroup = async (
   mustRateAnalinhamento :boolean,
   mustRateAnalise :boolean
   ) => {
-  return api.put('/updateGroup', {group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+  return api.put('/updateGroup', { group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+}
+
+export const updateStatusConfiguration = async (
+  statuses: any[]
+  ) => {
+  return api.put('/updateStatus', statuses)
 }
 
 export const unarchiveRequest = async (request_id: string) => {
