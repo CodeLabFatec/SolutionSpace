@@ -1,7 +1,7 @@
 import { notificationsRepository } from '../repos/postgres/repositories/notificationsRepository';
 import { Request, Response } from 'express';
 
-export class NotificationsController {
+class NotificationsController {
 
     async updateAllNotifications(req: Request, res: Response) {
         const { user_id } = req.params;
@@ -71,3 +71,6 @@ export class NotificationsController {
         }
     }
 }
+
+const notificationsController = new NotificationsController()
+export default notificationsController

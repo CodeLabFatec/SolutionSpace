@@ -1,7 +1,7 @@
 import { teamRepository } from '../repos/postgres/repositories/teamRepository';
 import { Request, Response } from 'express';
 
-export class TeamController {
+class TeamController {
     async create(req: Request, res: Response) {
         const { team_name, description, permissionCreateUsers, permissionCreateTeams,
             permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
@@ -114,3 +114,6 @@ export class TeamController {
         }
     }
 }
+
+const teamController = new TeamController()
+export default teamController

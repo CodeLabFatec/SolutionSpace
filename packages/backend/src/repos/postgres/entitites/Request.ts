@@ -66,4 +66,13 @@ export class Request {
     insertUpdated() {
         this.updated_at = new Date(moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss'));
     }
+
+    @Column({ type: 'text', nullable: true })
+    colorStatus: string;
+
+    @Column({ type: 'boolean', nullable: false, default: false })
+    arquived: boolean
+
+    @Column({ type: 'boolean', nullable: false, default: false })
+    approved: boolean
 }

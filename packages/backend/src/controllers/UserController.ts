@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { dataDecript } from '../utils/encryptor';
 import { groupRepository } from '../repos/postgres/repositories/groupRepository';
 
-export class UserController {
+class UserController {
     async create(req: Request, res: Response) {
         const { name, email, password, gender, team_id, group_id } = req.body;
 
@@ -143,3 +143,6 @@ export class UserController {
         }
     }
 }
+
+const userController = new UserController()
+export default userController
