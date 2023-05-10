@@ -3,9 +3,27 @@ import React, { useContext } from "react";
 import { AuthProvider, AuthContext } from "../contexts/authcontext";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Header, SideMenu } from "@/presentation/components";
-import { AlinhamentoEstrategico, AnaliseRisco, CadastroEquipe, CadastroGrupo, CadastroUsuarios, Chamados, EdicaoEquipe, EdicaoGrupo, EdicaoUsuarios, FormularioChamados, HistoricoAvaliacao, Home, ListagemEquipe, ListagemGrupos, ListagemUsuarios, Login } from "@/presentation/pages";
+import {
+  AlinhamentoEstrategico,
+  AnaliseRisco,
+  CadastroEquipe,
+  CadastroGrupo,
+  CadastroUsuarios,
+  Chamados,
+  EdicaoEquipe,
+  EdicaoGrupo,
+  EdicaoUsuarios,
+  FormularioChamados,
+  Home,
+  ListagemEquipe,
+  ListagemGrupos,
+  ListagemUsuarios,
+  Login,
+  PersonalizacaoAnalise,
+  HistoricoAvaliacao
+} from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
-import PersonalizacaoStatus from "@/presentation/pages/personalizacaoStatus/listagem/personalizacaoStatus";
+import PersonalizacaoAlinhamento from "@/presentation/pages/personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento";
 
 const Router: React.FC = () => {
   const Private = ({ children }: any) => {
@@ -226,10 +244,18 @@ const Router: React.FC = () => {
             }
           />
           <Route
-            path="/editStatus"
+            path="/StatusAlinhamento"
             element={
               <Private>
-                <PersonalizacaoStatus />
+                <PersonalizacaoAlinhamento />
+              </Private>
+            }
+          />
+          <Route
+            path="/StatusAnalise"
+            element={
+              <Private>
+                <PersonalizacaoAnalise />
               </Private>
             }
           />
