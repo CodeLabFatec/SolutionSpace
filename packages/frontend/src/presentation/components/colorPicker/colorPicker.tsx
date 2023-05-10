@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import Styles from "./colorPickerStyle.scss";
 
-const ColorPicker: React.FC<{ value: string }> = (props) => {
+const ColorPicker: React.FC<{ value: string, setValue: any }> = (props) => {
 
   const [color, setColor] = useState(props.value);
   const [isCopied, setCopied] = useState(false);
@@ -12,7 +12,7 @@ const ColorPicker: React.FC<{ value: string }> = (props) => {
 
   const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
-    props.value = e.target.value
+    props.setValue(e.target.value)
   };
 
   const handleCopyToClipBoard = () => {
