@@ -46,15 +46,13 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: | Média |
 |    |
 |   03   |   Adicionar personalização e controle de status de avaliação de chamados   | :hourglass: | Média |
-|   03   |   Adicionar controle de status de chamados aprovados (Kanban)   | :hourglass: | Média |
 |   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: | Média |
 |   03   |   Adicionar notificação para a movimentação de chamados   | :hourglass: | Média |
 |   03   |   Reformular visualização de avaliações (análise de risco e alinhamento estratégico) realizadas.   | :hourglass: | Média |
 |    |
-|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Média |
-|   04   |   Adicionar recuperação de senha via email  | :hourglass: | Baixa |
+|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Baixa |
+|   03   |   Adicionar controle de status de chamados aprovados (Kanban)   | :hourglass: | Baixa |
 |   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: | Baixa |
-|   04   |   Adicionar filtros para as páginas de listagem de chamados   | :hourglass: | Baixa |
 
 <br>
 
