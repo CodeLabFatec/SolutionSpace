@@ -85,9 +85,10 @@ export const createTeam = async (
   permissionCreateTeams: boolean,
   permissionCreateGroups: boolean,
   permissionEditRequests: boolean,
-  permissionUnarchiveRequests: boolean
+  permissionUnarchiveRequests: boolean,
+  permissionConfigureStatus: boolean
 ) => {
-  return api.post('/createTeam', { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
+  return api.post('/createTeam', { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests, permissionConfigureStatus })
 }
 
 export const createGroup = async (
@@ -170,8 +171,9 @@ export const updateTeam = async (
   permissionCreateTeams: boolean,
   permissionCreateGroups: boolean,
   permissionEditRequests: boolean,
-  permissionUnarchiveRequests: boolean) => {
-  return api.put('/updateTeam/' + team_id, { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests })
+  permissionUnarchiveRequests: boolean,
+  permissionConfigureStatus: boolean) => {
+  return api.put('/updateTeam/' + team_id, { team_name, description, permissionCreateGroups, permissionCreateTeams, permissionCreateUsers, permissionEditRequests, permissionUnarchiveRequests, permissionConfigureStatus })
 }
 
 export const updateGroup = async (

@@ -14,6 +14,7 @@ const CadastroEquipe: React.FC = () => {
   const [cadastrarGrupo, setCadastrarGrupo] = useState(false);
   const [editarChamado, setEditarChamado] = useState(false);
   const [desarquivarChamado, setDesarquivarChamado] = useState(false);
+  const [configuraStatus, setConfiguraStatus] = useState(false);
 
   const navigate = useNavigate();
   const alert = useAlert()
@@ -38,6 +39,10 @@ const CadastroEquipe: React.FC = () => {
     setEditarChamado(!editarChamado)
   }
 
+  const handleConfiguraStatus = () => {
+    setConfiguraStatus(!configuraStatus)
+  }
+
   const handleRequest = async () => {
     try {
 
@@ -48,7 +53,8 @@ const CadastroEquipe: React.FC = () => {
         cadastrarEquipe, 
         cadastrarGrupo, 
         editarChamado, 
-        desarquivarChamado)
+        desarquivarChamado,
+        configuraStatus)
 
       alert.criarAlerta({
         icon: 'success',
@@ -171,6 +177,13 @@ const CadastroEquipe: React.FC = () => {
               control={<Switch  value={desarquivarChamado}/>}
               onChange={handleDesarquivarChamado}
               label="Poderá desarquivar chamados?"
+              labelPlacement="start"
+              id={Styles.Switch}
+            />
+            <FormControlLabel
+              control={<Switch  value={configuraStatus}/>}
+              onChange={handleConfiguraStatus}
+              label="Poderá configurar status de chamados?"
               labelPlacement="start"
               id={Styles.Switch}
             />
