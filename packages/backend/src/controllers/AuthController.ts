@@ -4,7 +4,7 @@ import 'dotenv/config';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { comparePassword } from '../utils/encryptor';
 
-export class AuthController {
+class AuthController {
     async authenticate(req: Request, res: Response) {
         const { email, password } = req.body;
 
@@ -49,7 +49,7 @@ export class AuthController {
             if (!user) {
                 return res.status(401).json('User not found');
             }
-
+            
             return res.status(200).json({ user })
             
         } catch(e) {
@@ -57,3 +57,6 @@ export class AuthController {
         }
     }
 }
+
+const authController = new AuthController()
+export default authController

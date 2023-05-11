@@ -7,48 +7,30 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
 import { User } from './User';
-import { File } from './File';
 
-export enum RequestType {
-    FEATURE = 'feature',
-    HOTFIX = 'hotfix'
-}
-
-@Entity('requests')
-export class Request {
+@Entity('notifications')
+export class Notifications {
     @PrimaryGeneratedColumn('uuid')
-    request_id: string;
+    notification_id: string;
 
     @Column({ type: 'text', nullable: false })
     title: string;
 
-    @Column({ type: 'text', nullable: false, default: 'Aberto' })
-    status: string;
-
     @Column({ type: 'text', nullable: true })
-    description: string;
+    message: string;
 
-    @Column({
-        type: 'enum',
-        enum: RequestType,
-        nullable: true
+    @Column({ type: 'boolean', nullable: false, default: false })
+    hasRead: boolean;
+
+    @ManyToOne(() => User, (user) => user.user_id, { 
+        onDelete: 'CASCADE' 
     })
-    requestType: RequestType;
-
-    @ManyToOne(() => User, (user) => user.user_id)
     @JoinColumn({ name: 'user_id' })
     user: User;
-
-    @Column({ type: 'text', nullable: false })
-    requestStep: string;
-
-    @OneToMany(() => File, (file) => file.request)
-    files: File[];
 
     @CreateDateColumn()
     created_at: Date;
@@ -66,13 +48,4 @@ export class Request {
     insertUpdated() {
         this.updated_at = new Date(moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss'));
     }
-
-    @Column({ type: 'text', nullable: true })
-    colorStatus: string;
-
-    @Column({ type: 'boolean', nullable: false, default: false })
-    arquived: boolean
-
-    @Column({ type: 'boolean', nullable: false, default: false })
-    approved: boolean
 }
