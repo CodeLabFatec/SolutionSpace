@@ -16,8 +16,8 @@ const InfoChamado: React.FC<{
   const { user } = useContext(AuthContext)
 
   const applyMarginToButton: any =
-    props.chamado?.status === "Aprovado" ||
-    props.chamado?.status === "Arquivado"
+    props.chamado?.approved ||
+    props.chamado?.arquived
       ? { marginRight: "8vh" }
       : {};
 
@@ -72,9 +72,9 @@ const InfoChamado: React.FC<{
 
           {props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS ? (
             <div className={Styles.botoesInfochamado}>
-              {props.chamado.status === "Arquivado" ? (
+              {props.chamado.arquived ? (
                 <></>
-              ) : props.chamado.status === "Aprovado" ? (
+              ) : props.chamado.approved ? (
                 <></>
               ) : (user.group.canRateAnalise || user.group.mustRateAnalise) && props.chamado.requestStep === "Analise de risco" ? (
                 <button

@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from 'typeorm'
 import { User } from './User'
 import { Team } from './Team'
+import { Rating } from './Rating';
 
 @Entity('groups')
 export class Group {
@@ -37,4 +38,7 @@ export class Group {
 
     @OneToMany(() => User, (user) => user.group)
     users: User[]
+
+    @OneToMany(() => Rating, (rating) => rating.targetGroup)
+    ratings: Rating[]
 }
