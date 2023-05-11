@@ -4,7 +4,8 @@ import { Request, Response } from 'express';
 class TeamController {
     async create(req: Request, res: Response) {
         const { team_name, description, permissionCreateUsers, permissionCreateTeams,
-            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
+            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests, 
+            permissionConfigureStatus } = req.body;
 
         if (!team_name || !description) {
             return res.status(400).json({ message: 'All properties are required to create a team' });
@@ -19,7 +20,8 @@ class TeamController {
                     permissionCreateTeams,
                     permissionCreateUsers,
                     permissionEditRequests,
-                    permissionUnarchiveRequests
+                    permissionUnarchiveRequests,
+                    permissionConfigureStatus
                 });
 
             await teamRepository.save(newTeam);
@@ -59,7 +61,8 @@ class TeamController {
 
     async editTeam(req: Request, res: Response) {
         const { team_name, description, permissionCreateUsers, permissionCreateTeams,
-            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests } = req.body;
+            permissionCreateGroups, permissionEditRequests, permissionUnarchiveRequests,
+            permissionConfigureStatus } = req.body;
         const { team_id } = req.params;
 
         if (!team_name || !description) {
@@ -80,6 +83,7 @@ class TeamController {
             team.permissionCreateUsers = permissionCreateUsers;
             team.permissionEditRequests = permissionEditRequests;
             team.permissionUnarchiveRequests = permissionUnarchiveRequests;
+            team.permissionConfigureStatus = permissionConfigureStatus;
 
             await teamRepository.save(team);
 

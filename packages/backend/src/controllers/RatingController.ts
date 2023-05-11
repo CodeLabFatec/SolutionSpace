@@ -8,6 +8,8 @@ import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 import { checkGroupPermission } from '../utils/checkGroupPermissions';
 import { notifyUserByRequest } from '../utils/notifyUser';
+import { groupRepository } from '../repos/postgres/repositories/groupRepository';
+import { RequestStepStatus } from '../repos/postgres/entitites/StatusConfiguration';
 
 class RatingController {
     async create(req: Request, res: Response) {
@@ -27,23 +29,26 @@ class RatingController {
 
         const userGroupPermissions = await checkGroupPermission(user.group.group_id);
 
-        const alreadyRated = await ratingRepository.find({
-            where: {
-                requestStep: requestStep as RequestStep,
-                request: { request_id: requestId },
-                user: { team: { team_id: user.team.team_id } }
-            }
-        });
-
-        if (alreadyRated.length > 0)
-            return res.status(400).json('There is already a rating for this request from the same team');
-
+        
         const request = await requestRepository.findOne({
             where: { request_id: requestId },
             relations: { user: true }
         });
-
+        
         if (!request) return res.status(404).json('Request not found');
+
+        if (request.arquived) return res.status(200).json('This request has already been archived');
+
+        const alreadyRated = await ratingRepository.find({
+            where: {
+                requestStep: requestStep as RequestStep,
+                request: { request_id: requestId },
+                user: { group: { group_id: user.group.group_id } }
+            }
+        });
+
+        if (alreadyRated.length > 0)
+            return res.status(400).json('There is already a rating for this request from the same group');
 
         if (
             request.requestStep === RequestStep.ANALISE_RISCO &&
@@ -57,38 +62,31 @@ class RatingController {
         )
             return res.status(401).json({ message: "Não autorizado - O seu grupo não tem permissão para avaliar este chamado" })
 
-        const forbiddenStatus = await statusConfigurationRepository.find({
-            where: [
-                { rating: '0', requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO },
-                { rating: '3', requestStep: RequestStep.ANALISE_RISCO }
-            ]
-        });
+        if(
+            request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
+            userGroupPermissions.mustRateAlinhamento &&
+            targetGroup
+        ){
+            const groupExists = await groupRepository.findBy({ group_id: targetGroup })            
 
-        if (forbiddenStatus.length !== 2)
-            return res
-                .status(404)
-                .json(
-                    `forbiddenStatus not found - Please insert a status for Forbbiden status of '${RequestStep.ALINHAMENTO_ESTRATEGICO}' and '${RequestStep.ANALISE_RISCO}'`
-                );
+            if(!groupExists){
+                return res.status(401).json('O grupo informado não existe.')
+            }
 
-        if (request.status === forbiddenStatus[0].status)
-            return res.status(200).json('This request has already been archived');
-
-        const alinhamentoForbidden = forbiddenStatus.find(
-            i=> i.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO)
-
-        const analiseForbidden = forbiddenStatus.find(
-            i=> i.requestStep === RequestStep.ANALISE_RISCO)
-
-        if(!alinhamentoForbidden || !analiseForbidden) {
-            return res.status(404).json('No forbidden status found')
+        }else if(
+            request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO &&
+            userGroupPermissions.mustRateAlinhamento &&
+            !targetGroup
+        ){
+            return res.status(401).json('Você deve enviar um grupo alvo.')
         }
 
         try {
             const statusConfig = await statusConfigurationRepository.findOne({
                 where: {
                     rating,
-                    requestStep: request.requestStep as RequestStep
+                    requestStep: request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO ?  
+                    RequestStepStatus.ALINHAMENTO_ESTRATEGICO : RequestStepStatus.ANALISE_RISCO
                 }
             });
 
@@ -136,64 +134,56 @@ class RatingController {
 
             if(createdRating.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO){
 
-                // Checar as condições para arquivar na etapa de alinhamento estratégico
-                // (atualizar posteriormente com nova regra)
-                if(createdRating.rating === '0' && createdRating.targetGroup && userGroupPermissions.mustRateAlinhamento){
-                    await requestRepository.save({
-                        ...request,
-                        status: alinhamentoForbidden.status
-                    });
-    
-                    request.status = alinhamentoForbidden.status
+                if(userGroupPermissions.mustRateAlinhamento){
+
+                    if(statusConfig.archiveRequests){
+                        await requestRepository.save({
+                            ...request,
+                            arquived: true,
+                            status: statusConfig
+                        })
+                    }else{
+                        await requestRepository.save({
+                            ...request,
+                            approved: true,
+                            status: statusConfig
+                        })
+                    }
+
                     await notifyUserByRequest(request, createdRating)
 
                     return res.status(201).json(newRating);
                 }
-                
-                if(userGroupPermissions.mustRateAlinhamento){
-                    await requestRepository.save({
-                        ...request,
-                        status: statusConfig.status
-                    });
-    
-                    request.status = statusConfig.status
-                    await notifyUserByRequest(request, createdRating)
-                }
 
             } else if(createdRating.requestStep === RequestStep.ANALISE_RISCO) {
 
-                // Checar as condições para arquivar na etapa de análise de risco
-                // (atualizar posteriormente com nova regra)
                 if(userGroupPermissions.mustRateAnalise){
-                    if(createdRating.rating === '3'){
-                        await requestRepository.save({
-                            ...request,
-                            status: analiseForbidden.status
-                        });
-        
-                        request.status = analiseForbidden.status
-                        await notifyUserByRequest(request, createdRating)
-    
-                        return res.status(201).json(newRating);
-                    } else {
-                        await requestRepository.save({
-                            ...request,
-                            status: statusConfig.status,
-                            requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
-                        });
-                        
-                        request.status = statusConfig.status
-                        await notifyUserByRequest(request, createdRating)
 
-                        return res.status(201).json(newRating);
+                    if(statusConfig.archiveRequests){
+                        await requestRepository.save({
+                            ...request,
+                            arquived: true,
+                            status: statusConfig
+                        })  
+                    }else{
+                        await requestRepository.save({
+                            ...request,
+                            status: statusConfig,
+                            requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
+                        })
                     }
+
+                    await notifyUserByRequest(request, createdRating)
+
+                    return res.status(201).json(newRating);
                 }
+
             }
 
             return res.status(201).json(newRating);
         } catch (error) {
 
-            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+            return res.status(500).json(`Internal Server Error - ${error}`);
         }
     }
 

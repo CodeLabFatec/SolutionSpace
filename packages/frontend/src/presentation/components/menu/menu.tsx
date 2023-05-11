@@ -73,31 +73,6 @@ const SideMenu = () => {
           >
             <p>Home</p>
           </MenuItem>
-          <SubMenu
-            id={Styles.menuList}
-            icon={<BorderColorIcon />}
-            label="Personalizar status"
-            style={{ color: "#4FB4BC", padding: "10px" }}
-          >
-            <MenuItem
-              onClick={() => {
-                handleMenu();
-              }}
-              style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
-              component={<Link to="/StatusAnalise" />}
-            >
-              Análise de risco
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleMenu();
-              }}
-              style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
-              component={<Link to="/StatusAlinhamento" />}
-            >
-              Alinhamento estratégico
-            </MenuItem>
-          </SubMenu>
 
           {user.group.canRequestHotfix ||
           user.group.canRequestFeatures ||
@@ -161,6 +136,35 @@ const SideMenu = () => {
               ) : (
                 <></>
               )}
+            </SubMenu>
+          ) : (
+            <></>
+          )}
+          {user.team.permissionConfigureStatus ? (
+            <SubMenu
+              id={Styles.menuList}
+              icon={<BorderColorIcon />}
+              label="Personalizar status"
+              style={{ color: "#4FB4BC", padding: "10px" }}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleMenu();
+                }}
+                style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
+                component={<Link to="/StatusAnalise" />}
+              >
+                Análise de risco
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleMenu();
+                }}
+                style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
+                component={<Link to="/StatusAlinhamento" />}
+              >
+                Alinhamento estratégico
+              </MenuItem>
             </SubMenu>
           ) : (
             <></>

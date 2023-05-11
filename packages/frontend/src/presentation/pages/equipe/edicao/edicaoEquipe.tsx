@@ -16,6 +16,7 @@ const EdicaoEquipe: React.FC = () => {
   const [cadastrarGrupo, setCadastrarGrupo] = useState(false)
   const [editarChamado, setEditarChamado] = useState(false)
   const [desarquivarChamado, setDesarquivarChamado] = useState(false)
+  const [configuraStatus, setConfiguraStatus] = useState(false)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -42,6 +43,7 @@ const EdicaoEquipe: React.FC = () => {
     setCadastrarUsuario(team.permissionCreateUsers)
     setEditarChamado(team.permissionEditRequests)
     setDesarquivarChamado(team.permissionUnarchiveRequests)
+    setConfiguraStatus(team.permissionConfigureStatus)
   }
 
   useEffect(()=> {
@@ -67,6 +69,10 @@ const EdicaoEquipe: React.FC = () => {
   const handleEditarChamado = () => {
     setEditarChamado(!editarChamado)
   }
+  const handleConfiguraStatus = () => {
+    setConfiguraStatus(!configuraStatus)
+  }
+
 
   const handleRequest = async () => {
     try {
@@ -79,7 +85,8 @@ const EdicaoEquipe: React.FC = () => {
         cadastrarEquipe, 
         cadastrarGrupo, 
         editarChamado, 
-        desarquivarChamado)
+        desarquivarChamado,
+        configuraStatus)
 
       alert.criarAlerta({
         icon: 'success',
@@ -201,6 +208,13 @@ const EdicaoEquipe: React.FC = () => {
               control={<Switch  value={desarquivarChamado} checked={desarquivarChamado}/>}
               onChange={handleDesarquivarChamado}
               label="Poderá desarquivar chamados?"
+              labelPlacement="start"
+              id={Styles.Switch}
+            />
+            <FormControlLabel
+              control={<Switch  value={configuraStatus} checked={configuraStatus} />}
+              onChange={handleConfiguraStatus}
+              label="Poderá configurar status de chamados?"
               labelPlacement="start"
               id={Styles.Switch}
             />

@@ -1,5 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { RequestStep } from './Rating';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Request } from './Request';
+
+export enum RequestStepStatus {
+    ANALISE_RISCO = 'Analise de risco',
+    ALINHAMENTO_ESTRATEGICO = 'Alinhamento estratégico'
+}
 
 @Entity('statusConfigurations')
 export class StatusConfiguration {
@@ -14,14 +19,17 @@ export class StatusConfiguration {
 
     @Column({
         type: 'enum',
-        enum: RequestStep,
+        enum: RequestStepStatus,
         nullable: true
     })
-    requestStep: RequestStep;
+    requestStep: RequestStepStatus;
 
     @Column({ type: 'text', nullable: true })
     color: string;
 
     @Column({ type: 'boolean', nullable: false, default: false })
     archiveRequests: boolean
+
+    @OneToMany(() => Request, (request) => request.status)
+    requests: Request[]
 }

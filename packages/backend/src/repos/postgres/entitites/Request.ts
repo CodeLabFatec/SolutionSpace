@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import { User } from './User';
 import { File } from './File';
+import { StatusConfiguration } from './StatusConfiguration';
 
 export enum RequestType {
     FEATURE = 'feature',
@@ -27,8 +28,9 @@ export class Request {
     @Column({ type: 'text', nullable: false })
     title: string;
 
-    @Column({ type: 'text', nullable: false, default: 'Aberto' })
-    status: string;
+    @ManyToOne(() => StatusConfiguration, (status) => status.requests, { nullable: true })
+    @JoinColumn({ name: 'status_id' })
+    status: StatusConfiguration | undefined;
 
     @Column({ type: 'text', nullable: true })
     description: string;
@@ -66,9 +68,6 @@ export class Request {
     insertUpdated() {
         this.updated_at = new Date(moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss'));
     }
-
-    @Column({ type: 'text', nullable: true })
-    colorStatus: string;
 
     @Column({ type: 'boolean', nullable: false, default: false })
     arquived: boolean
