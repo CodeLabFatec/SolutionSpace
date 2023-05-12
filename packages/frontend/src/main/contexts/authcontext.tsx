@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: any) => {
       interval = null
     }
 
-
+    setLoading(false)
     return false
   }
 
@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }: any) => {
       api.defaults.withCredentials = true
 
       setUser(loggedUser)
+      setLoading(false)
 
       navigate('/home')
 

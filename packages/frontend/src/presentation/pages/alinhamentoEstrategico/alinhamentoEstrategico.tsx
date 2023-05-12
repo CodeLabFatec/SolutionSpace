@@ -1,11 +1,10 @@
-import { Modal, SelectType, Dropzone } from '@/presentation/components'
+import { SelectType, Dropzone } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
 import React, { useContext, useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/main/contexts/authcontext'
-import { createStrategicAlignmentRating, getAllGroups, getRatingsByRequest } from '@/main/api/api'
-import { TipoChamado } from '@/main/enums/tipo-chamado'
+import { createStrategicAlignmentRating, getAllGroups } from '@/main/api/api'
 import { useAlert } from '@/main/services'
 
 const AlinhamentoEstrategico: React.FC = () => {
@@ -15,21 +14,18 @@ const AlinhamentoEstrategico: React.FC = () => {
   const location = useLocation()
   const alert = useAlert()
 
-
-  const [openModal, setOpenModal] = useState(false)
   const [titulo, setTitulo] = useState<string>('')
   const [detalhes, setDetalhes] = useState<string>('')
   const [rating, setRating] = useState<string>('')
   const [targetGroup, setTargetGroup] = useState<string>('')
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([])
-  const [ratingAnalise, setRatingAnalise] = useState<any>(null)
   const [grupos] = useState<any[]>([])
 
   const loadGrupos = async () => {
     try {
       const response = await getAllGroups()
       response.data.map((item: any) => {
-        grupos.push({ label: item.group_name, value: item.group_name })
+        grupos.push({ label: item.group_name, value: item.group_id })
       })
     } catch(e) {
       alert.criarAlerta({
@@ -41,32 +37,8 @@ const AlinhamentoEstrategico: React.FC = () => {
   }
 
   useEffect(() => {
-    setRatingAnalise(null)
-    loadRatings()
     loadGrupos()
   }, [])
-
-  const loadRatings = async () => {
-    if (location.state != null) {
-      if (location.state.status === 'Aberto' && location.state.requestType === TipoChamado.HOTFIX) {
-        setRatingAnalise(null)
-        return
-      }
-      if (location.state.requestStep === 'Analise de risco' && location.state.requestType === TipoChamado.FEATURE) {
-        setRatingAnalise(null)
-        return
-      }
-
-      try {
-        const response = await getRatingsByRequest(location.state.request_id)
-
-        if (response.data.length > 0) {
-          const data = response.data
-          setRatingAnalise(data[data.length - 1])
-        }
-      } catch (e) { /* empty */ }
-    }
-  }
 
   const handleRequest = async () => {
     try {
@@ -260,42 +232,6 @@ const AlinhamentoEstrategico: React.FC = () => {
               </div>
             </form>
           </div>
-          {ratingAnalise != null ? (
-            <>
-              <div
-                className={Styles.openModal}
-                onClick={() => {
-                  setOpenModal(true)
-                }}
-              >
-                <i className='large material-icons'>assignment_turned_in</i>
-              </div>
-              <Modal
-                isOpen={openModal}
-                titulo={
-                  ratingAnalise != null
-                    ? ratingAnalise.title +
-                      ' - ' +
-                      ratingAnalise.user.name +
-                      ' (Avaliação: ' +
-                      ratingAnalise.rating +
-                      ')'
-                    : 'Avaliação'
-                }
-                setModalClose={() => {
-                  setOpenModal(!openModal)
-                }}
-              >
-                {ratingAnalise != null ? (
-                  <p>{ratingAnalise.description}</p>
-                ) : (
-                  <p>Ocorreu um erro ao carregar a avaliação.</p>
-                )}
-              </Modal>
-            </>
-          ) : (
-            <></>
-          )}
         </div>
         <div className={Styles.arquivoBotao}>
           <div className={Styles.dropzoneContainer}>
