@@ -6,6 +6,7 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
@@ -13,6 +14,7 @@ import { Team } from './Team';
 import moment from 'moment-timezone';
 import { Group } from './Group';
 import { dataEncrypt } from '../../../utils/encryptor';
+import { Notifications } from './Notifications';
 
 export enum Genders {
     MALE = 'male',
@@ -55,6 +57,9 @@ export class User {
     @ManyToOne(() => Group, (group) => group.users)
     @JoinColumn({ name: 'group_id' })
     group: Group;
+
+    @OneToMany(() => Notifications, (notifications) => notifications.user)
+    notifications: Notifications[]
 
     @CreateDateColumn()
     created_at: Date;

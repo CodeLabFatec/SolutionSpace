@@ -48,7 +48,7 @@ const FormularioChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
         }
       })
     } catch (e: any) {
-      let errorMessage = e.response.data;
+      let errorMessage = e.response.data.message;
 
       if (
         errorMessage === "Missing required informations to create a request"

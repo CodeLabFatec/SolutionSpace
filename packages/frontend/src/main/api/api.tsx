@@ -200,3 +200,10 @@ export const updateStatusConfiguration = async (
 export const unarchiveRequest = async (request_id: string) => {
   return api.post('/unarchiveRequest/' + request_id)
 }
+
+
+export const readAllNotifications = async (
+  user_id:string
+  ) => {
+  return api.get('/updateAllNotifications/' + user_id )
+}
