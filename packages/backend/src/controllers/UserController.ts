@@ -62,6 +62,8 @@ class UserController {
 
             if (!user) return res.status(404).json('User not found');
 
+            user.notifications = user.notifications.filter(item => !item.hasRead)
+
             return res.status(200).json(
                 {
                     user,

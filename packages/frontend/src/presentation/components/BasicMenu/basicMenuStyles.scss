@@ -1,11 +1,27 @@
-.MuiMenu-root {
-    background-color: #333333;
-}
-
-.button{
+.button {
     background-color: transparent;
     border: none;
     text-decoration: underline;
     color: #4fb4bc;
     cursor: pointer;
 }
+
+
+.scroll::-webkit-scrollbar {
+    background-color: #333333;
+    border-radius: 4px;
+    width: 10px;
+  }
+  
+  .scroll::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  .scroll::-webkit-scrollbar-thumb {
+    background-color: #535252;
+    border-radius: 20px;
+  }
+
+  .hover:hover{
+    background-color: #434242;
+  }

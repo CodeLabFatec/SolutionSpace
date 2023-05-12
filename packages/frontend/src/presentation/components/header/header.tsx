@@ -7,12 +7,10 @@ import { useAlert } from "@/main/services";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import NotificationBell from "../NotificationBell/notificationBell";
 
-import { grey } from '@mui/material/colors';
-
 const Header: React.FC = () => {
   const { logout, user } = useContext(AuthContext);
   const alert = useAlert();
-  const notifications = user.notifications.filter((item: any) => !item.hasRead);
+  const notifications = user.notifications ? user.notifications.filter((item: any) => !item.hasRead) : [];
 
   const handleLogout = (e: any) => {
     e.preventDefault();
@@ -25,8 +23,6 @@ const Header: React.FC = () => {
       },
     });
   };
-
-  const color = grey[500] 
 
   return (
     <ProSidebarProvider>

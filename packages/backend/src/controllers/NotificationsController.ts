@@ -1,4 +1,5 @@
 import { notificationsRepository } from '../repos/postgres/repositories/notificationsRepository';
+import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { Request, Response } from 'express';
 
 class NotificationsController {
@@ -17,7 +18,15 @@ class NotificationsController {
                 await notificationsRepository.save(notifications)
             }
 
-            return res.status(200).json(notifications)
+            const user = await userRepository.findOne({ 
+                where: { user_id }, 
+                relations: { team: true, group: true, notifications: true } })
+
+            if(!user) return res.status(404).json({ message: 'User not found' })
+
+            user.notifications = user.notifications.filter(item => !item.hasRead)
+
+            return res.status(200).json(user)
 
         } catch(error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` })

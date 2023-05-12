@@ -15,7 +15,7 @@ export { default as ListagemUsuarios } from './usuarios/listagem/listagem-usuari
 export { default as EdicaoUsuarios } from './usuarios/edicao/edicao-usuarios'
 export { default as HistoricoAvaliacao } from './historicoAvaliacao/historicoAvaliacao'
 export { default as PersonalizacaoAnalise} from './personalizacaoStatus/AnaliseRisco/personalizacaoAnalise'
-export { default as PersonalizacaoAlinhamento} from './personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento'
+export { default as PersonalizacaoAlinhamento } from './personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento'
 export { default as VisualizarEquipe } from './equipe/visualizacao/visualizarEquipe' 
 export { default as VisualizarGrupo } from './grupos/visualzacao/visualizarGrupo' 
 export { default as VisualizarUsuario } from './usuarios/visualizacao/visualizarUsuarios' 

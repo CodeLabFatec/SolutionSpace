@@ -1,5 +1,5 @@
 import { Badge } from "@mui/material";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip'
 import { grey } from '@mui/material/colors';
@@ -33,8 +33,8 @@ const NotificationBell: React.FC<{ notifications: any[]}> = (props) => {
         <div>
             <Tooltip title={props.notifications.length ? newNotification : noNotification}>
                 <IconButton onClick={handleOpen} sx={{ color: grey[500] }} >
-                    <Badge badgeContent={props.notifications.length} variant="dot" color="error" >
-                        <NotificationsIcon color="inherit"/>
+                    <Badge badgeContent={props.notifications.length} color="error" >
+                        <NotificationsNoneOutlinedIcon color="inherit"/>
                     </Badge>
                 </IconButton>
             </Tooltip>
