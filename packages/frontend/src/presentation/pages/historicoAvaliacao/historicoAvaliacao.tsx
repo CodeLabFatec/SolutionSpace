@@ -8,6 +8,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import { useLocation } from 'react-router-dom';
 import { useAlert, useDownload } from '@/main/services';
 import { getRatingsByRequest } from '@/main/api/api';
+import moment from 'moment';
 
 const HistoricoAvaliacao: React.FC = () => {
 
@@ -32,6 +33,7 @@ const HistoricoAvaliacao: React.FC = () => {
   const loadAvaliacoes = async () => {
     const ratings = await getRatingsByRequest(location.state.request_id)
     setAvaliacoes(ratings.data);
+    console.log(ratings.data)
   }
 
   const handleDownload = (e: any, rating: any) => {
@@ -149,7 +151,7 @@ const HistoricoAvaliacao: React.FC = () => {
         <div key={item.rating_id} className={Styles.avaliacoes}>
           <div className={Styles.infos}>
             <p>Etapa: {item.requestStep}</p>
-            <p>Avaliada em: {item.createdAt}</p>
+            <p>Avaliada em: {moment(item.created_at).format('DD/MM/YYYY HH:mm')}</p>
             <p>Usuário: {item.user.name}</p>
             <p>Nota: {item.rating}</p>
           </div>

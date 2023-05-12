@@ -1,8 +1,28 @@
+body {
+  text-align: center;
+}
+
 .container {
-  width: 96%;
   position: absolute;
   top: 69px;
-  left: 60px;
+  width: 100%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 4px;
+  width: 10px;
+}
+
+.container::-webkit-scrollbar-button {
+  display: none;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #535252;
+  border-radius: 20px;
 }
 
 .titleHistory {
@@ -23,6 +43,8 @@
   border-radius: 20px;
   overflow-x: auto;
   margin-top: 20px;
+  width: 90%;
+  margin-left: 100px;
 
   p {
     color: #FFF;
@@ -31,7 +53,7 @@
 }
 
 .relatorioAvaliacao::-webkit-scrollbar {
-  background-color: #333333;
+  background-color: #535252;
   border-radius: 20px;
   width: 10px;
   height: 10px;
@@ -42,7 +64,7 @@
 }
 
 .relatorioAvaliacao::-webkit-scrollbar-thumb {
-  background-color: #535252;
+  background-color: #333333;
   border-radius: 20px;
 }
 
@@ -66,6 +88,7 @@
   border-radius: 5px;
   max-width: 150px;
   min-width: 150px;
+  user-select: none;
 }
 
 .avaliacoes {
@@ -73,6 +96,9 @@
   margin-top: 30px;
   padding: 20px;
   border-radius: 20px;
+  
+  width: 90%;
+  margin-left: 100px;
 }
 
 .infos {
@@ -174,5 +200,5 @@
 }
 
 input:checked+.collapse {
-  height: 340px;
+  height: 350px;
 }

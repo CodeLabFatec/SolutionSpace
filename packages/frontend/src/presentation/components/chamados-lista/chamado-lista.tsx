@@ -34,13 +34,13 @@ const ChamadoLista: React.FC<{
 
         let requests: any[] = []
 
+        requests = response.data.filter((x: any) => !x.arquived)
+
         if(user.group.canRateAnalise){
-          requests = response.data.filter((x: any) => x.requestType === TipoChamado.FEATURE)
+          requests = requests.filter((x: any) => x.requestType === TipoChamado.FEATURE)
         }
 
-        if(user.group.canRateAnalinhamento){
-          requests = response.data
-        }
+        console.log(requests)
 
         setChamados(requests)
         setChamadosFiltrados(requests)

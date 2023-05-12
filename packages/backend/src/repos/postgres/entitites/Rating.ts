@@ -14,6 +14,7 @@ import {
 import { User } from './User';
 import { Request } from './Request';
 import { File } from './File';
+import { Group } from './Group';
 
 export enum RequestStep {
     ANALISE_RISCO = 'Analise de risco',
@@ -49,8 +50,9 @@ export class Rating {
     })
     requestStep: RequestStep;
 
-    @Column({ type: 'text', nullable: true })
-    targetGroup: string;
+    @ManyToOne(() => Group, (group) => group.ratings, { nullable: true })
+    @JoinColumn({ name: 'targetGroup' })
+    targetGroup: Group;
 
     @OneToMany(() => File, (file) => file.rating)
     files: File[];

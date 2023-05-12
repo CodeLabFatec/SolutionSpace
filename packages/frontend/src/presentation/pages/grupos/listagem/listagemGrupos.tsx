@@ -35,6 +35,12 @@ const ListagemGrupos: React.FC = () => {
     navigate("/editGroup", { replace: true, state: item });
   };
 
+  const handleVisualize = (e: any, item: any) => {
+    e.preventDefault();
+
+    navigate("/visualizarGrupo", { replace: true, state: item });
+  };
+
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
@@ -122,6 +128,14 @@ const ListagemGrupos: React.FC = () => {
                           delete
                         </i>
                       )}
+                       <i
+                          onClick={(e: any) => {
+                            handleVisualize(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          remove_red_eye
+                        </i>
                     </div>
                   </td>
                 </tr>

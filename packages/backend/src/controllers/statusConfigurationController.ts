@@ -1,5 +1,4 @@
-import { StatusConfiguration } from '../repos/postgres/entitites/StatusConfiguration';
-import { RequestStep } from '../repos/postgres/entitites/Rating';
+import { RequestStepStatus } from '../repos/postgres/entitites/StatusConfiguration';
 import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 import { Request, Response } from 'express';
 
@@ -16,7 +15,7 @@ class StatusConfigurationController {
             const alreadyCreated = await statusConfigurationRepository.findOne({
                 where: {
                     rating,
-                    requestStep: requestStep === 'ALINHAMENTO' ? RequestStep.ALINHAMENTO_ESTRATEGICO : RequestStep.ANALISE_RISCO
+                    requestStep: requestStep === 'ALINHAMENTO' ? RequestStepStatus.ALINHAMENTO_ESTRATEGICO : RequestStepStatus.ANALISE_RISCO
                 }
             });
 
@@ -25,7 +24,7 @@ class StatusConfigurationController {
             const newStatus = statusConfigurationRepository.create({
                 rating,
                 status,
-                requestStep: requestStep === 'ALINHAMENTO' ? RequestStep.ALINHAMENTO_ESTRATEGICO : RequestStep.ANALISE_RISCO
+                requestStep: requestStep === 'ALINHAMENTO' ? RequestStepStatus.ALINHAMENTO_ESTRATEGICO : RequestStepStatus.ANALISE_RISCO
             });
 
             const createdStatus = await statusConfigurationRepository.save(newStatus);
@@ -62,7 +61,7 @@ class StatusConfigurationController {
 
     async getStatusRequestStep(req: Request, res: Response) {
         const { requestStep } = req.params;
-        const stepToFind = requestStep === "AnaliseRisco" ? RequestStep.ANALISE_RISCO : RequestStep.ALINHAMENTO_ESTRATEGICO
+        const stepToFind = requestStep === "AnaliseRisco" ? RequestStepStatus.ANALISE_RISCO : RequestStepStatus.ALINHAMENTO_ESTRATEGICO
 
         try {
             const statuses = await statusConfigurationRepository.find({ where: { requestStep: stepToFind }, order: { rating: 'ASC' } });

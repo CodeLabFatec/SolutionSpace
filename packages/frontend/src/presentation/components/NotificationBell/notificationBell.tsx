@@ -2,20 +2,27 @@ import { Badge } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip'
+import { grey } from '@mui/material/colors';
+
+
 
 import React, { useState } from 'react'
 import BasicMenu from "../BasicMenu/basicMenu";
- 
-const NotificationBell: React.FC<{ notifications: any[] }> = (props) => {
+
+const NotificationBell: React.FC<{ notifications: any[]}> = (props) => {
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
+    
+    const newNotification = `Você possui ${props.notifications.length > 1 ? `${props.notifications.length} novas notificações`: `${props.notifications.length} nova notificação`}` 
+    const noNotification = 'Sem notificações'
 
-    const newNotification = "teste"
-    const noNotification = 'no new'
+
 
     const handleOpen = (event: any) => {
-        setAnchorEl(event.currentTarget);
-        setOpen(true)
+        if (props.notifications.length > 0){
+            setAnchorEl(event.currentTarget);
+            setOpen(true)
+        }
     };
     const handleClose = () => {
         setAnchorEl(null);
@@ -25,9 +32,9 @@ const NotificationBell: React.FC<{ notifications: any[] }> = (props) => {
     return (
         <div>
             <Tooltip title={props.notifications.length ? newNotification : noNotification}>
-                <IconButton onClick={handleOpen} >
-                    <Badge badgeContent={props.notifications.length} color="error">
-                        <NotificationsIcon />
+                <IconButton onClick={handleOpen} sx={{ color: grey[500] }} >
+                    <Badge badgeContent={props.notifications.length} variant="dot" color="error" >
+                        <NotificationsIcon color="inherit"/>
                     </Badge>
                 </IconButton>
             </Tooltip>

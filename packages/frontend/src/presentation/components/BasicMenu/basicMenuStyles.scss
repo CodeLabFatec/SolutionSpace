@@ -1,7 +1,11 @@
-.menuItem{
-    background-color: aqua;
-    color: violet;
-    width: 500px;
-    max-width: 500px;
-    word-break: break-all;
+.MuiMenu-root {
+    background-color: #333333;
+}
+
+.button{
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: #4fb4bc;
+    cursor: pointer;
 }

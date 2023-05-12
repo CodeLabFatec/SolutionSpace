@@ -20,7 +20,10 @@ import {
   ListagemUsuarios,
   Login,
   PersonalizacaoAnalise,
-  HistoricoAvaliacao
+  HistoricoAvaliacao,
+  VisualizarEquipe,
+  VisualizarGrupo,
+  VisualizarUsuario
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
 import PersonalizacaoAlinhamento from "@/presentation/pages/personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento";
@@ -256,6 +259,30 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <PersonalizacaoAnalise />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarEquipe"
+            element={
+              <Private>
+                <VisualizarEquipe />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarGrupo"
+            element={
+              <Private>
+                <VisualizarGrupo />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarUsuario"
+            element={
+              <Private>
+                <VisualizarUsuario />
               </Private>
             }
           />

@@ -7,7 +7,6 @@ import { ratingRepository } from '../repos/postgres/repositories/ratingRepositor
 import { In } from 'typeorm';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { File } from '../repos/postgres/entitites/File';
-import { statusConfigurationRepository } from '../repos/postgres/repositories/statusConfigurationRepository';
 
 class RequestController {
     async create(req: Request, res: Response) {
@@ -71,7 +70,8 @@ class RequestController {
 
     async listRequests(req: Request, res: Response) {
         try {
-            const requests = await requestRepository.find({ relations: { user: { team: true }, files: true } });
+            const requests = await requestRepository.find(
+                { relations: { user: { team: true }, files: true, status: true } });
 
             return res.status(200).json(requests);
         } catch (error) {
@@ -85,7 +85,7 @@ class RequestController {
         try {
             const requests = await requestRepository.find({
                 where: { user: { user_id } },
-                relations: { user: { team: true }, files: true }
+                relations: { user: { team: true }, files: true, status: true }
             });
 
             return res.status(200).json(requests);
@@ -105,7 +105,7 @@ class RequestController {
             if (user.team.team_name === 'Solicitante') {
                 const requests = await requestRepository.find({
                     where: { user: { user_id } },
-                    relations: { user: { team: true }, files: true }
+                    relations: { user: { team: true }, files: true, status: true }
                 });
 
                 return res.status(200).json(requests);
@@ -125,12 +125,12 @@ class RequestController {
             if (teamRatedIds.length > 0) {
                 const teamRequests = await requestRepository.find({
                     where: [{ user: { team: { team_name: user.team.team_name } } }],
-                    relations: { user: { team: true }, files: true }
+                    relations: { user: { team: true }, files: true, status: true }
                 });
 
                 const teamRatedRequests = await requestRepository.find({
                     where: { request_id: In(teamRatedIds) },
-                    relations: { user: { team: true }, files: true }
+                    relations: { user: { team: true }, files: true, status: true }
                 });
 
                 const filteredRequests = teamRequests.filter(
@@ -142,7 +142,7 @@ class RequestController {
 
             const teamRequests = await requestRepository.find({
                 where: [{ user: { team: { team_name: user.team.team_name } } }],
-                relations: { user: { team: true }, files: true }
+                relations: { user: { team: true }, files: true, status: true }
             });
 
             return res.status(200).json(teamRequests);
@@ -157,7 +157,7 @@ class RequestController {
         try {
             const request = await requestRepository.findOne({
                 where: { request_id: id },
-                relations: { user: { team: true }, files: true }
+                relations: { user: { team: true }, files: true, status: true }
             });
 
             if (!request) return res.status(404).json('Request not found');
@@ -171,8 +171,8 @@ class RequestController {
     async listArchivedRequests(req: Request, res: Response) {
         try {
             const requests = await requestRepository.find({
-                where: { status: 'Arquivado' },
-                relations: { user: { team: true, group: true }, files: true }
+                where: { arquived: true },
+                relations: { user: { team: true, group: true }, files: true, status: true }
             });
 
             return res.status(200).json(requests);
@@ -191,53 +191,26 @@ class RequestController {
 
             if (!request) return res.status(404).json('Request not found');
 
+            if (!request.arquived) return res.status(404).json('Request is not arquived');
+
             if(request.requestType === RequestType.HOTFIX) {
-                requestRepository.save({
-                    ...request,
-                    status: 'Aberto'
-                })
+                request.status = undefined
+                request.arquived = false
+                requestRepository.save(request)
 
                 return res.status(200).json({ request })
-            }else {
+            }else if(request.requestType === RequestType.FEATURE) {
 
-                if(request.requestStep === RequestStep.ANALISE_RISCO) {
-                    requestRepository.save({
-                        ...request,
-                        status: 'Aberto'
-                    })
+                request.status = undefined
+                request.arquived = false
 
-                    return res.status(200).json({ request })
-                }else if(request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO) {
-                                       
-                    const requestRatings = await ratingRepository.find(
-                        { where: { request: { request_id } } }
-                    )
-
-                    if(!requestRatings || requestRatings.length === 0) return res.status(404).json('Ratings not found for this request.')
-
-                    const analiseRiscoRatings = requestRatings.find(r=> r.requestStep === RequestStep.ANALISE_RISCO)
-
-                    if(!analiseRiscoRatings) return res.status(404).json('Rating not found for this request.')
-
-                    const rating = analiseRiscoRatings.rating
-
-                    const statusConfig = await statusConfigurationRepository.findOne({
-                        where: {
-                            rating,
-                            requestStep: request.requestStep as RequestStep
-                        }
-                    });
-                    
-                    if(!statusConfig) return res.status(404).json('Status not found.')
-
-                    requestRepository.save({
-                        ...request,
-                        status: statusConfig.status
-                    })
-
-                    return res.status(200).json({ request })
+                if(request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO) {
+                    request.requestStep = RequestStep.ANALISE_RISCO
                 }
+                
+                requestRepository.save(request)
 
+                return res.status(200).json({ request })
             }
 
             return res.status(404).json('Um erro inesperado ocorreu.')

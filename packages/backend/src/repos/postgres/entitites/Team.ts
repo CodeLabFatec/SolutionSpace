@@ -28,6 +28,9 @@ export class Team {
     @Column({ type: 'boolean', nullable: false, default: false })
     permissionUnarchiveRequests: boolean
 
+    @Column({ type: 'boolean', nullable: false, default: false })
+    permissionConfigureStatus: boolean
+
     @OneToMany(() => User, (user) => user.team)
     users: User[];
 

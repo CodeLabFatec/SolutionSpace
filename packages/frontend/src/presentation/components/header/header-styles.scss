@@ -43,18 +43,17 @@
 
 .notification {
   position: absolute;
-  right: 24px;
-  top: 20px;
-  
+  right: 60px;
+  top: 15.5px;
   text-align: center;
-  
   cursor: pointer;
   user-select: none;
+  color: #4fb4bc;
+  margin-bottom: 0;
 
-  i {
-    font-size: 30px;
-    color: #4fb4bc;
-    color: #4fb4bc;
-  
-  }
+}
+
+.notificacao{
+  background-color: #4fb4bc;
+
 }
