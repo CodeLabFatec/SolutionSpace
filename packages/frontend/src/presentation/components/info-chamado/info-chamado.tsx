@@ -69,6 +69,207 @@ const InfoChamado: React.FC<{
     })
   };
   
+  const BotaoAvaliar = () => {
+    const chamado = props.chamado
+
+    if(!chamado) return <></>
+    if(chamado.arquived) return (
+      <div className={Styles.botoesInfochamado}>
+        <button
+          style={applyMarginToButton}
+          color="secundary"
+          className={Styles.botaoVisualizarAnalise}
+          onClick={() => {
+            navigate("/history", {
+              replace: true,
+              state: props.chamado,
+            });
+          }}>
+          Ver avaliações
+        </button>
+      </div>
+    )
+    if(chamado.approved) return (
+      <div className={Styles.botoesInfochamado}>
+        <button
+          style={applyMarginToButton}
+          color="secundary"
+          className={Styles.botaoVisualizarAnalise}
+          onClick={() => {
+            navigate("/history", {
+              replace: true,
+              state: props.chamado,
+            });
+          }}>
+          Ver avaliações
+        </button>
+      </div>
+    )
+
+    if(chamado.requestStep === 'Analise de risco'){
+
+      if(user.group.canRateAnalise || user.group.mustRateAnalise){
+        if(chamado.ratings.length > 0){
+          const check = chamado.ratings.find(
+            x=> x.requestStep === chamado.requestStep && user.user_id === x.user.user_id)
+
+          if(check){
+            return (
+              <div className={Styles.botoesInfochamado}>
+                <button
+                  style={applyMarginToButton}
+                  color="secundary"
+                  className={Styles.botaoVisualizarAnalise}
+                  onClick={() => {
+                    navigate("/history", {
+                      replace: true,
+                      state: props.chamado,
+                    });
+                  }}>
+                  Ver avaliações
+                </button>
+              </div>
+              )
+          }
+          return (
+          <div className={Styles.botoesInfochamado}>
+            <button
+              className={Styles.botaoAvaliar}
+              onClick={() => {
+                navigate("/riskAnalysis", {
+                  replace: true,
+                  state: props.chamado,
+                });
+              }}>
+              Avaliar
+            </button>
+            <button
+            style={applyMarginToButton}
+            color="secundary"
+            className={Styles.botaoVisualizarAnalise}
+            onClick={() => {
+              navigate("/history", {
+                replace: true,
+                state: props.chamado,
+              });
+            }}>
+            Ver avaliações
+            </button>
+          </div>
+          )
+        }else{
+          return (
+          <div className={Styles.botoesInfochamado}>
+            <button
+              className={Styles.botaoAvaliar}
+              onClick={() => {
+                navigate("/riskAnalysis", {
+                  replace: true,
+                  state: props.chamado,
+                });
+              }}>
+              Avaliar
+            </button>
+            <button
+              style={applyMarginToButton}
+              color="secundary"
+              className={Styles.botaoVisualizarAnalise}
+              onClick={() => {
+                navigate("/history", {
+                  replace: true,
+                  state: props.chamado,
+                });
+              }}>
+              Ver avaliações
+            </button>
+          </div>
+          )
+        }
+      }
+      return <></>
+    }else{
+
+      if(user.group.canRateAnalinhamento || user.group.mustRateAnalinhamento){
+        if(chamado.ratings.length > 0){
+          const check = chamado.ratings.find(
+            x=> x.requestStep === chamado.requestStep && user.user_id === x.user.user_id)
+
+          if(check){
+            return (
+            <div className={Styles.botoesInfochamado}>
+              <button
+                style={applyMarginToButton}
+                color="secundary"
+                className={Styles.botaoVisualizarAnalise}
+                onClick={() => {
+                  navigate("/history", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+                }}>
+                Ver avaliações
+              </button>
+            </div>
+            )
+          }
+          return (
+            <div className={Styles.botoesInfochamado}>
+              <button
+                className={Styles.botaoAvaliar}
+                onClick={() => {
+                  navigate("/strategicAlignment", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+                }}>
+                Avaliar
+              </button>
+              <button
+              style={applyMarginToButton}
+              color="secundary"
+              className={Styles.botaoVisualizarAnalise}
+              onClick={() => {
+                navigate("/history", {
+                  replace: true,
+                  state: props.chamado,
+                });
+              }}>
+              Ver avaliações
+              </button>
+            </div>
+          )
+        }else{
+          return (
+            <div className={Styles.botoesInfochamado}>
+              <button
+                className={Styles.botaoAvaliar}
+                onClick={() => {
+                  navigate("/strategicAlignment", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+                }}>
+                Avaliar
+              </button>
+              <button
+              style={applyMarginToButton}
+              color="secundary"
+              className={Styles.botaoVisualizarAnalise}
+              onClick={() => {
+                navigate("/history", {
+                  replace: true,
+                  state: props.chamado,
+                });
+              }}>
+              Ver avaliações
+              </button>
+            </div>
+          )
+        }
+      }
+      return <></>
+    }
+  }
 
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
@@ -112,51 +313,7 @@ const InfoChamado: React.FC<{
           </div>
 
           {props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS ? (
-            <div className={Styles.botoesInfochamado}>
-              {props.chamado.arquived ? (
-                <></>
-              ) : props.chamado.approved ? (
-                <></>
-              ) : (user.group.canRateAnalise || user.group.mustRateAnalise) && props.chamado.requestStep === "Analise de risco" ? (
-                <button
-                  className={Styles.botaoAvaliar}
-                  onClick={() => {
-                    navigate("/riskAnalysis", {
-                      replace: true,
-                      state: props.chamado,
-                    });
-                  }}
-                >
-                  Avaliar
-                </button>
-              ) : (user.group.canRateAnalinhamento || user.group.mustRateAnalinhamento) ? (
-                <button
-                  className={Styles.botaoAvaliar}
-                  onClick={() => {
-                    navigate("/strategicAlignment", {
-                      replace: true,
-                      state: props.chamado,
-                    });
-                  }}
-                >
-                  Avaliar
-                </button>
-              ) : <></>}
-
-              <button
-                style={applyMarginToButton}
-                color="secundary"
-                className={Styles.botaoVisualizarAnalise}
-                onClick={() => {
-                  navigate("/history", {
-                    replace: true,
-                    state: props.chamado,
-                  });
-                }}
-              >
-                Ver avaliações
-              </button>
-            </div>
+            <BotaoAvaliar />
           ): <></>}
 
           {props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS ? (
@@ -167,7 +324,18 @@ const InfoChamado: React.FC<{
                 >
                   Desarquivar
                 </button>
-
+              <button
+                style={applyMarginToButton}
+                color="secundary"
+                className={Styles.botaoVisualizarAnalise}
+                onClick={() => {
+                  navigate("/history", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+              }}>
+              Ver avaliações
+              </button>
             </div>
           ): <></>}
         

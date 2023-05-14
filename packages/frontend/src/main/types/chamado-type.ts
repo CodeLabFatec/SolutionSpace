@@ -1,5 +1,6 @@
 import { TipoChamado } from "../enums/tipo-chamado"
 import { FileChamado } from "./filechamado-type"
+import { Rating } from "./rating"
 import { StatusConfiguration } from "./status-configuration"
 import { User } from "./user"
 
@@ -15,4 +16,5 @@ export type ChamadoType = {
     approved: boolean
     arquived: boolean
     user: User
+    ratings: Rating[]
 }
