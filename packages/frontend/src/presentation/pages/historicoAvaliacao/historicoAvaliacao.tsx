@@ -197,15 +197,7 @@ const HistoricoAvaliacao: React.FC = () => {
         </div>
       ))}
 
-      {/* Demonstração caso tenha alguma ainda não avaliada que não seja dps de Fechado*/}
-
-      <div className={Styles.avaliacoes}>
-        <div className={Styles.infos}>
-          <p>Etapa: Aguardando análise de risco</p>
-        </div>
-      </div>
-
-
+  
     </div>
   )
 }

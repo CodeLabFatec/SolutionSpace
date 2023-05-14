@@ -103,7 +103,7 @@ body {
 
 .infos {
   display: flex;
-  margin-bottom: 20px;
+  margin: 10px 0 ;
 
   p {
     margin-right: 30px;
@@ -180,16 +180,16 @@ body {
 }
 
 .divCollapse {
-
+  
   input[type="checkbox"] {
     display: none;
   }
-
+  
   h4 {
     cursor: pointer;
     text-decoration: underline;
   }
-
+  
 }
 
 .collapse {

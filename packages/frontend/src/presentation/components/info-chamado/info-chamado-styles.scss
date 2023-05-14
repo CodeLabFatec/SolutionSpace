@@ -6,7 +6,7 @@
 
   
   .tituloChamado {
-    margin: 10vh 8vh 0 8vh;
+    margin: 2vh 8vh 0 8vh;
     
     p {
       color: #FFFFFF;
@@ -27,7 +27,7 @@
         .tituloDetalhe {      
           flex-wrap: wrap;
           text-align: start;
-          margin: 10vh 8vh 0 8vh;
+          margin: 8vh 8vh 0 8vh;
           
         }
         
@@ -74,7 +74,7 @@
       .botoesInfochamado {
         
         .botaoVisualizarAnalise {
-          margin: 140px 3vh 0 0vh;
+          margin: 80px 2vh 0 0vh;
           position: relative;
           float: right;
           background-color: #6c757d;
@@ -85,7 +85,7 @@
         }
         
         .botaoAvaliar {
-          margin: 140px 8vh 0 0vh;
+          margin: 80px 8vh 0 0vh;
           position: relative;
           float: right;
           background-color: #4FB4BC;
@@ -95,4 +95,17 @@
           border: none;
         }
       }
+    }
+
+    .cabecalho{
+      margin-left: 60px;
+      margin-top: 10vh;
+      width: 80%;
+      text-align: start;
+      color: #4FB4BC;
+    }
+
+    .tituloChamadoNull{
+
+      margin-top: 20vh;
     }
