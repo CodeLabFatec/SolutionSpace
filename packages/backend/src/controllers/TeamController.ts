@@ -37,7 +37,7 @@ class TeamController {
 
     async listTeams(req: Request, res: Response) {
         try {
-            const teams = await teamRepository.find({ relations: { users: true } });
+            const teams = await teamRepository.find({ relations: { users: true }, order:{ team_name: 'asc' }  });
 
             return res.status(200).json(teams);
         } catch (error) {

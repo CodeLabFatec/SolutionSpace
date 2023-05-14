@@ -111,7 +111,7 @@ class GroupController {
 
   async listGroups(req: Request, res: Response) {
     try {
-      const groups = await groupRepository.find({ relations: { team: true } })
+      const groups = await groupRepository.find({ relations: { team: true }, order:{ group_name: 'asc' } })
 
       return res.status(200).json(groups)
     } catch (error) {
