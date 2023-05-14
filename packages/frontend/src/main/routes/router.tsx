@@ -148,6 +148,16 @@ const Router: React.FC = () => {
             }
           />
           <Route
+            path="/archiveRequests"
+            element={
+              <Private>
+                <Chamados
+                  visualizacaoChamado={VisualizarChamado.CHAMADOS_ARQUIVADOS}
+                />
+              </Private>
+            }
+          />
+          <Route
             path="/strategicAlignment"
             element={
               <Private>

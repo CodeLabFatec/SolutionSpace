@@ -6,7 +6,7 @@ import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 import React, { useContext, useEffect, useState } from "react";
 import Chamado from "@/presentation/components/chamado/chamado";
 import { TipoChamado } from "@/main/enums/tipo-chamado";
-import { getAllRequests, getAllRequestsByUser } from "@/main/api/api";
+import { getAllArchivedRequests, getAllRequests, getAllRequestsByUser } from "@/main/api/api";
 import { AuthContext } from "@/main/contexts/authcontext";
 import { ChamadoType } from "@/main/types";
 
@@ -45,6 +45,14 @@ const ChamadoLista: React.FC<{
         setChamados(requests)
         setChamadosFiltrados(requests)
 
+      }
+      else if (
+        props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS
+      ){
+        const response = await getAllArchivedRequests();
+
+        setChamados(response.data)
+        setChamadosFiltrados(response.data)
       }
     } catch (e: any) {
       /* */

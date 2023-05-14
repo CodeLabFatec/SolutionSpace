@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }: any) => {
       navigate('/home')
 
     } catch (e: any) {
+      console.log(e)
       const responseMessage = e.response.data
       let errorMessage
 

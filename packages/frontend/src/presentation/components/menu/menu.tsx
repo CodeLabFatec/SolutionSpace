@@ -161,6 +161,22 @@ const SideMenu = () => {
               ) : (
                 <></>
               )}
+              {user.team.permissionUnarchiveRequests ? (
+                <MenuItem
+                  onClick={() =>{
+                    handleMenu();
+
+                  }}
+                  style={{color:"#4FB4BC", backgroundColor: "#333333" }}
+                  component={<Link to="/archiveRequests"/>}
+                >
+                  Chamados Arquivados
+                </MenuItem>
+              ) : (
+                <></>
+              )} 
+              
+               
             </SubMenu>
           ) : (
             <></>
