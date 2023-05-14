@@ -71,7 +71,7 @@ class RequestController {
     async listRequests(req: Request, res: Response) {
         try {
             const requests = await requestRepository.find(
-                { relations: { user: { team: true }, files: true, status: true } });
+                { relations: { user: { team: true }, files: true, status: true, ratings: true } });
 
             return res.status(200).json(requests);
         } catch (error) {

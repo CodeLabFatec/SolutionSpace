@@ -31,13 +31,13 @@ const ChamadoLista: React.FC<{
         props.visualizacaoChamado === VisualizarChamado.TODOS_CHAMADOS
       ) {
         const response = await getAllRequests();
-
+  
         let requests: any[] = []
 
-        requests = response.data.filter((x: any) => !x.arquived)
+        requests = response.data.filter((x: any) => !x.arquived && !x.approved)
 
-        if(user.group.canRateAnalise){
-          requests = requests.filter((x: any) => x.requestType === TipoChamado.FEATURE)
+        if(!user.group.canRateAnalise){
+          requests = requests.filter((x: any) => x.requestType !== TipoChamado.FEATURE)
         }
 
         setChamados(requests)

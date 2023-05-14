@@ -1,15 +1,19 @@
 import { SelectType, Dropzone } from '@/presentation/components'
 import Styles from './alinhamentoEstrategico.scss'
 
+import BlockUi from "react-block-ui";
 import React, { useContext, useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/main/contexts/authcontext'
 import { createStrategicAlignmentRating, getAllGroups } from '@/main/api/api'
 import { useAlert } from '@/main/services'
+import { CircularProgress } from '@mui/material'
+import { BlockContext } from '@/main/contexts/blockcontext';
 
 const AlinhamentoEstrategico: React.FC = () => {
 
   const { user } = useContext(AuthContext)
+  const { setBlock } = useContext(BlockContext)
   const navigate = useNavigate()
   const location = useLocation()
   const alert = useAlert()
@@ -41,6 +45,7 @@ const AlinhamentoEstrategico: React.FC = () => {
   }, [])
 
   const handleRequest = async () => {
+    setBlock(true)
     try {
       const files: any[] = []
       if (uploadedFiles.length > 0) {
@@ -63,6 +68,7 @@ const AlinhamentoEstrategico: React.FC = () => {
         files
       )
 
+      setBlock(false)
       alert.criarAlerta({
         icon: 'success',
         html: "Avaliação feita com sucesso!",
@@ -85,6 +91,7 @@ const AlinhamentoEstrategico: React.FC = () => {
         errorMessage = 'Você precisa estar autenticado para realizar essa operação.'
       }
 
+      setBlock(false)
       alert.criarAlerta({
         icon: 'error',
         html: errorMessage
