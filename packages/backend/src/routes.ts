@@ -32,7 +32,7 @@ router.get('/listRequestsByUser/:user_id', authMiddleware, requestController.lis
 router.get('/listRequestsByTeam/:user_id', authMiddleware, requestController.listRequestsByTeam);
 router.get('/request/:id', authMiddleware, requestController.getRequestById);
 router.post('/createRequest/:userId', authMiddleware, requestController.create);
-router.post('/listArchivedRequests', authMiddleware, requestController.listArchivedRequests)
+router.get('/listArchivedRequests', authMiddleware, requestController.listArchivedRequests)
 router.post('/unarchiveRequest/:request_id', authMiddleware, requestController.unarchiveRequest)
 
 // Rating

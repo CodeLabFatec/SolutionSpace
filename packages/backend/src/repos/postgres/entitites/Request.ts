@@ -30,7 +30,7 @@ export class Request {
 
     @ManyToOne(() => StatusConfiguration, (status) => status.requests, { nullable: true })
     @JoinColumn({ name: 'status_id' })
-    status: StatusConfiguration | undefined;
+    status!: StatusConfiguration | null;
 
     @Column({ type: 'text', nullable: true })
     description: string;

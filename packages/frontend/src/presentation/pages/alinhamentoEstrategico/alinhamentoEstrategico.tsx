@@ -71,8 +71,6 @@ const AlinhamentoEstrategico: React.FC = () => {
         }
       })
     } catch (e: any) {
-      console.log(e)
-
       let errorMessage = e.response.data
 
       if (errorMessage === 'Missing required informations to create a rating') {
