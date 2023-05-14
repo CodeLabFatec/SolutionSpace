@@ -98,6 +98,7 @@ export const AuthProvider = ({ children }: any) => {
 
       createInterval()
     } catch (e: any) {
+      console.log(e)
       const responseMessage = e.response.data
       let errorMessage
 

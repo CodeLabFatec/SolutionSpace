@@ -4,7 +4,8 @@ import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import { useNavigate } from "react-router-dom";
 import { ChamadoType } from "@/main/types";
 import { AuthContext } from "@/main/contexts/authcontext";
-import { useDownload } from "@/main/services";
+import { useAlert, useDownload } from "@/main/services";
+import { unarchiveRequest } from "@/main/api/api";
 
 const InfoChamado: React.FC<{
   chamado: ChamadoType | undefined;
@@ -14,6 +15,8 @@ const InfoChamado: React.FC<{
   const navigate = useNavigate();
   const download = useDownload();
   const { user } = useContext(AuthContext)
+  const alert = useAlert()
+
 
   const applyMarginToButton: any =
     props.chamado?.approved ||
@@ -31,6 +34,33 @@ const InfoChamado: React.FC<{
       await download.download(file.ext, file.base64, file.file_name);
     });
   };
+
+  const handleRequest = async () => {
+    if (props.chamado !== undefined){
+    try {
+      await unarchiveRequest(props.chamado.request_id);
+      alert.criarAlerta({
+        icon: 'success',
+        html: "Chamado desarquivado com sucesso!",
+        confirmAction: () => {
+          navigate("/home");
+        }
+      });
+    } catch (e: any) {
+      console.log(e);
+      let errorMessage = e.response.data;
+  
+      if (errorMessage === "Unable to unarchive this request") {
+        errorMessage = "Não é possível desarquivar o chamado";
+      }
+     }
+    }
+  };
+ 
+  const handleClick = (e: any) => {
+    e.preventDefault();
+  };
+  
 
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
@@ -117,9 +147,24 @@ const InfoChamado: React.FC<{
               </button>
             </div>
           ): <></>}
+
+          {props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS ? (
+            <div className={Styles.botoesInfochamado}>
+              <button
+                  className={Styles.botaoAvaliar}
+                  onClick={handleClick}
+                >
+                  Desarquivar
+                </button>
+
+            </div>
+          ): <></>}
+        
+          
         </div>
       );
     }
+    
     return (
       <div className={Styles.tituloChamado}>
         <p style={{ textAlign: "center" }}>
