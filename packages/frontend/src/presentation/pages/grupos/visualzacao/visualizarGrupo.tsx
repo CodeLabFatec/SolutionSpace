@@ -9,7 +9,7 @@ import { useAlert } from "@/main/services";
 const VisualizarGrupo: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const alert = useAlert()
+  const alert = useAlert();
 
   const [id, setId] = useState<string>("");
   const [nomeGrupo, setNomeGrupo] = useState("");
@@ -31,22 +31,26 @@ const VisualizarGrupo: React.FC = () => {
       });
     } catch (e) {
       alert.criarAlerta({
-        icon: 'error',
-        html: 'Ocorreu um erro ao carregar as equipes.',
-        title: 'Erro'
-      })
+        icon: "error",
+        html: "Ocorreu um erro ao carregar as equipes.",
+        title: "Erro",
+      });
     }
   };
+
+  const handleVoltar = () => {
+    navigate('/groups')
+  }
 
   const loadGroup = async () => {
     const group = location.state;
 
     if (!group) {
       alert.criarAlerta({
-        icon: 'error',
+        icon: "error",
         html: "Ocorreu um erro ao carregar as informações do grupo a ser editado.",
-        title: 'Erro'
-      })
+        title: "Erro",
+      });
       navigate("/groups");
       return;
     }
@@ -117,8 +121,11 @@ const VisualizarGrupo: React.FC = () => {
                 />
                 <FormControlLabel
                   control={
-                    <Switch value={solicitarHotfix} checked={solicitarHotfix} 
-                    disabled={true}/>
+                    <Switch
+                      value={solicitarHotfix}
+                      checked={solicitarHotfix}
+                      disabled={true}
+                    />
                   }
                   label="Poderá solicitar hotfix?"
                   labelPlacement="start"
@@ -154,7 +161,6 @@ const VisualizarGrupo: React.FC = () => {
                       value={avaliarAlinhamento}
                       checked={avaliarAlinhamento}
                       disabled={true}
-                      
                     />
                   }
                   label="Poderá avaliar o Alinhamento Estratégico?"
@@ -175,7 +181,14 @@ const VisualizarGrupo: React.FC = () => {
                 />
               </FormGroup>
             </div>
-         
+          </div>
+          <div className={Styles.botao}>
+            <input
+              type="submit"
+              value="Voltar"
+              onClick={handleVoltar}
+              className={Styles.buttonVoltar}
+            />
           </div>
         </form>
       </div>

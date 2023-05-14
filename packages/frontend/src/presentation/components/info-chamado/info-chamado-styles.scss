@@ -74,7 +74,7 @@
       .botoesInfochamado {
         
         .botaoVisualizarAnalise {
-          margin: 80px 2vh 0 0vh;
+          margin: 80px;
           position: relative;
           float: right;
           background-color: #6c757d;
@@ -85,6 +85,17 @@
         }
         
         .botaoAvaliar {
+          margin: 80px 8vh 0 0vh;
+          position: relative;
+          float: right;
+          background-color: #4FB4BC;
+          color: #ffffff;
+          padding: 10px 24px;
+          border-radius: 4px;
+          border: none;
+        }
+
+        .botaoDesarquivar {
           margin: 80px 8vh 0 0vh;
           position: relative;
           float: right;

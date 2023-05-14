@@ -59,7 +59,7 @@ const Home: React.FC = () => {
       ) :
       <>
         <div className={Styles.abrirChamadoLabel}>
-          <h1>Abrir chamado</h1>
+          <h1></h1>
           </div>
       </>}
     </div>
