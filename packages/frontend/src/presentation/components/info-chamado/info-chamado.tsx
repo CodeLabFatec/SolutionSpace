@@ -4,6 +4,7 @@ import { VisualizarChamado } from "@/main/enums/visualizar-chamado";
 import { useNavigate } from "react-router-dom";
 import { ChamadoType } from "@/main/types";
 import { AuthContext } from "@/main/contexts/authcontext";
+import moment from "moment";
 import { useAlert, useDownload } from "@/main/services";
 import { unarchiveRequest } from "@/main/api/api";
 
@@ -71,8 +72,11 @@ const InfoChamado: React.FC<{
 
   const conteudo: any = () => {
     if (props.chamado !== undefined) {
+    
       return (
         <div className={Styles.teste}>
+
+          <p className={Styles.cabecalho}>Criado por {props.chamado.user.name} em {moment(props.chamado.created_at).format('DD/MM/yyyy * HH:mm').replace('*', 'às')}</p>
           <div className={Styles.tituloDetalhe}>
             <label htmlFor="titulo">Título</label>
             <input
@@ -142,7 +146,7 @@ const InfoChamado: React.FC<{
               <button
                 style={applyMarginToButton}
                 color="secundary"
-                className={Styles.botaoAvaliar}
+                className={Styles.botaoVisualizarAnalise}
                 onClick={() => {
                   navigate("/history", {
                     replace: true,
@@ -173,7 +177,7 @@ const InfoChamado: React.FC<{
     }
     
     return (
-      <div className={Styles.tituloChamado}>
+      <div className={Styles.tituloChamadoNull}>
         <p style={{ textAlign: "center" }}>
           Selecione um chamado ao lado para visualizar seus detalhes.
         </p>

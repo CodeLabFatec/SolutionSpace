@@ -1,6 +1,7 @@
 import { TipoChamado } from "../enums/tipo-chamado"
 import { FileChamado } from "./filechamado-type"
 import { StatusConfiguration } from "./status-configuration"
+import { User } from "./user"
 
 export type ChamadoType = {
     request_id: string
@@ -13,4 +14,5 @@ export type ChamadoType = {
     files: FileChamado[]
     approved: boolean
     arquived: boolean
+    user: User
 }

@@ -38,7 +38,7 @@ class UserController {
     async listUser(req: Request, res: Response) {
         try {
             const users = await userRepository.find({
-                relations: { team: true, group: true }
+                relations: { team: true, group: true }, order:{ name: 'asc' } 
             });
 
             users.forEach(user => {

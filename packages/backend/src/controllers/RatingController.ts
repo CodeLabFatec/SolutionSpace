@@ -30,7 +30,7 @@ class RatingController {
         const userGroupPermissions = await checkGroupPermission(user.group.group_id);
 
         
-        const request = await requestRepository.findOne({
+        let request = await requestRepository.findOne({
             where: { request_id: requestId },
             relations: { user: true }
         });
@@ -126,13 +126,13 @@ class RatingController {
                 if(userGroupPermissions.mustRateAlinhamento){
 
                     if(statusConfig.archiveRequests){
-                        await requestRepository.save({
+                        request = await requestRepository.save({
                             ...request,
                             arquived: true,
                             status: statusConfig
                         })
                     }else{
-                        await requestRepository.save({
+                        request = await requestRepository.save({
                             ...request,
                             approved: true,
                             status: statusConfig
@@ -149,13 +149,13 @@ class RatingController {
                 if(userGroupPermissions.mustRateAnalise){
 
                     if(statusConfig.archiveRequests){
-                        await requestRepository.save({
+                        request = await requestRepository.save({
                             ...request,
                             arquived: true,
                             status: statusConfig
                         })  
                     }else{
-                        await requestRepository.save({
+                        request = await requestRepository.save({
                             ...request,
                             status: statusConfig,
                             requestStep: RequestStep.ALINHAMENTO_ESTRATEGICO
