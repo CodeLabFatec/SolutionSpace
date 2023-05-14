@@ -30,6 +30,12 @@ const ListagemEquipe: React.FC = () => {
     loadTeams();
   }, []);
 
+  const handleVisualize = (e: any, item: any) => {
+    e.preventDefault();
+
+    navigate("/visualizarEquipe", { replace: true, state: item });
+  };
+
   const handleEdit = (e: any, item: any) => {
     e.preventDefault();
 
@@ -123,6 +129,14 @@ const ListagemEquipe: React.FC = () => {
                           delete
                         </i>
                       )}
+                       <i
+                          onClick={(e: any) => {
+                            handleVisualize(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          remove_red_eye
+                        </i>
                     </div>
                   </td>
                 </tr>

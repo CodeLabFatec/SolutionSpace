@@ -20,34 +20,29 @@ import {
   ListagemUsuarios,
   Login,
   PersonalizacaoAnalise,
-  HistoricoAvaliacao
+  HistoricoAvaliacao,
+  VisualizarEquipe,
+  VisualizarGrupo,
+  VisualizarUsuario,
+  PersonalizacaoAlinhamento
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
-import PersonalizacaoAlinhamento from "@/presentation/pages/personalizacaoStatus/alinhamentoEstrategico/personalizacaoAlinhamento";
 
 const Router: React.FC = () => {
+
+
   const Private = ({ children }: any) => {
     const { authenticated, loading } = useContext(AuthContext);
 
     if (loading) {
-      return <div className="loading">Carregando...</div>;
+      return <></>;
     }
 
-    if (!authenticated) {
-      return <Navigate to="/login" />;
+    if (authenticated) {
+      return children;
     }
 
-    return children;
-  };
-
-  const CheckLogin = () => {
-    const { authenticated } = useContext(AuthContext);
-
-    if (!authenticated) {
-      return <Login />;
-    }
-
-    return <Navigate to="/home" />;
+    return <Navigate to="/login" />;
   };
 
   const Menu = () => {
@@ -67,20 +62,6 @@ const Router: React.FC = () => {
     );
   };
 
-  const Origin = ({ children }: any) => {
-    const { authenticated, loading } = useContext(AuthContext);
-
-    if (loading) {
-      return <div className="loading">Carregando...</div>;
-    }
-
-    if (!authenticated) {
-      return <Navigate to="/login" />;
-    }
-
-    return children;
-  };
-
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -89,20 +70,20 @@ const Router: React.FC = () => {
           <Route
             index
             element={
-              <Origin>
+              <Private>
                 <Navigate to="/home" />
-              </Origin>
+              </Private>
             }
           />
           <Route
             path="*"
             element={
-              <Origin>
+              <Private>
                 <Navigate to="/home" />
-              </Origin>
+              </Private>
             }
           />
-          <Route path="/login" element={<CheckLogin />} />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/home"
             element={
@@ -266,6 +247,30 @@ const Router: React.FC = () => {
             element={
               <Private>
                 <PersonalizacaoAnalise />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarEquipe"
+            element={
+              <Private>
+                <VisualizarEquipe />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarGrupo"
+            element={
+              <Private>
+                <VisualizarGrupo />
+              </Private>
+            }
+          />
+          <Route
+            path="/visualizarUsuario"
+            element={
+              <Private>
+                <VisualizarUsuario />
               </Private>
             }
           />

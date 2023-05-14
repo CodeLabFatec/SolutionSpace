@@ -10,6 +10,12 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const alert = useAlert()
+  let interval: any;
+
+  const updateUser = (user: any) => {
+    setUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
+  }
 
   const loadCookies = async () => {
     const recoveredUser = localStorage.getItem('user')
@@ -25,6 +31,8 @@ export const AuthProvider = ({ children }: any) => {
         api.defaults.headers.common = { Authorization: `Bearer ${recoveredToken}` }
         api.defaults.withCredentials = true
         
+        setLoading(false)
+        return true
       } catch(e) {
 
         localStorage.removeItem('user')
@@ -37,15 +45,37 @@ export const AuthProvider = ({ children }: any) => {
         setUser(null)
     
         navigate('/login')
+
+        setLoading(false)
+        return false
       }
 
     }
 
+    if(interval){
+      clearInterval(interval)
+      interval = null
+    }
+
+    setLoading(false)
+    return false
+  }
+
+  const createInterval = () => {
+    interval = setInterval(async ()=> {
+      await loadCookies()
+    }, 10000)
+  }
+
+  const carregar = async () => {
+    const response = await loadCookies()
+    if(response){
+      createInterval()
+    }
   }
   
   useEffect(() => {
-    loadCookies()
-    setLoading(false)
+    carregar()
   }, [])
 
   const login = async (email: string, password: string) => {
@@ -62,9 +92,11 @@ export const AuthProvider = ({ children }: any) => {
       api.defaults.withCredentials = true
 
       setUser(loggedUser)
+      setLoading(false)
 
       navigate('/home')
 
+      createInterval()
     } catch (e: any) {
       console.log(e)
       const responseMessage = e.response.data
@@ -96,11 +128,16 @@ export const AuthProvider = ({ children }: any) => {
     setUser(null)
 
     navigate('/login')
+
+    if(interval) {
+      clearInterval(interval)
+      interval = null
+    }
   }
 
   return (
     
-    <AuthContext.Provider value={{ authenticated: !!user, user, loading, login, logout }}>
+    <AuthContext.Provider value={{ authenticated: !!user, user, loading, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   )

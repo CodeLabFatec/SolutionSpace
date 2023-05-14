@@ -35,6 +35,12 @@ const ListagemUsuarios: React.FC = () => {
     navigate("/editUser", { replace: true, state: item });
   };
 
+  const handleVisualize = (e: any, item: any) => {
+    e.preventDefault();
+
+    navigate("/visualizarUsuario", { replace: true, state: item });
+  };
+
   const handleDelete = (e: any, item: any) => {
     e.preventDefault();
 
@@ -120,6 +126,14 @@ const ListagemUsuarios: React.FC = () => {
                           delete
                         </i>
                       )}
+                        <i
+                          onClick={(e: any) => {
+                            handleVisualize(e, item);
+                          }}
+                          className="material-icons"
+                        >
+                          remove_red_eye
+                        </i>
                     </div>
                   </td>
                 </tr>
