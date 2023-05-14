@@ -45,13 +45,13 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   02   |   Adição de permissões de nível de sistema aos usuário   | :heavy_check_mark: | Média |
 |   02   |   Reformulação do header e do menu de navegação   | :heavy_check_mark: | Média |
 |    |
-|   03   |   Adicionar personalização e controle de status de avaliação de chamados   | :hourglass: | Média |
-|   03   |   Criação de página para a visualização de chamados arquivados   | :hourglass: | Média |
-|   03   |   Adicionar notificação para a movimentação de chamados   | :hourglass: | Média |
-|   03   |   Reformular visualização de avaliações (análise de risco e alinhamento estratégico) realizadas.   | :hourglass: | Média |
+|   03   |   Adicionar personalização e controle de status de avaliação de chamados   | :heavy_check_mark: | Média |
+|   03   |   Criação de página para a visualização de chamados arquivados   | :heavy_check_mark: | Média |
+|   03   |   Adicionar notificação para a movimentação de chamados   | :heavy_check_mark: | Média |
+|   03   |   Reformular visualização de avaliações (análise de risco e alinhamento estratégico) realizadas.   | :heavy_check_mark: | Média |
 |    |
-|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Baixa |
 |   03   |   Adicionar controle de status de chamados aprovados (Kanban)   | :hourglass: | Baixa |
+|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Baixa |
 |   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: | Baixa |
 
 <br>
@@ -66,7 +66,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 | :----: | :--------: | :----------------: | :----------------------------------: |
 |   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint1.md) |
 |   02   | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint2.md) |
-|   03   | 14/05/2023 | :hourglass:	 | ... |
+|   03   | 14/05/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint3.md) |
 |   04   | 04/06/2023 | :hourglass:	 | ... |
 
 <br />
