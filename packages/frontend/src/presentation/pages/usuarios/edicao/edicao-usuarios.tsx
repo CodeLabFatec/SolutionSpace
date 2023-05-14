@@ -98,6 +98,10 @@ const EdicaoUsuario: React.FC = () => {
     loadUser()
   }, [])
 
+  const handleVoltar = () => {
+    navigate('/users')
+  }
+
   const handleRequest = async () => {
     if(!genero) return
     if(!equipe) return
@@ -346,7 +350,14 @@ const EdicaoUsuario: React.FC = () => {
             value="Editar"
             className={Styles.buttonEnviar}
           />
+           <input
+            type="submit"
+            value="Voltar"
+            onClick={handleVoltar}
+            className={Styles.buttonVoltar}
+          />
         </div>
+
         </form>
       </div>
     </div>

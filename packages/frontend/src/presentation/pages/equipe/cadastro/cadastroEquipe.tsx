@@ -166,13 +166,13 @@ const CadastroEquipe: React.FC = () => {
               labelPlacement="start"
               id={Styles.Switch}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Switch value={editarChamado}/>}
               onChange={handleEditarChamado}
               label="Poderá editar chamados?"
               labelPlacement="start"
               id={Styles.Switch}
-            />
+            /> */}
             <FormControlLabel
               control={<Switch  value={desarquivarChamado}/>}
               onChange={handleDesarquivarChamado}
@@ -197,6 +197,7 @@ const CadastroEquipe: React.FC = () => {
             className={Styles.buttonEnviar}
           />
         </div>
+        
       </form>
     </div>
   );

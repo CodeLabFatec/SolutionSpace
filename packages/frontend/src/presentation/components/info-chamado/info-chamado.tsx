@@ -22,7 +22,7 @@ const InfoChamado: React.FC<{
   const applyMarginToButton: any =
     props.chamado?.approved ||
     props.chamado?.arquived
-      ? { marginRight: "8vh" }
+      ? { marginRight: "2vh" }
       : {};
 
   const handleDownload = (e: any) => {
@@ -162,12 +162,25 @@ const InfoChamado: React.FC<{
           {props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS ? (
             <div className={Styles.botoesInfochamado}>
               <button
-                  className={Styles.botaoAvaliar}
+                  className={Styles.botaoDesarquivar}
                   onClick={handleClick}
                 >
                   Desarquivar
                 </button>
-
+                
+                <button
+                style={applyMarginToButton}
+                color="secundary"
+                className={Styles.botaoVisualizarAnalise}
+                onClick={() => {
+                  navigate("/history", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+                }}
+              >
+                Ver avaliações
+              </button>
             </div>
           ): <></>}
         
