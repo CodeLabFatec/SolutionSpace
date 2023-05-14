@@ -40,8 +40,6 @@ const ChamadoLista: React.FC<{
           requests = requests.filter((x: any) => x.requestType === TipoChamado.FEATURE)
         }
 
-        console.log(requests)
-
         setChamados(requests)
         setChamadosFiltrados(requests)
 

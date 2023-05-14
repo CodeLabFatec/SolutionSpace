@@ -47,7 +47,6 @@ const InfoChamado: React.FC<{
         }
       });
     } catch (e: any) {
-      console.log(e);
       let errorMessage = e.response.data;
   
       if (errorMessage === "Unable to unarchive this request") {
@@ -59,6 +58,14 @@ const InfoChamado: React.FC<{
  
   const handleClick = (e: any) => {
     e.preventDefault();
+
+    alert.criarConfirmacao({
+      title: "Aviso",
+      html: 'Deseja desarquivar esse chamado?',
+      confirmAction: () => {
+        handleRequest();
+      }
+    })
   };
   
 

@@ -194,14 +194,14 @@ class RequestController {
             if (!request.arquived) return res.status(404).json('Request is not arquived');
 
             if(request.requestType === RequestType.HOTFIX) {
-                request.status = undefined
+                request.status = null
                 request.arquived = false
                 requestRepository.save(request)
 
                 return res.status(200).json({ request })
             }else if(request.requestType === RequestType.FEATURE) {
 
-                request.status = undefined
+                request.status = null
                 request.arquived = false
 
                 if(request.requestStep === RequestStep.ALINHAMENTO_ESTRATEGICO) {
