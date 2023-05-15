@@ -319,9 +319,8 @@ const InfoChamado: React.FC<{
           {props.visualizacaoChamado === VisualizarChamado.MEUS_CHAMADOS ? (
             <div className={Styles.botoesInfochamado}>
               <button
-                style={applyMarginToButton}
                 color="secundary"
-                className={Styles.botaoVisualizarAnalise}
+                className={Styles.botaoVisualizarAnaliseMeus}
                 onClick={() => {
                   navigate("/history", {
                     replace: true,
