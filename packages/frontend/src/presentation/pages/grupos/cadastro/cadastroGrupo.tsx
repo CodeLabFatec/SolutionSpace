@@ -157,7 +157,7 @@ const CadastroGrupo: React.FC = () => {
   return (
     <div className={Styles.container}>
       <div className={Styles.H1cadastroGrupo}>
-        <h1>Cadastro de grupos</h1>
+        <h1>Cadastro de grupo</h1>
         <hr />
         <form className={Styles.formCadastroGrupo} onSubmit={handleSubmit}>
           <div className={Styles.inputGroup}>

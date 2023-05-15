@@ -34,7 +34,7 @@ const SideMenu = () => {
     <div
       id="app"
       style={{
-        height: "100vh",
+        height: "90vh",
         display: "flex",
         position: "relative",
         left: "0",
@@ -42,7 +42,7 @@ const SideMenu = () => {
     >
       <Sidebar
         style={{
-          height: "169vh",
+          height: "90vh",
           color: "#4FB4BC",
           border: "none",
           textAlign: "left",
@@ -145,7 +145,7 @@ const SideMenu = () => {
                   style={{color:"#4FB4BC", backgroundColor: "#333333" }}
                   component={<Link to="/archiveRequests"/>}
                 >
-                  Chamados Arquivados
+                  Arquivados
                 </MenuItem>
               ) : (
                 <></>
@@ -170,7 +170,7 @@ const SideMenu = () => {
                 style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
                 component={<Link to="/StatusAnalise" />}
               >
-                Análise de risco
+                Status de risco
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -179,7 +179,7 @@ const SideMenu = () => {
                 style={{ color: "#4FB4BC", backgroundColor: "#333333" }}
                 component={<Link to="/StatusAlinhamento" />}
               >
-                Alinhamento estratégico
+                Status de alinhamento
               </MenuItem>
             </SubMenu>
           ) : (

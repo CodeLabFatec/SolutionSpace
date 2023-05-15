@@ -9,7 +9,7 @@ import { useAlert } from "@/main/services";
 const EdicaoGrupo: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const alert = useAlert()
+  const alert = useAlert();
 
   const [id, setId] = useState<string>("");
   const [nomeGrupo, setNomeGrupo] = useState("");
@@ -31,10 +31,10 @@ const EdicaoGrupo: React.FC = () => {
       });
     } catch (e) {
       alert.criarAlerta({
-        icon: 'error',
-        html: 'Ocorreu um erro ao carregar as equipes.',
-        title: 'Erro'
-      })
+        icon: "error",
+        html: "Ocorreu um erro ao carregar as equipes.",
+        title: "Erro",
+      });
     }
   };
 
@@ -43,10 +43,10 @@ const EdicaoGrupo: React.FC = () => {
 
     if (!group) {
       alert.criarAlerta({
-        icon: 'error',
+        icon: "error",
         html: "Ocorreu um erro ao carregar as informações do grupo a ser editado.",
-        title: 'Erro'
-      })
+        title: "Erro",
+      });
       navigate("/groups");
       return;
     }
@@ -93,6 +93,10 @@ const EdicaoGrupo: React.FC = () => {
     }
   };
 
+  const handleVoltar = () => {
+    navigate("/groups");
+  };
+
   const handleAlinhamentoObrigarorio = () => {
     setAlinhamentoObrigarorio(!alinhamentoObrigarorio);
   };
@@ -113,12 +117,12 @@ const EdicaoGrupo: React.FC = () => {
       );
 
       alert.criarAlerta({
-        icon: 'success',
-        html: 'Grupo alterado com sucesso.',
+        icon: "success",
+        html: "Grupo alterado com sucesso.",
         confirmAction: () => {
           navigate("/groups");
-        }
-      })
+        },
+      });
     } catch (e: any) {
       let errorMessage = e.response.data.message;
 
@@ -132,9 +136,9 @@ const EdicaoGrupo: React.FC = () => {
       }
 
       alert.criarAlerta({
-        icon: 'error',
-        html: errorMessage
-      })
+        icon: "error",
+        html: errorMessage,
+      });
     }
   };
 
@@ -144,24 +148,24 @@ const EdicaoGrupo: React.FC = () => {
     if (!nomeGrupo || nomeGrupo === "" || nomeGrupo === " ") {
       alert.criarAlerta({
         html: "Nome do grupo é obrigatório.",
-        title: 'Opss...'
-      })
+        title: "Opss...",
+      });
       return;
     }
 
     if (!descricaoGrupo || descricaoGrupo === "" || descricaoGrupo === " ") {
       alert.criarAlerta({
         html: "Descrição do grupo é obrigatória.",
-        title: 'Opss...'
-      })
+        title: "Opss...",
+      });
       return;
     }
 
     if (!equipe || equipe.value === "" || equipe.value === " ") {
       alert.criarAlerta({
         html: "Escolha de uma equipe é obrigatória.",
-        title: 'Opss...'
-      })
+        title: "Opss...",
+      });
       return;
     }
 
@@ -170,8 +174,8 @@ const EdicaoGrupo: React.FC = () => {
       html: "Deseja alterar o grupo?",
       confirmAction: () => {
         handleRequest();
-      }
-    })
+      },
+    });
   };
 
   return (
@@ -292,6 +296,12 @@ const EdicaoGrupo: React.FC = () => {
                 type="submit"
                 value="Editar"
                 className={Styles.buttonEnviar}
+              />
+              <input
+                type="submit"
+                value="Voltar"
+                onClick={handleVoltar}
+                className={Styles.buttonVoltar}
               />
             </div>
           </div>

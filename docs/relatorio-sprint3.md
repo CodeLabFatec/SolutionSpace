@@ -8,12 +8,12 @@
     <a href="#backlog">Backlog</a> |
     <a href="#entrega">Entrega</a> | 
     <a href="#burndown">Burndown</a> | 
-    <a href="#modeloConceitual">Modelo Conceitual das Entidades</a> |
+    <a href="#modeloConceitual">Modelo das Entidades</a> |
 </p>
 <span id="mvp">
  
 <h1> :dart: MVP </h1>
-<p align="justify">O MVP dessa entrega foi a inclusão de permissões ao sistema e ao fluxo de chamados, por meio dos cadastros de equipes, grupos e usuários.</p>
+<p align="justify">O MVP dessa entrega foi a personalização e configuração dos status de chamados de acordo com as avaliações de cada etapa, junto com a visualização de chamados arquivados.</p>
   
 <span id="backlog">
 
@@ -31,7 +31,7 @@
 ## 👩‍💻 Entrega
 <p align="center"></p>
 
-
+![entregaSprint3](https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/66f96ad4-ccba-43d0-9687-35bc4d02207e)
 
 <br />
 
@@ -44,7 +44,14 @@
 
 <span id="modeloConceitual">
 
-## Modelo Conceitual das Entidades
+## Modelo das Entidades
+
+. Modelo conceitual
+![modeloConceitualSprint3](https://user-images.githubusercontent.com/26208169/233863687-1e1b8507-bf11-4273-9e06-9a0a1bcbd87f.png)
+
+. Modelo lógico
+
+![modeloLogicoSprint3](https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/464e9d50-e6a7-410c-9aaa-9811e85778ae)
 
 <br>
 

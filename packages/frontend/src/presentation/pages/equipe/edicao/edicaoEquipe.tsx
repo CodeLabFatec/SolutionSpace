@@ -73,6 +73,10 @@ const EdicaoEquipe: React.FC = () => {
     setConfiguraStatus(!configuraStatus)
   }
 
+  const handleVoltar = () => {
+    navigate('/teams')
+  }
+
 
   const handleRequest = async () => {
     try {
@@ -197,13 +201,13 @@ const EdicaoEquipe: React.FC = () => {
               labelPlacement="start"
               id={Styles.Switch}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Switch value={editarChamado} checked={editarChamado}/>}
               onChange={handleEditarChamado}
               label="Poderá editar chamados?"
               labelPlacement="start"
               id={Styles.Switch}
-            />
+            /> */}
             <FormControlLabel
               control={<Switch  value={desarquivarChamado} checked={desarquivarChamado}/>}
               onChange={handleDesarquivarChamado}
@@ -226,6 +230,12 @@ const EdicaoEquipe: React.FC = () => {
             type="submit"
             value="Editar"
             className={Styles.buttonEnviar}
+          />
+           <input
+            type="submit"
+            value="Voltar"
+            onClick={handleVoltar}
+            className={Styles.buttonVoltar}
           />
         </div>
       </form>

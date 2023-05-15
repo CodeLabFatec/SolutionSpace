@@ -98,6 +98,11 @@ const VisualizarUsuario: React.FC = () => {
     loadUser()
   }, [])
 
+  
+  const handleVoltar = () => {
+    navigate('/users')
+  }
+
   return (
     <div className={Styles.container}>
       <div className={Styles.usuarioForm}>
@@ -188,6 +193,14 @@ const VisualizarUsuario: React.FC = () => {
               />
             </div>
           </div>
+          <div className={Styles.buttonWrapper}>
+           <input
+            type="submit"
+            value="Voltar"
+            onClick={handleVoltar}
+            className={Styles.buttonVoltar}
+          />
+        </div>
         </form>
       </div>
     </div>

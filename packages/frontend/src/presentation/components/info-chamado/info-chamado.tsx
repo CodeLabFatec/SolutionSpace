@@ -22,7 +22,7 @@ const InfoChamado: React.FC<{
   const applyMarginToButton: any =
     props.chamado?.approved ||
     props.chamado?.arquived
-      ? { marginRight: "8vh" }
+      ? { marginRight: "2vh" }
       : {};
 
   const handleDownload = (e: any) => {
@@ -316,14 +316,8 @@ const InfoChamado: React.FC<{
             <BotaoAvaliar />
           ): <></>}
 
-          {props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS ? (
+          {props.visualizacaoChamado === VisualizarChamado.MEUS_CHAMADOS ? (
             <div className={Styles.botoesInfochamado}>
-              <button
-                  className={Styles.botaoAvaliar}
-                  onClick={handleClick}
-                >
-                  Desarquivar
-                </button>
               <button
                 style={applyMarginToButton}
                 color="secundary"
@@ -333,8 +327,34 @@ const InfoChamado: React.FC<{
                     replace: true,
                     state: props.chamado,
                   });
-              }}>
-              Ver avaliações
+                }}
+              >
+                Ver avaliações
+              </button>
+            </div>    
+          ): <></>}
+
+          {props.visualizacaoChamado === VisualizarChamado.CHAMADOS_ARQUIVADOS ? (
+            <div className={Styles.botoesInfochamado}>
+                <button
+                  className={Styles.botaoDesarquivar}
+                  onClick={handleClick}
+                >
+                  Desarquivar
+                </button>
+                
+                <button
+                style={applyMarginToButton}
+                color="secundary"
+                className={Styles.botaoVisualizarAnalise}
+                onClick={() => {
+                  navigate("/history", {
+                    replace: true,
+                    state: props.chamado,
+                  });
+                }}
+              >
+                Ver avaliações
               </button>
             </div>
           ): <></>}

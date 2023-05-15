@@ -7,48 +7,51 @@ import { updateTeam } from "@/main/api/api";
 import { useAlert } from "@/main/services";
 
 const VisualizarEquipe: React.FC = () => {
+  const [id, setId] = useState<string>("");
+  const [nomeEquipe, setNomeEquipe] = useState("");
+  const [descricaoEquipe, setDescricaoEquipe] = useState("");
+  const [cadastrarUsuario, setCadastrarUsuario] = useState(false);
+  const [cadastrarEquipe, setCadastrarEquipe] = useState(false);
+  const [cadastrarGrupo, setCadastrarGrupo] = useState(false);
+  const [editarChamado, setEditarChamado] = useState(false);
+  const [desarquivarChamado, setDesarquivarChamado] = useState(false);
+  const [configuraStatus, setConfiguraStatus] = useState(false);
 
-  const [id, setId] = useState<string>('')
-  const [nomeEquipe, setNomeEquipe] = useState("")
-  const [descricaoEquipe, setDescricaoEquipe] = useState("")
-  const [cadastrarUsuario, setCadastrarUsuario] = useState(false)
-  const [cadastrarEquipe, setCadastrarEquipe] = useState(false)
-  const [cadastrarGrupo, setCadastrarGrupo] = useState(false)
-  const [editarChamado, setEditarChamado] = useState(false)
-  const [desarquivarChamado, setDesarquivarChamado] = useState(false)
-  const [configuraStatus, setConfiguraStatus] = useState(false)
-
-  const navigate = useNavigate()
-  const location = useLocation()
-  const alert = useAlert()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const alert = useAlert();
 
   const loadTeam = async () => {
-    const team = location.state
+    const team = location.state;
 
-    if(!team){
+    if (!team) {
       alert.criarAlerta({
-        icon: 'error',
+        icon: "error",
         html: "Ocorreu um erro ao carregar as informações da equipe a ser editada.",
-        title: 'Erro'
-      })
-      navigate('/teams')
-      return
+        title: "Erro",
+      });
+      navigate("/teams");
+      return;
     }
 
-    setId(team.team_id)
-    setNomeEquipe(team.team_name)
-    setDescricaoEquipe(team.description)
-    setCadastrarEquipe(team.permissionCreateTeams)
-    setCadastrarGrupo(team.permissionCreateGroups)
-    setCadastrarUsuario(team.permissionCreateUsers)
-    setEditarChamado(team.permissionEditRequests)
-    setDesarquivarChamado(team.permissionUnarchiveRequests)
-    setConfiguraStatus(team.permissionConfigureStatus)
-  }
+    setId(team.team_id);
+    setNomeEquipe(team.team_name);
+    setDescricaoEquipe(team.description);
+    setCadastrarEquipe(team.permissionCreateTeams);
+    setCadastrarGrupo(team.permissionCreateGroups);
+    setCadastrarUsuario(team.permissionCreateUsers);
+    setEditarChamado(team.permissionEditRequests);
+    setDesarquivarChamado(team.permissionUnarchiveRequests);
+    setConfiguraStatus(team.permissionConfigureStatus);
+  };
 
-  useEffect(()=> {
-    loadTeam()
-  }, [])
+  const handleVoltar = () => {
+    navigate("/teams");
+  };
+
+  useEffect(() => {
+    loadTeam();
+  }, []);
 
   return (
     <div className={Styles.container}>
@@ -86,49 +89,69 @@ const VisualizarEquipe: React.FC = () => {
         <div className={Styles.permissionsContainer}>
           <FormGroup id={Styles.teste}>
             <FormControlLabel
-              control={<Switch value={cadastrarUsuario} checked={cadastrarUsuario} />}
+              control={
+                <Switch value={cadastrarUsuario} checked={cadastrarUsuario} />
+              }
               label="Poderá cadastrar usuários?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
             />
             <FormControlLabel
-              control={<Switch value={cadastrarEquipe} checked={cadastrarEquipe}/>}
+              control={
+                <Switch value={cadastrarEquipe} checked={cadastrarEquipe} />
+              }
               label="Poderá cadastrar equipes?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
             />
             <FormControlLabel
-              control={<Switch value={cadastrarGrupo} checked={cadastrarGrupo} />}
+              control={
+                <Switch value={cadastrarGrupo} checked={cadastrarGrupo} />
+              }
               label="Poderá cadastrar grupos?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Switch value={editarChamado} checked={editarChamado}/>}
               label="Poderá editar chamados?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
-            />
+            /> */}
             <FormControlLabel
-              control={<Switch  value={desarquivarChamado} checked={desarquivarChamado}/>}
+              control={
+                <Switch
+                  value={desarquivarChamado}
+                  checked={desarquivarChamado}
+                />
+              }
               label="Poderá desarquivar chamados?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
             />
             <FormControlLabel
-              control={<Switch  value={configuraStatus} checked={configuraStatus} />}
+              control={
+                <Switch value={configuraStatus} checked={configuraStatus} />
+              }
               label="Poderá configurar status de chamados?"
               labelPlacement="start"
               id={Styles.Switch}
               disabled={true}
             />
-            
           </FormGroup>
+        </div>
+        <div className={Styles.botao}>
+          <input
+            type="submit"
+            value="Voltar"
+            onClick={handleVoltar}
+            className={Styles.buttonVoltar}
+          />
         </div>
       </form>
     </div>

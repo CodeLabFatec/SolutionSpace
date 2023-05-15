@@ -52,7 +52,7 @@ body {
   height: 100px;
   border-radius: 6px;
   border: 2px dashed #fff;
-  margin: 50px 0 80px 0;
+  margin: 50px 0 40px 0;
 }
 
 #teste {
@@ -62,4 +62,19 @@ body {
 
 #Switch {
   margin: 0 40px 0 0;
+}
+
+.buttonVoltar {
+  float: right;
+  background-color: #6c757d;
+  color: #fff;
+  padding: 12px 54px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #5f6468;
+  }
 }

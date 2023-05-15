@@ -40,6 +40,10 @@ const ChamadoLista: React.FC<{
           requests = requests.filter((x: any) => x.requestType !== TipoChamado.FEATURE)
         }
 
+        if(!user.group.canRateAnalinhamento){
+          requests = requests.filter((x: any) => x.requestStep === 'Analise de risco')
+        }
+
         setChamados(requests)
         setChamadosFiltrados(requests)
 

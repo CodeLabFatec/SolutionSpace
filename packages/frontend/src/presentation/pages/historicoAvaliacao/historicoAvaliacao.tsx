@@ -53,17 +53,25 @@ const HistoricoAvaliacao: React.FC = () => {
 
     return (
     <>
-      {avaliacoes.map((item: any) => {
+      {avaliacoes.map((item: any, index: number) => {
         chamado = item.request
+        const isLastElement = avaliacoes.length == (index + 1)
+
         if(item.requestStep === 'Analise de risco'){
           return (
             <React.Fragment key={item.rating_id}>
               {chamado.requestStep === 'Analise de risco' ? 
                 chamado.arquived ?
-                <div className={Styles.cardIcon}>
-                  <FolderIcon className={Styles.icon} />
-                  <p>Arquivado na análise de risco</p>
-                </div>
+                <>               
+                  <div className={Styles.cardIcon}>
+                    <FolderIcon className={Styles.icon} />
+                    <p>Arquivado na análise de risco</p>
+                  </div>
+                  {isLastElement ? 
+                  <></> : <div>
+                    <EastIcon className={Styles.arrowIcon} />
+                  </div>}
+                </>
                 :
                 <>
                   <div className={Styles.cardIcon}>
@@ -90,24 +98,30 @@ const HistoricoAvaliacao: React.FC = () => {
         }
 
         return (
-          <div key={item.rating_id} className={Styles.cardIcon}>
-            {chamado.approved ? 
-            <>
-              <CheckIcon className={Styles.icon} />
-              <p>Aprovado no alinhamento estratégico</p>
-            </> 
-            : 
-            chamado.arquived ?
-            <>
-              <FolderIcon className={Styles.icon} />
-              <p>Arquivado no alinhamento estratégico</p>
-            </> 
-            :
-            <>
-              <QuestionMarkIcon className={Styles.icon} />
-              <p>Aguardando alinhamento estratégico</p>
-            </>}
-          </div>
+          <>
+            <div key={item.rating_id} className={Styles.cardIcon}>
+              {chamado.approved ? 
+              <>
+                <CheckIcon className={Styles.icon} />
+                <p>Aprovado no alinhamento estratégico</p>
+              </> 
+              : 
+              chamado.arquived ?
+              <>
+                <FolderIcon className={Styles.icon} />
+                <p>Arquivado no alinhamento estratégico</p>
+              </> 
+              :
+              <>
+                <QuestionMarkIcon className={Styles.icon} />
+                <p>Aguardando alinhamento estratégico</p>
+              </>}
+            </div>
+            {isLastElement ? 
+              <></> : <div>
+                <EastIcon className={Styles.arrowIcon} />
+              </div>}
+          </>
         )
       })}
     </>)
