@@ -31,7 +31,7 @@
 ## 👩‍💻 Entrega
 <p align="center"></p>
 
-![entregaSprint3](https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/66f96ad4-ccba-43d0-9687-35bc4d02207e)
+  https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/66f96ad4-ccba-43d0-9687-35bc4d02207e
 
 <br />
 
