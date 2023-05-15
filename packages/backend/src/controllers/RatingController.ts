@@ -39,17 +39,6 @@ class RatingController {
 
         if (request.arquived) return res.status(200).json('This request has already been archived');
 
-        const alreadyRated = await ratingRepository.find({
-            where: {
-                requestStep: requestStep as RequestStep,
-                request: { request_id: requestId },
-                user: { group: { group_id: user.group.group_id } }
-            }
-        });
-
-        if (alreadyRated.length > 0)
-            return res.status(400).json('There is already a rating for this request from the same group');
-
         if (
             request.requestStep === RequestStep.ANALISE_RISCO &&
             userGroupPermissions.canRateAnalise === false

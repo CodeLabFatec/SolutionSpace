@@ -6,10 +6,12 @@ import { AuthContext } from "@/main/contexts/authcontext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createRiskAnalysisRating } from "@/main/api/api";
 import { useAlert } from "@/main/services";
+import { BlockContext } from "@/main/contexts/blockcontext";
 
 const AnaliseRisco: React.FC = () => {
 
   const { user } = useContext(AuthContext);
+  const { setBlock } = useContext(BlockContext);
   const navigate = useNavigate();
   const location = useLocation();
   const alert = useAlert()
@@ -20,6 +22,7 @@ const AnaliseRisco: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
 
   const handleRequest = async () => {
+    setBlock(true)
     try {
       const files: any[] = [];
       if (uploadedFiles.length > 0) {
@@ -41,6 +44,7 @@ const AnaliseRisco: React.FC = () => {
         files
       );
 
+      setBlock(false)
       alert.criarAlerta({
         icon: 'success',
         html: "Avaliação feita com sucesso!",
@@ -70,6 +74,7 @@ const AnaliseRisco: React.FC = () => {
           "Você precisa estar autenticado para realizar essa operação.";
       }
 
+      setBlock(false)
       alert.criarAlerta({
         icon: 'error',
         html: errorMessage

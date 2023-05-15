@@ -14,6 +14,7 @@ import {
 import { User } from './User';
 import { File } from './File';
 import { StatusConfiguration } from './StatusConfiguration';
+import { Rating } from './Rating';
 
 export enum RequestType {
     FEATURE = 'feature',
@@ -74,4 +75,7 @@ export class Request {
 
     @Column({ type: 'boolean', nullable: false, default: false })
     approved: boolean
+
+    @OneToMany(() => Rating, (rating) => rating.request)
+    ratings: Rating[];
 }

@@ -77,9 +77,14 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <p align="center"> <img width="1500" src = "./docs/images/sprint1.gif" /></p>
 
 <h4> Entrega da Sprint 2 </h4>
-<p align="center"></p>
+<p align="center">
+https://user-images.githubusercontent.com/80860267/233869076-704b465b-4d16-4855-a218-adcaa374ca58.mp4
+</p>
 
-  https://user-images.githubusercontent.com/80860267/233869076-704b465b-4d16-4855-a218-adcaa374ca58.mp4
+<h4> Entrega da Sprint 3 </h4>
+<p align="center">
+![entregaSprint3](https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/66f96ad4-ccba-43d0-9687-35bc4d02207e)
+</p>
 
 <br />
 
