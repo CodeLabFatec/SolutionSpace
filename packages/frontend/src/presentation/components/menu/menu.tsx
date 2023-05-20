@@ -272,6 +272,18 @@ const SideMenu = () => {
           ) : (
             <></>
           )}
+
+          <MenuItem
+            onClick={() => {
+              handleMenu();
+            }}
+            icon={<HomeIcon />}
+            style={{ padding: "10px" }}
+            id={Styles.menuList}
+            component={<Link to="/kanban" />}
+          >
+            <p>Kanban</p>
+          </MenuItem>
         </Menu>
       </Sidebar>
       <main></main>

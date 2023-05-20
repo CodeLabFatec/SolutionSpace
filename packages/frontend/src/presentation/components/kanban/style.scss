@@ -1,0 +1,39 @@
+.title {
+  background-color: lightblue;
+  position: "stick";
+}
+
+.column::-webkit-scrollbar {
+  background-color: #333333;
+  border-radius: 10px;
+  width: 10px;
+}
+
+.column::-webkit-scrollbar-button {
+  display: none;
+}
+
+.column::-webkit-scrollbar-thumb {
+  background-color: #535252;
+  border-radius: 20px;
+}
+
+.colunas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+  margin: 40px 0 0 280px;
+}
+
+.H1Kanban {
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.H1Kanban hr {
+  border: 1px dashed #ffffff;
+  width: 566px;
+  margin: 0 auto;
+}
