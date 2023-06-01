@@ -10,6 +10,7 @@ import { checkGroupPermission } from '../utils/checkGroupPermissions';
 import { notifyUserByRequest } from '../utils/notifyUser';
 import { groupRepository } from '../repos/postgres/repositories/groupRepository';
 import { RequestStepStatus } from '../repos/postgres/entitites/StatusConfiguration';
+import { kanbanRepository } from '../repos/postgres/repositories/kanbanRepository';
 
 class RatingController {
     async create(req: Request, res: Response) {
@@ -132,11 +133,22 @@ class RatingController {
                             status: statusConfig
                         })
                     }else{
-                        request = await requestRepository.save({
+
+                        const kanban = await kanbanRepository.findOneBy({ column: 'NEW' })
+                        const group = await groupRepository.findOneBy({ group_id: targetGroup })
+                        const requestToSave = {
                             ...request,
                             approved: true,
                             status: statusConfig
-                        })
+                        }
+
+                        if(kanban){
+                            requestToSave.kanban = kanban
+                        }
+                        if(group){
+                            requestToSave.group = group
+                        }
+                        request = await requestRepository.save(requestToSave)
                     }
 
                     await notifyUserByRequest(request, createdRating)

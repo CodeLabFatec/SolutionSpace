@@ -13,7 +13,6 @@ const Column: React.FC<{ title: any; tasks: any; id: any }> = (props) => {
           <TaskList
             ref={provided.innerRef}
             {...provided.droppableProps}
-            // isDraggingOver={snapshot.isDraggingOver}
           >
             {props.tasks.map((task: any, index: any) => (
               <Task key={index} index={index} task={task} />

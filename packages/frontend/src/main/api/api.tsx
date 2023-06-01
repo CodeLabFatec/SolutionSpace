@@ -108,8 +108,16 @@ export const getAllRequests = async () => {
   return api.get('/listRequests')
 }
 
+export const getKanban = async () => {
+  return api.get('/kanban')
+}
+
 export const getAllArchivedRequests = async () => {
   return api.get('/listArchivedRequests')
+}
+
+export const getAllApprovedRequests = async (user_id: string) => {
+  return api.get('/listApprovedRequests/' + user_id)
 }
 
 export const getAllRequestsByUser = async (userid: string) => {
@@ -206,4 +214,12 @@ export const readAllNotifications = async (
   user_id:string
   ) => {
   return api.get('/updateAllNotifications/' + user_id )
+}
+
+export const updateRequestKanbanColumn = async (column: string, request_id: string) => {
+  return api.post('/changeRequestKanbanColumn', { column, request_id })
+}
+
+export const clearRequestKanban = async (requests: number[]) => {
+  return api.post('/clearRequestKanban', { requests })
 }

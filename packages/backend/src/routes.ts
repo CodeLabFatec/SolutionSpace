@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authMiddleware from './middlewares/authMiddlaware';
-import { authController, groupController, notificationsController, ratingController, requestController, statusConfigurationController, teamController, userController } from './controllers';
+import { authController, groupController, kanbanController, notificationsController, ratingController, requestController, statusConfigurationController, teamController, userController } from './controllers';
 
 const router = Router();
 
@@ -11,6 +11,9 @@ router.get('/', (req, res) => {
 // Auth
 router.post('/auth', authController.authenticate);
 router.post('/verifyToken/:authorization', authController.verifyToken);
+
+//Kanban
+router.get('/kanban', authMiddleware, kanbanController.getKanban);
 
 // User
 router.get('/listUsers', authMiddleware, userController.listUser);
@@ -34,6 +37,9 @@ router.get('/request/:id', authMiddleware, requestController.getRequestById);
 router.post('/createRequest/:userId', authMiddleware, requestController.create);
 router.get('/listArchivedRequests', authMiddleware, requestController.listArchivedRequests)
 router.post('/unarchiveRequest/:request_id', authMiddleware, requestController.unarchiveRequest)
+router.get('/listApprovedRequests/:user_id', authMiddleware, requestController.listApprovedRequests)
+router.post('/changeRequestKanbanColumn', authMiddleware, requestController.changeRequestKanbanColumn)
+router.post('/clearRequestKanban', authMiddleware, requestController.clearRequestKanban);
 
 // Rating
 router.get('/listRatings', authMiddleware, ratingController.listRatings);

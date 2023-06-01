@@ -2,23 +2,11 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-// function bgcolorChange(props: any) {
-//   return props.isDragging
-//     ? "lightgreen"
-//     : props.isDraggable
-//     ? props.isBacklog
-//       ? "#F2D7D5"
-//       : "#DCDCDC"
-//     : props.isBacklog
-//     ? "#F2D7D5"
-//     : "#EAF4FC";
-// }
-
 const Task: React.FC<{ task: any; index: any }> = (props) => {
   return (
     <Draggable
-      draggableId={`${props.task.id}`}
-      key={props.task.id}
+      draggableId={`${props.task.request_id}`}
+      key={props.task.request_id}
       index={props.index}
     >
       {(provided, snapshot) => (
@@ -26,12 +14,11 @@ const Task: React.FC<{ task: any; index: any }> = (props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          //   isDragging={snapshot.isDragging}
         >
-          <div style={{ display: "flex", justifyContent: "start", padding: 2 }}>
+          <div style={{ display: "flex", justifyContent: "start", padding: 2, backgroundColor: props.task.status.color }}>
             <span>
               <small>
-                #{props.task.id}
+                {props.task.status.status}
                 {"  "}
               </small>
             </span>
@@ -41,7 +28,6 @@ const Task: React.FC<{ task: any; index: any }> = (props) => {
           >
             <TextContent>{props.task.title}</TextContent>
           </div>
-          {/* {provided.placeholder} */}
         </Container>
       )}
     </Draggable>

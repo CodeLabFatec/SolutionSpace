@@ -6,6 +6,7 @@ import requestController from "./RequestController";
 import statusConfigurationController from "./statusConfigurationController";
 import teamController from "./TeamController";
 import userController from "./UserController";
+import kanbanController from "./kanbanController";
 
 export { 
     authController, 
@@ -15,4 +16,5 @@ export {
     requestController, 
     statusConfigurationController,
     teamController,
-    userController };
+    userController,
+    kanbanController };
