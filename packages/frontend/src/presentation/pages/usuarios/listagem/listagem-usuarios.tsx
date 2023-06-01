@@ -9,6 +9,7 @@ const ListagemUsuarios: React.FC = () => {
   const navigate = useNavigate();
   const alert = useAlert()
   const [data, setData] = useState([]);
+  const [dataFiltrada, setDataFiltrada] = useState([]);
 
   const { user } = useContext(AuthContext)
 
@@ -16,6 +17,7 @@ const ListagemUsuarios: React.FC = () => {
     try {
       const response = await getAllUsers();
       setData(response.data.users);
+      setDataFiltrada(response.data.users);
     } catch (e) {
       alert.criarAlerta({
         icon: 'error',
@@ -72,12 +74,36 @@ const ListagemUsuarios: React.FC = () => {
     })
   };
 
+  const changeFilter: any = (event: any) => {
+    const filter = event.target.value.toLowerCase();
+    if (filter !== undefined && filter !== null) {
+      const filteredList = data.filter(
+        (x: any) =>
+          x.name.toLowerCase().includes(filter)  ||
+          filter.includes(x.name.toLowerCase())  ||
+          x.email.toLowerCase().includes(filter) ||
+          filter.includes(x.email.toLowerCase()) ||
+          x.group?.group_name.toLowerCase().includes(filter) ||
+          filter.includes(x.group?.group_name.toLowerCase()) ||
+          x.team?.team_name.toLowerCase().includes(filter) ||
+          filter.includes(x.team?.team_name.toLowerCase()) 
+      );
+      setDataFiltrada(filteredList);
+    }
+  };
+
   return (
     <div className={Styles.container}>
       <div className={Styles.tableContainer}>
         <div className={Styles.title}>
           <h1>Usuários</h1>
           <hr />
+        </div>
+        <div className={Styles.FiltroTable}>
+          <input placeholder="Pesquisar" onChange={changeFilter} type="text" />
+          <div className={Styles.FiltroTableIcon}>
+            <i className="large material-icons">filter_list</i>
+          </div>
         </div>
         <div className={Styles.tableUsers}>
           <table className={Styles.table}>
@@ -91,7 +117,7 @@ const ListagemUsuarios: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 ? (
+              {dataFiltrada.length === 0 ? (
                 <>
                   <tr>
                     <td colSpan={5}>Nenhum usuário encontrado</td>
@@ -100,7 +126,7 @@ const ListagemUsuarios: React.FC = () => {
               ) : (
                 <></>
               )}
-              {data.map((item: any) => (
+              {dataFiltrada.map((item: any) => (
                 <tr key={item.user_id}>
                   <td>{item.name}</td>
                   <td>{item.email}</td>

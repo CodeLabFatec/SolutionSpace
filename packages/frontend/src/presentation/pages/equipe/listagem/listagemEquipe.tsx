@@ -9,6 +9,7 @@ import { useAlert } from "@/main/services";
 const ListagemEquipe: React.FC = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [dataFiltrada, setDataFiltrada] = useState([]);
 
   const { user } = useContext(AuthContext);
   const alert = useAlert()
@@ -17,6 +18,7 @@ const ListagemEquipe: React.FC = () => {
     try {
       const response = await getAllTeams();
       setData(response.data);
+      setDataFiltrada(response.data);
     } catch (e) {
       alert.criarAlerta({
         icon: 'error',
@@ -73,12 +75,32 @@ const ListagemEquipe: React.FC = () => {
     })
   };
 
+  const changeFilter: any = (event: any) => {
+    const filter = event.target.value.toLowerCase();
+    if (filter !== undefined && filter !== null) {
+      const filteredList = data.filter(
+        (x: any) =>
+          x.team_name.toLowerCase().includes(filter) ||
+          filter.includes(x.team_name.toLowerCase()) ||
+          x.description.toLowerCase().includes(filter) ||
+          filter.includes(x.description.toLowerCase())
+      );
+      setDataFiltrada(filteredList);
+    }
+  };
+
   return (
     <div className={Styles.container}>
       <div className={Styles.tableContainer}>
         <div className={Styles.title}>
           <h1>Equipes</h1>
           <hr />
+        </div>
+        <div className={Styles.FiltroTable}>
+          <input placeholder="Pesquisar" onChange={changeFilter} type="text" />
+          <div className={Styles.FiltroTableIcon}>
+            <i className="large material-icons">filter_list</i>
+          </div>
         </div>
         <div className={Styles.tableTeams}>
           <table className={Styles.table}>
@@ -90,7 +112,7 @@ const ListagemEquipe: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 ? (
+              {dataFiltrada.length === 0 ? (
                 <>
                   <tr>
                     <td colSpan={3}>Nenhuma equipe encontrada</td>
@@ -99,7 +121,7 @@ const ListagemEquipe: React.FC = () => {
               ) : (
                 <></>
               )}
-              {data.map((item: any) => (
+              {dataFiltrada.map((item: any) => (
                 <tr key={item.team_id}>
                   <td>{item.team_name}</td>
                   <td>{item.description}</td>
