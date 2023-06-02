@@ -19,3 +19,4 @@ export { default as PersonalizacaoAlinhamento } from './personalizacaoStatus/ali
 export { default as VisualizarEquipe } from './equipe/visualizacao/visualizarEquipe' 
 export { default as VisualizarGrupo } from './grupos/visualzacao/visualizarGrupo' 
 export { default as VisualizarUsuario } from './usuarios/visualizacao/visualizarUsuarios' 
+export { default as KanbanPage } from './kanbanPage/kanban' 

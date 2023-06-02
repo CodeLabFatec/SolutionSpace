@@ -24,7 +24,8 @@ import {
   VisualizarEquipe,
   VisualizarGrupo,
   VisualizarUsuario,
-  PersonalizacaoAlinhamento
+  PersonalizacaoAlinhamento,
+  KanbanPage
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
 import { BlockProvider } from "../contexts/blockcontext";
@@ -273,6 +274,14 @@ const Router: React.FC = () => {
               element={
                 <Private>
                   <VisualizarUsuario />
+                </Private>
+              }
+            />
+            <Route
+              path="/kanban"
+              element={
+                <Private>
+                  <KanbanPage />
                 </Private>
               }
             />

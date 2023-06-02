@@ -10,18 +10,20 @@ const ListagemGrupos: React.FC = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [dataFiltrada, setDataFiltrada] = useState([]);
   const alert = useAlert()
 
   const loadGroups = async () => {
     try {
       const response = await getAllGroups();
       setData(response.data);
+      setDataFiltrada(response.data)
     } catch (e) {
       alert.criarAlerta({
         icon: 'error',
         html: "Ocorreu um erro ao carregar os grupos",
         title: 'Erro'
-      }) 
+      })
     }
   };
 
@@ -54,7 +56,7 @@ const ListagemGrupos: React.FC = () => {
           alert.criarAlerta({
             icon: 'success',
             html: `Grupo ${item.group_name} excluído com sucesso!`
-          }) 
+          })
           loadGroups()
         } catch (e) {
           let errorMessage = e.response.data.message;
@@ -66,10 +68,24 @@ const ListagemGrupos: React.FC = () => {
             icon: 'error',
             html: errorMessage,
             title: 'Erro'
-          }) 
-        }      
+          })
+        }
       }
     })
+  };
+
+  const changeFilter: any = (event: any) => {
+    const filter = event.target.value.toLowerCase();
+    if (filter !== undefined && filter !== null) {
+      const filteredList = data.filter(
+        (x: any) =>
+          x.group_name.toLowerCase().includes(filter) ||
+          filter.includes(x.group_name.toLowerCase()) ||
+          x.description.toLowerCase().includes(filter) ||
+          filter.includes(x.description.toLowerCase())
+      );
+      setDataFiltrada(filteredList);
+    }
   };
 
   return (
@@ -78,6 +94,12 @@ const ListagemGrupos: React.FC = () => {
         <div className={Styles.title}>
           <h1>Grupos</h1>
           <hr />
+        </div>
+        <div className={Styles.FiltroTable}>
+          <input placeholder="Pesquisar" onChange={changeFilter} type="text" />
+          <div className={Styles.FiltroTableIcon}>
+            <i className="large material-icons">filter_list</i>
+          </div>
         </div>
         <div className={Styles.tableGroups}>
           <table className={Styles.table}>
@@ -89,7 +111,7 @@ const ListagemGrupos: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 ? (
+              {dataFiltrada.length === 0 ? (
                 <>
                   <tr>
                     <td colSpan={3}>Nenhum grupo encontrado</td>
@@ -98,7 +120,7 @@ const ListagemGrupos: React.FC = () => {
               ) : (
                 <></>
               )}
-              {data.map((item: any) => (
+              {dataFiltrada.map((item: any) => (
                 <tr key={item.group_id}>
                   <td>{item.group_name}</td>
                   <td>{item.description}</td>
@@ -128,14 +150,14 @@ const ListagemGrupos: React.FC = () => {
                           delete
                         </i>
                       )}
-                       <i
-                          onClick={(e: any) => {
-                            handleVisualize(e, item);
-                          }}
-                          className="material-icons"
-                        >
-                          remove_red_eye
-                        </i>
+                      <i
+                        onClick={(e: any) => {
+                          handleVisualize(e, item);
+                        }}
+                        className="material-icons"
+                      >
+                        remove_red_eye
+                      </i>
                     </div>
                   </td>
                 </tr>

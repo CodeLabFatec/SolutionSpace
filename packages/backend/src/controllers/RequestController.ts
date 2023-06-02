@@ -7,6 +7,8 @@ import { ratingRepository } from '../repos/postgres/repositories/ratingRepositor
 import { In } from 'typeorm';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
 import { File } from '../repos/postgres/entitites/File';
+import { kanbanRepository } from '../repos/postgres/repositories/kanbanRepository';
+import { Group } from '../repos/postgres/entitites/Group';
 
 class RequestController {
     async create(req: Request, res: Response) {
@@ -72,6 +74,29 @@ class RequestController {
         try {
             const requests = await requestRepository.find(
                 { relations: { user: { team: true }, files: true, status: true, ratings: { user: true } } });
+
+            return res.status(200).json(requests);
+        } catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
+    async listApprovedRequests(req: Request, res: Response) {
+        const { user_id } = req.params;
+
+        try {
+            const user = await userRepository.findOne({ where: { user_id }, relations: { group: true } })
+
+            if(!user) return res.status(404).json('User not found')
+
+            const group: Group = user.group
+            
+
+            let requests = await requestRepository.find(
+                { where: { approved: true, group: { group_id: group.group_id }  } ,
+                  relations: { user: { group: true }, status: true, kanban: true, group: true } });
+
+            requests = requests.filter((req: any)=> req.kanban != null)
 
             return res.status(200).json(requests);
         } catch (error) {
@@ -181,6 +206,29 @@ class RequestController {
         }
     }
 
+    async changeRequestKanbanColumn(req: Request, res: Response){
+        const { column, request_id } = req.body;
+
+        try{
+            const kanban = await kanbanRepository.findOneBy({ column })
+
+            if(!kanban) return res.status(404).json('Kanban not found')
+
+            const request = await requestRepository.findOneBy({ request_id })
+
+            if(!request) return res.status(404).json('Request not found')
+
+            request.kanban = kanban
+
+            await requestRepository.save(request)
+
+            return res.status(200).json(request)
+
+        } catch(error){
+            return res.status(500).json(`Internal server error - ${error}`)
+        }
+    }
+
     async unarchiveRequest(req: Request, res: Response) {
         const { request_id } = req.params;
 
@@ -219,6 +267,28 @@ class RequestController {
         }
     }
     
+    async clearRequestKanban(req: Request, res: Response) {
+        const { requests } = req.body
+
+        try{
+
+            if(requests.length === 0) return res.status(200).json('Nenhum chamado para limpar.')
+
+            requests.forEach(async (request_id: any) => {
+                const req = await requestRepository.findOneBy({ request_id })
+
+                if(req){
+                    req.kanban = null
+                    await requestRepository.save(req)
+                }
+
+            })
+
+            return res.status(200).json('Sucesso ao limpar o kanban.')
+        }catch(error) {
+            return res.status(500).json('Internal server error - ' + error)
+        }
+    }
 }
 
 const requestController = new RequestController()

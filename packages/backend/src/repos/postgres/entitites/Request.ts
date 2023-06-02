@@ -15,6 +15,8 @@ import { User } from './User';
 import { File } from './File';
 import { StatusConfiguration } from './StatusConfiguration';
 import { Rating } from './Rating';
+import { Kanban } from './Kanban';
+import { Group } from './Group';
 
 export enum RequestType {
     FEATURE = 'feature',
@@ -52,6 +54,14 @@ export class Request {
 
     @OneToMany(() => File, (file) => file.request)
     files: File[];
+
+    @ManyToOne(() => Kanban, (kanban) => kanban.kanban_id, { nullable: true })
+    @JoinColumn({ name: 'kanban_id' })
+    kanban!: Kanban | null;
+
+    @ManyToOne(() => Group, (group) => group.users, { nullable: true })
+    @JoinColumn({ name: 'group_id' })
+    group!: Group | null;
 
     @CreateDateColumn()
     created_at: Date;

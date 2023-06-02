@@ -8,7 +8,7 @@ class StatusConfigurationController {
         const { rating, status, requestStep } = req.body;
 
         if (!rating || !status || !requestStep) {
-            return res.status(400).json({ message: 'Propertiesrequired to create a status configuration' });
+            return res.status(400).json({ message: 'Properties are required to create a status configuration' });
         }
 
         try {
