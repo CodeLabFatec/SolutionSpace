@@ -40,6 +40,7 @@ router.post('/unarchiveRequest/:request_id', authMiddleware, requestController.u
 router.get('/listApprovedRequests/:user_id', authMiddleware, requestController.listApprovedRequests)
 router.post('/changeRequestKanbanColumn', authMiddleware, requestController.changeRequestKanbanColumn)
 router.post('/clearRequestKanban', authMiddleware, requestController.clearRequestKanban);
+router.put('/editRequest', authMiddleware, requestController.editRequest);
 
 // Rating
 router.get('/listRatings', authMiddleware, ratingController.listRatings);

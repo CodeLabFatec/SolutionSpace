@@ -223,3 +223,7 @@ export const updateRequestKanbanColumn = async (column: string, request_id: stri
 export const clearRequestKanban = async (requests: number[]) => {
   return api.post('/clearRequestKanban', { requests })
 }
+
+export const editRequest = async (request_id: string, title: string, description: string, files: any[]) => {
+  return api.put('/editRequest', { request_id, title, description, files })
+}
