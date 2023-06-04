@@ -3,9 +3,11 @@ import Styles from './login.scss'
 import { LogoMenor } from '@/presentation/components'
 import { AuthContext } from '@/main/contexts/authcontext'
 import { useAlert } from '@/main/services';
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
 
+  const navigate = useNavigate()
   const { login } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
@@ -27,6 +29,12 @@ const Login: React.FC = () => {
 
     login(email, password)
   }
+
+  const passwordRecoveryHandler = (e: any) => {
+    e.preventDefault();
+
+    navigate('/enviarCodigo')
+  };
 
   return (
     <div className={Styles.imagem}>
@@ -61,6 +69,11 @@ const Login: React.FC = () => {
             <div className={Styles.container_login_form_btn}>
               <button type='submit' className={Styles.login_form_btn}>
                 Entrar
+              </button>
+            </div>
+            <div>
+              <button onClick={passwordRecoveryHandler} className={Styles.recovery_password_form_btn}>
+                Esqueci minha senha
               </button>
             </div>
           </form>

@@ -25,7 +25,9 @@ import {
   VisualizarGrupo,
   VisualizarUsuario,
   PersonalizacaoAlinhamento,
-  KanbanPage
+  KanbanPage,
+  RecuperarSenha,
+  EnviarCodigo
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
 import { BlockProvider } from "../contexts/blockcontext";
@@ -87,6 +89,8 @@ const Router: React.FC = () => {
               }
             />
             <Route path="/login" element={<Login />} />
+            <Route path="/recuperarSenha" element={<RecuperarSenha />} />
+            <Route path="/enviarCodigo" element={<EnviarCodigo />} />
             <Route
               path="/home"
               element={
@@ -229,7 +233,7 @@ const Router: React.FC = () => {
                 </Private>
               }
             />
-            <Route 
+            <Route
               path='/history'
               element={
                 <Private>
