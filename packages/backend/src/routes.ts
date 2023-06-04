@@ -18,9 +18,12 @@ router.get('/kanban', authMiddleware, kanbanController.getKanban);
 // User
 router.get('/listUsers', authMiddleware, userController.listUser);
 router.get('/user/:id', authMiddleware, userController.getUserById);
+router.get('/userByEmail/:email', userController.getUserByEmail);
 router.post('/createUser', authMiddleware, userController.create);
 router.put('/updateUser/:user_id', authMiddleware, userController.editUser);
+router.put('/updateUserByEmail/', userController.editUserInRecoveryPassword);
 router.delete('/deleteUser/:user_id', authMiddleware, userController.deleteUser);
+router.post('/sendEmailRecoveryPassword/:email', userController.sendEmailToPasswordRecovery);
 
 // Team
 router.get('/listTeams', authMiddleware, teamController.listTeams);
@@ -40,6 +43,7 @@ router.post('/unarchiveRequest/:request_id', authMiddleware, requestController.u
 router.get('/listApprovedRequests/:user_id', authMiddleware, requestController.listApprovedRequests)
 router.post('/changeRequestKanbanColumn', authMiddleware, requestController.changeRequestKanbanColumn)
 router.post('/clearRequestKanban', authMiddleware, requestController.clearRequestKanban);
+router.put('/editRequest', authMiddleware, requestController.editRequest);
 
 // Rating
 router.get('/listRatings', authMiddleware, ratingController.listRatings);

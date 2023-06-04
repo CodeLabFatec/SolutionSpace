@@ -26,11 +26,12 @@ import {
   VisualizarUsuario,
   PersonalizacaoAlinhamento,
   KanbanPage,
-  
+  RecuperarSenha,
+  EnviarCodigo,
+  EdicaoChamado
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
 import { BlockProvider } from "../contexts/blockcontext";
-import EdicaoChamados from "@/presentation/pages/chamados/edicao/edicaochamado";
 
 const Router: React.FC = () => {
 
@@ -89,6 +90,8 @@ const Router: React.FC = () => {
               }
             />
             <Route path="/login" element={<Login />} />
+            <Route path="/recuperarSenha" element={<RecuperarSenha />} />
+            <Route path="/enviarCodigo" element={<EnviarCodigo />} />
             <Route
               path="/home"
               element={
@@ -231,7 +234,7 @@ const Router: React.FC = () => {
                 </Private>
               }
             />
-            <Route 
+            <Route
               path='/history'
               element={
                 <Private>
@@ -291,8 +294,7 @@ const Router: React.FC = () => {
               path="/editRequest"
               element={
                 <Private>
-                  <Home
-                  />
+                  <EdicaoChamado />
                 </Private>
               }
             />

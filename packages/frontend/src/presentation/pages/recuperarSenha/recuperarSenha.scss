@@ -1,0 +1,176 @@
+.imagem {
+  background-image: url(./imagem/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container_login {
+  background-color: rgba(6, 6, 6, 0.8);
+  height: 695px;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+}
+
+.wrap_login {
+  width: 390px;
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 50px 55px 33px 55px;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login_form {
+  width: 100%;
+}
+
+.login_form_title {
+  display: block;
+  font-size: 30px;
+  color: azure;
+  font-weight: bold;
+  margin-left: 35px;
+  line-height: 1.9;
+  text-align: center;
+  align-items: center;
+}
+
+.wrap_input {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin-bottom: 37px;
+  margin-top: 15px;
+}
+
+.input {
+  font-size: 15px;
+  margin-top: 15px;
+  color: #fff;
+  line-height: 1.2;
+  border: none;
+  display: block;
+
+  width: 100%;
+  height: 45px;
+  background-color: transparent;
+  padding: 0px;
+}
+
+.focus_input {
+  position: absolute;
+  display: block;
+  text-align: start;
+  width: 100%;
+  height: 100%;
+
+  top: -25px;
+  left: 0;
+
+  pointer-events: none;
+  color: #adadad;
+}
+
+.focus_input::before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+}
+
+.focus_input::after {
+  font-size: 15px;
+  color: #999;
+  line-height: 1.2;
+
+  content: attr(data-placeholder);
+
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 16px;
+  left: 0px;
+
+  padding-left: 5px;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.container_login_form_btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 13px;
+}
+
+.login_form_btn {
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  color: #111;
+  font-weight: bold;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+  background-color: #4fb4bc;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.send_email_back_form_btn {
+  font-size: 13px;
+  border: none;
+  border-radius: 0px;
+  color: white;
+  font-weight: bold;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 0px;
+  background-color: #000;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.text_certer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 50px;
+}
+
+.txt1 {
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+  color: #adadad;
+}

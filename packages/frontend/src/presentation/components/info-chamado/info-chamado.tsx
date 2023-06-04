@@ -320,7 +320,7 @@ const InfoChamado: React.FC<{
             <div className={Styles.botoesInfochamado}>
               <button
                 color="secundary"
-                className={Styles.botaoVisualizarAnaliseMeus}
+                className={Styles.botaoVisualizarAnalise}
                 onClick={() => {
                   navigate("/history", {
                     replace: true,
@@ -363,9 +363,9 @@ const InfoChamado: React.FC<{
                 color="secundary"
                 className={Styles.botaoEditarChamado}
                 onClick={() => {
-                  navigate("/request", {
+                  navigate("/editRequest", {
                     replace: true,
-                    state: props.chamado,
+                    state: props.chamado?.request_id,
                   });
                 }}
               >

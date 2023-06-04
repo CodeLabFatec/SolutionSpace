@@ -1,50 +1,82 @@
 import Styles from "./edicaochamado.scss";
 
-import React, { useState, useContext, useEffect } from "react"; 
+import React, { useState, useEffect } from "react"; 
 import { Dropzone } from "@/presentation/components";
-import { TipoChamado } from "@/main/enums";
 
-import { AuthContext } from "@/main/contexts/authcontext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAlert } from "@/main/services";
-import { getAllRequests, getRequestById } from "@/main/api/api";
+import { editRequest, getRequestById } from "@/main/api/api";
+import { uniqueId } from "lodash";
+import { filesize } from "filesize";
 
-const EdicaoChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
-  const title =
-    props.tipoChamado === TipoChamado.FEATURE ? "Nova feature" : "Hotfix";
+const EdicaoChamados: React.FC = () => {
 
+  const [id, setId] = useState('')
   const [titulo, setTitulo] = useState<string>("");
   const [detalhes, setDetalhes] = useState<string>("");
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
-  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const alert = useAlert();
 
   const location = useLocation()
   
   useEffect(() => {
+    const chamado = location.state; 
+
+    if(!chamado){
+      alert.criarAlerta({
+        icon: "error",
+        html: "Ocorreu um erro ao carregar o chamado.",
+        title: "Erro",
+      });
+      navigate('/home')
+      return
+    }
+
     const fetchChamado = async () => {
       try {
-        const chamado = location.state.request_id; 
+        setId(chamado)
   
-       await getRequestById(chamado); 
+        const response = await getRequestById(chamado); 
   
-        setTitulo(chamado.titulo);
-        setDetalhes(chamado.detalhes);
-        setUploadedFiles(chamado.uploadedFiles);
+        setTitulo(response.data.title);
+        setDetalhes(response.data.description);
+        if(response.data.files.length > 0){
+          response.data.files.forEach((item: any) => {
+            const fl = srcToFile(`${item.base64}`, item.file_name, item.ext);
+            const file = {
+              name: item.file_name,
+              base64: item.base64,
+              type: item.ext,
+              id: uniqueId(),
+              readableSize: filesize(fl.size),
+              preview: `data:${item.ext};base64,${item.base64}`,
+              progress: 100,
+              uploaded: true,
+              error: false,
+              url: `data:${item.ext};base64,${item.base64}`
+            }
+            uploadedFiles.push(file)
+          })
+        }        
       }catch (e) {
   
         alert.criarAlerta({
           icon: "error",
-          html: "Ocorreu um erro ao carregar os chamados.",
+          html: "Ocorreu um erro ao carregar o chamado.",
           title: "Erro",
         });
+        navigate('/home')
 
       }
     };
   
     fetchChamado();
-  }, [location.state.request_id]); 
+  }, []); 
+
+  function srcToFile(src: string, fileName: string, mimeType: string){
+    return new File([src], fileName, { type: mimeType })
+}
   
 
   const handleRequest = async () => {
@@ -55,18 +87,12 @@ const EdicaoChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
           files.push({
             file_name: file.name,
             base64: file.base64,
-            ext: file.type,
+            ext: file.type
           });
         });
       }
 
-    //  await updateRequest({
-    //    id: location.state.request_id,
-    //    titulo: titulo,
-    //    detalhes: detalhes,
-    //    uploadedFiles: files
-    //  });
-      
+      await editRequest(id, titulo, detalhes, files)
 
       alert.criarAlerta({
         icon: "success",
@@ -115,7 +141,7 @@ const EdicaoChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
 
     alert.criarConfirmacao({
       title: "Aviso",
-      html: "Deseja salvar esse chamado?",
+      html: "Deseja alterar esse chamado?",
       confirmAction: () => {
         handleRequest();
       },
@@ -125,7 +151,7 @@ const EdicaoChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
   return (
     <div className={Styles.container}>
       <div className={Styles.H1formularioChamados}>
-        <h1>{title}</h1>
+        <h1>Editando chamado</h1>
         <hr />
       </div>
       <form onSubmit={handleSubmit} className={Styles.form}>
@@ -165,10 +191,11 @@ const EdicaoChamados: React.FC<{ tipoChamado: TipoChamado }> = (props) => {
             type="button"
             value="Cancelar"
             className={Styles.buttonCancelar}
+            onClick={()=> navigate('/home')}
           />
           <input
             type="submit"
-            value="Enviar para o comitê de aprovação"
+            value="Salvar alterações"
             className={Styles.buttonEnviar}
           />
         </div>
