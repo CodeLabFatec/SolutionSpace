@@ -77,7 +77,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <h4> Entrega da Sprint 1 </h4>
 <p align="center"></p>
 
-![Sprint1](/docs/videos/sprint1.mp4)
+https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/b5ad023b-6a98-45a2-a113-c0170feecc0f
 
 <br />
 
@@ -98,6 +98,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <h4> Entrega da Sprint 4 (Entrega final) </h4>
 <p align="center"></p>
 
+https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/36e0b209-5fb1-4365-b618-7891862fd56c
 
 <br />
 
