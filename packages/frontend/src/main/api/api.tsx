@@ -189,19 +189,19 @@ export const updateGroup = async (
   group_name: string,
   team_id: string,
   description: string,
-  canRequestFeatures:boolean,
-  canRequestHotfix:boolean,
-  canRateAnalinhamento :boolean,
-  canRateAnalise :boolean,
-  mustRateAnalinhamento :boolean,
-  mustRateAnalise :boolean
-  ) => {
-  return api.put('/updateGroup', { group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise,mustRateAnalinhamento,mustRateAnalise })
+  canRequestFeatures: boolean,
+  canRequestHotfix: boolean,
+  canRateAnalinhamento: boolean,
+  canRateAnalise: boolean,
+  mustRateAnalinhamento: boolean,
+  mustRateAnalise: boolean
+) => {
+  return api.put('/updateGroup', { group_id, group_name, team_id, description, canRequestFeatures, canRequestHotfix, canRateAnalinhamento, canRateAnalise, mustRateAnalinhamento, mustRateAnalise })
 }
 
 export const updateStatusConfiguration = async (
   statuses: any[]
-  ) => {
+) => {
   return api.put('/updateStatus', statuses)
 }
 
@@ -211,9 +211,9 @@ export const unarchiveRequest = async (request_id: string) => {
 
 
 export const readAllNotifications = async (
-  user_id:string
-  ) => {
-  return api.get('/updateAllNotifications/' + user_id )
+  user_id: string
+) => {
+  return api.get('/updateAllNotifications/' + user_id)
 }
 
 export const updateRequestKanbanColumn = async (column: string, request_id: string) => {
@@ -226,4 +226,18 @@ export const clearRequestKanban = async (requests: number[]) => {
 
 export const editRequest = async (request_id: string, title: string, description: string, files: any[]) => {
   return api.put('/editRequest', { request_id, title, description, files })
+  
+export const enviarEmailRecuperarSenha = async (email: string) => {
+  return api.post('/sendEmailRecoveryPassword/' + email)
+}
+
+export const getUserByEmail = async (email: string) => {
+  return api.get('/userByEmail/' + email)
+}
+
+export const updateUserByEmail = async (
+  email: string,
+  password: string,
+) => {
+  return api.put('/updateUserByEmail', { email, password })
 }

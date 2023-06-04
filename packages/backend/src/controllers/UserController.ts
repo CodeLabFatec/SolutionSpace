@@ -4,6 +4,8 @@ import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { Request, Response } from 'express';
 import { dataDecript } from '../utils/encryptor';
 import { groupRepository } from '../repos/postgres/repositories/groupRepository';
+import { notifyUserToRecoveryPassword } from '../utils/notifyUser';
+import * as crypto from "crypto";
 
 class UserController {
     async create(req: Request, res: Response) {
@@ -38,7 +40,7 @@ class UserController {
     async listUser(req: Request, res: Response) {
         try {
             const users = await userRepository.find({
-                relations: { team: true, group: true }, order:{ name: 'asc' } 
+                relations: { team: true, group: true }, order: { name: 'asc' }
             });
 
             users.forEach(user => {
@@ -57,6 +59,29 @@ class UserController {
         try {
             const user = await userRepository.findOne({
                 where: { user_id: id },
+                relations: { team: true, group: true, notifications: true }
+            });
+
+            if (!user) return res.status(404).json('User not found');
+
+            user.notifications = user.notifications.filter(item => !item.hasRead)
+
+            return res.status(200).json(
+                {
+                    user,
+                    passwordDecrypted: dataDecript(user.password)
+                });
+        } catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
+    async getUserByEmail(req: Request, res: Response) {
+        const { email } = req.params;
+
+        try {
+            const user = await userRepository.findOne({
+                where: { email },
                 relations: { team: true, group: true, notifications: true }
             });
 
@@ -124,6 +149,33 @@ class UserController {
         }
     }
 
+    async editUserInRecoveryPassword(req: Request, res: Response) {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'All properties are required to edit an User' });
+        }
+
+        try {
+            const user = await userRepository.findOne({
+                where: { email }
+            });
+
+            if (!user) return res.status(404).json('User not found');
+
+            user.password = password;
+
+            await userRepository.save(user);
+
+            return res.status(201).json({
+                user
+            });
+        }
+        catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
     async deleteUser(req: Request, res: Response) {
         const { user_id } = req.params;
 
@@ -140,6 +192,24 @@ class UserController {
                 message: "User succesfully deleted.",
                 user
             });
+        } catch (error) {
+            return res.status(500).json({ message: `Internal Server Error - ${error}` });
+        }
+    }
+
+    async sendEmailToPasswordRecovery(req: Request, res: Response) {
+        const { email } = req.params;
+
+        const accessCode = crypto.randomBytes(3).toString("hex").toUpperCase();
+
+        if (!email) {
+            return res.status(400).json({ message: 'Email is required to try recovery password' });
+        }
+
+        try {
+            await notifyUserToRecoveryPassword(email, accessCode);
+
+            return res.status(200).json({ message: "Email enviado com sucesso!", accessCode });
         } catch (error) {
             return res.status(500).json({ message: `Internal Server Error - ${error}` });
         }
