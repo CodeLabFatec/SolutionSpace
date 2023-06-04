@@ -77,7 +77,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <h4> Entrega da Sprint 1 </h4>
 <p align="center"></p>
 
-![Sprint1](/docs/videos/sprint1.mp4)
+https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/36e0b209-5fb1-4365-b618-7891862fd56c
 
 <br />
 
