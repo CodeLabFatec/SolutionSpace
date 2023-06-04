@@ -27,7 +27,8 @@ import {
   PersonalizacaoAlinhamento,
   KanbanPage,
   RecuperarSenha,
-  EnviarCodigo
+  EnviarCodigo,
+  EdicaoChamado
 } from "@/presentation/pages";
 import { TipoChamado, VisualizarChamado } from "../enums";
 import { BlockProvider } from "../contexts/blockcontext";
@@ -286,6 +287,14 @@ const Router: React.FC = () => {
               element={
                 <Private>
                   <KanbanPage />
+                </Private>
+              }
+            />
+            <Route
+              path="/editRequest"
+              element={
+                <Private>
+                  <EdicaoChamado />
                 </Private>
               }
             />

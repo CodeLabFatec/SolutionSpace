@@ -341,7 +341,7 @@ const InfoChamado: React.FC<{
                 >
                   Desarquivar
                 </button>
-                
+          
                 <button
                 style={applyMarginToButton}
                 color="secundary"
@@ -356,6 +356,22 @@ const InfoChamado: React.FC<{
                 Ver avaliações
               </button>
             </div>
+          ): <></>}
+           {props.visualizacaoChamado === VisualizarChamado.MEUS_CHAMADOS ? (
+            <div className={Styles.botoesInfochamado}>
+              <button
+                color="secundary"
+                className={Styles.botaoEditarChamado}
+                onClick={() => {
+                  navigate("/editRequest", {
+                    replace: true,
+                    state: props.chamado?.request_id,
+                  });
+                }}
+              >
+                Editar
+              </button>
+            </div>    
           ): <></>}
         
           

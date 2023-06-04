@@ -224,8 +224,13 @@ export const clearRequestKanban = async (requests: number[]) => {
   return api.post('/clearRequestKanban', { requests })
 }
 
+export const getRequestById = async(id:string) => {
+  return api.get('/request/'+id)
+}
+
 export const editRequest = async (request_id: string, title: string, description: string, files: any[]) => {
   return api.put('/editRequest', { request_id, title, description, files })
+}
   
 export const enviarEmailRecuperarSenha = async (email: string) => {
   return api.post('/sendEmailRecoveryPassword/' + email)

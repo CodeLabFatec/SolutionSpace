@@ -22,3 +22,4 @@ export { default as VisualizarEquipe } from './equipe/visualizacao/visualizarEqu
 export { default as VisualizarGrupo } from './grupos/visualzacao/visualizarGrupo'
 export { default as VisualizarUsuario } from './usuarios/visualizacao/visualizarUsuarios'
 export { default as KanbanPage } from './kanbanPage/kanban' 
+export { default as EdicaoChamado } from './chamados/edicao/edicaochamado'
