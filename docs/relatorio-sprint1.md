@@ -32,8 +32,11 @@
 <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "./images/sprint1.gif"></p>
-<br>
+<p align="center"></p>
+
+![Sprint1](/docs/videos/sprint1.mp4)
+
+<br />
 
 
 <span id="burndown">
