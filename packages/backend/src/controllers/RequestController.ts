@@ -2,7 +2,7 @@ import { requestRepository } from '../repos/postgres/repositories/requestReposit
 import { Request, Response } from 'express';
 import { userRepository } from '../repos/postgres/repositories/userRepository';
 import { RequestType } from '../repos/postgres/entitites/Request';
-import { RequestStep } from '../repos/postgres/entitites/Rating';
+import { Rating, RequestStep } from '../repos/postgres/entitites/Rating';
 import { ratingRepository } from '../repos/postgres/repositories/ratingRepository';
 import { In } from 'typeorm';
 import { fileRepository } from '../repos/postgres/repositories/fileRepository';
@@ -286,6 +286,59 @@ class RequestController {
 
             return res.status(200).json('Sucesso ao limpar o kanban.')
         }catch(error) {
+            return res.status(500).json('Internal server error - ' + error)
+        }
+    }
+
+    async editRequest(req: Request, res: Response) {
+        const { request_id, title, description, files } = req.body
+
+        if(!request_id || !title || !description || !files) return res.status(400).json('Request id, title, description and files are required')
+
+        try{
+            const requests = await requestRepository.find({ where: { request_id }, 
+                relations: { files: true, group: true, status: true, kanban: true, ratings: true } })
+            if(!requests) return res.status(404).json('Request not found')
+            let request = requests[0]
+
+            request.title = title
+            request.description = description
+            request.status = null
+            request.arquived = false
+            request.approved = false
+            request.group = null
+            request.kanban = null
+            if(request.requestType === RequestType.FEATURE){
+                request.requestStep = RequestStep.ANALISE_RISCO
+            }else{
+                request.requestStep = RequestStep.ALINHAMENTO_ESTRATEGICO
+            }
+
+            if(request.ratings.length > 0){
+                request.ratings.forEach(async (rating: Rating) => {
+                    await ratingRepository.remove(rating)
+                })
+            }
+            
+            
+            request = await requestRepository.save(request)
+            
+            if(request.files.length > 0){
+                request.files.forEach(async (item: File) => {
+                    await fileRepository.remove(item)
+                })
+            }
+
+            if(files.length > 0){
+                files.forEach(async (file: File) => {
+                    file.request = request
+
+                    await fileRepository.save(file)
+                })
+            }
+
+            return res.status(200).json(request)
+        }catch(error){
             return res.status(500).json('Internal server error - ' + error)
         }
     }

@@ -15,7 +15,7 @@
 <span id="objetivo">
 
 ## 🚀 Objetivo
-  > **Status do projeto: Em desenvolvimento**
+  > **Status do projeto: Finalizado**
 
 <p align="justify">Desenvolver uma plataforma capaz de receber e gerenciar chamados internos dentro de uma sprint de projeto, podendo configurar uma árvore de decisão para redirecionar demandas de acordo com a classificação.</p>
 
@@ -50,9 +50,10 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 |   03   |   Adicionar notificação para a movimentação de chamados   | :heavy_check_mark: | Média |
 |   03   |   Reformular visualização de avaliações (análise de risco e alinhamento estratégico) realizadas.   | :heavy_check_mark: | Média |
 |    |
-|   03   |   Adicionar controle de status de chamados aprovados (Kanban)   | :hourglass: | Baixa |
-|   04   |   Criação de página para edição de chamados já cadastrados   | :hourglass: | Baixa |
-|   04   |   Adequar as páginas do sistema para acesso em dispositivos móveis   | :hourglass: | Baixa |
+|   04   |   Adicionar controle de status de chamados aprovados (Kanban)   | :heavy_check_mark: | Média |
+|   04   |   Criação de página para edição de chamados já cadastrados   | :heavy_check_mark: | Baixa |
+|   04   |   Adição de filtros nas listagens do sistema   | :heavy_check_mark: | Baixa |
+|   04   |   Sistema de recuperação de senha do usuário   | :heavy_check_mark: | Baixa |
 
 <br>
 
@@ -67,7 +68,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 |   01   | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint1.md) |
 |   02   | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint2.md) |
 |   03   | 14/05/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint3.md) |
-|   04   | 04/06/2023 | :hourglass:	 | ... |
+|   04   | 04/06/2023 | :heavy_check_mark:	 | [ver relatório](/docs/relatorio-sprint4.md) |
 
 <br />
 
@@ -94,6 +95,10 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 
 <br />
 
+<h4> Entrega da Sprint 4 (Entrega final) </h4>
+<p align="center"></p>
+
+
 <br />
 
 <span id="tecnologias">
@@ -107,6 +112,8 @@ Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execuçã
 - [Typescript](https://www.typescriptlang.org/): Linguagem de programação
 - [Git](https://git-scm.com): Versionamento
 - [GitHub](https://github.com/): Armazenamento de código
+- [Jira](https://www.atlassian.com/): Gerenciamento do projeto
+- [Slack](https://slack.com/): Comunicação com o cliente
 
 <br />
 
