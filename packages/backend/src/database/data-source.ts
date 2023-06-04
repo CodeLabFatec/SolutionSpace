@@ -10,7 +10,7 @@ import { StatusConfiguration } from '../repos/postgres/entitites/StatusConfigura
 import { Group } from '../repos/postgres/entitites/Group';
 import { Notifications } from '../repos/postgres/entitites/Notifications';
 import { Kanban } from '../repos/postgres/entitites/Kanban';
-import { default1685817474704 } from './migrations/1685817474704-default';
+import { default1685899725962 } from './migrations/1685899725962-default';
 
 const DB_PORT = process.env.DB_PORT as number | undefined;
 
@@ -22,6 +22,6 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
     entities: [User, File, Team, Request, Rating, StatusConfiguration, Group, Notifications, Kanban],
-    migrations: [default1685817474704],
+    migrations: [default1685899725962],
     maxQueryExecutionTime: 2000
 });
