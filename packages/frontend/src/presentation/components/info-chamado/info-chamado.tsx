@@ -320,7 +320,7 @@ const InfoChamado: React.FC<{
             <div className={Styles.botoesInfochamado}>
               <button
                 color="secundary"
-                className={Styles.botaoVisualizarAnalise}
+                className={Styles.botaoVisualizarAnaliseMeus}
                 onClick={() => {
                   navigate("/history", {
                     replace: true,
