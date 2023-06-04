@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import Styles from "./style.scss";
 
 const Task: React.FC<{ task: any; index: any }> = (props) => {
   return (
@@ -15,18 +16,19 @@ const Task: React.FC<{ task: any; index: any }> = (props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <div style={{ display: "flex", justifyContent: "start", padding: 2, backgroundColor: props.task.status.color }}>
-            <span>
-              <small>
-                {props.task.status.status}
-                {"  "}
-              </small>
-            </span>
+          <div style={{  padding: 0, color: "#4fb4bc"  }}>
+            <TextContent>{props.task.title}</TextContent>
+          </div>
+          <div style={{  padding: 0, color: "#FFF", textAlign: "justify" }}>
+            <TextContent>{props.task.description}</TextContent>
           </div>
           <div
-            style={{ display: "flex", justifyContent: "start", padding: 0 }}
+            className={Styles.Status}
+            style={{ backgroundColor: props.task.status.color }}
           >
-            <TextContent>{props.task.title}</TextContent>
+              <p>
+                {props.task.status.status}
+              </p>
           </div>
         </Container>
       )}
@@ -41,15 +43,15 @@ const Container = styled.div`
   padding: 8px;
   color: #000;
   margin-bottom: 8px;
-  min-height: 90px;
   margin-left: 10px;
-  background-color: #d6d5d5;
+  background-color: #454444;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 `;
 
 const TextContent = styled.div`
+  font-size: 13px;
   justify-content: start;
+  margin-bottom: 10px;
 `;
-

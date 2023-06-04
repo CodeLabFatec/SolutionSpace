@@ -12,6 +12,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import GroupsIcon from "@mui/icons-material/Groups";
 import HomeIcon from "@mui/icons-material/Home";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import Styles from "./menuStyle.scss";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -277,7 +278,7 @@ const SideMenu = () => {
             onClick={() => {
               handleMenu();
             }}
-            icon={<HomeIcon />}
+            icon={<ViewKanbanIcon />}
             style={{ padding: "10px" }}
             id={Styles.menuList}
             component={<Link to="/kanban" />}
