@@ -24,7 +24,7 @@
 |   Adicionar controle de status de chamados aprovados (Kanban)   |   COMO um usuário EU QUERO poder visualizar e controlar o desenvolvimento dos chamados aprovados do meu grupo PARA QUE seja possível finalizar o ciclo do chamado, que após sua aprovação pelo comitê é direcionado a um grupo que controlará o desenvolvimento do chamado pelas etapas de NEW, ON HOLDING e DONE |
 |   Criação de página para edição de chamados já cadastrados   |   COMO um usuário EU QUERO editar os chamados que eu abri PARA QUE seja possível atualizar as informações do cadastro |
 |   Adição de filtros nas listagens do sistema   |   COMO um usuário EU QUERO que em todas as listagens do sistema (chamados, usuários, grupos e equipes) haja um filtro PARA QUE seja possível encontrar com maior facilidade o item de interesse |
-|   Sistema de recuperação de senha do usuário   |   COMO um usuário EU QUERO que seja possível recuperar minha senha PARA QUE caso eu esqueça minha seja eu possa recuperá-la pelo email informado no cadastro |
+|   Sistema de recuperação de senha do usuário   |   COMO um usuário EU QUERO que seja possível recuperar minha senha PARA QUE caso eu esqueça minha senha eu possa recuperá-la pelo email informado no cadastro |
 
 <span id="entrega">
  
