@@ -46,6 +46,8 @@ https://github.com/CodeLabFatec/SolutionSpace/assets/26208169/36e0b209-5fb1-4365
 <span id="banco">
 
 ## Documentação do banco de dados
+ ![Modelo_lógico-2023-06-04_22-21](https://github.com/CodeLabFatec/SolutionSpace/assets/88887821/bd9df4e0-59c2-4410-87ba-ecb09a47bfde)
+
 [Documentação Banco de dados.pdf](https://github.com/CodeLabFatec/SolutionSpace/files/11647680/Documentacao.Banco.de.dados.pdf)
 
 
