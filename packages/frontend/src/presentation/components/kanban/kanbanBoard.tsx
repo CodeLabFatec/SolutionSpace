@@ -91,7 +91,10 @@ export default function KanbanBoard() {
       alert.criarAlerta({
         html: response.data,
       });
-      loadRequests();
+      
+      const reqs = requests.filter(x=> x.kanban.column !== 'DONE')
+      setRequests(reqs)
+      
     } catch (e) {
       alert.criarAlerta({
         icon: "error",
